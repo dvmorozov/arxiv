@@ -1,24 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ArxivExpress.ArticleList">
-    <ListView x:Name="MyListView" ItemsSource="{Binding Items}" ItemTapped="Handle_ItemTapped" CachingStrategy="RecycleElement">
-        <!--Built in Cells
+    <ListView x:Name="MyListView" ItemsSource="{Binding Items}" ItemTapped="Handle_ItemTapped" CachingStrategy="RecycleElement" HasUnevenRows="True">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <TextCell Text="{Binding Summary}" />
+                <ViewCell>
+                    <StackLayout VerticalOptions="FillAndExpand" Margin="10">
+                        <Label Text="{Binding Title}"
+                            Style="{DynamicResource ListItemTextStyle}" LineBreakMode="WordWrap"/>
+                        <Label Text="{Binding Summary}"
+                            Style="{DynamicResource ListItemDetailTextStyle}" LineBreakMode="WordWrap"/>
+                    </StackLayout>
+                </ViewCell>
             </DataTemplate>
-        </ListView.ItemTemplate>
-        -->
-        <ListView.ItemTemplate>
-          <DataTemplate>
-            <ViewCell>
-              <FlexLayout>
-                <Label Text="{Binding Title}" 
-                       Style="{DynamicResource ListItemTextStyle}" />
-                <Label Text="{Binding Summary}" 
-                       Style="{DynamicResource ListItemDetailTextStyle}"/>
-              </FlexLayout>
-            </ViewCell>
-          </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
 </ContentPage>

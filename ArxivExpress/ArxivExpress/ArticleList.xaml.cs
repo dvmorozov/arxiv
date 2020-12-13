@@ -9,13 +9,13 @@ namespace ArxivExpress
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ArticleList : ContentPage
     {
-        public ObservableCollection<IAtomEntry> Items { get; set; }
+        public ObservableCollection<EntryAdapter> Items { get; set; }
         private AtomFeedProcessor _atomFeedProcessor;
  
         public ArticleList()
         {
             _atomFeedProcessor = new AtomFeedProcessor(this);
-            Items = new ObservableCollection<IAtomEntry>();
+            Items = new ObservableCollection<EntryAdapter>();
 
             InitializeComponent();
             MakeRequest();
@@ -48,6 +48,48 @@ namespace ArxivExpress
             }
         }
 
+        public class EntryAdapter
+        {
+            private IAtomEntry _entry;
+
+            public EntryAdapter(IAtomEntry entry)
+            {
+                _entry = entry;
+            }
+
+            public string Summary
+            {
+                get { return MakePlainString(_entry.Summary); }
+            }
+
+            public string Title
+            {
+                get { return MakePlainString(_entry.Title); }
+            }
+
+            private string MakePlainString(string original)
+            {
+                string result = original;
+                result = result.Trim(new char[] { ' ', '\t', '\n' });
+                result = result.Replace('\n', ' ');
+                result = result.Replace('\t', ' ');
+
+                var length = result.Length;
+                while(true)
+                {
+                    result = result.Replace("  ", " ");
+                    if (result.Length < length)
+                    {
+                        length = result.Length;
+                        continue;
+                    }
+                    break;
+                }
+                
+                return result;
+            }
+        }
+
         private class AtomFeedProcessor : AtomFeedRequest.IAtomFeedProcessor
         {
             private ArticleList _articleList;
@@ -68,7 +110,7 @@ namespace ArxivExpress
             void AtomFeedRequest.IAtomFeedProcessor.ProcessEntry(IAtomEntry entry)
             {
                 if (entry != null)
-                    _articleList.Items.Add(entry);
+                    _articleList.Items.Add(new EntryAdapter(entry));
             }
 
             void AtomFeedRequest.IAtomFeedProcessor.ProcessLink(ISyndicationLink link)
