@@ -1,12 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Xml;
-using Microsoft.SyndicationFeed;
-using Microsoft.SyndicationFeed.Atom;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace ArxivExpress
 {
@@ -17,8 +9,9 @@ namespace ArxivExpress
             InitializeComponent();
         }
 
-        public void Handle_ReadingData(object sender, System.EventArgs e)
+        public async void Handle_ReadingData(object sender, System.EventArgs e)
         {
+            await Navigation.PushAsync(new ArticleList());
         }
     }
 }
