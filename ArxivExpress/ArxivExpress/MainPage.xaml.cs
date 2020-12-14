@@ -11,7 +11,7 @@ namespace ArxivExpress
 
         public async void Handle_ReadingData(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new ArticleList());
+            await Navigation.PushAsync(new SearchQueryAttributes());
         }
     }
 }
