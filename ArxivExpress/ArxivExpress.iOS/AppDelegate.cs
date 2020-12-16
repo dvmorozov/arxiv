@@ -22,6 +22,7 @@ namespace ArxivExpress.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            global::Xamarin.Forms.Forms.SetFlags("RadioButton_Experimental");
 #if ENABLE_TEST_CLOUD
             Xamarin.Calabash.Start();
 #endif

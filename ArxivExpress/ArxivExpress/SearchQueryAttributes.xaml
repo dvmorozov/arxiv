@@ -2,8 +2,54 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ArxivExpress.SearchQueryAttributes">
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand">
-            <Entry Placeholder="Search term..." />
-            <Picker Title="Title" />
+            <StackLayout Orientation="Horizontal">
+                <Entry Placeholder="Search term..." HorizontalOptions="FillAndExpand" />
+                <Picker Title="Title" />
+            </StackLayout>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition Width="0.5*" />
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox/><Label Text="Computer Science (cs)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Grid.Column="1">
+                    <CheckBox/><Label Text="Physics" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/><Picker Title="All" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Grid.Row="1">
+                    <CheckBox/><Label Text="Economics (econ)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+                    <CheckBox/><Label Text="Quantitative Biology (q-bio)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Grid.Row="2">
+                    <CheckBox/><Label Text="Electrical Engineering and Systems Science (eess)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
+                    <CheckBox/><Label Text="Quantitative Finance (q-fin)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Grid.Row="3">
+                    <CheckBox/><Label Text="Mathematics (math)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="3">
+                    <CheckBox/><Label Text="Statistics (stat)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+            </Grid>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                <RadioButton Text="Include cross-listed papers" />
+                <RadioButton Text="Exclude cross-listed papers" />
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+
+            </StackLayout>
+
             <Button Text="Search" Pressed="Handle_SearchPressed" BorderColor="#2196F3" BackgroundColor="#2196F3"
                     BorderWidth="2" Margin="10" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center"
                     WidthRequest="200" TextColor="White"/>
