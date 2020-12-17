@@ -47,7 +47,36 @@
             </StackLayout>
 
             <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                <RadioButton Text="All dates" />
+                <RadioButton Text="Past 12 months" />
+                <RadioButton Text="Specific year" /><Entry Placeholder="YYYY" HorizontalOptions="FillAndExpand" />
+                <RadioButton Text="Date range" />
+            </StackLayout>
 
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Entry Placeholder="YYYY[-MM[-DD]]" />
+                <Entry Placeholder="YYYY[-MM[-DD]]" />
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                <RadioButton Text="Submission date (most recent)" />
+                <RadioButton Text="Submission date (original)" />
+                <RadioButton Text="Announcement date" />
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                <RadioButton Text="Show abstracts" />
+                <RadioButton Text="Hide abstracts" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Picker Title="50" />
+                <Label Text="results per page" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <CheckBox />
+                <Label Text="Include older versions of papers" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
 
             <Button Text="Search" Pressed="Handle_SearchPressed" BorderColor="#2196F3" BackgroundColor="#2196F3"
