@@ -94,7 +94,7 @@
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <CheckBox />
+                    <CheckBox x:Name="CheckBoxIncludeOlderVersions" CheckedChanged="Handle_OnCheckBoxCheckedChanged" />
                     <Label Text="Include older versions of papers" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
 

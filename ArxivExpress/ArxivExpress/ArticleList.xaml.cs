@@ -70,6 +70,8 @@ namespace ArxivExpress
             public bool ShowAbstracts;
             public bool HideAbstracts;
 
+            public bool IncludeOlderVersions;
+
             public SearchQuery()
             {
                 FillDefaultValues();
@@ -104,6 +106,8 @@ namespace ArxivExpress
                 //  Mutually exclusive.
                 ShowAbstracts = true;
                 HideAbstracts = false;
+
+                IncludeOlderVersions = false;
             }
 
             public string GetQueryString()

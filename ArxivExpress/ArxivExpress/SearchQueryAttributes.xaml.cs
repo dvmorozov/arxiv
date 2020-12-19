@@ -39,6 +39,8 @@ namespace ArxivExpress
 
             RadioShowAbstracts.IsChecked = _searchQuery.ShowAbstracts;
             RadioHideAbstracts.IsChecked = _searchQuery.HideAbstracts;
+
+            CheckBoxIncludeOlderVersions.IsChecked = _searchQuery.IncludeOlderVersions;
         }
 
         private void Handle_OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -74,6 +76,10 @@ namespace ArxivExpress
             else if (sender == CheckBoxStatistics)
             {
                 _searchQuery.Statistics = e.Value;
+            }
+            else if (sender == CheckBoxIncludeOlderVersions)
+            {
+                _searchQuery.IncludeOlderVersions = e.Value;
             }
         }
 
