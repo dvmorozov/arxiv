@@ -40,8 +40,34 @@ namespace ArxivExpress
             await AtomFeedRequest.MakeRequest(query.GetQueryString(), _atomFeedProcessor);
         }
 
-        private class SearchQuery
+        public class SearchQuery
         {
+            public bool ComputerScience;
+            public bool Physics;
+            public bool Economics;
+            public bool QuantitativeBiology;
+            public bool ElectricalEngineering;
+            public bool QuantitativeFinance;
+            public bool Mathematics;
+            public bool Statistics;
+
+            public SearchQuery()
+            {
+                FillDefaultValues();
+            }
+
+            private void FillDefaultValues()
+            {
+                ComputerScience = true;
+                Physics = true;
+                Economics = true;
+                QuantitativeBiology = true;
+                ElectricalEngineering = true;
+                QuantitativeFinance = true;
+                Mathematics = true;
+                Statistics = true;
+            }
+
             public string GetQueryString()
             {
                 return "http://export.arxiv.org/api/query?search_query=all:electron&start=0&max_results=10";

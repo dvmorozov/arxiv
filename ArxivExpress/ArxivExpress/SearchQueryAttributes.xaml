@@ -1,43 +1,60 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ArxivExpress.SearchQueryAttributes">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ArxivExpress"
+             x:Class="ArxivExpress.SearchQueryAttributes">
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand">
             <StackLayout Orientation="Horizontal">
                 <Entry Placeholder="Search term..." HorizontalOptions="FillAndExpand" />
                 <Picker Title="Title" />
             </StackLayout>
-            <Grid>
+            <Grid BindingContext="{Binding .}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.5*" />
                     <ColumnDefinition Width="0.5*" />
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
 
                 <StackLayout Orientation="Horizontal">
-                    <CheckBox/><Label Text="Computer Science (cs)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <CheckBox x:Name="CheckBoxComputerScience" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
+                    <Label Text="Computer Science (cs)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Grid.Column="1">
-                    <CheckBox/><Label Text="Physics" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/><Picker Title="All" />
+                    <CheckBox x:Name="CheckBoxPhysics" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
+                    <Label Text="Physics" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <Picker Title="All" />
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Grid.Row="1">
-                    <CheckBox/><Label Text="Economics (econ)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <CheckBox x:Name="CheckBoxEconimics" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
+                    <Label Text="Economics (econ)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
-                    <CheckBox/><Label Text="Quantitative Biology (q-bio)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <CheckBox x:Name="CheckBoxQuantitativeBiology" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
+                    <Label Text="Quantitative Biology (q-bio)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Grid.Row="2">
-                    <CheckBox/><Label Text="Electrical Engineering and Systems Science (eess)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <CheckBox x:Name="CheckBoxElectricalEngineering" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
+                    <Label Text="Electrical Engineering and Systems Science (eess)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
-                    <CheckBox/><Label Text="Quantitative Finance (q-fin)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <CheckBox x:Name="CheckBoxQuantitativeFinance" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
+                    <Label Text="Quantitative Finance (q-fin)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Grid.Row="3">
-                    <CheckBox/><Label Text="Mathematics (math)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <CheckBox x:Name="CheckBoxMathematics" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
+                    <Label Text="Mathematics (math)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="3">
-                    <CheckBox/><Label Text="Statistics (stat)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <CheckBox x:Name="CheckBoxStatistics" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
+                    <Label Text="Statistics (stat)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
             </Grid>
 
