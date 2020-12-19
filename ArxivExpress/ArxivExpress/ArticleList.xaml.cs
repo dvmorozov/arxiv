@@ -51,6 +51,25 @@ namespace ArxivExpress
             public bool Mathematics;
             public bool Statistics;
 
+            //  Mutually exclusive.
+            public bool IncludeCrossListedPapers;
+            public bool ExcludeCrossListedPapers;
+
+            //  Mutually exclusive.
+            public bool AllDates;
+            public bool Past12Months;
+            public bool SpecificYear;
+            public bool DateRange;
+
+            //  Mutually exclusive.
+            public bool SubmissionDateMostRecent;
+            public bool SubmissionDateOriginal;
+            public bool AnnouncementDate;
+
+            //  Mutually exclusive.
+            public bool ShowAbstracts;
+            public bool HideAbstracts;
+
             public SearchQuery()
             {
                 FillDefaultValues();
@@ -66,6 +85,25 @@ namespace ArxivExpress
                 QuantitativeFinance = true;
                 Mathematics = true;
                 Statistics = true;
+
+                //  Mutually exclusive.
+                IncludeCrossListedPapers = true;
+                ExcludeCrossListedPapers = false;
+
+                //  Mutually exclusive.
+                AllDates = true;
+                Past12Months = false;
+                SpecificYear = false;
+                DateRange = false;
+
+                //  Mutually exclusive.
+                SubmissionDateMostRecent = true;
+                SubmissionDateOriginal = false;
+                AnnouncementDate = false;
+
+                //  Mutually exclusive.
+                ShowAbstracts = true;
+                HideAbstracts = false;
             }
 
             public string GetQueryString()
