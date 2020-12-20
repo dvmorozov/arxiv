@@ -72,6 +72,10 @@ namespace ArxivExpress
 
             public bool IncludeOlderVersions;
 
+            public string ItemType;
+            public string PhysicsSubdivision;
+            public string ResultsPerPage;
+
             public SearchQuery()
             {
                 FillDefaultValues();
@@ -108,6 +112,9 @@ namespace ArxivExpress
                 HideAbstracts = false;
 
                 IncludeOlderVersions = false;
+
+                ItemType = "Title";
+                PhysicsSubdivision = "all";
             }
 
             public string GetQueryString()

@@ -1,15 +1,34 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:ArxivExpress"
              x:Class="ArxivExpress.SearchQueryAttributes">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout VerticalOptions="FillAndExpand">
                 <StackLayout Orientation="Horizontal">
                     <Entry Placeholder="Search term..." HorizontalOptions="FillAndExpand" />
-                    <Picker Title="Title" />
+                    <Picker x:Name="PickerItemType" Title="Title" SelectedIndexChanged="Hangle_OnPickerSelectedIndexChanged">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Title</x:String>
+                                <x:String>Author(s)</x:String>
+                                <x:String>Abstract</x:String>
+                                <x:String>Comments</x:String>
+                                <x:String>Journal reference</x:String>
+                                <x:String>ACM classification</x:String>
+                                <x:String>MSC classification</x:String>
+                                <x:String>Report number</x:String>
+                                <x:String>arXiv identifier</x:String>
+                                <x:String>Cross-list category</x:String>
+                                <x:String>DOI</x:String>
+                                <x:String>ORCID</x:String>
+                                <x:String>arXiv author ID</x:String>
+                                <x:String>All fields</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
                 </StackLayout>
-                <Grid BindingContext="{Binding .}">
+
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*" />
                         <ColumnDefinition Width="0.5*" />
@@ -28,7 +47,27 @@
                     <StackLayout Orientation="Horizontal" Grid.Column="1">
                         <CheckBox x:Name="CheckBoxPhysics" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
                         <Label Text="Physics" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-                        <Picker Title="All" />
+
+                        <Picker x:Name="PickerPhysicsSubdivision" Title="all" SelectedIndexChanged="Hangle_OnPickerSelectedIndexChanged">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>all</x:String>
+                                    <x:String>astro-ph</x:String>
+                                    <x:String>cond-mat</x:String>
+                                    <x:String>gr-qc</x:String>
+                                    <x:String>hep-ex</x:String>
+                                    <x:String>hep-lat</x:String>
+                                    <x:String>hep-ph</x:String>
+                                    <x:String>hep-th</x:String>
+                                    <x:String>math-ph</x:String>
+                                    <x:String>nlin</x:String>
+                                    <x:String>nucl-ex</x:String>
+                                    <x:String>nucl-th</x:String>
+                                    <x:String>physics</x:String>
+                                    <x:String>quant-ph</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal" Grid.Row="1">
@@ -89,7 +128,16 @@
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Picker Title="50" />
+                    <Picker x:Name="PickerResultsPerPage" Title="50" SelectedIndexChanged="Hangle_OnPickerSelectedIndexChanged">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>25</x:String>
+                                <x:String>50</x:String>
+                                <x:String>100</x:String>
+                                <x:String>200</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
                     <Label Text="results per page" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
 

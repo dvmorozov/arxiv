@@ -41,6 +41,13 @@ namespace ArxivExpress
             RadioHideAbstracts.IsChecked = _searchQuery.HideAbstracts;
 
             CheckBoxIncludeOlderVersions.IsChecked = _searchQuery.IncludeOlderVersions;
+
+            if (PickerItemType.Items.Count != 0)
+                PickerItemType.SelectedIndex = 0;
+            if (PickerPhysicsSubdivision.Items.Count != 0)
+                PickerPhysicsSubdivision.SelectedIndex = 0;
+            if (PickerResultsPerPage.Items.Count > 1)
+                PickerResultsPerPage.SelectedIndex = 1;
         }
 
         private void Handle_OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -128,6 +135,25 @@ namespace ArxivExpress
             else if (sender == RadioHideAbstracts)
             {
                 _searchQuery.HideAbstracts = e.Value;
+            }
+        }
+
+        private void Hangle_OnPickerSelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (sender == PickerItemType)
+            {
+                var picker = (Picker)sender;
+                _searchQuery.ItemType = (string)picker.ItemsSource[picker.SelectedIndex];
+            }
+            else if (sender == PickerPhysicsSubdivision)
+            {
+                var picker = (Picker)sender;
+                _searchQuery.PhysicsSubdivision = (string)picker.ItemsSource[picker.SelectedIndex];
+            }
+            else if (sender == PickerResultsPerPage)
+            {
+                var picker = (Picker)sender;
+                _searchQuery.ResultsPerPage = (string)picker.ItemsSource[picker.SelectedIndex];
             }
         }
 
