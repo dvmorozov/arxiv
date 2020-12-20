@@ -42,6 +42,11 @@ namespace ArxivExpress
 
         public class SearchQuery
         {
+            public string SearchTerm;
+            public string DateFrom;
+            public string DateTo;
+            public string Year;
+
             public bool ComputerScience;
             public bool Physics;
             public bool Economics;

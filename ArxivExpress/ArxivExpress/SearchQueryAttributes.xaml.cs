@@ -48,6 +48,11 @@ namespace ArxivExpress
                 PickerPhysicsSubdivision.SelectedIndex = 0;
             if (PickerResultsPerPage.Items.Count > 1)
                 PickerResultsPerPage.SelectedIndex = 1;
+
+            EntrySearchTerm.Text = "";
+            EntryDateFrom.Text = "";
+            EntryDateTo.Text = "";
+            EntrySpecificYear.Text = "";
         }
 
         private void Handle_OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -154,6 +159,26 @@ namespace ArxivExpress
             {
                 var picker = (Picker)sender;
                 _searchQuery.ResultsPerPage = (string)picker.ItemsSource[picker.SelectedIndex];
+            }
+        }
+
+        private void Handle_EntryCompleted(object sender, EventArgs e)
+        {
+            if (sender == EntrySearchTerm)
+            {
+                _searchQuery.SearchTerm = ((Entry)sender).Text;
+            }
+            else if (sender == EntryDateFrom)
+            {
+                _searchQuery.DateFrom = ((Entry)sender).Text;
+            }
+            else if (sender == EntryDateTo)
+            {
+                _searchQuery.DateTo = ((Entry)sender).Text;
+            }
+            else if (sender == EntrySpecificYear)
+            {
+                _searchQuery.Year = ((Entry)sender).Text;
             }
         }
 

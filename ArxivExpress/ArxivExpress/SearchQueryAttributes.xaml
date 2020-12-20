@@ -1,11 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ArxivExpress.SearchQueryAttributes">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout VerticalOptions="FillAndExpand">
                 <StackLayout Orientation="Horizontal">
-                    <Entry Placeholder="Search term..." HorizontalOptions="FillAndExpand" />
+                    <Entry x:Name="EntrySearchTerm" Placeholder="Search term..." HorizontalOptions="FillAndExpand"
+                           ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
+
                     <Picker x:Name="PickerItemType" Title="Title" SelectedIndexChanged="Hangle_OnPickerSelectedIndexChanged">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
@@ -107,13 +110,16 @@
                     <RadioButton x:Name="RadioAllDates" Text="All dates" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
                     <RadioButton x:Name="RadioPast12Months" Text="Past 12 months" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
                     <RadioButton x:Name="RadioSpecificYear" Text="Specific year" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
-                    <Entry Placeholder="YYYY" HorizontalOptions="FillAndExpand" />
+                    <Entry x:Name="EntrySpecificYear" Placeholder="YYYY" HorizontalOptions="FillAndExpand"
+                           ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
                     <RadioButton x:Name="RadioDateRange" Text="Date range" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Entry Placeholder="YYYY[-MM[-DD]]" />
-                    <Entry Placeholder="YYYY[-MM[-DD]]" />
+                    <Entry x:Name="EntryDateFrom" Placeholder="YYYY[-MM[-DD]]"
+                           ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
+                    <Entry x:Name="EntryDateTo" Placeholder="YYYY[-MM[-DD]]"
+                           ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
                 </StackLayout>
 
                 <StackLayout Orientation="Vertical" HorizontalOptions="Center">
