@@ -6,7 +6,7 @@
         <ScrollView>
             <StackLayout VerticalOptions="FillAndExpand">
 
-                <StackLayout Orientation="Horizontal">
+                <StackLayout Orientation="Horizontal" Margin="0,0,0,8">
                     <Entry x:Name="EntrySearchTerm" Placeholder="Search term..." HorizontalOptions="FillAndExpand"
                            ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
 
@@ -32,7 +32,7 @@
                     </Picker>
                 </StackLayout>
 
-                <Grid>
+                <Grid Margin="0,0,0,8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*" />
                         <ColumnDefinition Width="0.5*" />
@@ -44,11 +44,11 @@
                         <RowDefinition Height="50" />
                     </Grid.RowDefinitions>
 
-                    <StackLayout Orientation="Horizontal">
+                    <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
                         <CheckBox x:Name="CheckBoxComputerScience" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
                         <Label Text="Computer Science (cs)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
-                    <StackLayout Orientation="Horizontal" Grid.Column="1">
+                    <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
                         <CheckBox x:Name="CheckBoxPhysics" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
                         <Label Text="Physics" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
 
@@ -74,7 +74,7 @@
                         </Picker>
                     </StackLayout>
 
-                    <StackLayout Orientation="Horizontal" Grid.Row="1">
+                    <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="1">
                         <CheckBox x:Name="CheckBoxEconimics" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
                         <Label Text="Economics (econ)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
@@ -83,7 +83,7 @@
                         <Label Text="Quantitative Biology (q-bio)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
 
-                    <StackLayout Orientation="Horizontal" Grid.Row="2">
+                    <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="2">
                         <CheckBox x:Name="CheckBoxElectricalEngineering" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
                         <Label Text="Electrical Engineering and Systems Science (eess)" VerticalOptions="Start" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
@@ -92,7 +92,7 @@
                         <Label Text="Quantitative Finance (q-fin)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
 
-                    <StackLayout Orientation="Horizontal" Grid.Row="3">
+                    <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="3">
                         <CheckBox x:Name="CheckBoxMathematics" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
                         <Label Text="Mathematics (math)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
@@ -102,41 +102,56 @@
                     </StackLayout>
                 </Grid>
  
-                <StackLayout Orientation="Vertical" HorizontalOptions="Start" Margin="8,0,0,0">
+                <StackLayout Orientation="Vertical" HorizontalOptions="Start" Margin="8,0,0,8">
                     <RadioButton x:Name="RadioIncludeCrossListedPapers" Text="Include cross-listed papers"
                                  CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
                     <RadioButton x:Name="RadioExcludeCrossListedPapers" Text="Exclude cross-listed papers"
                                  CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
                 </StackLayout>
 
-                <StackLayout Orientation="Vertical" HorizontalOptions="Start" Margin="8,0,0,0">
-                    <RadioButton x:Name="RadioAllDates" Text="All dates" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
-                    <RadioButton x:Name="RadioPast12Months" Text="Past 12 months" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
-                    <RadioButton x:Name="RadioSpecificYear" Text="Specific year" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
-                    <Entry x:Name="EntrySpecificYear" Placeholder="YYYY" HorizontalOptions="FillAndExpand"
-                           ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
-                    <RadioButton x:Name="RadioDateRange" Text="Date range" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
-                </StackLayout>
+                <Grid Margin="8,0,8,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="0.5*" />
+                    </Grid.ColumnDefinitions>
 
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Margin="8,0,0,0">
-                    <Entry x:Name="EntryDateFrom" Placeholder="YYYY[-MM[-DD]]"
-                           ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
-                    <Entry x:Name="EntryDateTo" Placeholder="YYYY[-MM[-DD]]"
-                           ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
-                </StackLayout>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                    </Grid.RowDefinitions>
 
-                <StackLayout Orientation="Vertical" HorizontalOptions="Start" Margin="8,0,0,0">
+                    <RadioButton Grid.Column="0" Grid.Row="0" x:Name="RadioAllDates" Text="All dates" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+                    <RadioButton Grid.Column="0" Grid.Row="1" x:Name="RadioPast12Months" Text="Past 12 months" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+                    <RadioButton Grid.Column="0" Grid.Row="2" x:Name="RadioSpecificYear" Text="Specific year" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+                    <StackLayout Grid.Column="1" Grid.Row="2" Orientation="Vertical" HorizontalOptions="Start" Margin="8,0,0,0"
+                                 VerticalOptions="Center">
+                        <Entry x:Name="EntrySpecificYear" Placeholder="YYYY" HorizontalOptions="Start"
+                               ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
+                    </StackLayout>
+                    <RadioButton Grid.Column="0" Grid.Row="3" x:Name="RadioDateRange" Text="Date range" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+
+                    <StackLayout Grid.Column="1" Grid.Row="3" Orientation="Vertical" HorizontalOptions="Start" Margin="8,0,0,0">
+                        <Entry x:Name="EntryDateFrom" Placeholder="YYYY[-MM[-DD]]"
+                               ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
+                        <Entry x:Name="EntryDateTo" Placeholder="YYYY[-MM[-DD]]"
+                               ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
+                    </StackLayout>
+                </Grid>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Start" Margin="8,0,0,8">
                     <RadioButton x:Name="RadioSubmissionDateMostRecent" Text="Submission date (most recent)" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
                     <RadioButton x:Name="RadioSubmissionDateOriginal" Text="Submission date (original)" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
                     <RadioButton x:Name="RadioAnnouncementDate" Text="Announcement date" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
                 </StackLayout>
 
-                <StackLayout Orientation="Vertical" HorizontalOptions="Start" Margin="8,0,0,0">
+                <StackLayout Orientation="Vertical" HorizontalOptions="Start" Margin="8,0,0,8">
                     <RadioButton x:Name="RadioShowAbstracts" Text="Show abstracts" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
                     <RadioButton x:Name="RadioHideAbstracts" Text="Hide abstracts" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Margin="8,0,0,0">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Margin="8,0,0,8">
                     <Picker x:Name="PickerResultsPerPage" Title="50" SelectedIndexChanged="Hangle_OnPickerSelectedIndexChanged">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
@@ -148,15 +163,13 @@
                         </Picker.ItemsSource>
                     </Picker>
                     <Label Text="results per page" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-                </StackLayout>
 
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
                     <CheckBox x:Name="CheckBoxIncludeOlderVersions" CheckedChanged="Handle_OnCheckBoxCheckedChanged" />
                     <Label Text="Include older versions of papers" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
 
                 <Button Text="Search" Pressed="Handle_SearchPressed" BorderColor="#2196F3" BackgroundColor="#2196F3"
-                            BorderWidth="2" Margin="10" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Start"
+                            BorderWidth="2" Margin="10" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center"
                             WidthRequest="200" TextColor="White"/>
             </StackLayout>
         </ScrollView>
