@@ -2,13 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ArxivExpress.SearchQueryAttributes">
-    <ContentPage.Content>
-        <ScrollView>
-            <StackLayout VerticalOptions="FillAndExpand">
+        <StackLayout>
 
-                <StackLayout Orientation="Horizontal" Margin="0,0,0,8">
+            <Frame>
+                <StackLayout Orientation="Horizontal">
                     <Entry x:Name="EntrySearchTerm" Placeholder="Search term..." HorizontalOptions="FillAndExpand"
-                           ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
+                            ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
 
                     <Picker x:Name="PickerItemType" Title="Title" SelectedIndexChanged="Hangle_OnPickerSelectedIndexChanged">
                         <Picker.ItemsSource>
@@ -31,147 +30,160 @@
                         </Picker.ItemsSource>
                     </Picker>
                 </StackLayout>
+            </Frame>
 
-                <Grid Margin="0,0,0,8">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*" />
-                        <ColumnDefinition Width="0.5*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50" />
-                        <RowDefinition Height="50" />
-                        <RowDefinition Height="50" />
-                        <RowDefinition Height="50" />
-                    </Grid.RowDefinitions>
+            <ScrollView VerticalOptions="FillAndExpand">
+                <StackLayout>
+                    <Grid Margin="0,0,0,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="0.5*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
 
-                    <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
-                        <CheckBox x:Name="CheckBoxComputerScience" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
-                        <Label Text="Computer Science (cs)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
+                            <CheckBox x:Name="CheckBoxComputerScience" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
+                            <Label Text="Computer Science (cs)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
+                            <CheckBox x:Name="CheckBoxPhysics" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
+                            <Label Text="Physics" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+
+                            <Picker x:Name="PickerPhysicsSubdivision" Title="all" SelectedIndexChanged="Hangle_OnPickerSelectedIndexChanged">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>all</x:String>
+                                        <x:String>astro-ph</x:String>
+                                        <x:String>cond-mat</x:String>
+                                        <x:String>gr-qc</x:String>
+                                        <x:String>hep-ex</x:String>
+                                        <x:String>hep-lat</x:String>
+                                        <x:String>hep-ph</x:String>
+                                        <x:String>hep-th</x:String>
+                                        <x:String>math-ph</x:String>
+                                        <x:String>nlin</x:String>
+                                        <x:String>nucl-ex</x:String>
+                                        <x:String>nucl-th</x:String>
+                                        <x:String>physics</x:String>
+                                        <x:String>quant-ph</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="1">
+                            <CheckBox x:Name="CheckBoxEconimics" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
+                            <Label Text="Economics (econ)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+                            <CheckBox x:Name="CheckBoxQuantitativeBiology" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
+                            <Label Text="Quantitative Biology (q-bio)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="2">
+                            <CheckBox x:Name="CheckBoxElectricalEngineering" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
+                            <Label Text="Electrical Engineering and Systems Science (eess)" VerticalOptions="Start" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
+                            <CheckBox x:Name="CheckBoxQuantitativeFinance" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
+                            <Label Text="Quantitative Finance (q-fin)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="3">
+                            <CheckBox x:Name="CheckBoxMathematics" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
+                            <Label Text="Mathematics (math)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="3">
+                            <CheckBox x:Name="CheckBoxStatistics" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
+                            <Label Text="Statistics (stat)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                    </Grid>
+
+                    <BoxView Color="Gray" HeightRequest="2" HorizontalOptions="Fill" />
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Start" Margin="8,0,0,8">
+                        <RadioButton x:Name="RadioIncludeCrossListedPapers" Text="Include cross-listed papers"
+                                        CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+                        <RadioButton x:Name="RadioExcludeCrossListedPapers" Text="Exclude cross-listed papers"
+                                        CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
                     </StackLayout>
-                    <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
-                        <CheckBox x:Name="CheckBoxPhysics" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
-                        <Label Text="Physics" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
 
-                        <Picker x:Name="PickerPhysicsSubdivision" Title="all" SelectedIndexChanged="Hangle_OnPickerSelectedIndexChanged">
+                    <BoxView Color="Gray" HeightRequest="2" HorizontalOptions="Fill" />
+
+                    <Grid Margin="8,0,8,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="0.5*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+
+                        <RadioButton Grid.Column="0" Grid.Row="0" x:Name="RadioAllDates" Text="All dates" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+                        <RadioButton Grid.Column="0" Grid.Row="1" x:Name="RadioPast12Months" Text="Past 12 months" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+                        <RadioButton Grid.Column="0" Grid.Row="2" x:Name="RadioSpecificYear" Text="Specific year" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+                        <StackLayout Grid.Column="1" Grid.Row="2" Orientation="Vertical" HorizontalOptions="Start" Margin="8,0,0,0"
+                                        VerticalOptions="Center">
+                            <Entry x:Name="EntrySpecificYear" Placeholder="YYYY" HorizontalOptions="Start"
+                                    ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
+                        </StackLayout>
+                        <RadioButton Grid.Column="0" Grid.Row="3" x:Name="RadioDateRange" Text="Date range" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+
+                        <StackLayout Grid.Column="1" Grid.Row="3" Orientation="Vertical" HorizontalOptions="Start" Margin="8,0,0,0">
+                            <Entry x:Name="EntryDateFrom" Placeholder="YYYY[-MM[-DD]]"
+                                    ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
+                            <Entry x:Name="EntryDateTo" Placeholder="YYYY[-MM[-DD]]"
+                                    ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
+                        </StackLayout>
+                    </Grid>
+
+                    <BoxView Color="Gray" HeightRequest="2" HorizontalOptions="Fill" />
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Start" Margin="8,0,0,8">
+                        <RadioButton x:Name="RadioSubmissionDateMostRecent" Text="Submission date (most recent)" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+                        <RadioButton x:Name="RadioSubmissionDateOriginal" Text="Submission date (original)" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+                        <RadioButton x:Name="RadioAnnouncementDate" Text="Announcement date" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+                    </StackLayout>
+
+                    <BoxView Color="Gray" HeightRequest="2" HorizontalOptions="Fill" />
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Start" Margin="8,0,0,8">
+                        <RadioButton x:Name="RadioShowAbstracts" Text="Show abstracts" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+                        <RadioButton x:Name="RadioHideAbstracts" Text="Hide abstracts" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+                    </StackLayout>
+
+                    <BoxView Color="Gray" HeightRequest="2" HorizontalOptions="Fill" />
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Margin="8,0,0,8">
+                        <Picker x:Name="PickerResultsPerPage" Title="50" SelectedIndexChanged="Hangle_OnPickerSelectedIndexChanged">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
-                                    <x:String>all</x:String>
-                                    <x:String>astro-ph</x:String>
-                                    <x:String>cond-mat</x:String>
-                                    <x:String>gr-qc</x:String>
-                                    <x:String>hep-ex</x:String>
-                                    <x:String>hep-lat</x:String>
-                                    <x:String>hep-ph</x:String>
-                                    <x:String>hep-th</x:String>
-                                    <x:String>math-ph</x:String>
-                                    <x:String>nlin</x:String>
-                                    <x:String>nucl-ex</x:String>
-                                    <x:String>nucl-th</x:String>
-                                    <x:String>physics</x:String>
-                                    <x:String>quant-ph</x:String>
+                                    <x:String>25</x:String>
+                                    <x:String>50</x:String>
+                                    <x:String>100</x:String>
+                                    <x:String>200</x:String>
                                 </x:Array>
                             </Picker.ItemsSource>
                         </Picker>
+                        <Label Text="results per page" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+
+                        <CheckBox x:Name="CheckBoxIncludeOlderVersions" CheckedChanged="Handle_OnCheckBoxCheckedChanged" />
+                        <Label Text="Include older versions of papers" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
 
-                    <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="1">
-                        <CheckBox x:Name="CheckBoxEconimics" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
-                        <Label Text="Economics (econ)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
-                        <CheckBox x:Name="CheckBoxQuantitativeBiology" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
-                        <Label Text="Quantitative Biology (q-bio)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-                    </StackLayout>
-
-                    <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="2">
-                        <CheckBox x:Name="CheckBoxElectricalEngineering" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
-                        <Label Text="Electrical Engineering and Systems Science (eess)" VerticalOptions="Start" HorizontalOptions="FillAndExpand"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
-                        <CheckBox x:Name="CheckBoxQuantitativeFinance" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
-                        <Label Text="Quantitative Finance (q-fin)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-                    </StackLayout>
-
-                    <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="3">
-                        <CheckBox x:Name="CheckBoxMathematics" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
-                        <Label Text="Mathematics (math)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="3">
-                        <CheckBox x:Name="CheckBoxStatistics" CheckedChanged="Handle_OnCheckBoxCheckedChanged"/>
-                        <Label Text="Statistics (stat)" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-                    </StackLayout>
-                </Grid>
- 
-                <StackLayout Orientation="Vertical" HorizontalOptions="Start" Margin="8,0,0,8">
-                    <RadioButton x:Name="RadioIncludeCrossListedPapers" Text="Include cross-listed papers"
-                                 CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
-                    <RadioButton x:Name="RadioExcludeCrossListedPapers" Text="Exclude cross-listed papers"
-                                 CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+                    <Button Text="Search" Pressed="Handle_SearchPressed" BorderColor="#2196F3" BackgroundColor="#2196F3"
+                                BorderWidth="2" Margin="10" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center"
+                                WidthRequest="200" TextColor="White"/>
                 </StackLayout>
-
-                <Grid Margin="8,0,8,8">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*" />
-                        <ColumnDefinition Width="0.5*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50" />
-                        <RowDefinition Height="50" />
-                        <RowDefinition Height="50" />
-                        <RowDefinition Height="50" />
-                    </Grid.RowDefinitions>
-
-                    <RadioButton Grid.Column="0" Grid.Row="0" x:Name="RadioAllDates" Text="All dates" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
-                    <RadioButton Grid.Column="0" Grid.Row="1" x:Name="RadioPast12Months" Text="Past 12 months" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
-                    <RadioButton Grid.Column="0" Grid.Row="2" x:Name="RadioSpecificYear" Text="Specific year" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
-                    <StackLayout Grid.Column="1" Grid.Row="2" Orientation="Vertical" HorizontalOptions="Start" Margin="8,0,0,0"
-                                 VerticalOptions="Center">
-                        <Entry x:Name="EntrySpecificYear" Placeholder="YYYY" HorizontalOptions="Start"
-                               ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
-                    </StackLayout>
-                    <RadioButton Grid.Column="0" Grid.Row="3" x:Name="RadioDateRange" Text="Date range" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
-
-                    <StackLayout Grid.Column="1" Grid.Row="3" Orientation="Vertical" HorizontalOptions="Start" Margin="8,0,0,0">
-                        <Entry x:Name="EntryDateFrom" Placeholder="YYYY[-MM[-DD]]"
-                               ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
-                        <Entry x:Name="EntryDateTo" Placeholder="YYYY[-MM[-DD]]"
-                               ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
-                    </StackLayout>
-                </Grid>
-
-                <StackLayout Orientation="Vertical" HorizontalOptions="Start" Margin="8,0,0,8">
-                    <RadioButton x:Name="RadioSubmissionDateMostRecent" Text="Submission date (most recent)" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
-                    <RadioButton x:Name="RadioSubmissionDateOriginal" Text="Submission date (original)" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
-                    <RadioButton x:Name="RadioAnnouncementDate" Text="Announcement date" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
-                </StackLayout>
-
-                <StackLayout Orientation="Vertical" HorizontalOptions="Start" Margin="8,0,0,8">
-                    <RadioButton x:Name="RadioShowAbstracts" Text="Show abstracts" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
-                    <RadioButton x:Name="RadioHideAbstracts" Text="Hide abstracts" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
-                </StackLayout>
-
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Margin="8,0,0,8">
-                    <Picker x:Name="PickerResultsPerPage" Title="50" SelectedIndexChanged="Hangle_OnPickerSelectedIndexChanged">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>25</x:String>
-                                <x:String>50</x:String>
-                                <x:String>100</x:String>
-                                <x:String>200</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
-                    <Label Text="results per page" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-
-                    <CheckBox x:Name="CheckBoxIncludeOlderVersions" CheckedChanged="Handle_OnCheckBoxCheckedChanged" />
-                    <Label Text="Include older versions of papers" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-                </StackLayout>
-
-                <Button Text="Search" Pressed="Handle_SearchPressed" BorderColor="#2196F3" BackgroundColor="#2196F3"
-                            BorderWidth="2" Margin="10" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center"
-                            WidthRequest="200" TextColor="White"/>
-            </StackLayout>
-        </ScrollView>
-    </ContentPage.Content>
+            </ScrollView>
+        </StackLayout>
 </ContentPage>
