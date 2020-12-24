@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using Microsoft.SyndicationFeed;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -9,18 +8,20 @@ namespace ArxivExpress
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ArticleList : ContentPage
     {
-        public ObservableCollection<EntryAdapter> Items { get; set; }
+        private ObservableCollection<EntryAdapter> _items { get; set; }
         private AtomFeedProcessor _atomFeedProcessor;
- 
-        public ArticleList()
+        private SearchQuery _searchQuery;
+
+        public ArticleList(SearchQuery searchQuery)
         {
             _atomFeedProcessor = new AtomFeedProcessor(this);
-            Items = new ObservableCollection<EntryAdapter>();
+            _searchQuery = searchQuery;
+            _items = new ObservableCollection<EntryAdapter>();
 
             InitializeComponent();
             MakeRequest();
 
-            MyListView.ItemsSource = Items;
+            MyListView.ItemsSource = _items;
         }
 
         public async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -36,8 +37,8 @@ namespace ArxivExpress
 
         public async void MakeRequest()
         {
-            SearchQuery query = new SearchQuery();
-            await AtomFeedRequest.MakeRequest(query.GetQueryString(), _atomFeedProcessor);
+            await AtomFeedRequest.MakeRequest(
+                _searchQuery.GetQueryString(), _atomFeedProcessor);
         }
 
         public class SearchQuery
@@ -81,6 +82,8 @@ namespace ArxivExpress
             public string PhysicsSubdivision;
             public string ResultsPerPage;
 
+            private uint _pageNumber;
+
             public SearchQuery()
             {
                 FillDefaultValues();
@@ -88,6 +91,11 @@ namespace ArxivExpress
 
             private void FillDefaultValues()
             {
+                SearchTerm = "";
+                DateFrom = "";
+                DateTo = "";
+                Year = "";
+
                 ComputerScience = true;
                 Physics = true;
                 Economics = true;
@@ -120,11 +128,24 @@ namespace ArxivExpress
 
                 ItemType = "Title";
                 PhysicsSubdivision = "all";
+                ResultsPerPage = "20";
+
+                _pageNumber = 0;
             }
 
             public string GetQueryString()
             {
-                return "http://export.arxiv.org/api/query?search_query=all:electron&start=0&max_results=10";
+                var queryString = "http://export.arxiv.org/api/query?search_query=";
+
+                queryString += PhysicsSubdivision;
+                if (SearchTerm != null && SearchTerm != string.Empty)
+                {
+                    queryString += ":\"" + SearchTerm + "\"";
+                }
+                queryString += "&start=" + _pageNumber.ToString();
+                queryString += "&max_results=" + ResultsPerPage;
+
+                return queryString;
             }
         }
 
@@ -190,7 +211,7 @@ namespace ArxivExpress
             void AtomFeedRequest.IAtomFeedProcessor.ProcessEntry(IAtomEntry entry)
             {
                 if (entry != null)
-                    _articleList.Items.Add(new EntryAdapter(entry));
+                    _articleList._items.Add(new EntryAdapter(entry));
             }
 
             void AtomFeedRequest.IAtomFeedProcessor.ProcessLink(ISyndicationLink link)

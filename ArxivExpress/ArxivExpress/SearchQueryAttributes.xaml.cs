@@ -184,7 +184,7 @@ namespace ArxivExpress
 
         async void Handle_SearchPressed(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ArticleList());
+            await Navigation.PushAsync(new ArticleList(_searchQuery));
         }
 
         private ArticleList.SearchQuery _searchQuery;
