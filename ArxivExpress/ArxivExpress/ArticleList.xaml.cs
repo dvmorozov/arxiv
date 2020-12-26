@@ -44,43 +44,17 @@ namespace ArxivExpress
         public class SearchQuery
         {
             public string SearchTerm;
-            public string DateFrom;
-            public string DateTo;
-            public string Year;
-
-            public bool ComputerScience;
-            public bool Physics;
-            public bool Economics;
-            public bool QuantitativeBiology;
-            public bool ElectricalEngineering;
-            public bool QuantitativeFinance;
-            public bool Mathematics;
-            public bool Statistics;
-
-            //  Mutually exclusive.
-            public bool IncludeCrossListedPapers;
-            public bool ExcludeCrossListedPapers;
-
-            //  Mutually exclusive.
-            public bool AllDates;
-            public bool Past12Months;
-            public bool SpecificYear;
-            public bool DateRange;
-
-            //  Mutually exclusive.
-            public bool SubmissionDateMostRecent;
-            public bool SubmissionDateOriginal;
-            public bool AnnouncementDate;
-
-            //  Mutually exclusive.
-            public bool ShowAbstracts;
-            public bool HideAbstracts;
-
-            public bool IncludeOlderVersions;
-
             public string Prefix;
-            public string PhysicsSubdivision;
             public string ResultsPerPage;
+
+            //  Mutually exclusive.
+            public bool SortByRelevance;
+            public bool SortByLastUpdatedDate;
+            public bool SortBySubmittedDate;
+
+            //  Mutually exclusive.
+            public bool SortOrderAscending;
+            public bool SortOrderDescending;
 
             private uint _pageNumber;
 
@@ -92,44 +66,44 @@ namespace ArxivExpress
             private void FillDefaultValues()
             {
                 SearchTerm = "";
-                DateFrom = "";
-                DateTo = "";
-                Year = "";
-
-                ComputerScience = true;
-                Physics = true;
-                Economics = true;
-                QuantitativeBiology = true;
-                ElectricalEngineering = true;
-                QuantitativeFinance = true;
-                Mathematics = true;
-                Statistics = true;
-
-                //  Mutually exclusive.
-                IncludeCrossListedPapers = true;
-                ExcludeCrossListedPapers = false;
-
-                //  Mutually exclusive.
-                AllDates = true;
-                Past12Months = false;
-                SpecificYear = false;
-                DateRange = false;
-
-                //  Mutually exclusive.
-                SubmissionDateMostRecent = true;
-                SubmissionDateOriginal = false;
-                AnnouncementDate = false;
-
-                //  Mutually exclusive.
-                ShowAbstracts = true;
-                HideAbstracts = false;
-
-                IncludeOlderVersions = false;
-
-                PhysicsSubdivision = "all";
                 ResultsPerPage = "20";
 
+                SortByRelevance = true;
+                SortByLastUpdatedDate = false;
+                SortBySubmittedDate = false;
+
+                SortOrderAscending = true;
+                SortOrderDescending = false;
+
                 _pageNumber = 0;
+            }
+
+            private string GetQuerySortBy()
+            {
+                if (SortByRelevance)
+                {
+                    return "relevance";
+                }
+                else if (SortByLastUpdatedDate)
+                {
+                    return "lastUpdatedDate";
+                }
+                else //if (SortBySubmittedDate)
+                {
+                    return "submittedDate";
+                }
+            }
+
+            private string GetQuerySortOrder()
+            {
+                if (SortOrderAscending)
+                {
+                    return "ascending";
+                }
+                else //if (SortOrderDescending)
+                {
+                    return "descending";
+                }
             }
 
             public string GetQueryString()
@@ -149,8 +123,11 @@ namespace ArxivExpress
                 {
                     queryString += ":\"" + SearchTerm + "\"";
                 }
+
                 queryString += "&start=" + _pageNumber.ToString();
                 queryString += "&max_results=" + ResultsPerPage;
+                queryString += "&sortBy=" + GetQuerySortBy();
+                queryString += "&sortOrder=" + GetQuerySortOrder();
 
                 return queryString;
             }
