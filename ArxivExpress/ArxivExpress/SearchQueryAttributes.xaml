@@ -9,27 +9,10 @@
                     <Entry x:Name="EntrySearchTerm" Placeholder="Search term..." HorizontalOptions="FillAndExpand"
                             ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
 
-                    <Picker x:Name="PickerItemType" Title="Title" SelectedIndexChanged="Hangle_OnPickerSelectedIndexChanged">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>Title</x:String>
-                                <x:String>Author(s)</x:String>
-                                <x:String>Abstract</x:String>
-                                <x:String>Comments</x:String>
-                                <x:String>Journal reference</x:String>
-                                <x:String>ACM classification</x:String>
-                                <x:String>MSC classification</x:String>
-                                <x:String>Report number</x:String>
-                                <x:String>arXiv identifier</x:String>
-                                <x:String>Cross-list category</x:String>
-                                <x:String>DOI</x:String>
-                                <x:String>ORCID</x:String>
-                                <x:String>arXiv author ID</x:String>
-                                <x:String>All fields</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
-                </StackLayout>
+                    <Picker x:Name="PickerItemType" Title="Title" SelectedIndexChanged="Hangle_OnPickerSelectedIndexChanged"
+                            ItemsSource="{Binding FieldPrefixes}" ItemDisplayBinding="{Binding Explanation}"/>
+
+            </StackLayout>
             </Frame>
 
             <ScrollView VerticalOptions="FillAndExpand">

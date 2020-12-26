@@ -78,7 +78,7 @@ namespace ArxivExpress
 
             public bool IncludeOlderVersions;
 
-            public string ItemType;
+            public string Prefix;
             public string PhysicsSubdivision;
             public string ResultsPerPage;
 
@@ -126,7 +126,6 @@ namespace ArxivExpress
 
                 IncludeOlderVersions = false;
 
-                ItemType = "Title";
                 PhysicsSubdivision = "all";
                 ResultsPerPage = "20";
 
@@ -137,7 +136,15 @@ namespace ArxivExpress
             {
                 var queryString = "http://export.arxiv.org/api/query?search_query=";
 
-                queryString += PhysicsSubdivision;
+                if (Prefix != null && Prefix != string.Empty)
+                {
+                    queryString += Prefix;
+                }
+                else
+                {
+                    queryString += "all";
+                }
+
                 if (SearchTerm != null && SearchTerm != string.Empty)
                 {
                     queryString += ":\"" + SearchTerm + "\"";

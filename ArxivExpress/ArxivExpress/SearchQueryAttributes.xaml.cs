@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace ArxivExpress
@@ -9,10 +9,75 @@ namespace ArxivExpress
         public SearchQueryAttributes()
         {
             _searchQuery = new ArticleList.SearchQuery();
+            _fieldPrefixes = new List<FieldPrefix>()
+            {
+                new FieldPrefix() { Prefix = "ti", Explanation = "Title" },
+                new FieldPrefix() { Prefix = "au", Explanation = "Author" },
+                new FieldPrefix() { Prefix = "abs", Explanation = "Abstract" },
+                new FieldPrefix() { Prefix = "co", Explanation = "Comment" },
+                new FieldPrefix() { Prefix = "jr", Explanation = "Journal Reference" },
+                new FieldPrefix() { Prefix = "cat", Explanation = "Subject Category" },
+                new FieldPrefix() { Prefix = "rn", Explanation = "Report Number" },
+                new FieldPrefix() { Prefix = "all", Explanation = "All Fields" }
+            };
+
+            BindingContext = this;
 
             InitializeComponent();
             FillFormData();
         }
+
+        public class FieldPrefix
+        {
+            public string Prefix
+            {
+                get
+                {
+                    return _prefix;
+                }
+
+                set
+                {
+                    _prefix = value;
+                }
+            }
+
+            public string Explanation
+            {
+                get
+                {
+                    return _explanation;
+                }
+
+                set
+                {
+                    _explanation = value;
+                }
+            }
+
+            private string _prefix;
+            private string _explanation;
+        }
+
+        public IList<FieldPrefix> FieldPrefixes
+        {
+            get
+            {
+                return _fieldPrefixes;
+            }
+        }
+
+        private List<FieldPrefix> _fieldPrefixes = new List<FieldPrefix>()
+        {
+            new FieldPrefix() { Prefix = "ti", Explanation = "Title" },
+            new FieldPrefix() { Prefix = "au", Explanation = "Author" },
+            new FieldPrefix() { Prefix = "abs", Explanation = "Abstract" },
+            new FieldPrefix() { Prefix = "co", Explanation = "Comment" },
+            new FieldPrefix() { Prefix = "jr", Explanation = "Journal Reference" },
+            new FieldPrefix() { Prefix = "cat", Explanation = "Subject Category" },
+            new FieldPrefix() { Prefix = "rn", Explanation = "Report Number" },
+            new FieldPrefix() { Prefix = "all", Explanation = "All of the above" }
+        };
 
         private void FillFormData()
         {
@@ -148,7 +213,8 @@ namespace ArxivExpress
             if (sender == PickerItemType)
             {
                 var picker = (Picker)sender;
-                _searchQuery.ItemType = (string)picker.ItemsSource[picker.SelectedIndex];
+                FieldPrefix item = (FieldPrefix)picker.ItemsSource[picker.SelectedIndex];
+                _searchQuery.Prefix = item.Prefix;
             }
             else if (sender == PickerPhysicsSubdivision)
             {
