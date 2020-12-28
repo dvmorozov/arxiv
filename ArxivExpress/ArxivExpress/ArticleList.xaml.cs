@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using Microsoft.SyndicationFeed;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -21,7 +22,7 @@ namespace ArxivExpress
             InitializeComponent();
             MakeRequest();
 
-            MyListView.ItemsSource = _items;
+            ArticleListView.ItemsSource = _items;
         }
 
         public async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -33,6 +34,12 @@ namespace ArxivExpress
 
             //Deselect Item
             ((ListView)sender).SelectedItem = null;
+        }
+
+        public void Handle_ToolbarItemClicked(object sender, EventArgs e)
+        {
+            ToolbarItem item = (ToolbarItem)sender;
+            //messageLabel.Text = $"You clicked the \"{item.Text}\" toolbar item.";
         }
 
         public async void MakeRequest()

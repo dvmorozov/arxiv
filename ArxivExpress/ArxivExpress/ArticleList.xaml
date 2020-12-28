@@ -2,7 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ArxivExpress.ArticleList"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core">
-    <ListView x:Name="MyListView" ItemsSource="{Binding Items}" ItemTapped="Handle_ItemTapped" CachingStrategy="RecycleElement"
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Primary"
+                Text="Icon Item"
+                Priority="0"
+                IconImageSource="AppIcon"
+                Clicked="Handle_ToolbarItemClicked" />
+    </ContentPage.ToolbarItems> 
+
+    <ListView x:Name="ArticleListView" ItemsSource="{Binding Items}" ItemTapped="Handle_ItemTapped" CachingStrategy="RecycleElement"
               HasUnevenRows="True" ios:ListView.SeparatorStyle="FullWidth">
         <ListView.ItemTemplate>
             <DataTemplate>
