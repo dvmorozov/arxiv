@@ -9,7 +9,7 @@ namespace ArxivExpress
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ArticleList : ContentPage
     {
-        private ObservableCollection<EntryAdapter> _items { get; set; }
+        private ObservableCollection<ArticleEntry> _items { get; set; }
         private AtomFeedProcessor _atomFeedProcessor;
         private SearchQuery _searchQuery;
 
@@ -17,7 +17,7 @@ namespace ArxivExpress
         {
             _atomFeedProcessor = new AtomFeedProcessor(this);
             _searchQuery = searchQuery;
-            _items = new ObservableCollection<EntryAdapter>();
+            _items = new ObservableCollection<ArticleEntry>();
 
             InitializeComponent();
             MakeRequest();
@@ -39,13 +39,48 @@ namespace ArxivExpress
         public void Handle_ToolbarItemClicked(object sender, EventArgs e)
         {
             ToolbarItem item = (ToolbarItem)sender;
-            //messageLabel.Text = $"You clicked the \"{item.Text}\" toolbar item.";
+            if (item == ToolbarItemNextPage)
+            {
+                _searchQuery.PageNumber++;
+                MakeRequest();
+            }
+            else if (item == ToolbarItemPrevPage)
+            {
+                if (_searchQuery.PageNumber > 0)
+                {
+                    _searchQuery.PageNumber--;
+                    MakeRequest();
+                }
+            }
+        }
+
+        private void SetToolbarPageNavigationItems()
+        {
+            if (_searchQuery.PageNumber > 0)
+            {
+                ToolbarItemPrevPage.Text = "Page " +
+                    (_searchQuery.PageNumber).ToString();
+
+                ToolbarItemPrevPage.IsEnabled = true;
+            }
+            else
+            {
+                ToolbarItemPrevPage.Text = "Prev Page";
+
+                ToolbarItemPrevPage.IsEnabled = false;
+            }
+            ToolbarItemNextPage.Text = "Page " +
+                    (_searchQuery.PageNumber + 2).ToString();
         }
 
         public async void MakeRequest()
         {
+            _items.Clear();
+
             await AtomFeedRequest.MakeRequest(
                 _searchQuery.GetQueryString(), _atomFeedProcessor);
+
+            SetToolbarPageNavigationItems();
         }
 
         public class SearchQuery
@@ -63,7 +98,7 @@ namespace ArxivExpress
             public bool SortOrderAscending;
             public bool SortOrderDescending;
 
-            private uint _pageNumber;
+            public uint PageNumber;
 
             public SearchQuery()
             {
@@ -82,7 +117,7 @@ namespace ArxivExpress
                 SortOrderAscending = true;
                 SortOrderDescending = false;
 
-                _pageNumber = 0;
+                PageNumber = 0;
             }
 
             private string GetQuerySortBy()
@@ -131,8 +166,11 @@ namespace ArxivExpress
                     queryString += ":\"" + SearchTerm + "\"";
                 }
 
-                queryString += "&start=" + _pageNumber.ToString();
-                queryString += "&max_results=" + ResultsPerPage;
+                uint resultsPerPage = 25;
+                uint.TryParse(ResultsPerPage, out resultsPerPage);
+
+                queryString += "&start=" + (PageNumber * resultsPerPage).ToString();
+                queryString += "&max_results=" + resultsPerPage.ToString();
                 queryString += "&sortBy=" + GetQuerySortBy();
                 queryString += "&sortOrder=" + GetQuerySortOrder();
 
@@ -140,11 +178,11 @@ namespace ArxivExpress
             }
         }
 
-        public class EntryAdapter
+        public class ArticleEntry
         {
             private IAtomEntry _entry;
 
-            public EntryAdapter(IAtomEntry entry)
+            public ArticleEntry(IAtomEntry entry)
             {
                 _entry = entry;
             }
@@ -202,7 +240,7 @@ namespace ArxivExpress
             void AtomFeedRequest.IAtomFeedProcessor.ProcessEntry(IAtomEntry entry)
             {
                 if (entry != null)
-                    _articleList._items.Add(new EntryAdapter(entry));
+                    _articleList._items.Add(new ArticleEntry(entry));
             }
 
             void AtomFeedRequest.IAtomFeedProcessor.ProcessLink(ISyndicationLink link)

@@ -3,11 +3,19 @@
              x:Class="ArxivExpress.ArticleList"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Order="Primary"
-                Text="Icon Item"
-                Priority="0"
-                IconImageSource="AppIcon"
-                Clicked="Handle_ToolbarItemClicked" />
+        <ToolbarItem
+            x:Name="ToolbarItemPrevPage"
+            Text="Page 1"
+            Clicked="Handle_ToolbarItemClicked"/>
+        <ToolbarItem
+            x:Name="ToolbarItemHome"
+            Text="Home"
+            IconImageSource="AppIcon"
+            Clicked="Handle_ToolbarItemClicked"/>
+        <ToolbarItem
+            x:Name="ToolbarItemNextPage"
+            Text="Page 2"
+            Clicked="Handle_ToolbarItemClicked"/>
     </ContentPage.ToolbarItems> 
 
     <ListView x:Name="ArticleListView" ItemsSource="{Binding Items}" ItemTapped="Handle_ItemTapped" CachingStrategy="RecycleElement"
