@@ -227,6 +227,15 @@ namespace ArxivExpress
                 get { return MakePlainString(_entry.Title); }
             }
 
+            public string Published
+            {
+                get { return
+                        _entry.Published != null ?
+                        "Published: " + _entry.Published.Date.ToShortDateString() :
+                        "";
+                }
+            }
+
             private string MakePlainString(string original)
             {
                 string result = original;

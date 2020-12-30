@@ -27,6 +27,9 @@
                         <Label Text="{Binding Summary}"
                                Style="{DynamicResource ListItemDetailTextStyle}"
                                LineBreakMode="WordWrap"/>
+                        <Label Text="{Binding Published}"
+                               Style="{DynamicResource ListItemDetailTextStyle}"
+                               LineBreakMode="WordWrap"/>
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>
