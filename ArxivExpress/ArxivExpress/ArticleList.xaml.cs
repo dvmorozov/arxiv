@@ -131,12 +131,12 @@ namespace ArxivExpress
                 SearchTerm = "";
                 ResultsPerPage = "25";
 
-                SortByRelevance = true;
+                SortByRelevance = false;
                 SortByLastUpdatedDate = false;
-                SortBySubmittedDate = false;
+                SortBySubmittedDate = true;
 
-                SortOrderAscending = true;
-                SortOrderDescending = false;
+                SortOrderAscending = false;
+                SortOrderDescending = true;
 
                 PageNumber = 0;
             }
