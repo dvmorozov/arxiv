@@ -44,7 +44,7 @@ namespace ArxivExpress
                 _searchQuery.PageNumber++;
                 MakeRequest();
             }
-            else if (item == ToolbarItemPrevPage)
+            else if (item == _toolbarItemPrevPage)
             {
                 if (_searchQuery.PageNumber > 0)
                 {
@@ -63,22 +63,34 @@ namespace ArxivExpress
             return startIndex.ToString() + "-" + endIndex.ToString();
         }
 
+        private ToolbarItem _toolbarItemPrevPage;
+
+        private void DeleteToolbarItemPate()
+        {
+            if (_toolbarItemPrevPage != null)
+            {
+                this.ToolbarItems.Remove(_toolbarItemPrevPage);
+            }
+        }
+
         private void SetToolbarPageNavigationItems()
         {
-  
+            DeleteToolbarItemPate();
+
             if (_searchQuery.PageNumber > 0)
             {
-                ToolbarItemPrevPage.Text = GetItemsRange(_searchQuery.PageNumber - 1);
+                var item = new ToolbarItem
+                {
+                    Text = GetItemsRange(_searchQuery.PageNumber - 1),
+                    Order = ToolbarItemOrder.Primary,
+                    Priority = 0                    
+                };
+                item.Clicked += Handle_ToolbarItemClicked;
 
-                ToolbarItemPrevPage.IsEnabled = true;
+                this.ToolbarItems.Insert(0, item);
+                _toolbarItemPrevPage = item;
             }
-            else
-            {
-                ToolbarItemPrevPage.Text = "";
-
-                ToolbarItemPrevPage.IsEnabled = false;
-            }
-
+ 
             ToolbarItemNextPage.Text = GetItemsRange(_searchQuery.PageNumber + 1);
         }
 

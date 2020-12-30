@@ -4,10 +4,6 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core">
     <ContentPage.ToolbarItems>
         <ToolbarItem
-            x:Name="ToolbarItemPrevPage"
-            Text="Page 1"
-            Clicked="Handle_ToolbarItemClicked"/>
-        <ToolbarItem
             x:Name="ToolbarItemHome"
             Text="Home"
             IconImageSource="AppIcon"
