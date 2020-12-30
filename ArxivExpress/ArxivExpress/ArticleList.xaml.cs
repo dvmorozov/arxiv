@@ -54,23 +54,32 @@ namespace ArxivExpress
             }
         }
 
+        private string GetItemsRange(uint pageIndex)
+        {
+            var resultsPerPage = _searchQuery.GetResultsPerPage();
+            var startIndex = pageIndex * resultsPerPage + 1;
+            var endIndex = (pageIndex + 1) * resultsPerPage;
+
+            return startIndex.ToString() + "-" + endIndex.ToString();
+        }
+
         private void SetToolbarPageNavigationItems()
         {
+  
             if (_searchQuery.PageNumber > 0)
             {
-                ToolbarItemPrevPage.Text = "Page " +
-                    (_searchQuery.PageNumber).ToString();
+                ToolbarItemPrevPage.Text = GetItemsRange(_searchQuery.PageNumber - 1);
 
                 ToolbarItemPrevPage.IsEnabled = true;
             }
             else
             {
-                ToolbarItemPrevPage.Text = "Prev Page";
+                ToolbarItemPrevPage.Text = "";
 
                 ToolbarItemPrevPage.IsEnabled = false;
             }
-            ToolbarItemNextPage.Text = "Page " +
-                    (_searchQuery.PageNumber + 2).ToString();
+
+            ToolbarItemNextPage.Text = GetItemsRange(_searchQuery.PageNumber + 1);
         }
 
         public async void MakeRequest()
@@ -108,7 +117,7 @@ namespace ArxivExpress
             private void FillDefaultValues()
             {
                 SearchTerm = "";
-                ResultsPerPage = "20";
+                ResultsPerPage = "25";
 
                 SortByRelevance = true;
                 SortByLastUpdatedDate = false;
@@ -148,6 +157,16 @@ namespace ArxivExpress
                 }
             }
 
+            public uint GetResultsPerPage()
+            {
+                if (!uint.TryParse(ResultsPerPage, out uint resultsPerPage))
+                {
+                    resultsPerPage = 25;
+                }
+
+                return resultsPerPage;
+            }
+
             public string GetQueryString()
             {
                 var queryString = "http://export.arxiv.org/api/query?search_query=";
@@ -166,8 +185,7 @@ namespace ArxivExpress
                     queryString += ":\"" + SearchTerm + "\"";
                 }
 
-                uint resultsPerPage = 25;
-                uint.TryParse(ResultsPerPage, out resultsPerPage);
+                var resultsPerPage = GetResultsPerPage();
 
                 queryString += "&start=" + (PageNumber * resultsPerPage).ToString();
                 queryString += "&max_results=" + resultsPerPage.ToString();
