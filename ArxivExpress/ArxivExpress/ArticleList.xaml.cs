@@ -30,7 +30,7 @@ namespace ArxivExpress
             if (e.Item == null)
                 return;
 
-            await DisplayAlert("Item Tapped", "An item was tapped.", "OK");
+            await Navigation.PushAsync(new ArticleInfo((ArticleEntry)e.Item));
 
             //Deselect Item
             ((ListView)sender).SelectedItem = null;
