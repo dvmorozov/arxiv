@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Microsoft.SyndicationFeed;
 using Xamarin.Forms;
@@ -215,6 +216,21 @@ namespace ArxivExpress
             public ArticleEntry(IAtomEntry entry)
             {
                 _entry = entry;
+            }
+
+            public IList<string> Categories
+            {
+                get
+                {
+                    List<string> result = new List<string>();
+
+                    foreach (var category in _entry.Categories)
+                    {
+                        result.Add(category.Name);
+                    }
+
+                    return result;
+                }
             }
 
             public string Summary
