@@ -209,6 +209,18 @@ namespace ArxivExpress
             }
         }
 
+        public class Contributor
+        {
+            public string Email { get; }
+            public string Name { get; }
+
+            public Contributor(string name, string email)
+            {
+                Name = name;
+                Email = email;
+            }
+        }
+
         public class ArticleEntry
         {
             private IAtomEntry _entry;
@@ -227,6 +239,23 @@ namespace ArxivExpress
                     foreach (var category in _entry.Categories)
                     {
                         result.Add(category.Name);
+                    }
+
+                    return result;
+                }
+            }
+
+            public IList<Contributor> Contributors
+            {
+                get
+                {
+                    List<Contributor> result = new List<Contributor>();
+
+                    foreach (var contributor in _entry.Contributors)
+                    {
+                        result.Add(new Contributor(
+                            contributor.Name, contributor.Email)
+                        );
                     }
 
                     return result;
