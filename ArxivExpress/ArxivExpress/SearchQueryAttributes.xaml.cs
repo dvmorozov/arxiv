@@ -59,25 +59,9 @@ namespace ArxivExpress
             private string _explanation;
         }
 
-        public IList<FieldPrefix> FieldPrefixes
-        {
-            get
-            {
-                return _fieldPrefixes;
-            }
-        }
+        public IList<FieldPrefix> FieldPrefixes => _fieldPrefixes;
 
-        private List<FieldPrefix> _fieldPrefixes = new List<FieldPrefix>()
-        {
-            new FieldPrefix() { Prefix = "ti", Explanation = "Title" },
-            new FieldPrefix() { Prefix = "au", Explanation = "Author" },
-            new FieldPrefix() { Prefix = "abs", Explanation = "Abstract" },
-            new FieldPrefix() { Prefix = "co", Explanation = "Comment" },
-            new FieldPrefix() { Prefix = "jr", Explanation = "Journal Reference" },
-            new FieldPrefix() { Prefix = "cat", Explanation = "Subject Category" },
-            new FieldPrefix() { Prefix = "rn", Explanation = "Report Number" },
-            new FieldPrefix() { Prefix = "all", Explanation = "All of the above" }
-        };
+        private readonly List<FieldPrefix> _fieldPrefixes;
 
         private void FillFormData()
         {
