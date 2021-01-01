@@ -9,9 +9,29 @@ namespace ArxivExpress
             InitializeComponent();
         }
 
-        public async void Handle_ReadingData(object sender, System.EventArgs e)
+        public async void Handle_SearchPressed(object sender, System.EventArgs e)
         {
             await Navigation.PushAsync(new SearchQueryAttributes());
+        }
+
+        public async void Handle_RecentlyViewedPressed(object sender, System.EventArgs e)
+        {
+            //await Navigation.PushAsync(new SearchQueryAttributes());
+        }
+
+        public async void Handle_LikedArticlesPressed(object sender, System.EventArgs e)
+        {
+            //await Navigation.PushAsync(new SearchQueryAttributes());
+        }
+
+        public async void Handle_RecommendedArticlesPressed(object sender, System.EventArgs e)
+        {
+            //await Navigation.PushAsync(new SearchQueryAttributes());
+        }
+
+        public async void Handle_ViewedAuthorsPressed(object sender, System.EventArgs e)
+        {
+            //await Navigation.PushAsync(new SearchQueryAttributes());
         }
     }
 }

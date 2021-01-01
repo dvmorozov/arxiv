@@ -7,19 +7,40 @@
         <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
             <Label Text="Welcome to ArxivExpress!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
-        <Button Text="Test Reading Data" Clicked="Handle_ReadingData" />
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
+
+        <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand">
+
+            <Button Text="Search" Pressed="Handle_SearchPressed"
+                    BorderColor="#2196F3" BackgroundColor="#2196F3"
+                    BorderWidth="2" Margin="10,40,10,10" HeightRequest="50"
+                    VerticalOptions="Center" HorizontalOptions="Center"
+                    WidthRequest="200" TextColor="White"/>
+
+            <Button Text="Recently Viewed" Pressed="Handle_RecentlyViewedPressed"
+                    BorderColor="#2196F3" BackgroundColor="#2196F3"
+                    BorderWidth="2" Margin="10" HeightRequest="50"
+                    VerticalOptions="Center" HorizontalOptions="Center"
+                    WidthRequest="200" TextColor="White"/>
+
+            <Button Text="Liked Articles" Pressed="Handle_LikedArticlesPressed"
+                    BorderColor="#2196F3" BackgroundColor="#2196F3"
+                    BorderWidth="2" Margin="10" HeightRequest="50"
+                    VerticalOptions="Center" HorizontalOptions="Center"
+                    WidthRequest="200" TextColor="White"/>
+
+            <Button Text="Recommended Articles" Pressed="Handle_RecommendedArticlesPressed"
+                    BorderColor="#2196F3" BackgroundColor="#2196F3"
+                    BorderWidth="2" Margin="10" HeightRequest="50"
+                    VerticalOptions="Center" HorizontalOptions="Center"
+                    WidthRequest="200" TextColor="White"/>
+
+            <Button Text="Viewed Authors" Pressed="Handle_ViewedAuthorsPressed"
+                    BorderColor="#2196F3" BackgroundColor="#2196F3"
+                    BorderWidth="2" Margin="10" HeightRequest="50"
+                    VerticalOptions="Center" HorizontalOptions="Center"
+                    WidthRequest="200" TextColor="White"/>
+
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>
