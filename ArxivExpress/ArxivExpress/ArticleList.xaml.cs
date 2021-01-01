@@ -299,6 +299,17 @@ namespace ArxivExpress
                 }
             }
 
+            public string LastUpdated
+            {
+                get
+                {
+                    return
+                      _entry.LastUpdated != null ?
+                      "Last updated: " + _entry.LastUpdated.Date.ToShortDateString() :
+                      "";
+                }
+            }
+
             private string MakePlainString(string original)
             {
                 string result = original;
