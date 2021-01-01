@@ -17,7 +17,7 @@
                       BindableLayout.ItemsSource="{Binding ArticleEntry.Contributors}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding ArticleEntry.Name}"
+                        <Label Text="{Binding Name}"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
                                 LineBreakMode="WordWrap"/>
                     </DataTemplate>
