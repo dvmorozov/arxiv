@@ -8,8 +8,33 @@ namespace ArxivExpress
     {
         public ArticleList.ArticleEntry ArticleEntry { get; }
 
-        public ICommand Handle_PdfUrlTapped => new Command<string>(
-            async (url) => await Launcher.OpenAsync(url));
+        public class HyperlinkLabel : Label
+        {
+            public string Url { get; }
+
+            public HyperlinkLabel(string text, string url)
+            {
+                Url = url;
+                Text = text;
+
+                TextDecorations = TextDecorations.Underline;
+                TextColor = Color.Blue;
+                GestureRecognizers.Add(new TapGestureRecognizer
+                {
+                    Command = new Command(async () => await Launcher.OpenAsync(Url))
+                });
+            }
+        }
+
+        private void CreatePdfUrl()
+        {
+            if (ArticleEntry.PdfUrl != null)
+            {
+                StackLayoutArticleInfo.Children.Add(
+                    new HyperlinkLabel("Pdf", ArticleEntry.PdfUrl)
+                    );
+            }
+        }
 
         public ArticleInfo(ArticleList.ArticleEntry articleEntry)
         {
@@ -17,6 +42,7 @@ namespace ArxivExpress
             BindingContext = this;
 
             InitializeComponent();
+            CreatePdfUrl();
         }
     }
 }

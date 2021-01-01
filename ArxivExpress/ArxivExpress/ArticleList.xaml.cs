@@ -266,7 +266,7 @@ namespace ArxivExpress
             {
                 get
                 {
-                    string result = "";
+                    string result = null;
 
                     foreach (var link in _entry.Links)
                     {
