@@ -5,30 +5,30 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand" Margin="10">
 
-            <Label Text="{Binding Title}"
+            <Label Text="{Binding ArticleEntry.Title}"
                     Style="{DynamicResource ListItemTextStyle}"
                     LineBreakMode="WordWrap"/>
-            <Label Text="{Binding Summary}"
+            <Label Text="{Binding ArticleEntry.Summary}"
                     Style="{DynamicResource ListItemDetailTextStyle}"
                     LineBreakMode="WordWrap"/>
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
-                      BindableLayout.ItemsSource="{Binding Contributors}">
+                      BindableLayout.ItemsSource="{Binding ArticleEntry.Contributors}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding Name}"
+                        <Label Text="{Binding ArticleEntry.Name}"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
                                 LineBreakMode="WordWrap"/>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </StackLayout>
 
-            <Label Text="{Binding Published}"
+            <Label Text="{Binding ArticleEntry.Published}"
                     Style="{DynamicResource ListItemDetailTextStyle}"
                     LineBreakMode="WordWrap"/>
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
-                      BindableLayout.ItemsSource="{Binding Categories}">
+                      BindableLayout.ItemsSource="{Binding ArticleEntry.Categories}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <Label Text="{Binding .}"
@@ -37,6 +37,22 @@
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </StackLayout>
+
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Pdf"
+                              TextColor="Blue"
+                              TextDecorations="Underline">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Handle_PdfUrlTapped}"
+                                    CommandParameter="{Binding ArticleEntry.PdfUrl}"/>
+                            </Span.GestureRecognizers>
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
         </StackLayout>
     </ContentPage.Content>

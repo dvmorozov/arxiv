@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using System.Windows.Input;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace ArxivExpress
 {
@@ -6,10 +8,13 @@ namespace ArxivExpress
     {
         public ArticleList.ArticleEntry ArticleEntry { get; }
 
+        public ICommand Handle_PdfUrlTapped => new Command<string>(
+            async (url) => await Launcher.OpenAsync(url));
+
         public ArticleInfo(ArticleList.ArticleEntry articleEntry)
         {
             ArticleEntry = articleEntry;
-            BindingContext = ArticleEntry;
+            BindingContext = this;
 
             InitializeComponent();
         }

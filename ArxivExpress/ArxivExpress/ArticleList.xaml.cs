@@ -262,6 +262,24 @@ namespace ArxivExpress
                 }
             }
 
+            public string PdfUrl
+            {
+                get
+                {
+                    string result = "";
+
+                    foreach (var link in _entry.Links)
+                    {
+                        if (link.MediaType == "application/pdf")
+                        {
+                            result = link.Uri.ToString();
+                        }
+                    }
+
+                    return result;
+                }
+            }
+
             public string Summary
             {
                 get { return MakePlainString(_entry.Summary); }
