@@ -3,48 +3,52 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ArxivExpress.ArticleInfo">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="StartAndExpand" Margin="10"
-                     x:Name="StackLayoutArticleInfo">
+        <ScrollView>
 
-            <Label Text="{Binding ArticleEntry.Title}"
-                    Style="{DynamicResource ListItemTextStyle}"
-                    LineBreakMode="WordWrap"/>
-            <Label Text="{Binding ArticleEntry.Summary}"
-                    Style="{DynamicResource ListItemDetailTextStyle}"
-                    LineBreakMode="WordWrap"/>
+            <StackLayout VerticalOptions="StartAndExpand" Margin="10"
+                         x:Name="StackLayoutArticleInfo">
 
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
-                      BindableLayout.ItemsSource="{Binding ArticleEntry.Contributors}">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate>
-                        <Label Text="{Binding Name}"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                LineBreakMode="WordWrap"/>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Label Text="{Binding ArticleEntry.Published}"
+                <Label Text="{Binding ArticleEntry.Title}"
+                        Style="{DynamicResource ListItemTextStyle}"
+                        LineBreakMode="WordWrap"/>
+                <Label Text="{Binding ArticleEntry.Summary}"
                         Style="{DynamicResource ListItemDetailTextStyle}"
                         LineBreakMode="WordWrap"/>
 
-                <Label Text="{Binding ArticleEntry.LastUpdated}"
-                        Style="{DynamicResource ListItemDetailTextStyle}"
-                        LineBreakMode="WordWrap"/>
-            </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
+                          BindableLayout.ItemsSource="{Binding ArticleEntry.Contributors}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding Name}"
+                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                    LineBreakMode="WordWrap"/>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
 
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
-                      BindableLayout.ItemsSource="{Binding ArticleEntry.Categories}">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate>
-                        <Label Text="{Binding .}"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                LineBreakMode="WordWrap"/>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="{Binding ArticleEntry.Published}"
+                            Style="{DynamicResource ListItemDetailTextStyle}"
+                            LineBreakMode="WordWrap"/>
 
-        </StackLayout>
+                    <Label Text="{Binding ArticleEntry.LastUpdated}"
+                            Style="{DynamicResource ListItemDetailTextStyle}"
+                            LineBreakMode="WordWrap"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
+                          BindableLayout.ItemsSource="{Binding ArticleEntry.Categories}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding .}"
+                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                    LineBreakMode="WordWrap"/>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+             </StackLayout>
+
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
