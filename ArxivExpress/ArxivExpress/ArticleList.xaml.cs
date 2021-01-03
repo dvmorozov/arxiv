@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.SyndicationFeed;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,7 +12,6 @@ namespace ArxivExpress
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ArticleList : ContentPage
     {
-        private ObservableCollection<ArticleEntry> _items { get; set; }
         private AtomFeedProcessor _atomFeedProcessor;
         private SearchQuery _searchQuery;
 
@@ -18,12 +19,9 @@ namespace ArxivExpress
         {
             _atomFeedProcessor = new AtomFeedProcessor(this);
             _searchQuery = searchQuery;
-            _items = new ObservableCollection<ArticleEntry>();
 
             InitializeComponent();
-            MakeRequest();
-
-            ArticleListView.ItemsSource = _items;
+            MakeRequest().Wait();
         }
 
         public async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -37,20 +35,20 @@ namespace ArxivExpress
             ((ListView)sender).SelectedItem = null;
         }
 
-        public void Handle_ToolbarItemClicked(object sender, EventArgs e)
+        public async void Handle_ToolbarItemClicked(object sender, EventArgs e)
         {
             ToolbarItem item = (ToolbarItem)sender;
             if (item == ToolbarItemNextPage)
             {
                 _searchQuery.PageNumber++;
-                MakeRequest();
+                await MakeRequest();
             }
             else if (item == _toolbarItemPrevPage)
             {
                 if (_searchQuery.PageNumber > 0)
                 {
                     _searchQuery.PageNumber--;
-                    MakeRequest();
+                    await MakeRequest();
                 }
             }
         }
@@ -95,13 +93,14 @@ namespace ArxivExpress
             ToolbarItemNextPage.Text = GetItemsRange(_searchQuery.PageNumber + 1);
         }
 
-        public async void MakeRequest()
+        private async Task MakeRequest()
         {
-            _items.Clear();
+            _atomFeedProcessor.Items.Clear();
 
             await AtomFeedRequest.MakeRequest(
                 _searchQuery.GetQueryString(), _atomFeedProcessor);
 
+            ArticleListView.ItemsSource = _atomFeedProcessor.Items;
             SetToolbarPageNavigationItems();
         }
 
@@ -336,9 +335,15 @@ namespace ArxivExpress
         private class AtomFeedProcessor : AtomFeedRequest.IAtomFeedProcessor
         {
             private ArticleList _articleList;
+            private ObservableCollection<ArticleEntry> _items;
+            public ObservableCollection<ArticleEntry> Items
+            {
+                get { return _items; }
+            }
 
             public AtomFeedProcessor(ArticleList articleList)
             {
+                _items = new ObservableCollection<ArticleEntry>();
                 _articleList = articleList;
             }
 
@@ -353,7 +358,7 @@ namespace ArxivExpress
             void AtomFeedRequest.IAtomFeedProcessor.ProcessEntry(IAtomEntry entry)
             {
                 if (entry != null)
-                    _articleList._items.Add(new ArticleEntry(entry));
+                    _items.Add(new ArticleEntry(entry));
             }
 
             void AtomFeedRequest.IAtomFeedProcessor.ProcessLink(ISyndicationLink link)
