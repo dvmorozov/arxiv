@@ -1,6 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -8,7 +6,7 @@ namespace ArxivExpress
 {
     public partial class ArticleInfo : ContentPage
     {
-        public ArticleList.ArticleEntry ArticleEntry { get; }
+        public ArticleEntry ArticleEntry { get; }
 
         public class HyperlinkLabel : Label
         {
@@ -63,7 +61,7 @@ namespace ArxivExpress
             }
         }
 
-        public ArticleInfo(ArticleList.ArticleEntry articleEntry)
+        public ArticleInfo(ArticleEntry articleEntry)
         {
             ArticleEntry = articleEntry;
             BindingContext = this;

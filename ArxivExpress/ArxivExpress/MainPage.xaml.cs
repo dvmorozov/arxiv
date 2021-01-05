@@ -16,22 +16,22 @@ namespace ArxivExpress
 
         public async void Handle_RecentlyViewedPressed(object sender, System.EventArgs e)
         {
-            //await Navigation.PushAsync(new SearchQueryAttributes());
+            //await Navigation.PushAsync(new SearchQuery());
         }
 
         public async void Handle_LikedArticlesPressed(object sender, System.EventArgs e)
         {
-            //await Navigation.PushAsync(new SearchQueryAttributes());
+            //await Navigation.PushAsync(new SearchQuery());
         }
 
         public async void Handle_RecommendedArticlesPressed(object sender, System.EventArgs e)
         {
-            //await Navigation.PushAsync(new SearchQueryAttributes());
+            //await Navigation.PushAsync(new SearchQuery());
         }
 
         public async void Handle_ViewedAuthorsPressed(object sender, System.EventArgs e)
         {
-            //await Navigation.PushAsync(new SearchQueryAttributes());
+            //await Navigation.PushAsync(new SearchQuery());
         }
     }
 }
