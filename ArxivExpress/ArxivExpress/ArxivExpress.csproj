@@ -24,5 +24,6 @@
     <Folder Include="Features\ArticleList\" />
     <Folder Include="Features\ArticleInfo\" />
     <Folder Include="Features\SearchQuery\" />
+    <Folder Include="Features\LikedArticles\" />
   </ItemGroup>
 </Project>
