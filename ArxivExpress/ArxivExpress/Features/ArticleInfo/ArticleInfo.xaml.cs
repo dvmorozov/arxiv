@@ -44,7 +44,7 @@ namespace ArxivExpress
                 HorizontalOptions = LayoutOptions.Center;
                 WidthRequest = 200;
                 TextColor = Color.White;
-                Pressed += new EventHandler(delegate(Object o, EventArgs a)
+                Clicked += new EventHandler(delegate(Object o, EventArgs a)
                 {
                     Launcher.OpenAsync(Url);
                 });
