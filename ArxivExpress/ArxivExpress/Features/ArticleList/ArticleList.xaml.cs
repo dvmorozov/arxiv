@@ -19,7 +19,6 @@ namespace ArxivExpress
             _searchQuery = searchQuery;
 
             InitializeComponent();
-            MakeRequest().Wait();
         }
 
         public async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -91,7 +90,7 @@ namespace ArxivExpress
             ToolbarItemNextPage.Text = GetItemsRange(_searchQuery.PageNumber + 1);
         }
 
-        private async Task MakeRequest()
+        public async Task MakeRequest()
         {
             _atomFeedProcessor.Items.Clear();
 
