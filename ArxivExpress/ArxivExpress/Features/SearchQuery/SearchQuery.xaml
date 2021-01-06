@@ -45,7 +45,7 @@
                         <Label Text="Sort Order" Margin="8,0,0,0"/>
 
                         <RadioButton Margin="8,0,0,0" x:Name="RadioSortOrderAscending"
-                                     Text="Ascending" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+                                     Text="Ascending1" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
                         <RadioButton Margin="8,0,0,0" x:Name="RadioSortOrderDescending"
                                      Text="Descending" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
                     </StackLayout>

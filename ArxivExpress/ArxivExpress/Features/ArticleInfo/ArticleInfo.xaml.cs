@@ -1,4 +1,5 @@
 ﻿using System;
+using ArxivExpress.Features.LikedArticles;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -7,6 +8,8 @@ namespace ArxivExpress
     public partial class ArticleInfo : ContentPage
     {
         public ArticleEntry ArticleEntry { get; }
+
+        public LikedArticlesRepository LikedArticlesRepository { get; }
 
         public class HyperlinkLabel : Label
         {
@@ -78,6 +81,18 @@ namespace ArxivExpress
                     new HyperlinkButton("Open Pdf", ArticleEntry.PdfUrl)
                     );
             }
+        }       
+
+        void Handle_LikePressed(object sender, EventArgs e)
+        {
+            LikedArticlesRepository.Add("test");
+        }
+
+        public void CreateAddLikedArticleButton(EventHandler clicked)
+        {
+            StackLayoutArticleInfo.Children.Add(
+                new OrdinaryButton("Like", clicked)
+                );
         }
 
         public ArticleInfo(ArticleEntry articleEntry)
@@ -87,6 +102,7 @@ namespace ArxivExpress
 
             InitializeComponent();
             CreatePdfUrl();
+            CreateAddLikedArticleButton(Handle_LikePressed);
         }
     }
 }
