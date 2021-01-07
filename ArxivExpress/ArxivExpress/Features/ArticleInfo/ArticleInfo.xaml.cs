@@ -85,24 +85,34 @@ namespace ArxivExpress
 
         void Handle_LikePressed(object sender, EventArgs e)
         {
-            LikedArticlesRepository.Add("test");
+            LikedArticlesRepository.AddArticle("test");
         }
 
-        public void CreateAddLikedArticleButton(EventHandler clicked)
+        public void CreateAddLikedArticleButton(string articleId, EventHandler clicked)
         {
-            StackLayoutArticleInfo.Children.Add(
-                new OrdinaryButton("Like", clicked)
-                );
+            if (!LikedArticlesRepository.HasArticle(articleId))
+            {
+                StackLayoutArticleInfo.Children.Add(
+                    new OrdinaryButton("Add to Liked", clicked)
+                    );
+            }
+            else
+            {
+                StackLayoutArticleInfo.Children.Add(
+                   new OrdinaryButton("Remove from Liked", clicked)
+                   );
+            }
         }
 
         public ArticleInfo(ArticleEntry articleEntry)
         {
             ArticleEntry = articleEntry;
+            LikedArticlesRepository = new LikedArticlesRepository();
             BindingContext = this;
 
             InitializeComponent();
             CreatePdfUrl();
-            CreateAddLikedArticleButton(Handle_LikePressed);
+            CreateAddLikedArticleButton(articleEntry.Id, Handle_LikePressed);
         }
     }
 }

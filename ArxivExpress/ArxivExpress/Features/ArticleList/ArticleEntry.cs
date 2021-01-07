@@ -95,6 +95,14 @@ namespace ArxivExpress
             }
         }
 
+        public string Id
+        {
+            get
+            {
+                return _entry.Id;
+            }
+        }
+
         private string MakePlainString(string original)
         {
             string result = original;
