@@ -5,12 +5,23 @@ namespace ArxivExpress.Features.LikedArticles
 {
     public class LikedArticlesRepository
     {
-        public LikedArticlesRepository()
+        private static LikedArticlesRepository _instance;
+        private static List<string> _articleIds;
+
+        protected LikedArticlesRepository()
         {
-            _articleIds = new List<string>();
+        	_articleIds = new List<string>();
         }
 
-        private List<string> _articleIds;
+        public static LikedArticlesRepository GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new LikedArticlesRepository();
+            }
+
+            return _instance;
+        }
 
         public void AddArticle(string id)
         {

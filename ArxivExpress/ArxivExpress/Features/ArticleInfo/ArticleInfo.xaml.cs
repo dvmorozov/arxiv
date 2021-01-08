@@ -69,7 +69,7 @@ namespace ArxivExpress
 
             public ToggleLikeButton(string articleId)
             {
-                LikedArticlesRepository = new LikedArticlesRepository();
+                LikedArticlesRepository = LikedArticlesRepository.GetInstance();
 
                 BorderColor = Color.FromHex("#2196F3");
                 BackgroundColor = Color.FromHex("#2196F3");
@@ -143,7 +143,6 @@ namespace ArxivExpress
         public ArticleInfo(ArticleEntry articleEntry)
         {
             ArticleEntry = articleEntry;
-            //  TODO: convert LikedArticlesRepository to singleton.
             BindingContext = this;
 
             InitializeComponent();
