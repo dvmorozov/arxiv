@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
+﻿using Foundation;
+using PCLAppConfig;
 using UIKit;
 
 namespace ArxivExpress.iOS
@@ -27,6 +24,7 @@ namespace ArxivExpress.iOS
             Xamarin.Calabash.Start();
 #endif
             global::Xamarin.Forms.Forms.Init();
+            ConfigurationManager.Initialise(PCLAppConfig.FileSystemStream.PortableStream.Current);
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

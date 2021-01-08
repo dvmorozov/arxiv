@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using PCLAppConfig;
 
 namespace ArxivExpress.Features.LikedArticles
 {
@@ -11,6 +11,7 @@ namespace ArxivExpress.Features.LikedArticles
         protected LikedArticlesRepository()
         {
         	_articleIds = new List<string>();
+            var test = ConfigurationManager.AppSettings["config.text"];
         }
 
         public static LikedArticlesRepository GetInstance()
