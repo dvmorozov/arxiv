@@ -9,8 +9,7 @@ namespace ArxivExpress
     {
         public ArticleEntry ArticleEntry { get; }
 
-        public LikedArticlesRepository LikedArticlesRepository { get; }
-
+        //  TODO: move buttons into separate sources.
         public class HyperlinkLabel : Label
         {
             public string Url { get; }
@@ -54,11 +53,23 @@ namespace ArxivExpress
             }
         }
 
-        public class OrdinaryButton : Button
+        public class ToggleLikeButton : Button
         {
-            public OrdinaryButton(string text, EventHandler clicked)
+            public LikedArticlesRepository LikedArticlesRepository { get; }
+
+            class LikeButtonContext
             {
-                Text = text;
+                public readonly string ArticleId;
+
+                public LikeButtonContext(string articleId)
+                {
+                    ArticleId = articleId;
+                }
+            }
+
+            public ToggleLikeButton(string articleId)
+            {
+                LikedArticlesRepository = new LikedArticlesRepository();
 
                 BorderColor = Color.FromHex("#2196F3");
                 BackgroundColor = Color.FromHex("#2196F3");
@@ -69,7 +80,46 @@ namespace ArxivExpress
                 HorizontalOptions = LayoutOptions.Center;
                 WidthRequest = 200;
                 TextColor = Color.White;
-                Clicked += clicked;
+
+                BindingContext = new LikeButtonContext(articleId);
+
+                Clicked += Handle_Pressed;
+                SetText();
+            }
+
+            private void Handle_Pressed(object sender, EventArgs e)
+            {
+                if (sender == this)
+                {
+                    ToggleLikeStatus();
+                }
+            }
+
+            private void ToggleLikeStatus()
+            {
+                var context = BindingContext as LikeButtonContext;
+                if (context != null)
+                {
+                    if (LikedArticlesRepository.HasArticle(context.ArticleId))
+                    {
+                        LikedArticlesRepository.DeleteArticle(context.ArticleId);
+                    }
+                    else
+                    {
+                        LikedArticlesRepository.AddArticle(context.ArticleId);
+                    }
+                }
+                SetText();
+            }
+
+            private void SetText()
+            {
+                var context = BindingContext as LikeButtonContext;
+                if (context != null)
+                {
+                    Text = LikedArticlesRepository.HasArticle(context.ArticleId)
+                        ? "Remove from Liked" : "Add to Liked";
+                }
             }
         }
 
@@ -83,36 +133,22 @@ namespace ArxivExpress
             }
         }       
 
-        void Handle_LikePressed(object sender, EventArgs e)
+        public void CreateAddLikedArticleButton(string articleId)
         {
-            LikedArticlesRepository.AddArticle("test");
-        }
-
-        public void CreateAddLikedArticleButton(string articleId, EventHandler clicked)
-        {
-            if (!LikedArticlesRepository.HasArticle(articleId))
-            {
-                StackLayoutArticleInfo.Children.Add(
-                    new OrdinaryButton("Add to Liked", clicked)
-                    );
-            }
-            else
-            {
-                StackLayoutArticleInfo.Children.Add(
-                   new OrdinaryButton("Remove from Liked", clicked)
-                   );
-            }
+            StackLayoutArticleInfo.Children.Add(
+                new ToggleLikeButton(articleId)
+                );
         }
 
         public ArticleInfo(ArticleEntry articleEntry)
         {
             ArticleEntry = articleEntry;
-            LikedArticlesRepository = new LikedArticlesRepository();
+            //  TODO: convert LikedArticlesRepository to singleton.
             BindingContext = this;
 
             InitializeComponent();
             CreatePdfUrl();
-            CreateAddLikedArticleButton(articleEntry.Id, Handle_LikePressed);
+            CreateAddLikedArticleButton(articleEntry.Id);
         }
     }
 }
