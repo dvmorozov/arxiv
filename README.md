@@ -4,6 +4,7 @@ Arxiv.org clients
 ## Dependencies
 
 [Microsoft.SyndicationFeed.ReaderWriter](https://www.nuget.org/packages/Microsoft.SyndicationFeed.ReaderWriter)
+[PCLAppConfig](https://www.nuget.org/packages/PCLAppConfig)
 
 ## Arxiv API
 
