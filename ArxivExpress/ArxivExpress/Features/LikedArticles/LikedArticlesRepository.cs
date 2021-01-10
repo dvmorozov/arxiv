@@ -9,20 +9,20 @@ namespace ArxivExpress.Features.LikedArticles
     public class LikedArticlesRepository
     {
         private static LikedArticlesRepository _instance;
-        private static List<string> _articleIds;
+        private static List<LikedArticle> _likedArticles;
         private const string _fileName = "liked_articles.xml";
         private const string _rootElementName = "LikedArticleList";
         private const string _articleElementName = "LikedArticle";
 
         protected LikedArticlesRepository()
         {
-        	_articleIds = new List<string>();
+        	_likedArticles = new List<LikedArticle>();
             LoadArticeIds();
         }
 
         private void LoadArticeIds()
         {
-            _articleIds.Clear();
+            _likedArticles.Clear();
 
             var filePath = Path.Combine(Environment.GetFolderPath(
                 Environment.SpecialFolder.LocalApplicationData), _fileName);
@@ -36,7 +36,7 @@ namespace ArxivExpress.Features.LikedArticles
 
                 foreach (var articleId in query)
                 {
-                    _articleIds.Add(articleId);
+                    _likedArticles.Add(new LikedArticle { Id = articleId });
                 }
             }
         }
@@ -47,12 +47,12 @@ namespace ArxivExpress.Features.LikedArticles
                 Environment.SpecialFolder.LocalApplicationData), _fileName);
 
             var xml = new XDocument();
-            var likedArticleElements = new XElement[_articleIds.Count];
+            var likedArticleElements = new XElement[_likedArticles.Count];
 
-            for (var i = 0; i < _articleIds.Count; i++)
+            for (var i = 0; i < _likedArticles.Count; i++)
             {
                 likedArticleElements[i] = new XElement(_articleElementName,
-                    new XAttribute("id", _articleIds[i]));
+                    new XAttribute("id", _likedArticles[i]));
             }
             xml.Add(new XElement(_rootElementName, likedArticleElements));
             xml.Save(filePath);
@@ -68,24 +68,24 @@ namespace ArxivExpress.Features.LikedArticles
             return _instance;
         }
 
-        public void AddArticle(string id)
+        public void AddArticle(string articleId)
         {
-            _articleIds.Add(id);
+            _likedArticles.Add(new LikedArticle { Id = articleId });
             SaveArtcleIds();
         }
 
-        public void DeleteArticle(string id)
+        public void DeleteArticle(string articleId)
         {
-            if (_articleIds.Contains(id))
+            if (_likedArticles.Exists(item => item.Id == articleId))
             {
-                _articleIds.Remove(id);
+                _likedArticles.RemoveAll(item => item.Id == articleId);
                 SaveArtcleIds();
             }
         }
 
-        public bool HasArticle(string id)
+        public bool HasArticle(string articleId)
         {
-            return _articleIds.Contains(id);
+            return _likedArticles.Exists(item => item.Id == articleId);
         }
     }
 }
