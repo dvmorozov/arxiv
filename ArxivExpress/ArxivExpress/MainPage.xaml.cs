@@ -11,7 +11,7 @@ namespace ArxivExpress
 
         public async void Handle_SearchPressed(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new SearchQueryAttributes());
+            await Navigation.PushAsync(new SearchAttributes());
         }
 
         public async void Handle_RecentlyViewedPressed(object sender, System.EventArgs e)
