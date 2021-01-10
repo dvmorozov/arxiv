@@ -8,7 +8,7 @@ namespace ArxivExpress
     {
         public SearchAttributes()
         {
-            _searchQuery = new ArticleList.SearchQuery();
+            _searchQuery = new SearchQuery();
             _fieldPrefixes = new List<FieldPrefix>()
             {
                 new FieldPrefix() { Prefix = "ti", Explanation = "Title" },
@@ -134,6 +134,6 @@ namespace ArxivExpress
             await articleList.MakeRequest();
         }
 
-        private ArticleList.SearchQuery _searchQuery;
+        private SearchQuery _searchQuery;
     }
 }
