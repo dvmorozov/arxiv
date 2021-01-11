@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.SyndicationFeed;
-using static ArxivExpress.ArticleList;
 
-namespace ArxivExpress
+namespace ArxivExpress.Features.ArticleList
 {
     public class ArticleEntry
     {

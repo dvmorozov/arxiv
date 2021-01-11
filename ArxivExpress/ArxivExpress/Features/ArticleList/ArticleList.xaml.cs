@@ -5,15 +5,15 @@ using Microsoft.SyndicationFeed;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ArxivExpress
+namespace ArxivExpress.Features.ArticleList
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ArticleList : ContentPage
     {
         private AtomFeedProcessor _atomFeedProcessor;
-        private SearchQuery _searchQuery;
+        private SearchArticles.SearchQuery _searchQuery;
 
-        public ArticleList(SearchQuery searchQuery)
+        public ArticleList(SearchArticles.SearchQuery searchQuery)
         {
             _atomFeedProcessor = new AtomFeedProcessor(this);
             _searchQuery = searchQuery;
@@ -26,7 +26,7 @@ namespace ArxivExpress
             if (e.Item == null)
                 return;
 
-            await Navigation.PushAsync(new ArticleInfo((ArticleEntry)e.Item));
+            await Navigation.PushAsync(new ArticleInfo.ArticleInfo((ArticleEntry)e.Item));
 
             //Deselect Item
             ((ListView)sender).SelectedItem = null;
@@ -99,18 +99,6 @@ namespace ArxivExpress
 
             ArticleListView.ItemsSource = _atomFeedProcessor.Items;
             SetToolbarPageNavigationItems();
-        }
-
-        public class Contributor
-        {
-            public string Email { get; }
-            public string Name { get; }
-
-            public Contributor(string name, string email)
-            {
-                Name = name;
-                Email = email;
-            }
         }
 
         private class AtomFeedProcessor : AtomFeedRequest.IAtomFeedProcessor

@@ -1,11 +1,11 @@
 ﻿using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace ArxivExpress
+namespace ArxivExpress.Features.ArticleInfo
 {
     public partial class ArticleInfo : ContentPage
     {
-        public ArticleEntry ArticleEntry { get; }
+        public ArticleList.ArticleEntry ArticleEntry { get; }
 
         public class HyperlinkLabel : Label
         {
@@ -42,7 +42,7 @@ namespace ArxivExpress
                 );
         }
 
-        public ArticleInfo(ArticleEntry articleEntry)
+        public ArticleInfo(ArticleList.ArticleEntry articleEntry)
         {
             ArticleEntry = articleEntry;
             BindingContext = this;

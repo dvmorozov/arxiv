@@ -1,5 +1,5 @@
 ﻿
-namespace ArxivExpress
+namespace ArxivExpress.Features.SearchArticles
 {
     public class SearchQuery
     {

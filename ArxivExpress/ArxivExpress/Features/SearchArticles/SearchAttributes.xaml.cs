@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Xamarin.Forms;
 
-namespace ArxivExpress
+namespace ArxivExpress.Features.SearchArticles
 {
     public partial class SearchAttributes : ContentPage
     {
@@ -129,7 +129,7 @@ namespace ArxivExpress
 
         async void Handle_SearchPressed(object sender, EventArgs e)
         {
-            var articleList = new ArticleList(_searchQuery);
+            var articleList = new ArticleList.ArticleList(_searchQuery);
             await Navigation.PushAsync(articleList);
             await articleList.MakeRequest();
         }
