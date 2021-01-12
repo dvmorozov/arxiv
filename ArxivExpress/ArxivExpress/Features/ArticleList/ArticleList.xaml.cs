@@ -35,7 +35,7 @@ namespace ArxivExpress.Features.ArticleList
         public async void Handle_ToolbarItemClicked(object sender, EventArgs e)
         {
             ToolbarItem item = (ToolbarItem)sender;
-            if (item == ToolbarItemNextPage)
+            if (item == _toolbarItemNextPage)
             {
                 _searchQuery.PageNumber++;
                 await MakeRequest();
@@ -60,34 +60,45 @@ namespace ArxivExpress.Features.ArticleList
         }
 
         private ToolbarItem _toolbarItemPrevPage;
+        private ToolbarItem _toolbarItemNextPage;
 
-        private void DeleteToolbarItemPate()
+        private void DeleteToolbarItemPages()
         {
             if (_toolbarItemPrevPage != null)
             {
                 this.ToolbarItems.Remove(_toolbarItemPrevPage);
             }
+            if (_toolbarItemNextPage != null)
+            {
+                this.ToolbarItems.Remove(_toolbarItemNextPage);
+            }
+        }
+
+        private ToolbarItem CreateToolbarItem(uint pageNumber)
+        {
+            var item = new ToolbarItem
+            {
+                Text = GetItemsRange(pageNumber),
+                Order = ToolbarItemOrder.Primary,
+                Priority = 0
+            };
+            item.Clicked += Handle_ToolbarItemClicked;
+
+            return item;
         }
 
         private void SetToolbarPageNavigationItems()
         {
-            DeleteToolbarItemPate();
+            DeleteToolbarItemPages();
 
             if (_searchQuery.PageNumber > 0)
             {
-                var item = new ToolbarItem
-                {
-                    Text = GetItemsRange(_searchQuery.PageNumber - 1),
-                    Order = ToolbarItemOrder.Primary,
-                    Priority = 0                    
-                };
-                item.Clicked += Handle_ToolbarItemClicked;
-
-                this.ToolbarItems.Insert(0, item);
-                _toolbarItemPrevPage = item;
+                _toolbarItemPrevPage = CreateToolbarItem(_searchQuery.PageNumber - 1);
+                ToolbarItems.Insert(0, _toolbarItemPrevPage);
             }
- 
-            ToolbarItemNextPage.Text = GetItemsRange(_searchQuery.PageNumber + 1);
+
+            _toolbarItemNextPage = CreateToolbarItem(_searchQuery.PageNumber + 1);
+            ToolbarItems.Add(_toolbarItemNextPage);
         }
 
         public async Task MakeRequest()

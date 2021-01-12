@@ -5,12 +5,12 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem
             x:Name="ToolbarItemHome"
-            Text="Home"
+            Text=""
             IconImageSource="AppIcon"
             Clicked="Handle_ToolbarItemClicked"/>
         <ToolbarItem
             x:Name="ToolbarItemNextPage"
-            Text="Page 2"
+            Text=""
             Clicked="Handle_ToolbarItemClicked"/>
     </ContentPage.ToolbarItems> 
 
