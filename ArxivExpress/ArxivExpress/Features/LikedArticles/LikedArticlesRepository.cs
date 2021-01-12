@@ -11,16 +11,18 @@ namespace ArxivExpress.Features.LikedArticles
         private static LikedArticlesRepository _instance;
         private static List<LikedArticle> _likedArticles;
         private const string _fileName = "liked_articles.xml";
-        private const string _rootElementName = "LikedArticleList";
-        private const string _articleElementName = "LikedArticle";
+        private const string _likedArticleListElementName = "LikedArticleList";
+        private const string _likedArticleElementName = "LikedArticle";
+        private const string _contributorListElementName = "ContributorList";
+        private const string _contributorElementName = "Contributor";
 
         protected LikedArticlesRepository()
         {
         	_likedArticles = new List<LikedArticle>();
-            LoadArticeIds();
+            LoadArticles();
         }
 
-        private void LoadArticeIds()
+        private void LoadArticles()
         {
             _likedArticles.Clear();
 
@@ -30,18 +32,61 @@ namespace ArxivExpress.Features.LikedArticles
             if (File.Exists(filePath))
             {
                 var xml = XDocument.Load(filePath);
-                var query = from likedArticle
-                            in xml.Root.Descendants(_articleElementName)
-                            select likedArticle.Attribute("id").Value;
 
-                foreach (var articleId in query)
-                {
-                    _likedArticles.Add(new LikedArticle { Id = articleId });
-                }
+                _likedArticles = (
+                    from likedArticle
+                    in xml.Root.Descendants(_likedArticleElementName)
+                    select new LikedArticle
+                    {
+                        Id = likedArticle.Attribute("Id").Value,
+
+                        LastUpdated = likedArticle.Attribute("LastUpdated") != null ?
+                            likedArticle.Attribute("LastUpdated").Value : "unknown",
+
+                        Published = likedArticle.Attribute("Published") != null ?
+                            likedArticle.Attribute("Published").Value : "unknown",
+
+                        Title = likedArticle.Attribute("Title").Value != null ?
+                            likedArticle.Attribute("Title").Value : "unknown",
+
+                        Categories = likedArticle.Attribute("Categories") != null ?
+                            likedArticle.Attribute("Categories").Value.Split(';').ToList() : new List<string>(),
+
+                        Contributors = (
+                            from contributor
+                            in likedArticle.Descendants(_contributorListElementName)
+                            select new ArticleList.Contributor(
+                                contributor.Attribute("Name") != null ? contributor.Attribute("Name").Value : "unknown",
+                                contributor.Attribute("Email") != null ? contributor.Attribute("Email").Value : "unknown"
+                            )
+                        ).ToList()
+                    }
+                ).ToList();
             }
         }
 
-        private void SaveArtcleIds()
+        private XElement GetContributors(LikedArticle likedArticle)
+        {
+            var contributorElements = new XElement[0];
+
+            if (likedArticle.Contributors != null)
+            {
+                contributorElements = new XElement[likedArticle.Contributors.Count];
+
+                for (var i = 0; i < likedArticle.Contributors.Count; i++)
+                {
+                    var objects = new object[2];
+                    objects[0] = new XAttribute("Name", likedArticle.Contributors[i].Name ?? "unknown");
+                    objects[1] = new XAttribute("Email", likedArticle.Contributors[i].Email ?? "unknown");
+
+                    contributorElements[i] = new XElement(_contributorElementName, objects);
+                }
+            }
+
+            return new XElement(_contributorListElementName, contributorElements);
+        }
+
+        private void SaveArtcles()
         {
             var filePath = Path.Combine(Environment.GetFolderPath(
                 Environment.SpecialFolder.LocalApplicationData), _fileName);
@@ -51,10 +96,17 @@ namespace ArxivExpress.Features.LikedArticles
 
             for (var i = 0; i < _likedArticles.Count; i++)
             {
-                likedArticleElements[i] = new XElement(_articleElementName,
-                    new XAttribute("id", _likedArticles[i]));
+                var objects = new object[6];
+                objects[0] = new XAttribute("Id", _likedArticles[i].Id);
+                objects[1] = new XAttribute("LastUpdated", _likedArticles[i].LastUpdated ?? "unknown");
+                objects[2] = new XAttribute("Published", _likedArticles[i].Published ?? "unknown");
+                objects[3] = new XAttribute("Title", _likedArticles[i].Title ?? "unknown");
+                objects[4] = new XAttribute("Categories", _likedArticles[i].Categories != null ? string.Join(";", _likedArticles[i].Categories) : "unknown");
+                objects[5] = GetContributors(_likedArticles[i]);
+
+                likedArticleElements[i] = new XElement(_likedArticleElementName, objects);
             }
-            xml.Add(new XElement(_rootElementName, likedArticleElements));
+            xml.Add(new XElement(_likedArticleListElementName, likedArticleElements));
             xml.Save(filePath);
         }
 
@@ -71,7 +123,7 @@ namespace ArxivExpress.Features.LikedArticles
         public void AddArticle(string articleId)
         {
             _likedArticles.Add(new LikedArticle { Id = articleId });
-            SaveArtcleIds();
+            SaveArtcles();
         }
 
         public void DeleteArticle(string articleId)
@@ -79,7 +131,7 @@ namespace ArxivExpress.Features.LikedArticles
             if (_likedArticles.Exists(item => item.Id == articleId))
             {
                 _likedArticles.RemoveAll(item => item.Id == articleId);
-                SaveArtcleIds();
+                SaveArtcles();
             }
         }
 

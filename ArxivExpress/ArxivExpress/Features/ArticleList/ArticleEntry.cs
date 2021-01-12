@@ -12,7 +12,7 @@ namespace ArxivExpress.Features.ArticleList
             _entry = entry;
         }
 
-        public IList<string> Categories
+        public List<string> Categories
         {
             get
             {
@@ -27,7 +27,7 @@ namespace ArxivExpress.Features.ArticleList
             }
         }
 
-        public IList<Contributor> Contributors
+        public List<Contributor> Contributors
         {
             get
             {
