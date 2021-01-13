@@ -114,6 +114,7 @@ namespace ArxivExpress.Features.ArticleList
 
         private class AtomFeedProcessor : AtomFeedRequest.IAtomFeedProcessor
         {
+            //  TODO: remove _articleList.
             private ArticleList _articleList;
             private ObservableCollection<ArticleEntry> _items;
             public ObservableCollection<ArticleEntry> Items

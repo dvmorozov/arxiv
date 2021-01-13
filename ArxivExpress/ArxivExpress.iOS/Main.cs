@@ -1,5 +1,4 @@
 ﻿using UIKit;
-using Xamarin.Forms;
 
 namespace ArxivExpress.iOS
 {

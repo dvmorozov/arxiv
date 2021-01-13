@@ -39,6 +39,7 @@ namespace ArxivExpress
 
     public class ToggleLikeButton : StyledButton
     {
+        //  TODO: make private.
         public LikedArticlesRepository LikedArticlesRepository { get; }
 
         class LikeButtonContext

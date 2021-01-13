@@ -1,6 +1,7 @@
 ﻿
 namespace ArxivExpress.Features.SearchArticles
 {
+    //  TODO: Convert SearchQuery to singleton.
     public class SearchQuery
     {
         public string SearchTerm;

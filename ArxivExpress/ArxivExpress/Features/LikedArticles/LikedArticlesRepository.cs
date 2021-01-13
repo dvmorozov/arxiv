@@ -16,6 +16,8 @@ namespace ArxivExpress.Features.LikedArticles
         private const string _contributorListElementName = "ContributorList";
         private const string _contributorElementName = "Contributor";
 
+        public List<LikedArticle> LikedArticles => _likedArticles;
+
         protected LikedArticlesRepository()
         {
         	_likedArticles = new List<LikedArticle>();
@@ -40,24 +42,17 @@ namespace ArxivExpress.Features.LikedArticles
                     {
                         Id = likedArticle.Attribute("Id").Value,
 
-                        LastUpdated = likedArticle.Attribute("LastUpdated") != null ?
-                            likedArticle.Attribute("LastUpdated").Value : "unknown",
-
-                        Published = likedArticle.Attribute("Published") != null ?
-                            likedArticle.Attribute("Published").Value : "unknown",
-
-                        Title = likedArticle.Attribute("Title").Value != null ?
-                            likedArticle.Attribute("Title").Value : "unknown",
-
-                        Categories = likedArticle.Attribute("Categories") != null ?
-                            likedArticle.Attribute("Categories").Value.Split(';').ToList() : new List<string>(),
+                        LastUpdated = likedArticle.Attribute("LastUpdated")?.Value,
+                        Published = likedArticle.Attribute("Published")?.Value,
+                        Title = likedArticle.Attribute("Title")?.Value,
+                        Categories = likedArticle.Attribute("Categories")?.Value.Split(';').ToList(),
 
                         Contributors = (
                             from contributor
                             in likedArticle.Descendants(_contributorListElementName)
                             select new ArticleList.Contributor(
-                                contributor.Attribute("Name") != null ? contributor.Attribute("Name").Value : "unknown",
-                                contributor.Attribute("Email") != null ? contributor.Attribute("Email").Value : "unknown"
+                                contributor.Attribute("Name")?.Value,
+                                contributor.Attribute("Email")?.Value
                             )
                         ).ToList()
                     }
@@ -76,8 +71,8 @@ namespace ArxivExpress.Features.LikedArticles
                 for (var i = 0; i < likedArticle.Contributors.Count; i++)
                 {
                     var objects = new object[2];
-                    objects[0] = new XAttribute("Name", likedArticle.Contributors[i].Name ?? "unknown");
-                    objects[1] = new XAttribute("Email", likedArticle.Contributors[i].Email ?? "unknown");
+                    objects[0] = new XAttribute("Name", likedArticle.Contributors[i].Name);
+                    objects[1] = new XAttribute("Email", likedArticle.Contributors[i].Email);
 
                     contributorElements[i] = new XElement(_contributorElementName, objects);
                 }
@@ -98,10 +93,10 @@ namespace ArxivExpress.Features.LikedArticles
             {
                 var objects = new object[6];
                 objects[0] = new XAttribute("Id", _likedArticles[i].Id);
-                objects[1] = new XAttribute("LastUpdated", _likedArticles[i].LastUpdated ?? "unknown");
-                objects[2] = new XAttribute("Published", _likedArticles[i].Published ?? "unknown");
-                objects[3] = new XAttribute("Title", _likedArticles[i].Title ?? "unknown");
-                objects[4] = new XAttribute("Categories", _likedArticles[i].Categories != null ? string.Join(";", _likedArticles[i].Categories) : "unknown");
+                objects[1] = new XAttribute("LastUpdated", _likedArticles[i].LastUpdated);
+                objects[2] = new XAttribute("Published", _likedArticles[i].Published);
+                objects[3] = new XAttribute("Title", _likedArticles[i].Title);
+                objects[4] = new XAttribute("Categories", string.Join(";", _likedArticles[i].Categories));
                 objects[5] = GetContributors(_likedArticles[i]);
 
                 likedArticleElements[i] = new XElement(_likedArticleElementName, objects);

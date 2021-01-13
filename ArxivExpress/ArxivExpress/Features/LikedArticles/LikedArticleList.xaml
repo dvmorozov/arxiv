@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArxivExpress.Features.LikedArticles.LikedArticleList"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            x:Name="ToolbarItemHome"
+            Text=""
+            IconImageSource="AppIcon"
+            Clicked="Handle_ToolbarItemClicked"/>
+        <ToolbarItem
+            x:Name="ToolbarItemNextPage"
+            Text=""
+            Clicked="Handle_ToolbarItemClicked"/>
+    </ContentPage.ToolbarItems>  
+
+    <ListView x:Name="LikedArticleListView" ItemsSource="{Binding Items}"
+                ItemTapped="Handle_ItemTapped" CachingStrategy="RecycleElement"
+                HasUnevenRows="True" ios:ListView.SeparatorStyle="FullWidth">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout VerticalOptions="FillAndExpand" Margin="10">
+                        <Label Text="{Binding Title}"
+                                Style="{DynamicResource ListItemTextStyle}"
+                                LineBreakMode="WordWrap"/>
+
+                        <StackLayout Orientation="Horizontal"
+                                        HorizontalOptions="FillAndExpand">
+                            <Label Text="{Binding Published}"
+                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                    LineBreakMode="WordWrap"/>
+
+                            <Label Text="{Binding LastUpdated}"
+                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                    LineBreakMode="WordWrap"/>
+                        </StackLayout>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
