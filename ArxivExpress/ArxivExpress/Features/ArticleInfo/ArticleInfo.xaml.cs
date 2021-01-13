@@ -1,4 +1,5 @@
-﻿using Xamarin.Essentials;
+﻿using ArxivExpress.Features.ArticleList;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace ArxivExpress.Features.ArticleInfo
@@ -35,21 +36,21 @@ namespace ArxivExpress.Features.ArticleInfo
             }
         }       
 
-        public void CreateAddLikedArticleButton(string articleId)
+        public void CreateAddLikedArticleButton(ArticleEntry articleEntry)
         {
             StackLayoutArticleInfo.Children.Add(
-                new ToggleLikeButton(articleId)
+                new ToggleLikeButton(articleEntry)
                 );
         }
 
-        public ArticleInfo(ArticleList.ArticleEntry articleEntry)
+        public ArticleInfo(ArticleEntry articleEntry)
         {
             ArticleEntry = articleEntry;
             BindingContext = this;
 
             InitializeComponent();
             CreatePdfUrl();
-            CreateAddLikedArticleButton(articleEntry.Id);
+            CreateAddLikedArticleButton(articleEntry);
         }
     }
 }

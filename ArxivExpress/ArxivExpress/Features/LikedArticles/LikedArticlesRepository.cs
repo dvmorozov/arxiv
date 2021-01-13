@@ -115,9 +115,9 @@ namespace ArxivExpress.Features.LikedArticles
             return _instance;
         }
 
-        public void AddArticle(string articleId)
+        public void AddArticle(LikedArticle likedArticle)
         {
-            _likedArticles.Add(new LikedArticle { Id = articleId });
+            _likedArticles.Add(likedArticle);
             SaveArtcles();
         }
 

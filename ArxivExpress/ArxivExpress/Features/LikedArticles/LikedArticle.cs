@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ArxivExpress.Features.ArticleList;
 
 namespace ArxivExpress.Features.LikedArticles
 {
@@ -6,6 +7,16 @@ namespace ArxivExpress.Features.LikedArticles
     {
         public LikedArticle()
         {
+        }
+
+        public LikedArticle(ArticleEntry articleEntry)
+        {
+            Id = articleEntry.Id;
+            Categories = articleEntry.Categories;
+            Contributors = articleEntry.Contributors;
+            Title = articleEntry.Title;
+            Published = articleEntry.Published;
+            LastUpdated = articleEntry.LastUpdated;
         }
 
         private List<string> _categories;

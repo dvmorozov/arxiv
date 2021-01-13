@@ -1,4 +1,5 @@
 ﻿using System;
+using ArxivExpress.Features.ArticleList;
 using ArxivExpress.Features.LikedArticles;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -38,24 +39,10 @@ namespace ArxivExpress
     }
 
     public class ToggleLikeButton : StyledButton
-    {
-        //  TODO: make private.
-        public LikedArticlesRepository LikedArticlesRepository { get; }
-
-        class LikeButtonContext
+    { 
+        public ToggleLikeButton(ArticleEntry articleEntry)
         {
-            public readonly string ArticleId;
-
-            public LikeButtonContext(string articleId)
-            {
-                ArticleId = articleId;
-            }
-        }
-
-        public ToggleLikeButton(string articleId)
-        {
-            LikedArticlesRepository = LikedArticlesRepository.GetInstance();
-            BindingContext = new LikeButtonContext(articleId);
+            BindingContext = articleEntry;
 
             Clicked += Handle_Pressed;
             SetText();
@@ -71,16 +58,19 @@ namespace ArxivExpress
 
         private void ToggleLikeStatus()
         {
-            var context = BindingContext as LikeButtonContext;
-            if (context != null)
+            var articleEntry = BindingContext as ArticleEntry;
+            var likedArticlesRepository = LikedArticlesRepository.GetInstance();
+
+            if (articleEntry != null)
             {
-                if (LikedArticlesRepository.HasArticle(context.ArticleId))
+                if (likedArticlesRepository.HasArticle(articleEntry.Id))
                 {
-                    LikedArticlesRepository.DeleteArticle(context.ArticleId);
+                    likedArticlesRepository.DeleteArticle(articleEntry.Id);
                 }
                 else
                 {
-                    LikedArticlesRepository.AddArticle(context.ArticleId);
+
+                    likedArticlesRepository.AddArticle(new LikedArticle(articleEntry));
                 }
             }
             SetText();
@@ -88,10 +78,11 @@ namespace ArxivExpress
 
         private void SetText()
         {
-            var context = BindingContext as LikeButtonContext;
-            if (context != null)
+            var articleEntry = BindingContext as ArticleEntry;
+            if (articleEntry != null)
             {
-                Text = LikedArticlesRepository.HasArticle(context.ArticleId)
+                var likedArticlesRepository = LikedArticlesRepository.GetInstance();
+                Text = likedArticlesRepository.HasArticle(articleEntry.Id)
                     ? "Remove from Liked" : "Add to Liked";
             }
         }

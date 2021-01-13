@@ -76,6 +76,7 @@ namespace ArxivExpress.Features.ArticleList
         {
             get
             {
+                //  TODO: return "unknown" in the case of null.
                 return
                   _entry.Published != null ?
                   "Published: " + _entry.Published.Date.ToShortDateString() :
@@ -87,6 +88,7 @@ namespace ArxivExpress.Features.ArticleList
         {
             get
             {
+                //  TODO: return "unknown" in the case of null.
                 return
                   _entry.LastUpdated != null ?
                   "Last updated: " + _entry.LastUpdated.Date.ToShortDateString() :
