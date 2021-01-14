@@ -18,9 +18,12 @@ namespace ArxivExpress.Features.ArticleList
             {
                 List<string> result = new List<string>();
 
-                foreach (var category in _entry.Categories)
+                if (_entry.Categories != null)
                 {
-                    result.Add(category.Name);
+                    foreach (var category in _entry.Categories)
+                    {
+                        result.Add(category.Name);
+                    }
                 }
 
                 return result;
@@ -33,11 +36,14 @@ namespace ArxivExpress.Features.ArticleList
             {
                 List<Contributor> result = new List<Contributor>();
 
-                foreach (var contributor in _entry.Contributors)
+                if (_entry.Contributors != null)
                 {
-                    result.Add(new Contributor(
-                        contributor.Name, contributor.Email)
-                    );
+                    foreach (var contributor in _entry.Contributors)
+                    {
+                        result.Add(new Contributor(
+                            contributor.Name, contributor.Email)
+                        );
+                    }
                 }
 
                 return result;
@@ -50,11 +56,14 @@ namespace ArxivExpress.Features.ArticleList
             {
                 string result = null;
 
-                foreach (var link in _entry.Links)
+                if (_entry.Links != null)
                 {
-                    if (link.MediaType == "application/pdf")
+                    foreach (var link in _entry.Links)
                     {
-                        result = link.Uri.ToString();
+                        if (link.MediaType == "application/pdf")
+                        {
+                            result = link.Uri.ToString();
+                        }
                     }
                 }
 
@@ -76,11 +85,10 @@ namespace ArxivExpress.Features.ArticleList
         {
             get
             {
-                //  TODO: return "unknown" in the case of null.
-                return
+                return "Published: " +
                   _entry.Published != null ?
-                  "Published: " + _entry.Published.Date.ToShortDateString() :
-                  "";
+                  _entry.Published.Date.ToShortDateString() :
+                  "unknown";
             }
         }
 
@@ -88,11 +96,10 @@ namespace ArxivExpress.Features.ArticleList
         {
             get
             {
-                //  TODO: return "unknown" in the case of null.
-                return
+                return "Last updated: " +
                   _entry.LastUpdated != null ?
-                  "Last updated: " + _entry.LastUpdated.Date.ToShortDateString() :
-                  "";
+                  _entry.LastUpdated.Date.ToShortDateString() :
+                  "unknown";
             }
         }
 
@@ -107,21 +114,27 @@ namespace ArxivExpress.Features.ArticleList
         private string MakePlainString(string original)
         {
             string result = original;
-            result = result.Trim(new char[] { ' ', '\t', '\n' });
-            result = result.Replace('\n', ' ');
-            result = result.Replace('\t', ' ');
 
-            var length = result.Length;
-            while (true)
+            if (result != null)
             {
-                result = result.Replace("  ", " ");
-                if (result.Length < length)
+                result = result.Trim(new char[] { ' ', '\t', '\n' });
+                result = result.Replace('\n', ' ');
+                result = result.Replace('\t', ' ');
+
+                var length = result.Length;
+                while (true)
                 {
-                    length = result.Length;
-                    continue;
+                    result = result.Replace("  ", " ");
+                    if (result.Length < length)
+                    {
+                        length = result.Length;
+                        continue;
+                    }
+                    break;
                 }
-                break;
             }
+            else
+                result = "unknown";
 
             return result;
         }
