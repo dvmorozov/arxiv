@@ -26,7 +26,10 @@ namespace ArxivExpress.Features.ArticleList
             if (e.Item == null)
                 return;
 
-            await Navigation.PushAsync(new ArticleInfo.ArticleInfo((ArticleEntry)e.Item));
+            if (e.Item is IArticleEntry articleEntry)
+            {
+                await Navigation.PushAsync(new ArticleInfo.ArticleInfo(articleEntry));
+            }
 
             //Deselect Item
             ((ListView)sender).SelectedItem = null;

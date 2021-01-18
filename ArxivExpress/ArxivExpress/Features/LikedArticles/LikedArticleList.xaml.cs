@@ -1,4 +1,5 @@
 ﻿using System;
+using ArxivExpress.Features.ArticleList;
 using Xamarin.Forms;
 
 namespace ArxivExpress.Features.LikedArticles
@@ -15,12 +16,15 @@ namespace ArxivExpress.Features.LikedArticles
             LikedArticleListView.ItemsSource = _likedArticlesRepository.LikedArticles;
         }
 
-        public void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
+        public async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e.Item == null)
                 return;
 
-            //await Navigation.PushAsync(new ArticleInfo.ArticleInfo((ArticleEntry)e.Item));
+            if (e.Item is IArticleEntry articleEntry)
+            {
+                await Navigation.PushAsync(new ArticleInfo.ArticleInfo(articleEntry));
+            }
 
             //Deselect Item
             ((ListView)sender).SelectedItem = null;

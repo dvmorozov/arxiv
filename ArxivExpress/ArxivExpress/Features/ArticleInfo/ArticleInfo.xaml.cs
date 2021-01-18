@@ -6,7 +6,7 @@ namespace ArxivExpress.Features.ArticleInfo
 {
     public partial class ArticleInfo : ContentPage
     {
-        public ArticleList.ArticleEntry ArticleEntry { get; }
+        public IArticleEntry ArticleEntry { get; }
 
         public class HyperlinkLabel : Label
         {
@@ -28,7 +28,7 @@ namespace ArxivExpress.Features.ArticleInfo
 
         private void CreatePdfUrl()
         {
-            if (ArticleEntry.PdfUrl != null)
+            if (ArticleEntry.PdfUrl != "unknown")
             {
                 StackLayoutArticleInfo.Children.Add(
                     new HyperlinkButton("Open Pdf", ArticleEntry.PdfUrl)
@@ -36,14 +36,14 @@ namespace ArxivExpress.Features.ArticleInfo
             }
         }       
 
-        public void CreateAddLikedArticleButton(ArticleEntry articleEntry)
+        public void CreateAddLikedArticleButton(IArticleEntry articleEntry)
         {
             StackLayoutArticleInfo.Children.Add(
                 new ToggleLikeButton(articleEntry)
                 );
         }
 
-        public ArticleInfo(ArticleEntry articleEntry)
+        public ArticleInfo(IArticleEntry articleEntry)
         {
             ArticleEntry = articleEntry;
             BindingContext = this;

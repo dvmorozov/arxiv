@@ -40,7 +40,7 @@ namespace ArxivExpress
 
     public class ToggleLikeButton : StyledButton
     { 
-        public ToggleLikeButton(ArticleEntry articleEntry)
+        public ToggleLikeButton(IArticleEntry articleEntry)
         {
             BindingContext = articleEntry;
 
@@ -58,10 +58,9 @@ namespace ArxivExpress
 
         private void ToggleLikeStatus()
         {
-            var articleEntry = BindingContext as ArticleEntry;
             var likedArticlesRepository = LikedArticlesRepository.GetInstance();
 
-            if (articleEntry != null)
+            if (BindingContext is IArticleEntry articleEntry)
             {
                 if (likedArticlesRepository.HasArticle(articleEntry.Id))
                 {
@@ -69,7 +68,6 @@ namespace ArxivExpress
                 }
                 else
                 {
-
                     likedArticlesRepository.AddArticle(new LikedArticle(articleEntry));
                 }
             }
@@ -78,8 +76,7 @@ namespace ArxivExpress
 
         private void SetText()
         {
-            var articleEntry = BindingContext as ArticleEntry;
-            if (articleEntry != null)
+            if (BindingContext is IArticleEntry articleEntry)
             {
                 var likedArticlesRepository = LikedArticlesRepository.GetInstance();
                 Text = likedArticlesRepository.HasArticle(articleEntry.Id)

@@ -46,6 +46,8 @@ namespace ArxivExpress.Features.LikedArticles
                         Published = likedArticle.Attribute("Published")?.Value,
                         Title = likedArticle.Attribute("Title")?.Value,
                         Categories = likedArticle.Attribute("Categories")?.Value.Split(';').ToList(),
+                        PdfUrl = likedArticle.Attribute("PdfUrl")?.Value,
+                        Summary = likedArticle.Attribute("Summary")?.Value,
 
                         Contributors = (
                             from contributor
@@ -91,13 +93,15 @@ namespace ArxivExpress.Features.LikedArticles
 
             for (var i = 0; i < _likedArticles.Count; i++)
             {
-                var objects = new object[6];
+                var objects = new object[8];
                 objects[0] = new XAttribute("Id", _likedArticles[i].Id);
                 objects[1] = new XAttribute("LastUpdated", _likedArticles[i].LastUpdated);
                 objects[2] = new XAttribute("Published", _likedArticles[i].Published);
                 objects[3] = new XAttribute("Title", _likedArticles[i].Title);
                 objects[4] = new XAttribute("Categories", string.Join(";", _likedArticles[i].Categories));
-                objects[5] = GetContributors(_likedArticles[i]);
+                objects[5] = new XAttribute("PdfUrl", _likedArticles[i].PdfUrl);
+                objects[6] = new XAttribute("Summary", _likedArticles[i].Summary);
+                objects[7] = GetContributors(_likedArticles[i]);
 
                 likedArticleElements[i] = new XElement(_likedArticleElementName, objects);
             }

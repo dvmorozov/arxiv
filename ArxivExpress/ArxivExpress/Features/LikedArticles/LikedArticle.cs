@@ -3,13 +3,13 @@ using ArxivExpress.Features.ArticleList;
 
 namespace ArxivExpress.Features.LikedArticles
 {
-    public class LikedArticle
+    public class LikedArticle : IArticleEntry
     {
         public LikedArticle()
         {
         }
 
-        public LikedArticle(ArticleEntry articleEntry)
+        public LikedArticle(IArticleEntry articleEntry)
         {
             Id = articleEntry.Id;
             Categories = articleEntry.Categories;
@@ -17,6 +17,8 @@ namespace ArxivExpress.Features.LikedArticles
             Title = articleEntry.Title;
             Published = articleEntry.Published;
             LastUpdated = articleEntry.LastUpdated;
+            PdfUrl = articleEntry.PdfUrl;
+            Summary = articleEntry.Summary;
         }
 
         private List<string> _categories;
@@ -46,6 +48,36 @@ namespace ArxivExpress.Features.LikedArticles
             set
             {
                 _contributors = value;
+            }
+        }
+
+        private string _pdfUrl;
+
+        public string PdfUrl
+        {
+            get
+            {
+                return _pdfUrl ?? "unknown";
+            }
+
+            set
+            {
+                _pdfUrl = value;
+            }
+        }
+
+        private string _summary;
+
+        public string Summary
+        {
+            get
+            {
+                return _summary ?? "unknown";
+            }
+
+            set
+            {
+                _summary = value;
             }
         }
 
@@ -94,6 +126,19 @@ namespace ArxivExpress.Features.LikedArticles
             }
         }
 
-        public string Id;
+        private string _id;
+
+        public string Id
+        {
+            get
+            {
+                return _id;
+            }
+
+            set
+            {
+                _id = value;
+            }
+        }
     }
 }

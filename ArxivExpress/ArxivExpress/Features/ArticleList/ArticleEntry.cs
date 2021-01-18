@@ -3,7 +3,7 @@ using Microsoft.SyndicationFeed;
 
 namespace ArxivExpress.Features.ArticleList
 {
-    public class ArticleEntry
+    public class ArticleEntry : IArticleEntry
     {
         private IAtomEntry _entry;
 
