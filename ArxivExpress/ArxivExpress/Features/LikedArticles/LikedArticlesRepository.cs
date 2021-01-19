@@ -10,7 +10,6 @@ namespace ArxivExpress.Features.LikedArticles
     {
         private static LikedArticlesRepository _instance;
         private static List<LikedArticle> _likedArticles;
-        private const string _fileName = "liked_articles.xml";
         private const string _likedArticleListElementName = "LikedArticleList";
         private const string _likedArticleElementName = "LikedArticle";
         private const string _contributorListElementName = "ContributorList";
@@ -24,18 +23,24 @@ namespace ArxivExpress.Features.LikedArticles
             LoadArticles();
         }
 
-        private void LoadArticles()
+        protected virtual string GetFileName()
         {
-            _likedArticles.Clear();
+            return "liked_articles.xml";
+        }
 
-            var filePath = Path.Combine(Environment.GetFolderPath(
-                Environment.SpecialFolder.LocalApplicationData), _fileName);
+        protected string GetFilePath()
+        {
+            return Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.LocalApplicationData), GetFileName());
+        }
 
+        protected List<LikedArticle> LoadArticlesFromFile(string filePath)
+        {
             if (File.Exists(filePath))
             {
                 var xml = XDocument.Load(filePath);
 
-                _likedArticles = (
+                return (
                     from likedArticle
                     in xml.Root.Descendants(_likedArticleElementName)
                     select new LikedArticle
@@ -60,6 +65,17 @@ namespace ArxivExpress.Features.LikedArticles
                     }
                 ).ToList();
             }
+
+            return new List<LikedArticle>();
+        }
+
+        protected virtual void LoadArticles()
+        {
+            _likedArticles.Clear();
+
+            var filePath = GetFilePath();
+
+            _likedArticles = LoadArticlesFromFile(filePath);
         }
 
         private XElement GetContributors(LikedArticle likedArticle)
@@ -83,10 +99,9 @@ namespace ArxivExpress.Features.LikedArticles
             return new XElement(_contributorListElementName, contributorElements);
         }
 
-        private void SaveArtcles()
+        protected virtual void SaveArtcles()
         {
-            var filePath = Path.Combine(Environment.GetFolderPath(
-                Environment.SpecialFolder.LocalApplicationData), _fileName);
+            var filePath = GetFilePath();
 
             var xml = new XDocument();
             var likedArticleElements = new XElement[_likedArticles.Count];
