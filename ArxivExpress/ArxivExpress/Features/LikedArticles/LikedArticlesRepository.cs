@@ -10,7 +10,7 @@ namespace ArxivExpress.Features.LikedArticles
     {
         private static LikedArticlesRepository _instance;
 
-        private List<Article> _articles;
+        protected List<Article> _articles;
         public List<Article> Articles => _articles;
 
         protected LikedArticlesRepository()
