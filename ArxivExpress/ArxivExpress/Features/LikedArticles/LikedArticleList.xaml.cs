@@ -13,7 +13,7 @@ namespace ArxivExpress.Features.LikedArticles
             _likedArticlesRepository = LikedArticlesRepository.GetInstance();
 
             InitializeComponent();
-            LikedArticleListView.ItemsSource = _likedArticlesRepository.LikedArticles;
+            LikedArticleListView.ItemsSource = _likedArticlesRepository.Articles;
         }
 
         public async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)

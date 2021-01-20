@@ -9,17 +9,13 @@ namespace ArxivExpress.Features.LikedArticles
     public class LikedArticlesRepository
     {
         private static LikedArticlesRepository _instance;
-        private static List<LikedArticle> _likedArticles;
-        private const string _likedArticleListElementName = "LikedArticleList";
-        private const string _likedArticleElementName = "LikedArticle";
-        private const string _contributorListElementName = "ContributorList";
-        private const string _contributorElementName = "Contributor";
 
-        public List<LikedArticle> LikedArticles => _likedArticles;
+        private List<Article> _articles;
+        public List<Article> Articles => _articles;
 
         protected LikedArticlesRepository()
         {
-        	_likedArticles = new List<LikedArticle>();
+        	_articles = new List<Article>();
             LoadArticles();
         }
 
@@ -28,35 +24,48 @@ namespace ArxivExpress.Features.LikedArticles
             return "liked_articles.xml";
         }
 
-        protected string GetFilePath()
+        protected virtual string GetArticleListElementName()
+        {
+            return "LikedArticleList";
+        }
+
+        protected virtual string GetArticleElementName()
+        {
+            return "LikedArticle";
+        }
+
+        private const string _contributorListElementName = "ContributorList";
+        private const string _contributorElementName = "Contributor";
+
+        private string GetFilePath()
         {
             return Path.Combine(Environment.GetFolderPath(
                 Environment.SpecialFolder.LocalApplicationData), GetFileName());
         }
 
-        protected List<LikedArticle> LoadArticlesFromFile(string filePath)
+        private List<Article> LoadArticlesFromFile(string filePath)
         {
             if (File.Exists(filePath))
             {
                 var xml = XDocument.Load(filePath);
 
                 return (
-                    from likedArticle
-                    in xml.Root.Descendants(_likedArticleElementName)
-                    select new LikedArticle
+                    from article
+                    in xml.Root.Descendants(GetArticleElementName())
+                    select new Article
                     {
-                        Id = likedArticle.Attribute("Id").Value,
+                        Id = article.Attribute("Id").Value,
 
-                        LastUpdated = likedArticle.Attribute("LastUpdated")?.Value,
-                        Published = likedArticle.Attribute("Published")?.Value,
-                        Title = likedArticle.Attribute("Title")?.Value,
-                        Categories = likedArticle.Attribute("Categories")?.Value.Split(';').ToList(),
-                        PdfUrl = likedArticle.Attribute("PdfUrl")?.Value,
-                        Summary = likedArticle.Attribute("Summary")?.Value,
+                        LastUpdated = article.Attribute("LastUpdated")?.Value,
+                        Published = article.Attribute("Published")?.Value,
+                        Title = article.Attribute("Title")?.Value,
+                        Categories = article.Attribute("Categories")?.Value.Split(';').ToList(),
+                        PdfUrl = article.Attribute("PdfUrl")?.Value,
+                        Summary = article.Attribute("Summary")?.Value,
 
                         Contributors = (
                             from contributor
-                            in likedArticle.Descendants(_contributorListElementName)
+                            in article.Descendants(_contributorListElementName)
                             select new ArticleList.Contributor(
                                 contributor.Attribute("Name")?.Value,
                                 contributor.Attribute("Email")?.Value
@@ -66,31 +75,31 @@ namespace ArxivExpress.Features.LikedArticles
                 ).ToList();
             }
 
-            return new List<LikedArticle>();
+            return new List<Article>();
         }
 
         protected virtual void LoadArticles()
         {
-            _likedArticles.Clear();
+            _articles.Clear();
 
             var filePath = GetFilePath();
 
-            _likedArticles = LoadArticlesFromFile(filePath);
+            _articles = LoadArticlesFromFile(filePath);
         }
 
-        private XElement GetContributors(LikedArticle likedArticle)
+        private XElement GetContributors(Article article)
         {
             var contributorElements = new XElement[0];
 
-            if (likedArticle.Contributors != null)
+            if (article.Contributors != null)
             {
-                contributorElements = new XElement[likedArticle.Contributors.Count];
+                contributorElements = new XElement[article.Contributors.Count];
 
-                for (var i = 0; i < likedArticle.Contributors.Count; i++)
+                for (var i = 0; i < article.Contributors.Count; i++)
                 {
                     var objects = new object[2];
-                    objects[0] = new XAttribute("Name", likedArticle.Contributors[i].Name);
-                    objects[1] = new XAttribute("Email", likedArticle.Contributors[i].Email);
+                    objects[0] = new XAttribute("Name", article.Contributors[i].Name);
+                    objects[1] = new XAttribute("Email", article.Contributors[i].Email);
 
                     contributorElements[i] = new XElement(_contributorElementName, objects);
                 }
@@ -99,28 +108,29 @@ namespace ArxivExpress.Features.LikedArticles
             return new XElement(_contributorListElementName, contributorElements);
         }
 
-        protected virtual void SaveArtcles()
+        protected void SaveArtcles()
         {
             var filePath = GetFilePath();
 
             var xml = new XDocument();
-            var likedArticleElements = new XElement[_likedArticles.Count];
+            var articleElements = new XElement[_articles.Count];
 
-            for (var i = 0; i < _likedArticles.Count; i++)
+            for (var i = 0; i < _articles.Count; i++)
             {
                 var objects = new object[8];
-                objects[0] = new XAttribute("Id", _likedArticles[i].Id);
-                objects[1] = new XAttribute("LastUpdated", _likedArticles[i].LastUpdated);
-                objects[2] = new XAttribute("Published", _likedArticles[i].Published);
-                objects[3] = new XAttribute("Title", _likedArticles[i].Title);
-                objects[4] = new XAttribute("Categories", string.Join(";", _likedArticles[i].Categories));
-                objects[5] = new XAttribute("PdfUrl", _likedArticles[i].PdfUrl);
-                objects[6] = new XAttribute("Summary", _likedArticles[i].Summary);
-                objects[7] = GetContributors(_likedArticles[i]);
+                objects[0] = new XAttribute("Id", _articles[i].Id);
+                objects[1] = new XAttribute("LastUpdated", _articles[i].LastUpdated);
+                objects[2] = new XAttribute("Published", _articles[i].Published);
+                objects[3] = new XAttribute("Title", _articles[i].Title);
+                objects[4] = new XAttribute("Categories", string.Join(";", _articles[i].Categories));
+                objects[5] = new XAttribute("PdfUrl", _articles[i].PdfUrl);
+                objects[6] = new XAttribute("Summary", _articles[i].Summary);
+                objects[7] = GetContributors(_articles[i]);
 
-                likedArticleElements[i] = new XElement(_likedArticleElementName, objects);
+                articleElements[i] = new XElement(GetArticleListElementName(), objects);
             }
-            xml.Add(new XElement(_likedArticleListElementName, likedArticleElements));
+
+            xml.Add(new XElement(GetArticleElementName(), articleElements));
             xml.Save(filePath);
         }
 
@@ -134,24 +144,24 @@ namespace ArxivExpress.Features.LikedArticles
             return _instance;
         }
 
-        public void AddArticle(LikedArticle likedArticle)
+        public virtual void AddArticle(Article article)
         {
-            _likedArticles.Add(likedArticle);
+            _articles.Add(article);
             SaveArtcles();
         }
 
         public void DeleteArticle(string articleId)
         {
-            if (_likedArticles.Exists(item => item.Id == articleId))
+            if (_articles.Exists(item => item.Id == articleId))
             {
-                _likedArticles.RemoveAll(item => item.Id == articleId);
+                _articles.RemoveAll(item => item.Id == articleId);
                 SaveArtcles();
             }
         }
 
         public bool HasArticle(string articleId)
         {
-            return _likedArticles.Exists(item => item.Id == articleId);
+            return _articles.Exists(item => item.Id == articleId);
         }
     }
 }

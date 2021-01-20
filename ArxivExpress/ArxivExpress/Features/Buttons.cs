@@ -68,7 +68,7 @@ namespace ArxivExpress
                 }
                 else
                 {
-                    likedArticlesRepository.AddArticle(new LikedArticle(articleEntry));
+                    likedArticlesRepository.AddArticle(new Article(articleEntry));
                 }
             }
             SetText();

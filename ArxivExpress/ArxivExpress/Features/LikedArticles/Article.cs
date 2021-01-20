@@ -3,13 +3,13 @@ using ArxivExpress.Features.ArticleList;
 
 namespace ArxivExpress.Features.LikedArticles
 {
-    public class LikedArticle : IArticleEntry
+    public class Article : IArticleEntry
     {
-        public LikedArticle()
+        public Article()
         {
         }
 
-        public LikedArticle(IArticleEntry articleEntry)
+        public Article(IArticleEntry articleEntry)
         {
             Id = articleEntry.Id;
             Categories = articleEntry.Categories;
@@ -36,13 +36,13 @@ namespace ArxivExpress.Features.LikedArticles
             }
         }
 
-        private List<ArticleList.Contributor> _contributors;
+        private List<Contributor> _contributors;
 
-        public List<ArticleList.Contributor> Contributors
+        public List<Contributor> Contributors
         {
             get
             {
-                return _contributors ?? new List<ArticleList.Contributor>();
+                return _contributors ?? new List<Contributor>();
             }
 
             set
