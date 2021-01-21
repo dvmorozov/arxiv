@@ -1,4 +1,6 @@
 ﻿using ArxivExpress.Features.ArticleList;
+using ArxivExpress.Features.LikedArticles;
+using ArxivExpress.Features.RecentlyViewedArticles;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -8,7 +10,7 @@ namespace ArxivExpress.Features.ArticleInfo
     {
         public IArticleEntry ArticleEntry { get; }
 
-        public class HyperlinkLabel : Label
+        private class HyperlinkLabel : Label
         {
             public string Url { get; }
 
@@ -36,11 +38,17 @@ namespace ArxivExpress.Features.ArticleInfo
             }
         }       
 
-        public void CreateAddLikedArticleButton(IArticleEntry articleEntry)
+        private void CreateAddLikedArticleButton(IArticleEntry articleEntry)
         {
             StackLayoutArticleInfo.Children.Add(
                 new ToggleLikeButton(articleEntry)
                 );
+        }
+
+        private void AddArticleToViewedList(IArticleEntry articleEntry)
+        {
+            var viewedArticleRepository = ViewedArticlesRepository.GetInstance();
+            viewedArticleRepository.AddArticle(new Article(articleEntry));
         }
 
         public ArticleInfo(IArticleEntry articleEntry)
@@ -51,6 +59,8 @@ namespace ArxivExpress.Features.ArticleInfo
             InitializeComponent();
             CreatePdfUrl();
             CreateAddLikedArticleButton(articleEntry);
+
+            AddArticleToViewedList(articleEntry);
         }
     }
 }
