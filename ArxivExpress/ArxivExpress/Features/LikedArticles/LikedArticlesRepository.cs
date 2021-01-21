@@ -127,10 +127,10 @@ namespace ArxivExpress.Features.LikedArticles
                 objects[6] = new XAttribute("Summary", _articles[i].Summary);
                 objects[7] = GetContributors(_articles[i]);
 
-                articleElements[i] = new XElement(GetArticleListElementName(), objects);
+                articleElements[i] = new XElement(GetArticleElementName(), objects);
             }
 
-            xml.Add(new XElement(GetArticleElementName(), articleElements));
+            xml.Add(new XElement(GetArticleListElementName(), articleElements));
             xml.Save(filePath);
         }
 

@@ -1,12 +1,13 @@
-﻿using ArxivExpress.Features.LikedArticles;
+﻿using System.Collections.Generic;
+using ArxivExpress.Features.LikedArticles;
 
 namespace ArxivExpress.Features.RecentlyViewedArticles
 {
-    public class ViewedArticlesRepository : LikedArticles.LikedArticlesRepository
+    public class ViewedArticlesRepository : LikedArticlesRepository
     {
         private static ViewedArticlesRepository _instance;
 
-        protected ViewedArticlesRepository()
+        protected ViewedArticlesRepository() : base()
         {
         }
 
