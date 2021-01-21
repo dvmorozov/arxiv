@@ -36,10 +36,24 @@ namespace ArxivExpress.Features.RecentlyViewedArticles
             return _instance;
         }
 
+        private void MoveArticleToTop(Article article)
+        {
+            if (_articles.Exists(item => item.Id == article.Id))
+            {
+                _articles.RemoveAll(item => item.Id == article.Id);
+                _articles.Insert(0, article);
+            }
+        }
+
         public override void AddArticle(Article article)
         {
-            _articles.Add(article);
-            SaveArtcles();
+            if (!_articles.Exists(item => item.Id == article.Id))
+            {
+                _articles.Insert(0, article);
+                SaveArtcles();
+            }
+            else
+                MoveArticleToTop(article);
         }
     }
 }
