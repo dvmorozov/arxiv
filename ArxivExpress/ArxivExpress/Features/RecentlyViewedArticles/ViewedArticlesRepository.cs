@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using ArxivExpress.Features.LikedArticles;
+﻿using ArxivExpress.Features.LikedArticles;
 
 namespace ArxivExpress.Features.RecentlyViewedArticles
 {

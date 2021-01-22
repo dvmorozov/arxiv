@@ -10,12 +10,10 @@ namespace ArxivExpress.Features.ArticleList
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ArticleList : ContentPage
     {
-        private AtomFeedProcessor _atomFeedProcessor;
         private SearchArticles.SearchQuery _searchQuery;
 
         public ArticleList(SearchArticles.SearchQuery searchQuery)
         {
-            _atomFeedProcessor = new AtomFeedProcessor(this);
             _searchQuery = searchQuery;
 
             InitializeComponent();
@@ -106,29 +104,22 @@ namespace ArxivExpress.Features.ArticleList
 
         public async Task MakeRequest()
         {
-            _atomFeedProcessor.Items.Clear();
+            var atomFeedProcessor = new AtomFeedProcessor(this);
 
             await AtomFeedRequest.MakeRequest(
-                _searchQuery.GetQueryString(), _atomFeedProcessor);
+                _searchQuery.GetQueryString(), atomFeedProcessor);
 
-            ArticleListView.ItemsSource = _atomFeedProcessor.Items;
+            ArticleListView.ItemsSource = atomFeedProcessor.Items;
             SetToolbarPageNavigationItems();
         }
 
         private class AtomFeedProcessor : AtomFeedRequest.IAtomFeedProcessor
         {
-            //  TODO: remove _articleList.
-            private ArticleList _articleList;
-            private ObservableCollection<ArticleEntry> _items;
-            public ObservableCollection<ArticleEntry> Items
-            {
-                get { return _items; }
-            }
+            public ObservableCollection<ArticleEntry> Items { get; }
 
             public AtomFeedProcessor(ArticleList articleList)
             {
-                _items = new ObservableCollection<ArticleEntry>();
-                _articleList = articleList;
+                Items = new ObservableCollection<ArticleEntry>();
             }
 
             void AtomFeedRequest.IAtomFeedProcessor.ProcessCategory(ISyndicationCategory category)
@@ -142,7 +133,7 @@ namespace ArxivExpress.Features.ArticleList
             void AtomFeedRequest.IAtomFeedProcessor.ProcessEntry(IAtomEntry entry)
             {
                 if (entry != null)
-                    _items.Add(new ArticleEntry(entry));
+                    Items.Add(new ArticleEntry(entry));
             }
 
             void AtomFeedRequest.IAtomFeedProcessor.ProcessLink(ISyndicationLink link)
