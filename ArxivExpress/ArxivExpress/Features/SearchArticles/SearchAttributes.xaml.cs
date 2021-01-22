@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using ArxivExpress.Features.ArticleList;
 using Xamarin.Forms;
 
 namespace ArxivExpress.Features.SearchArticles
@@ -127,7 +129,7 @@ namespace ArxivExpress.Features.SearchArticles
             }
         }
 
-        async void Handle_SearchPressed(object sender, EventArgs e)
+        private async void Handle_SearchPressed(object sender, EventArgs e)
         {
             var articleList = new ArticleList.ArticleList(_searchQuery);
             await Navigation.PushAsync(articleList);

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Microsoft.SyndicationFeed;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -104,48 +103,20 @@ namespace ArxivExpress.Features.ArticleList
 
         public async Task MakeRequest()
         {
-            var atomFeedProcessor = new AtomFeedProcessor(this);
+            var atomFeedProcessor = new AtomFeedProcessor();
 
             await AtomFeedRequest.MakeRequest(
                 _searchQuery.GetQueryString(), atomFeedProcessor);
 
-            ArticleListView.ItemsSource = atomFeedProcessor.Items;
-            SetToolbarPageNavigationItems();
+            Items = atomFeedProcessor.Items;
         }
 
-        private class AtomFeedProcessor : AtomFeedRequest.IAtomFeedProcessor
+        public ObservableCollection<ArticleEntry> Items
         {
-            public ObservableCollection<ArticleEntry> Items { get; }
-
-            public AtomFeedProcessor(ArticleList articleList)
+            set
             {
-                Items = new ObservableCollection<ArticleEntry>();
-            }
-
-            void AtomFeedRequest.IAtomFeedProcessor.ProcessCategory(ISyndicationCategory category)
-            {
-            }
-
-            void AtomFeedRequest.IAtomFeedProcessor.ProcessImage(ISyndicationImage image)
-            {
-            }
-
-            void AtomFeedRequest.IAtomFeedProcessor.ProcessEntry(IAtomEntry entry)
-            {
-                if (entry != null)
-                    Items.Add(new ArticleEntry(entry));
-            }
-
-            void AtomFeedRequest.IAtomFeedProcessor.ProcessLink(ISyndicationLink link)
-            {
-            }
-
-            void AtomFeedRequest.IAtomFeedProcessor.ProcessPerson(ISyndicationPerson person)
-            {
-            }
-
-            void AtomFeedRequest.IAtomFeedProcessor.ProcessContent(ISyndicationContent content)
-            {
+                ArticleListView.ItemsSource = value;
+                SetToolbarPageNavigationItems();
             }
         }
     }
