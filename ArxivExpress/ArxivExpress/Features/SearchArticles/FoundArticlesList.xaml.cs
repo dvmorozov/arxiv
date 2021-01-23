@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using ArxivExpress.Features.ArticleList;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ArxivExpress.Features.ArticleList
+namespace ArxivExpress.Features.SearchArticles
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ArticleList : ContentPage
+    public partial class FoundArticlesList : ContentPage
     {
-        private SearchArticles.SearchQuery _searchQuery;
+        private readonly SearchQuery _searchQuery;
 
-        public ArticleList(SearchArticles.SearchQuery searchQuery)
+        public FoundArticlesList(SearchQuery searchQuery)
         {
             _searchQuery = searchQuery;
 
@@ -24,7 +25,7 @@ namespace ArxivExpress.Features.ArticleList
                 return;
 
             if (e.Item is IArticleEntry articleEntry)
-            {
+            { 
                 await Navigation.PushAsync(new ArticleInfo.ArticleInfo(articleEntry));
             }
 
@@ -38,14 +39,14 @@ namespace ArxivExpress.Features.ArticleList
             if (item == _toolbarItemNextPage)
             {
                 _searchQuery.PageNumber++;
-                await MakeRequest();
+                await LoadArticles();
             }
             else if (item == _toolbarItemPrevPage)
             {
                 if (_searchQuery.PageNumber > 0)
                 {
                     _searchQuery.PageNumber--;
-                    await MakeRequest();
+                    await LoadArticles();
                 }
             }
         }
@@ -101,7 +102,7 @@ namespace ArxivExpress.Features.ArticleList
             ToolbarItems.Add(_toolbarItemNextPage);
         }
 
-        public async Task MakeRequest()
+        public async Task LoadArticles()
         {
             var atomFeedProcessor = new AtomFeedProcessor();
 
