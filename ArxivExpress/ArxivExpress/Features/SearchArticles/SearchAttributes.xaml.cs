@@ -8,7 +8,8 @@ namespace ArxivExpress.Features.SearchArticles
     {
         public SearchAttributes()
         {
-            _searchQuery = new SearchQuery();
+            _searchArticleRepository = SearchArticlesRepository.GetInstance();
+
             _fieldPrefixes = new List<FieldPrefix>()
             {
                 new FieldPrefix() { Prefix = "ti", Explanation = "Title" },
@@ -65,12 +66,17 @@ namespace ArxivExpress.Features.SearchArticles
 
         private void FillFormData()
         {
-            RadioSortByRelevance.IsChecked = _searchQuery.SortByRelevance;
-            RadioSortByLastUpdatedDate.IsChecked = _searchQuery.SortByLastUpdatedDate;
-            RadioSortBySubmittedDate.IsChecked = _searchQuery.SortBySubmittedDate;
+            RadioSortByRelevance.IsChecked =
+                _searchArticleRepository.SearchQuery.SortByRelevance;
+            RadioSortByLastUpdatedDate.IsChecked =
+                _searchArticleRepository.SearchQuery.SortByLastUpdatedDate;
+            RadioSortBySubmittedDate.IsChecked =
+                _searchArticleRepository.SearchQuery.SortBySubmittedDate;
 
-            RadioSortOrderAscending.IsChecked = _searchQuery.SortOrderAscending;
-            RadioSortOrderDescending.IsChecked = _searchQuery.SortOrderDescending;
+            RadioSortOrderAscending.IsChecked =
+                _searchArticleRepository.SearchQuery.SortOrderAscending;
+            RadioSortOrderDescending.IsChecked =
+                _searchArticleRepository.SearchQuery.SortOrderDescending;
 
             if (PickerItemType.Items.Count != 0)
                 PickerItemType.SelectedIndex = 0;
@@ -84,23 +90,23 @@ namespace ArxivExpress.Features.SearchArticles
         {
             if (sender == RadioSortByRelevance)
             {
-               _searchQuery.SortByRelevance = e.Value;
+                _searchArticleRepository.SearchQuery.SortByRelevance = e.Value;
             }
             else if (sender == RadioSortByLastUpdatedDate)
             {
-                _searchQuery.SortByLastUpdatedDate = e.Value;
+                _searchArticleRepository.SearchQuery.SortByLastUpdatedDate = e.Value;
             }
             else if (sender == RadioSortBySubmittedDate)
             {
-                _searchQuery.SortBySubmittedDate = e.Value;
+                _searchArticleRepository.SearchQuery.SortBySubmittedDate = e.Value;
             }
             else if (sender == RadioSortOrderAscending)
             {
-                _searchQuery.SortOrderAscending = e.Value;
+                _searchArticleRepository.SearchQuery.SortOrderAscending = e.Value;
             }
             else if (sender == RadioSortOrderDescending)
             {
-                _searchQuery.SortOrderDescending = e.Value;
+                _searchArticleRepository.SearchQuery.SortOrderDescending = e.Value;
             }
         }
 
@@ -110,12 +116,13 @@ namespace ArxivExpress.Features.SearchArticles
             {
                 var picker = (Picker)sender;
                 FieldPrefix item = (FieldPrefix)picker.ItemsSource[picker.SelectedIndex];
-                _searchQuery.Prefix = item.Prefix;
+                _searchArticleRepository.SearchQuery.Prefix = item.Prefix;
             }
             else if (sender == PickerResultsPerPage)
             {
                 var picker = (Picker)sender;
-                _searchQuery.ResultsPerPage = (string)picker.ItemsSource[picker.SelectedIndex];
+                _searchArticleRepository.SearchQuery.ResultsPerPage =
+                    (string)picker.ItemsSource[picker.SelectedIndex];
             }
         }
 
@@ -123,17 +130,17 @@ namespace ArxivExpress.Features.SearchArticles
         {
             if (sender == EntrySearchTerm)
             {
-                _searchQuery.SearchTerm = ((Entry)sender).Text;
+                _searchArticleRepository.SearchQuery.SearchTerm = ((Entry)sender).Text;
             }
         }
 
         private async void Handle_SearchPressed(object sender, EventArgs e)
         {
-            var articleList = new FoundArticlesList(_searchQuery);
+            var articleList = new ArticleList(_searchArticleRepository);
             await Navigation.PushAsync(articleList);
             await articleList.LoadArticles();
         }
 
-        private SearchQuery _searchQuery;
+        private SearchArticlesRepository _searchArticleRepository;
     }
 }

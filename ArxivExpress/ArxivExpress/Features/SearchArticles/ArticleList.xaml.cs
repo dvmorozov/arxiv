@@ -8,18 +8,23 @@ using Xamarin.Forms.Xaml;
 namespace ArxivExpress.Features.SearchArticles
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FoundArticlesList : ContentPage
+    public partial class ArticleList : ContentPage
     {
-        private readonly SearchQuery _searchQuery;
+        private IArticlesRepository _articleRepository;
 
-        public FoundArticlesList(SearchQuery searchQuery)
+        public ArticleList(IArticlesRepository articleRepository)
         {
-            _searchQuery = searchQuery;
+            _articleRepository = articleRepository;
 
-            InitializeComponent();
+            InitializeComponent(); 
         }
 
-        public async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
+        public async Task LoadArticles()
+        {
+            Items = await _articleRepository.LoadArticles();
+        }
+
+        private async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e.Item == null)
                 return;
@@ -38,22 +43,17 @@ namespace ArxivExpress.Features.SearchArticles
             ToolbarItem item = (ToolbarItem)sender;
             if (item == _toolbarItemNextPage)
             {
-                _searchQuery.PageNumber++;
-                await LoadArticles();
+                Items = await _articleRepository.LoadNextPage();
             }
             else if (item == _toolbarItemPrevPage)
             {
-                if (_searchQuery.PageNumber > 0)
-                {
-                    _searchQuery.PageNumber--;
-                    await LoadArticles();
-                }
+                Items = await _articleRepository.LoadPrevPage();
             }
         }
 
         private string GetItemsRange(uint pageIndex)
         {
-            var resultsPerPage = _searchQuery.GetResultsPerPage();
+            var resultsPerPage = _articleRepository.GetResultsPerPage();
             var startIndex = pageIndex * resultsPerPage + 1;
             var endIndex = (pageIndex + 1) * resultsPerPage;
 
@@ -92,27 +92,17 @@ namespace ArxivExpress.Features.SearchArticles
         {
             DeleteToolbarItemPages();
 
-            if (_searchQuery.PageNumber > 0)
+            if (_articleRepository.GetPageNumber() > 0)
             {
-                _toolbarItemPrevPage = CreateToolbarItem(_searchQuery.PageNumber - 1);
+                _toolbarItemPrevPage = CreateToolbarItem(_articleRepository.GetPageNumber() - 1);
                 ToolbarItems.Insert(0, _toolbarItemPrevPage);
             }
 
-            _toolbarItemNextPage = CreateToolbarItem(_searchQuery.PageNumber + 1);
+            _toolbarItemNextPage = CreateToolbarItem(_articleRepository.GetPageNumber() + 1);
             ToolbarItems.Add(_toolbarItemNextPage);
         }
 
-        public async Task LoadArticles()
-        {
-            var atomFeedProcessor = new AtomFeedProcessor();
-
-            await AtomFeedRequest.MakeRequest(
-                _searchQuery.GetQueryString(), atomFeedProcessor);
-
-            Items = atomFeedProcessor.Items;
-        }
-
-        public ObservableCollection<ArticleEntry> Items
+        private ObservableCollection<ArticleEntry> Items
         {
             set
             {
