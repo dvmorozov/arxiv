@@ -102,7 +102,7 @@ namespace ArxivExpress.Features.SearchArticles
             ToolbarItems.Add(_toolbarItemNextPage);
         }
 
-        private ObservableCollection<ArticleEntry> Items
+        private ObservableCollection<IArticleEntry> Items
         {
             set
             {

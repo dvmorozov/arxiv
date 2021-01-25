@@ -6,9 +6,9 @@ namespace ArxivExpress.Features.SearchArticles
 {
     public interface IArticlesRepository
     {
-        Task<ObservableCollection<ArticleEntry>> LoadArticles();
-        Task<ObservableCollection<ArticleEntry>> LoadNextPage();
-        Task<ObservableCollection<ArticleEntry>> LoadPrevPage();
+        Task<ObservableCollection<IArticleEntry>> LoadArticles();
+        Task<ObservableCollection<IArticleEntry>> LoadNextPage();
+        Task<ObservableCollection<IArticleEntry>> LoadPrevPage();
         uint GetPageNumber();
         uint GetResultsPerPage();
     }

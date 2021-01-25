@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Xml.Linq;
+using ArxivExpress.Features.ArticleList;
+using ArxivExpress.Features.SearchArticles;
 
 namespace ArxivExpress.Features.LikedArticles
 {
-    public class LikedArticlesRepository
+    public class LikedArticlesRepository : IArticlesRepository
     {
         private static LikedArticlesRepository _instance;
 
@@ -76,15 +80,6 @@ namespace ArxivExpress.Features.LikedArticles
             }
 
             return new List<Article>();
-        }
-
-        protected virtual void LoadArticles()
-        {
-            _articles.Clear();
-
-            var filePath = GetFilePath();
-
-            _articles = LoadArticlesFromFile(filePath);
         }
 
         private XElement GetContributors(Article article)
@@ -162,6 +157,50 @@ namespace ArxivExpress.Features.LikedArticles
         public bool HasArticle(string articleId)
         {
             return _articles.Exists(item => item.Id == articleId);
+        }
+
+        private async Task LoadArticlesAsync()
+        {
+            _articles.Clear();
+
+            var filePath = GetFilePath();
+
+            _articles = LoadArticlesFromFile(filePath);
+         }
+
+        public async Task<ObservableCollection<IArticleEntry>> LoadArticles()
+        {
+            var result = new ObservableCollection<IArticleEntry>();
+            await LoadArticlesAsync();
+
+            foreach (var article in _articles)
+            {
+                result.Add(article);
+            }
+            
+            return result;
+        }
+
+        public Task<ObservableCollection<IArticleEntry>> LoadNextPage()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ObservableCollection<IArticleEntry>> LoadPrevPage()
+        {
+            throw new NotImplementedException();
+        }
+
+        private uint _pageNumber = 0;
+
+        public uint GetPageNumber()
+        {
+            return _pageNumber;
+        }
+
+        public uint GetResultsPerPage()
+        {
+            return 50;
         }
     }
 }
