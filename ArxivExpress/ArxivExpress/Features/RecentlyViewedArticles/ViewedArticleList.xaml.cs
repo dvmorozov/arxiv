@@ -1,19 +1,27 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using ArxivExpress.Features.ArticleList;
+using ArxivExpress.Features.SearchArticles;
 using Xamarin.Forms;
 
 namespace ArxivExpress.Features.RecentlyViewedArticles
 {
     public partial class ViewedArticleList : ContentPage
     {
-        private ViewedArticlesRepository _viewedArticlesRepository;
+        private IArticlesRepository _articleRepository;
 
         public ViewedArticleList()
         {
-            _viewedArticlesRepository = ViewedArticlesRepository.GetInstance();
+            _articleRepository = ViewedArticlesRepository.GetInstance();
 
             InitializeComponent();
-            ViewedArticleListView.ItemsSource = _viewedArticlesRepository.Articles;
+            LoadArticles();
+        }
+
+        public async Task LoadArticles()
+        {
+            Items = await _articleRepository.LoadArticles();
         }
 
         public async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -97,6 +105,15 @@ namespace ArxivExpress.Features.RecentlyViewedArticles
 
             _toolbarItemNextPage = CreateToolbarItem(_pageNumber + 1);
             ToolbarItems.Add(_toolbarItemNextPage);
+        }
+
+        private ObservableCollection<IArticleEntry> Items
+        {
+            set
+            {
+                ViewedArticleListView.ItemsSource = value;
+                SetToolbarPageNavigationItems();
+            }
         }
     }
 }

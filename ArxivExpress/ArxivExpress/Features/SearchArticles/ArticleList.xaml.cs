@@ -16,7 +16,7 @@ namespace ArxivExpress.Features.SearchArticles
         {
             _articleRepository = articleRepository;
 
-            InitializeComponent(); 
+            InitializeComponent();
         }
 
         public async Task LoadArticles()

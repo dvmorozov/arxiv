@@ -1,19 +1,27 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using ArxivExpress.Features.ArticleList;
+using ArxivExpress.Features.SearchArticles;
 using Xamarin.Forms;
 
 namespace ArxivExpress.Features.LikedArticles
 {
     public partial class LikedArticleList : ContentPage
     {
-        private LikedArticlesRepository _likedArticlesRepository;
+        private IArticlesRepository _articleRepository;
 
         public LikedArticleList()
         {
-            _likedArticlesRepository = LikedArticlesRepository.GetInstance();
+            _articleRepository = LikedArticlesRepository.GetInstance();
 
             InitializeComponent();
-            LikedArticleListView.ItemsSource = _likedArticlesRepository.Articles;
+            LoadArticles();
+        }
+
+        public async Task LoadArticles()
+        {
+            Items = await _articleRepository.LoadArticles();
         }
 
         public async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -97,6 +105,15 @@ namespace ArxivExpress.Features.LikedArticles
 
             _toolbarItemNextPage = CreateToolbarItem(_pageNumber + 1);
             ToolbarItems.Add(_toolbarItemNextPage);
+        }
+
+        private ObservableCollection<IArticleEntry> Items
+        {
+            set
+            {
+                LikedArticleListView.ItemsSource = value;
+                SetToolbarPageNavigationItems();
+            }
         }
     }
 }
