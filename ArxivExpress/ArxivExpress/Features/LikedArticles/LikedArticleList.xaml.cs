@@ -11,9 +11,9 @@ namespace ArxivExpress.Features.LikedArticles
     {
         private IArticlesRepository _articleRepository;
 
-        public LikedArticleList()
+        public LikedArticleList(IArticlesRepository articleRepository)
         {
-            _articleRepository = LikedArticlesRepository.GetInstance();
+            _articleRepository = articleRepository;
 
             InitializeComponent();
             LoadArticles();

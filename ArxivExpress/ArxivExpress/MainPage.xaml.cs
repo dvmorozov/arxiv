@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using ArxivExpress.Features.LikedArticles;
+using ArxivExpress.Features.RecentlyViewedArticles;
+using Xamarin.Forms;
 
 namespace ArxivExpress
 {
@@ -16,12 +18,12 @@ namespace ArxivExpress
 
         public async void Handle_RecentlyViewedPressed(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new Features.RecentlyViewedArticles.ViewedArticleList());
+            await Navigation.PushAsync(new ViewedArticleList(ViewedArticlesRepository.GetInstance()));
         }
 
         public async void Handle_LikedArticlesPressed(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new Features.LikedArticles.LikedArticleList());
+            await Navigation.PushAsync(new LikedArticleList(LikedArticlesRepository.GetInstance()));
         }
 
         public async void Handle_RecommendedArticlesPressed(object sender, System.EventArgs e)

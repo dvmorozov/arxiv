@@ -11,9 +11,9 @@ namespace ArxivExpress.Features.RecentlyViewedArticles
     {
         private IArticlesRepository _articleRepository;
 
-        public ViewedArticleList()
+        public ViewedArticleList(IArticlesRepository articleRepository)
         {
-            _articleRepository = ViewedArticlesRepository.GetInstance();
+            _articleRepository = articleRepository;
 
             InitializeComponent();
             LoadArticles();
