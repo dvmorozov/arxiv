@@ -5,7 +5,7 @@ using System.Xml;
 using Microsoft.SyndicationFeed;
 using Microsoft.SyndicationFeed.Atom;
 
-namespace ArxivExpress.Features.ArticleList
+namespace ArxivExpress.Features.SearchArticles
 {
     public class AtomFeedRequest
     {

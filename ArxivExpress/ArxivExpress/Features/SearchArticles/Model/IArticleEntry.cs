@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ArxivExpress.Features.ArticleList
+namespace ArxivExpress.Features.SearchArticles
 {
     public interface IArticleEntry
     {

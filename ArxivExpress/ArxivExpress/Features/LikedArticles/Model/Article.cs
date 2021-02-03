@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ArxivExpress.Features.ArticleList;
+using ArxivExpress.Features.SearchArticles;
 
 namespace ArxivExpress.Features.LikedArticles
 {

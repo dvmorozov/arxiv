@@ -22,10 +22,17 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\" />
-    <Folder Include="Features\ArticleList\" />
     <Folder Include="Features\ArticleInfo\" />
     <Folder Include="Features\SearchArticles\" />
     <Folder Include="Features\LikedArticles\" />
     <Folder Include="Features\RecentlyViewedArticles\" />
+    <Folder Include="Features\SearchArticles\Data\" />
+    <Folder Include="Features\SearchArticles\Model\" />
+    <Folder Include="Features\RecentlyViewedArticles\Data\" />
+    <Folder Include="Features\LikedArticles\Model\" />
+    <Folder Include="Features\LikedArticles\Data\" />
+    <Folder Include="Features\SearchArticles\Forms\" />
+    <Folder Include="Features\ArticleInfo\Forms\" />
+    <Folder Include="Forms\" />
   </ItemGroup>
 </Project>

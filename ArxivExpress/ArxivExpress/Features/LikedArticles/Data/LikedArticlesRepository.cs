@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using ArxivExpress.Features.ArticleList;
 using ArxivExpress.Features.SearchArticles;
 
 namespace ArxivExpress.Features.LikedArticles
@@ -69,7 +68,7 @@ namespace ArxivExpress.Features.LikedArticles
                         Contributors = (
                             from contributor
                             in article.Descendants(_contributorListElementName)
-                            select new ArticleList.Contributor(
+                            select new Contributor(
                                 contributor.Attribute("Name")?.Value,
                                 contributor.Attribute("Email")?.Value
                             )

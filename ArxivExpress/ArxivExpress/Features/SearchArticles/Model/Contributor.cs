@@ -1,4 +1,4 @@
-﻿namespace ArxivExpress.Features.ArticleList
+﻿namespace ArxivExpress.Features.SearchArticles
 {
     public class Contributor
     {

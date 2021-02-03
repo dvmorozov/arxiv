@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using ArxivExpress.Features.ArticleList;
 
 namespace ArxivExpress.Features.SearchArticles
 {

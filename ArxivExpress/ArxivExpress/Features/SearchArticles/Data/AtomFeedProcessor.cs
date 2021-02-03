@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Microsoft.SyndicationFeed;
 
-namespace ArxivExpress.Features.ArticleList
+namespace ArxivExpress.Features.SearchArticles
 {
     public class AtomFeedProcessor : AtomFeedRequest.IAtomFeedProcessor
     {

@@ -1,6 +1,6 @@
-﻿using ArxivExpress.Features.ArticleList;
-using ArxivExpress.Features.LikedArticles;
+﻿using ArxivExpress.Features.LikedArticles;
 using ArxivExpress.Features.RecentlyViewedArticles;
+using ArxivExpress.Features.SearchArticles;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
