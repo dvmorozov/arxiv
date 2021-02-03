@@ -138,7 +138,6 @@ namespace ArxivExpress.Features.SearchArticles
         {
             var articleList = new ArticleList(_searchArticleRepository);
             await Navigation.PushAsync(articleList);
-            await articleList.LoadArticles();
         }
 
         private SearchArticlesRepository _searchArticleRepository;

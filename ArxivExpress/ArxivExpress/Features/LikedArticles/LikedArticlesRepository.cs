@@ -20,7 +20,6 @@ namespace ArxivExpress.Features.LikedArticles
         protected LikedArticlesRepository()
         {
         	_articles = new List<Article>();
-            LoadArticles();
         }
 
         protected virtual string GetFileName()
