@@ -25,11 +25,13 @@
                         VerticalOptions="Center" HorizontalOptions="Center"
                         WidthRequest="200" TextColor="White"/>
 
+                <!--
                 <Button Text="Recommended Articles" Pressed="Handle_RecommendedArticlesPressed"
                         BorderColor="#2196F3" BackgroundColor="#2196F3"
                         BorderWidth="2" Margin="10" HeightRequest="50"
                         VerticalOptions="Center" HorizontalOptions="Center"
                         WidthRequest="200" TextColor="White"/>
+                -->
 
                 <Button Text="Viewed Authors" Pressed="Handle_ViewedAuthorsPressed"
                         BorderColor="#2196F3" BackgroundColor="#2196F3"

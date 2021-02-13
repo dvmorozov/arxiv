@@ -27,11 +27,13 @@ namespace ArxivExpress
             await Navigation.PushAsync(new ArticleList(LikedArticlesRepository.GetInstance()));
         }
 
+        /*
         public async void Handle_RecommendedArticlesPressed(object sender, System.EventArgs e)
         {
             //  TODO: Implement recommended articles.
             //await Navigation.PushAsync(new SearchQuery());
         }
+        */
 
         public async void Handle_ViewedAuthorsPressed(object sender, System.EventArgs e)
         {
