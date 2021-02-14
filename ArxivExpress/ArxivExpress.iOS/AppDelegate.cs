@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using Microsoft.AppCenter.Distribute;
 using PCLAppConfig;
 using UIKit;
 
@@ -25,6 +26,9 @@ namespace ArxivExpress.iOS
 #endif
             global::Xamarin.Forms.Forms.Init();
             ConfigurationManager.Initialise(PCLAppConfig.FileSystemStream.PortableStream.Current);
+
+            Distribute.DontCheckForUpdatesInDebug();
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
