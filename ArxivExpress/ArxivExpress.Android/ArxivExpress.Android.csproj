@@ -44,7 +44,6 @@
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <LangVersion>8.0</LangVersion>
-    <PublicSign>false</PublicSign>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />

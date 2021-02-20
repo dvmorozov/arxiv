@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using ArxivExpress.Features.SearchArticles.Data;
 
 namespace ArxivExpress.Features.SearchArticles
 {
@@ -10,7 +11,8 @@ namespace ArxivExpress.Features.SearchArticles
 
         private SearchArticlesRepository()
         {
-            SearchQuery = new SearchQuery();
+            var searchQueryRepository = SearchQueryRepository.GetInstance();
+            SearchQuery = searchQueryRepository.GetSearchQuery();
         }
 
         public static SearchArticlesRepository GetInstance()
