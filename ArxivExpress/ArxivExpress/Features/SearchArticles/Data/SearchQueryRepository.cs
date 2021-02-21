@@ -8,11 +8,9 @@ namespace ArxivExpress.Features.SearchArticles.Data
     public class SearchQueryRepository
     {
         private static SearchQueryRepository _instance;
-        private SearchQuery _searchQuery;
 
         private SearchQueryRepository()
         {
-            _searchQuery = LoadSearchQueryFromFile(GetFilePath());
         }
 
         public static SearchQueryRepository GetInstance()
@@ -23,11 +21,6 @@ namespace ArxivExpress.Features.SearchArticles.Data
             }
 
             return _instance;
-        }
-
-        public SearchQuery GetSearchQuery()
-        {
-            return _searchQuery;
         }
 
         private string GetFileName()
@@ -46,15 +39,16 @@ namespace ArxivExpress.Features.SearchArticles.Data
                 Environment.SpecialFolder.LocalApplicationData), GetFileName());
         }
 
-        private SearchQuery LoadSearchQueryFromFile(string filePath)
+        public SearchQuery LoadSearchQuery()
         {
+            var filePath = GetFilePath();
+
             if (File.Exists(filePath))
             {
                 var xml = XDocument.Load(filePath);
-
-                return (
+                var list = (
                     from searchQuery
-                    in xml.Root.Descendants(GetSearchQueryElementName())
+                    in xml.Descendants(GetSearchQueryElementName())
                     select new SearchQuery
                     {
                         SearchTerm = searchQuery.Attribute("SearchTerm")?.Value,
@@ -68,27 +62,32 @@ namespace ArxivExpress.Features.SearchArticles.Data
                         SortOrderAscending = bool.Parse(searchQuery.Attribute("SortOrderAscending")?.Value),
                         SortOrderDescending = bool.Parse(searchQuery.Attribute("SortOrderDescending")?.Value)
                     }
-                ).ToList()[0];
+                ).ToList();
+
+                if (list.Count != 0)
+                {
+                    return list[0];
+                }
             }
 
             return new SearchQuery();
         }
 
-        protected void SaveArtcles()
+        public void SaveSearchQuery(SearchQuery searchQuery)
         {
             var filePath = GetFilePath();
 
             var xml = new XDocument();
 
             var attributes = new object[8];
-            attributes[0] = new XAttribute("SearchTerm", _searchQuery.SearchTerm);
-            attributes[1] = new XAttribute("Prefix", _searchQuery.Prefix);
-            attributes[2] = new XAttribute("ResultsPerPage", _searchQuery.ResultsPerPage);
-            attributes[3] = new XAttribute("SortByRelevance", _searchQuery.SortByRelevance);
-            attributes[4] = new XAttribute("SortByLastUpdatedDate", _searchQuery.SortByLastUpdatedDate);
-            attributes[5] = new XAttribute("SortBySubmittedDate", _searchQuery.SortBySubmittedDate);
-            attributes[6] = new XAttribute("SortOrderAscending", _searchQuery.SortOrderAscending);
-            attributes[7] = new XAttribute("SortOrderDescending", _searchQuery.SortOrderDescending);
+            attributes[0] = new XAttribute("SearchTerm", searchQuery.SearchTerm);
+            attributes[1] = new XAttribute("Prefix", searchQuery.Prefix);
+            attributes[2] = new XAttribute("ResultsPerPage", searchQuery.ResultsPerPage);
+            attributes[3] = new XAttribute("SortByRelevance", searchQuery.SortByRelevance);
+            attributes[4] = new XAttribute("SortByLastUpdatedDate", searchQuery.SortByLastUpdatedDate);
+            attributes[5] = new XAttribute("SortBySubmittedDate", searchQuery.SortBySubmittedDate);
+            attributes[6] = new XAttribute("SortOrderAscending", searchQuery.SortOrderAscending);
+            attributes[7] = new XAttribute("SortOrderDescending", searchQuery.SortOrderDescending);
 
             xml.Add(new XElement(GetSearchQueryElementName(), attributes));
             xml.Save(filePath);

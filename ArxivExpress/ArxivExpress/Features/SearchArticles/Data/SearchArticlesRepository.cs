@@ -1,18 +1,16 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using ArxivExpress.Features.SearchArticles.Data;
 
 namespace ArxivExpress.Features.SearchArticles
 {
     public class SearchArticlesRepository : IArticlesRepository
     {
         private static SearchArticlesRepository _instance;
-        public readonly SearchQuery SearchQuery;
+        public SearchQuery SearchQuery;
 
         private SearchArticlesRepository()
         {
-            var searchQueryRepository = SearchQueryRepository.GetInstance();
-            SearchQuery = searchQueryRepository.GetSearchQuery();
+            SearchQuery = new SearchQuery();
         }
 
         public static SearchArticlesRepository GetInstance()
