@@ -85,7 +85,7 @@ namespace ArxivExpress.Features.SearchArticles
         {
             get
             {
-                return "Published: " +
+                return 
                   _entry.Published != null ?
                   _entry.Published.Date.ToShortDateString() :
                   "unknown";
@@ -96,7 +96,7 @@ namespace ArxivExpress.Features.SearchArticles
         {
             get
             {
-                return "Last updated: " +
+                return
                   _entry.LastUpdated != null ?
                   _entry.LastUpdated.Date.ToShortDateString() :
                   "unknown";

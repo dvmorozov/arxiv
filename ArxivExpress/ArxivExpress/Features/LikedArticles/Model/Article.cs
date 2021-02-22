@@ -102,8 +102,7 @@ namespace ArxivExpress.Features.LikedArticles
         {
             get
             {
-                return "Published: " +
-                  _published ?? "unknown";
+                return _published ?? "unknown";
             }
 
             set
@@ -118,7 +117,7 @@ namespace ArxivExpress.Features.LikedArticles
         {
             get
             {
-                return "Last updated: " + _lastUpdated ?? "unknown";
+                return _lastUpdated ?? "unknown";
             }
 
             set

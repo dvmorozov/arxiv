@@ -27,7 +27,15 @@
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="Published:" 
+                            Style="{DynamicResource ListItemDetailTextStyle}"
+                            LineBreakMode="WordWrap"/>
+
                     <Label Text="{Binding ArticleEntry.Published}"
+                            Style="{DynamicResource ListItemDetailTextStyle}"
+                            LineBreakMode="WordWrap"/>
+
+                    <Label Text="Last Updated:" 
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             LineBreakMode="WordWrap"/>
 
