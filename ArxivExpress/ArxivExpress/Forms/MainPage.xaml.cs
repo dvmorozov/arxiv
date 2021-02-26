@@ -1,6 +1,7 @@
 ﻿using ArxivExpress.Features.LikedArticles;
 using ArxivExpress.Features.RecentlyViewedArticles;
 using ArxivExpress.Features.SearchArticles;
+using ArxivExpress.Features.ViewedAuthors.Forms;
 using Xamarin.Forms;
 
 namespace ArxivExpress
@@ -37,8 +38,7 @@ namespace ArxivExpress
 
         public async void Handle_ViewedAuthorsPressed(object sender, System.EventArgs e)
         {
-            //  TODO: Implement viewed author's articles.
-            //await Navigation.PushAsync(new SearchQuery());
+            await Navigation.PushAsync(new AuthorList());
         }
     }
 }

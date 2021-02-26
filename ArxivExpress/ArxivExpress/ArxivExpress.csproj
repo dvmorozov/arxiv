@@ -37,5 +37,8 @@
     <Folder Include="Features\SearchArticles\Forms\" />
     <Folder Include="Features\ArticleInfo\Forms\" />
     <Folder Include="Forms\" />
+    <Folder Include="Features\ViewedAuthors\" />
+    <Folder Include="Features\ViewedAuthors\Data\" />
+    <Folder Include="Features\ViewedAuthors\Forms\" />
   </ItemGroup>
 </Project>

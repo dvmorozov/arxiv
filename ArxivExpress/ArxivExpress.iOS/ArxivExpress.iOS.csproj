@@ -75,9 +75,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="app.config" />
     <Compile Include="UIBarButtons.cs" />
-    <None Include="Info %28copy%29.plist" />
-    <None Include="Info %28another copy%29.plist" />
-    <None Include="Info %283rd copy%29.plist" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
