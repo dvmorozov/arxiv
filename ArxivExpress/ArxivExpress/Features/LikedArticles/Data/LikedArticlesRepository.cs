@@ -21,28 +21,20 @@ namespace ArxivExpress.Features.LikedArticles
         	_articles = new List<Article>();
         }
 
-        protected virtual string GetFileName()
-        {
-            return "liked_articles.xml";
-        }
+        protected virtual string FileName => "liked_articles.xml";
 
-        protected virtual string GetArticleListElementName()
-        {
-            return "LikedArticleList";
-        }
+        protected virtual string ArticleListElementName => "LikedArticleList";
 
-        protected virtual string GetArticleElementName()
-        {
-            return "LikedArticle";
-        }
+        protected virtual string ArticleElementName => "LikedArticle";
 
-        private const string _contributorListElementName = "ContributorList";
-        private const string _contributorElementName = "Contributor";
+        private string _contributorListElementName => "ContributorList";
+
+        private string _contributorElementName => "Contributor";
 
         private string GetFilePath()
         {
             return Path.Combine(Environment.GetFolderPath(
-                Environment.SpecialFolder.LocalApplicationData), GetFileName());
+                Environment.SpecialFolder.LocalApplicationData), FileName);
         }
 
         private List<Article> LoadArticlesFromFile(string filePath)
@@ -53,7 +45,7 @@ namespace ArxivExpress.Features.LikedArticles
 
                 return (
                     from article
-                    in xml.Root.Descendants(GetArticleElementName())
+                    in xml.Root.Descendants(ArticleElementName)
                     select new Article
                     {
                         Id = article.Attribute("Id").Value,
@@ -120,10 +112,10 @@ namespace ArxivExpress.Features.LikedArticles
                 objects[6] = new XAttribute("Summary", _articles[i].Summary);
                 objects[7] = GetContributors(_articles[i]);
 
-                articleElements[i] = new XElement(GetArticleElementName(), objects);
+                articleElements[i] = new XElement(ArticleElementName, objects);
             }
 
-            xml.Add(new XElement(GetArticleListElementName(), articleElements));
+            xml.Add(new XElement(ArticleListElementName, articleElements));
             xml.Save(filePath);
         }
 
@@ -171,7 +163,9 @@ namespace ArxivExpress.Features.LikedArticles
             var result = new ObservableCollection<IArticleEntry>();
             await LoadArticlesAsync();
 
-            foreach (var article in _articles)
+            foreach (var article in _articles.GetRange(
+                (int)GetPageNumber() * (int)GetResultsPerPage(),
+                (int)GetResultsPerPage()))
             {
                 result.Add(article);
             }
@@ -181,12 +175,17 @@ namespace ArxivExpress.Features.LikedArticles
 
         public Task<ObservableCollection<IArticleEntry>> LoadNextPage()
         {
-            throw new NotImplementedException();
+            _pageNumber++;
+            return LoadArticles();
         }
 
         public Task<ObservableCollection<IArticleEntry>> LoadPrevPage()
         {
-            throw new NotImplementedException();
+            if (_pageNumber > 0)
+            {
+                _pageNumber--;
+            }
+            return LoadArticles();
         }
 
         private uint _pageNumber = 0;
@@ -198,7 +197,7 @@ namespace ArxivExpress.Features.LikedArticles
 
         public uint GetResultsPerPage()
         {
-            return 50;
+            return 5;
         }
     }
 }

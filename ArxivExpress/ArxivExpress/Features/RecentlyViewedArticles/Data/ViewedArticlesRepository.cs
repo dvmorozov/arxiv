@@ -11,20 +11,11 @@ namespace ArxivExpress.Features.RecentlyViewedArticles
         {
         }
 
-        protected override string GetFileName()
-        {
-            return "viewed_articles.xml";
-        }
+        protected override string FileName => "viewed_articles.xml";
 
-        protected override string GetArticleListElementName()
-        {
-            return "ViewedArticleList";
-        }
+        protected override string ArticleListElementName => "ViewedArticleList";
 
-        protected override string GetArticleElementName()
-        {
-            return "ViewedArticle";
-        }
+        protected override string ArticleElementName => "ViewedArticle";
 
         public static new ViewedArticlesRepository GetInstance()
         {
