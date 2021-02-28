@@ -18,7 +18,9 @@ namespace ArxivExpress.Features.LikedArticles
 
         protected LikedArticlesRepository()
         {
-        	_articles = new List<Article>();
+            var filePath = GetFilePath();
+
+            _articles = LoadArticlesFromFile(filePath);
         }
 
         protected virtual string FileName => "liked_articles.xml";
@@ -149,33 +151,33 @@ namespace ArxivExpress.Features.LikedArticles
             return _articles.Exists(item => item.Id == articleId);
         }
 
-        private async Task LoadArticlesAsync()
-        {
-            _articles.Clear();
-
-            var filePath = GetFilePath();
-
-            _articles = LoadArticlesFromFile(filePath);
-         }
-
         public async Task<ObservableCollection<IArticleEntry>> LoadArticles()
         {
-            var result = new ObservableCollection<IArticleEntry>();
-            await LoadArticlesAsync();
+            var task = new Task<ObservableCollection<IArticleEntry>>(
+                () =>
+                {
+                    var result = new ObservableCollection<IArticleEntry>();
+                    var start = GetPageNumber() * GetResultsPerPage();
+                    var count = GetResultsPerPage() <= _articles.Count - start ?
+                        GetResultsPerPage() : _articles.Count - start;
 
-            foreach (var article in _articles.GetRange(
-                (int)GetPageNumber() * (int)GetResultsPerPage(),
-                (int)GetResultsPerPage()))
-            {
-                result.Add(article);
-            }
-            
-            return result;
+                    foreach (var article in _articles.GetRange((int)start, (int)count))
+                    {
+                        result.Add(article);
+                    }
+                    return result;
+                });
+
+            task.Start();
+            return await task;
         }
 
         public Task<ObservableCollection<IArticleEntry>> LoadNextPage()
         {
-            _pageNumber++;
+            if ((GetPageNumber() + 1) * GetResultsPerPage() < _articles.Count)
+            {
+                _pageNumber++;
+            }
             return LoadArticles();
         }
 
