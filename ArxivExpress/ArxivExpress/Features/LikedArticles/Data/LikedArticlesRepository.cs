@@ -158,8 +158,8 @@ namespace ArxivExpress.Features.LikedArticles
                 {
                     var result = new ObservableCollection<IArticleEntry>();
                     var start = GetPageNumber() * GetResultsPerPage();
-                    var count = GetResultsPerPage() <= _articles.Count - start ?
-                        GetResultsPerPage() : _articles.Count - start;
+                    var count = IsLastPage() ?
+                        _articles.Count - start : GetResultsPerPage();
 
                     foreach (var article in _articles.GetRange((int)start, (int)count))
                     {
@@ -199,7 +199,13 @@ namespace ArxivExpress.Features.LikedArticles
 
         public uint GetResultsPerPage()
         {
-            return 5;
+            return 25;
+        }
+
+        public bool IsLastPage()
+        {
+            var start = GetPageNumber() * GetResultsPerPage();
+            return GetResultsPerPage() >= _articles.Count - start;
         }
     }
 }

@@ -98,8 +98,11 @@ namespace ArxivExpress.Features.SearchArticles
                 ToolbarItems.Insert(0, _toolbarItemPrevPage);
             }
 
-            _toolbarItemNextPage = CreateToolbarItem(_articleRepository.GetPageNumber() + 1);
-            ToolbarItems.Add(_toolbarItemNextPage);
+            if (!_articleRepository.IsLastPage())
+            {
+                _toolbarItemNextPage = CreateToolbarItem(_articleRepository.GetPageNumber() + 1);
+                ToolbarItems.Add(_toolbarItemNextPage);
+            }
         }
 
         private ObservableCollection<IArticleEntry> Items

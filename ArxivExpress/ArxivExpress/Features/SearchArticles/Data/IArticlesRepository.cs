@@ -10,5 +10,6 @@ namespace ArxivExpress.Features.SearchArticles
         Task<ObservableCollection<IArticleEntry>> LoadPrevPage();
         uint GetPageNumber();
         uint GetResultsPerPage();
+        bool IsLastPage();
     }
 }

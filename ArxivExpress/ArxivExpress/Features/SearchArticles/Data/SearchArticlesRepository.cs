@@ -64,5 +64,10 @@ namespace ArxivExpress.Features.SearchArticles
         {
             return SearchQuery.GetResultsPerPage();
         }
+
+        public bool IsLastPage()
+        {
+            return false;
+        }
     }
 }
