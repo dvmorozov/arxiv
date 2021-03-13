@@ -5,11 +5,12 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using ArxivExpress.Features.Data;
 using ArxivExpress.Features.SearchArticles;
 
 namespace ArxivExpress.Features.LikedArticles
 {
-    public class LikedArticlesRepository : IArticlesRepository
+    public class LikedArticlesRepository : IListRepository<IArticleEntry>
     {
         private static LikedArticlesRepository _instance;
 
@@ -151,7 +152,7 @@ namespace ArxivExpress.Features.LikedArticles
             return _articles.Exists(item => item.Id == articleId);
         }
 
-        public async Task<ObservableCollection<IArticleEntry>> LoadArticles()
+        public async Task<ObservableCollection<IArticleEntry>> LoadFirstPage()
         {
             var task = new Task<ObservableCollection<IArticleEntry>>(
                 () =>
@@ -178,7 +179,7 @@ namespace ArxivExpress.Features.LikedArticles
             {
                 _pageNumber++;
             }
-            return LoadArticles();
+            return LoadFirstPage();
         }
 
         public Task<ObservableCollection<IArticleEntry>> LoadPrevPage()
@@ -187,7 +188,7 @@ namespace ArxivExpress.Features.LikedArticles
             {
                 _pageNumber--;
             }
-            return LoadArticles();
+            return LoadFirstPage();
         }
 
         private uint _pageNumber = 0;

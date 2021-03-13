@@ -40,5 +40,6 @@
     <Folder Include="Features\ViewedAuthors\" />
     <Folder Include="Features\ViewedAuthors\Data\" />
     <Folder Include="Features\ViewedAuthors\Forms\" />
+    <Folder Include="Features\Data\" />
   </ItemGroup>
 </Project>

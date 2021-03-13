@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using ArxivExpress.Features.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,9 +10,9 @@ namespace ArxivExpress.Features.SearchArticles
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ArticleList : ContentPage
     {
-        private IArticlesRepository _articleRepository;
+        private IListRepository<IArticleEntry> _articleRepository;
 
-        public ArticleList(IArticlesRepository articleRepository)
+        public ArticleList(IListRepository<IArticleEntry> articleRepository)
         {
             _articleRepository = articleRepository;
 
@@ -21,7 +22,7 @@ namespace ArxivExpress.Features.SearchArticles
 
         public async Task LoadArticles()
         {
-            Items = await _articleRepository.LoadArticles();
+            Items = await _articleRepository.LoadFirstPage();
         }
 
         private async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)

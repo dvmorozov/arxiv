@@ -1,9 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using ArxivExpress.Features.Data;
 
 namespace ArxivExpress.Features.SearchArticles
 {
-    public class SearchArticlesRepository : IArticlesRepository
+    public class SearchArticlesRepository : IListRepository<IArticleEntry>
     {
         private static SearchArticlesRepository _instance;
         public SearchQuery SearchQuery;
@@ -23,7 +24,7 @@ namespace ArxivExpress.Features.SearchArticles
             return _instance;
         }
 
-        public async Task<ObservableCollection<IArticleEntry>> LoadArticles()
+        public async Task<ObservableCollection<IArticleEntry>> LoadFirstPage()
         {
             var atomFeedProcessor = new AtomFeedProcessor();
 
@@ -43,7 +44,7 @@ namespace ArxivExpress.Features.SearchArticles
         public async Task<ObservableCollection<IArticleEntry>> LoadNextPage()
         {
             SearchQuery.PageNumber++;
-            return await LoadArticles();
+            return await LoadFirstPage();
         }
 
         public async Task<ObservableCollection<IArticleEntry>> LoadPrevPage()
@@ -52,7 +53,7 @@ namespace ArxivExpress.Features.SearchArticles
             {
                 SearchQuery.PageNumber--;
             }
-            return await LoadArticles();
+            return await LoadFirstPage();
         }
 
         public uint GetPageNumber()
