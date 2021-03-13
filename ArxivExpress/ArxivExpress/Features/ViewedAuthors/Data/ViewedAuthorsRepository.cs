@@ -1,17 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Xml.Linq;
+using ArxivExpress.Features.Data;
+using ArxivExpress.Features.ViewedAuthors.Model;
 
 namespace ArxivExpress.Features.ViewedAuthors.Data
 {
-    public class ViewedAuthorsRepository
+    public class ViewedAuthorsRepository : IListRepository<Author>
     {
         private static ViewedAuthorsRepository _instance;
 
+        protected List<string> _authors;
+        public List<string> Articles => _authors;
+
         private ViewedAuthorsRepository()
         {
+            _authors = LoadAuthors();
         }
 
         public static ViewedAuthorsRepository GetInstance()
@@ -82,6 +90,63 @@ namespace ArxivExpress.Features.ViewedAuthors.Data
 
             xml.Add(new XElement(GetRootElementName(), authorElements));
             xml.Save(filePath);
+        }
+
+        public async Task<ObservableCollection<Author>> LoadFirstPage()
+        {
+            var task = new Task<ObservableCollection<Author>>(
+                () =>
+                {
+                    var result = new ObservableCollection<Author>();
+                    var start = GetPageNumber() * GetResultsPerPage();
+                    var count = IsLastPage() ?
+                        _authors.Count - start : GetResultsPerPage();
+
+                    foreach (var author in _authors.GetRange((int)start, (int)count))
+                    {
+                        result.Add(new Author() { Name = author });
+                    }
+                    return result;
+                });
+
+            task.Start();
+            return await task;
+        }
+
+        public Task<ObservableCollection<Author>> LoadNextPage()
+        {
+            if ((GetPageNumber() + 1) * GetResultsPerPage() < _authors.Count)
+            {
+                _pageNumber++;
+            }
+            return LoadFirstPage();
+        }
+
+        public Task<ObservableCollection<Author>> LoadPrevPage()
+        {
+            if (_pageNumber > 0)
+            {
+                _pageNumber--;
+            }
+            return LoadFirstPage();
+        }
+
+        private uint _pageNumber = 0;
+
+        public uint GetPageNumber()
+        {
+            return _pageNumber;
+        }
+
+        public uint GetResultsPerPage()
+        {
+            return 25;
+        }
+
+        public bool IsLastPage()
+        {
+            var start = GetPageNumber() * GetResultsPerPage();
+            return GetResultsPerPage() >= _authors.Count - start;
         }
     }
 }
