@@ -35,7 +35,7 @@ namespace ArxivExpress.Features.SearchArticles
                 await Navigation.PushAsync(new ArticleInfo.ArticleInfo(articleEntry));
             }
 
-            //Deselect Item
+            // Deselect Item
             ((ListView)sender).SelectedItem = null;
         }
 
