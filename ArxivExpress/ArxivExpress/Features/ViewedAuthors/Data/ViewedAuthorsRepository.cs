@@ -14,8 +14,8 @@ namespace ArxivExpress.Features.ViewedAuthors.Data
     {
         private static ViewedAuthorsRepository _instance;
 
-        protected List<string> _authors;
-        public List<string> Articles => _authors;
+        protected List<Author> _authors;
+        public List<Author> Articles => _authors;
 
         private ViewedAuthorsRepository()
         {
@@ -53,7 +53,7 @@ namespace ArxivExpress.Features.ViewedAuthors.Data
                 Environment.SpecialFolder.LocalApplicationData), GetFileName());
         }
 
-        public List<string> LoadAuthors()
+        private List<Author> LoadAuthors()
         {
             var filePath = GetFilePath();
 
@@ -64,26 +64,29 @@ namespace ArxivExpress.Features.ViewedAuthors.Data
                     from searchQuery
                     in xml.Root.Descendants(GetElementName())
                     where searchQuery.Attribute("Name") != null
-                    select searchQuery.Attribute("Name").Value 
+                    select new Author
+                    {
+                        Name = searchQuery.Attribute("Name").Value
+                    }
                 ).ToList();
 
                 return list;
             }
 
-            return new List<string>();
+            return new List<Author>();
         }
 
-        public void SaveAuthors(List<string> authors)
+        private void SaveAuthors()
         {
             var filePath = GetFilePath();
 
             var xml = new XDocument();
-            var authorElements = new XElement[authors.Count];
+            var authorElements = new XElement[_authors.Count];
 
-            for (var i = 0; i < authors.Count; i++)
+            for (var i = 0; i < _authors.Count; i++)
             {
                 var attributes = new object[1];
-                attributes[0] = new XAttribute("Name", authors[i]);
+                attributes[0] = new XAttribute("Name", _authors[i]);
 
                 authorElements[i] = new XElement(GetElementName(), attributes);
             }
@@ -104,7 +107,7 @@ namespace ArxivExpress.Features.ViewedAuthors.Data
 
                     foreach (var author in _authors.GetRange((int)start, (int)count))
                     {
-                        result.Add(new Author() { Name = author });
+                        result.Add(author);
                     }
                     return result;
                 });
@@ -147,6 +150,15 @@ namespace ArxivExpress.Features.ViewedAuthors.Data
         {
             var start = GetPageNumber() * GetResultsPerPage();
             return GetResultsPerPage() >= _authors.Count - start;
+        }
+
+        public void AddArticle(Author author)
+        {
+            if (!_authors.Exists(item => item.Name == author.Name))
+            {
+                _authors.Insert(0, author);
+                SaveAuthors();
+            }
         }
     }
 }
