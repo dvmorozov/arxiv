@@ -1,14 +1,19 @@
 ﻿using ArxivExpress.Features.LikedArticles;
+using ArxivExpress.Features.ViewedAuthors.Data;
+using ArxivExpress.Features.ViewedAuthors.Model;
 
-namespace ArxivExpress.Features.RecentlyViewedArticles
+namespace ArxivExpress.Features.RecentlyViewedArticles.Data
 {
     public class ViewedArticlesRepository : LikedArticlesRepository
     {
         private static ViewedArticlesRepository _instance;
         private uint _maxArticleNumber = 1000;
 
+        private ViewedAuthorsRepository _viewedAuthorsRepository;
+
         protected ViewedArticlesRepository() : base()
         {
+            _viewedAuthorsRepository = ViewedAuthorsRepository.GetInstance();
         }
 
         protected override string FileName => "viewed_articles.xml";
@@ -44,6 +49,15 @@ namespace ArxivExpress.Features.RecentlyViewedArticles
             }
         }
 
+        private void AddAuthors(Article article)
+        {
+            foreach (var autor in article.Contributors)
+            {
+                _viewedAuthorsRepository.AddAuthor(
+                    new Author() { Name = autor.Name });
+            }
+        }
+
         public override void AddArticle(Article article)
         {
             if (!_articles.Exists(item => item.Id == article.Id))
@@ -51,6 +65,8 @@ namespace ArxivExpress.Features.RecentlyViewedArticles
                 _articles.Insert(0, article);
                 LimitArticleNumber();
                 SaveArtcles();
+
+                AddAuthors(article);
             }
             else
                 MoveArticleToTop(article);

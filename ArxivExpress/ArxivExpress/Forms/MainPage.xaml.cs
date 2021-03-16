@@ -1,5 +1,5 @@
 ﻿using ArxivExpress.Features.LikedArticles;
-using ArxivExpress.Features.RecentlyViewedArticles;
+using ArxivExpress.Features.RecentlyViewedArticles.Data;
 using ArxivExpress.Features.SearchArticles;
 using ArxivExpress.Features.ViewedAuthors.Forms;
 using Xamarin.Forms;

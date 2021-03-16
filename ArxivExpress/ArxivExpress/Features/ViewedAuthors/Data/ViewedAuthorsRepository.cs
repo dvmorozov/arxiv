@@ -86,7 +86,7 @@ namespace ArxivExpress.Features.ViewedAuthors.Data
             for (var i = 0; i < _authors.Count; i++)
             {
                 var attributes = new object[1];
-                attributes[0] = new XAttribute("Name", _authors[i]);
+                attributes[0] = new XAttribute("Name", _authors[i].Name);
 
                 authorElements[i] = new XElement(GetElementName(), attributes);
             }
@@ -152,7 +152,7 @@ namespace ArxivExpress.Features.ViewedAuthors.Data
             return GetResultsPerPage() >= _authors.Count - start;
         }
 
-        public void AddArticle(Author author)
+        public void AddAuthor(Author author)
         {
             if (!_authors.Exists(item => item.Name == author.Name))
             {
