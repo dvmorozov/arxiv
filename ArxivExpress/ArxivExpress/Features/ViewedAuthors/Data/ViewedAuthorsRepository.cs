@@ -68,7 +68,7 @@ namespace ArxivExpress.Features.ViewedAuthors.Data
                     {
                         Name = searchQuery.Attribute("Name").Value
                     }
-                ).ToList();
+                ).OrderBy(author => author.Name).ToList();
 
                 return list;
             }
