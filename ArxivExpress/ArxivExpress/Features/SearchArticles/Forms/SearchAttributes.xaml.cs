@@ -139,7 +139,7 @@ namespace ArxivExpress.Features.SearchArticles
             if (sender == PickerItemType)
             {
                 var picker = (Picker)sender;
-                FieldPrefix item = (FieldPrefix)picker.ItemsSource[picker.SelectedIndex];
+                var item = (FieldPrefix)picker.ItemsSource[picker.SelectedIndex];
                 _searchQuery.Prefix = item.Prefix;
             }
             else if (sender == PickerResultsPerPage)

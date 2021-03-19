@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using ArxivExpress.Features.SearchArticles;
 using ArxivExpress.Features.ViewedAuthors.Data;
 using ArxivExpress.Features.ViewedAuthors.Model;
 using Xamarin.Forms;
@@ -31,7 +32,15 @@ namespace ArxivExpress.Features.ViewedAuthors.Forms
 
             if (e.Item is Author author)
             {
-                // Search items by author.
+                //await Navigation.PushAsync(new SearchAttributes());
+
+                // Search articles by author.
+                var _searchArticleRepository = SearchArticlesRepository.GetInstance();
+                _searchArticleRepository.SearchQuery =
+                    new SearchQuery(searchTerm : author.Name, prefix : "au");
+
+                var articleList = new ArticleList(_searchArticleRepository);
+                await Navigation.PushAsync(articleList);
             }
 
             // Deselect Item

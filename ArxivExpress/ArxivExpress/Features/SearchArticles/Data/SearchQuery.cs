@@ -19,15 +19,16 @@ namespace ArxivExpress.Features.SearchArticles
 
         public uint PageNumber;
 
-        public SearchQuery()
+        public SearchQuery(string searchTerm = "", string prefix = "ti")
         {
-            FillDefaultValues();
+            FillDefaultValues(searchTerm, prefix);
         }
 
-        private void FillDefaultValues()
+        private void FillDefaultValues(string searchTerm, string prefix)
         {
-            SearchTerm = "";
+            SearchTerm = searchTerm;
             ResultsPerPage = "25";
+            Prefix = prefix;
 
             SortByRelevance = false;
             SortByLastUpdatedDate = false;
