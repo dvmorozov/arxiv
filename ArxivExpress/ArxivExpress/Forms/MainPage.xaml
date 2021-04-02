@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ArxivExpress.MainPage">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="ArxivExpress"/>
+    </ContentPage.ToolbarItems>
+
     <StackLayout>
         <ScrollView>
             <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand">
