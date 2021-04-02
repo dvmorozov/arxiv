@@ -38,6 +38,8 @@ namespace ArxivExpress.Features.SearchArticles
                 result.Add(article);
             }
 
+            _isLastPage = result.Count < GetResultsPerPage();
+
             return result;
         }
 
@@ -66,9 +68,11 @@ namespace ArxivExpress.Features.SearchArticles
             return SearchQuery.GetResultsPerPage();
         }
 
+        private bool _isLastPage = false;
+
         public bool IsLastPage()
         {
-            return false;
+            return _isLastPage;
         }
     }
 }
