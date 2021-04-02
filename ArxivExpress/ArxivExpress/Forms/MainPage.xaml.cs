@@ -40,5 +40,10 @@ namespace ArxivExpress
         {
             await Navigation.PushAsync(new AuthorList());
         }
+
+        public async void Handle_ListsPressed(object sender, System.EventArgs e)
+        {
+            //await Navigation.PushAsync(new AuthorList());
+        }
     }
 }
