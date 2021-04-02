@@ -28,6 +28,17 @@
                                Style="{DynamicResource ListItemDetailTextStyle}"
                                LineBreakMode="WordWrap"/>
 
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
+                                     BindableLayout.ItemsSource="{Binding Contributors}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Text="{Binding Name}"
+                                            Style="{DynamicResource ListItemDetailTextStyle}"
+                                            LineBreakMode="WordWrap"/>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+
                         <StackLayout Orientation="Horizontal"
                                      HorizontalOptions="FillAndExpand">
                             <Label Text="Published:"
