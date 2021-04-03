@@ -45,5 +45,6 @@
     <Folder Include="Features\SelectedArticles\" />
     <Folder Include="Features\SelectedArticles\Data\" />
     <Folder Include="Features\SelectedArticles\Model\" />
+    <Folder Include="Features\SelectedArticles\Forms\" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 ﻿using ArxivExpress.Features.LikedArticles;
 using ArxivExpress.Features.RecentlyViewedArticles.Data;
 using ArxivExpress.Features.SearchArticles;
+using ArxivExpress.Features.SelectedArticles.Forms;
 using ArxivExpress.Features.ViewedAuthors.Forms;
 using Xamarin.Forms;
 
@@ -43,7 +44,7 @@ namespace ArxivExpress
 
         public async void Handle_ListsPressed(object sender, System.EventArgs e)
         {
-            //await Navigation.PushAsync(new AuthorList());
+            await Navigation.PushAsync(new SelectedArticlesLists());
         }
     }
 }
