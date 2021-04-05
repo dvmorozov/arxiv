@@ -13,6 +13,8 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
 
         public SelectedArticlesLists()
         {
+            _selectedArticlesListsRepository = SelectedArticlesListsRepository.GetInstance();
+
             InitializeComponent();
             LoadSelectedArticlesLists();
         }

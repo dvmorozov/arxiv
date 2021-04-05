@@ -3,6 +3,7 @@ using ArxivExpress.Features.LikedArticles;
 using ArxivExpress.Features.LikedArticles.Forms;
 using ArxivExpress.Features.RecentlyViewedArticles.Data;
 using ArxivExpress.Features.SearchArticles;
+using ArxivExpress.Features.SelectedArticles.Data;
 using ArxivExpress.Features.SelectedArticles.Forms;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -57,9 +58,14 @@ namespace ArxivExpress.Features.ArticleInfo
 
         private void CreateAddToArticleListButton(IArticleEntry articleEntry)
         {
-            StackLayoutArticleInfo.Children.Add(
-                new AddToArticleListButton(articleEntry)
-                );
+            var selectedArticlesListsRepository = SelectedArticlesListsRepository.GetInstance();
+
+            if (!selectedArticlesListsRepository.IsEmpty())
+            {
+                StackLayoutArticleInfo.Children.Add(
+                    new AddToArticleListButton(articleEntry)
+                    );
+            }
         }
 
         private void AddArticleToViewedList(IArticleEntry articleEntry)

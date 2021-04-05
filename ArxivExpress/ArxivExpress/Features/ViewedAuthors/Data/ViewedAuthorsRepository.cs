@@ -14,12 +14,11 @@ namespace ArxivExpress.Features.ViewedAuthors.Data
     {
         private static ViewedAuthorsRepository _instance;
 
-        protected List<Author> _authors;
-        public List<Author> Articles => _authors;
+        protected List<Author> _viewedAuthors;
 
         private ViewedAuthorsRepository()
         {
-            _authors = LoadAuthors();
+            _viewedAuthors = LoadAuthors();
         }
 
         public static ViewedAuthorsRepository GetInstance()
@@ -81,12 +80,12 @@ namespace ArxivExpress.Features.ViewedAuthors.Data
             var filePath = GetFilePath();
 
             var xml = new XDocument();
-            var authorElements = new XElement[_authors.Count];
+            var authorElements = new XElement[_viewedAuthors.Count];
 
-            for (var i = 0; i < _authors.Count; i++)
+            for (var i = 0; i < _viewedAuthors.Count; i++)
             {
                 var attributes = new object[1];
-                attributes[0] = new XAttribute("Name", _authors[i].Name);
+                attributes[0] = new XAttribute("Name", _viewedAuthors[i].Name);
 
                 authorElements[i] = new XElement(GetElementName(), attributes);
             }
@@ -103,9 +102,9 @@ namespace ArxivExpress.Features.ViewedAuthors.Data
                     var result = new ObservableCollection<Author>();
                     var start = GetPageNumber() * GetResultsPerPage();
                     var count = IsLastPage() ?
-                        _authors.Count - start : GetResultsPerPage();
+                        _viewedAuthors.Count - start : GetResultsPerPage();
 
-                    foreach (var author in _authors.GetRange((int)start, (int)count))
+                    foreach (var author in _viewedAuthors.GetRange((int)start, (int)count))
                     {
                         result.Add(author);
                     }
@@ -118,7 +117,7 @@ namespace ArxivExpress.Features.ViewedAuthors.Data
 
         public Task<ObservableCollection<Author>> LoadNextPage()
         {
-            if ((GetPageNumber() + 1) * GetResultsPerPage() < _authors.Count)
+            if ((GetPageNumber() + 1) * GetResultsPerPage() < _viewedAuthors.Count)
             {
                 _pageNumber++;
             }
@@ -149,16 +148,21 @@ namespace ArxivExpress.Features.ViewedAuthors.Data
         public bool IsLastPage()
         {
             var start = GetPageNumber() * GetResultsPerPage();
-            return GetResultsPerPage() >= _authors.Count - start;
+            return GetResultsPerPage() >= _viewedAuthors.Count - start;
         }
 
         public void AddAuthor(Author author)
         {
-            if (!_authors.Exists(item => item.Name == author.Name))
+            if (!_viewedAuthors.Exists(item => item.Name == author.Name))
             {
-                _authors.Insert(0, author);
+                _viewedAuthors.Insert(0, author);
                 SaveAuthors();
             }
+        }
+
+        public bool IsEmpty()
+        {
+            return _viewedAuthors.Count == 0;
         }
     }
 }

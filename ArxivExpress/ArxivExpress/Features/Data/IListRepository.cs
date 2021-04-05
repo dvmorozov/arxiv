@@ -11,5 +11,6 @@ namespace ArxivExpress.Features.Data
         uint GetPageNumber();
         uint GetResultsPerPage();
         bool IsLastPage();
+        bool IsEmpty();
     }
 }

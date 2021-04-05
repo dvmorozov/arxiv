@@ -34,18 +34,18 @@ namespace ArxivExpress.Features.RecentlyViewedArticles.Data
 
         private void MoveArticleToTop(Article article)
         {
-            if (_articles.Exists(item => item.Id == article.Id))
+            if (_likedArticles.Exists(item => item.Id == article.Id))
             {
-                _articles.RemoveAll(item => item.Id == article.Id);
-                _articles.Insert(0, article);
+                _likedArticles.RemoveAll(item => item.Id == article.Id);
+                _likedArticles.Insert(0, article);
             }
         }
 
         private void LimitArticleNumber()
         {
-            while (_articles.Count > _maxArticleNumber)
+            while (_likedArticles.Count > _maxArticleNumber)
             {
-                _articles.RemoveAt(_articles.Count - 1);
+                _likedArticles.RemoveAt(_likedArticles.Count - 1);
             }
         }
 
@@ -60,9 +60,9 @@ namespace ArxivExpress.Features.RecentlyViewedArticles.Data
 
         public override void AddArticle(Article article)
         {
-            if (!_articles.Exists(item => item.Id == article.Id))
+            if (!_likedArticles.Exists(item => item.Id == article.Id))
             {
-                _articles.Insert(0, article);
+                _likedArticles.Insert(0, article);
                 LimitArticleNumber();
                 SaveArtcles();
 

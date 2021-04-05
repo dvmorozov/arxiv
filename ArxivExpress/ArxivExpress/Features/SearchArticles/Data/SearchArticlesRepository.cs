@@ -39,6 +39,7 @@ namespace ArxivExpress.Features.SearchArticles
             }
 
             _isLastPage = result.Count < GetResultsPerPage();
+            _isEmpty = result.Count == 0 && GetPageNumber() == 0;
 
             return result;
         }
@@ -73,6 +74,13 @@ namespace ArxivExpress.Features.SearchArticles
         public bool IsLastPage()
         {
             return _isLastPage;
+        }
+
+        private bool _isEmpty = false;
+
+        public bool IsEmpty()
+        {
+            return _isEmpty;
         }
     }
 }

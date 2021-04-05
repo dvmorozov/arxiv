@@ -14,14 +14,13 @@ namespace ArxivExpress.Features.LikedArticles
     {
         private static LikedArticlesRepository _instance;
 
-        protected List<Article> _articles;
-        public List<Article> Articles => _articles;
+        protected List<Article> _likedArticles;
 
         protected LikedArticlesRepository()
         {
             var filePath = GetFilePath();
 
-            _articles = LoadArticlesFromFile(filePath);
+            _likedArticles = LoadArticlesFromFile(filePath);
         }
 
         protected virtual string FileName => "liked_articles.xml";
@@ -101,19 +100,19 @@ namespace ArxivExpress.Features.LikedArticles
             var filePath = GetFilePath();
 
             var xml = new XDocument();
-            var articleElements = new XElement[_articles.Count];
+            var articleElements = new XElement[_likedArticles.Count];
 
-            for (var i = 0; i < _articles.Count; i++)
+            for (var i = 0; i < _likedArticles.Count; i++)
             {
                 var objects = new object[8];
-                objects[0] = new XAttribute("Id", _articles[i].Id);
-                objects[1] = new XAttribute("LastUpdated", _articles[i].LastUpdated);
-                objects[2] = new XAttribute("Published", _articles[i].Published);
-                objects[3] = new XAttribute("Title", _articles[i].Title);
-                objects[4] = new XAttribute("Categories", string.Join(";", _articles[i].Categories));
-                objects[5] = new XAttribute("PdfUrl", _articles[i].PdfUrl);
-                objects[6] = new XAttribute("Summary", _articles[i].Summary);
-                objects[7] = GetContributors(_articles[i]);
+                objects[0] = new XAttribute("Id", _likedArticles[i].Id);
+                objects[1] = new XAttribute("LastUpdated", _likedArticles[i].LastUpdated);
+                objects[2] = new XAttribute("Published", _likedArticles[i].Published);
+                objects[3] = new XAttribute("Title", _likedArticles[i].Title);
+                objects[4] = new XAttribute("Categories", string.Join(";", _likedArticles[i].Categories));
+                objects[5] = new XAttribute("PdfUrl", _likedArticles[i].PdfUrl);
+                objects[6] = new XAttribute("Summary", _likedArticles[i].Summary);
+                objects[7] = GetContributors(_likedArticles[i]);
 
                 articleElements[i] = new XElement(ArticleElementName, objects);
             }
@@ -134,22 +133,22 @@ namespace ArxivExpress.Features.LikedArticles
 
         public virtual void AddArticle(Article article)
         {
-            _articles.Add(article);
+            _likedArticles.Add(article);
             SaveArtcles();
         }
 
         public void DeleteArticle(string articleId)
         {
-            if (_articles.Exists(item => item.Id == articleId))
+            if (_likedArticles.Exists(item => item.Id == articleId))
             {
-                _articles.RemoveAll(item => item.Id == articleId);
+                _likedArticles.RemoveAll(item => item.Id == articleId);
                 SaveArtcles();
             }
         }
 
         public bool HasArticle(string articleId)
         {
-            return _articles.Exists(item => item.Id == articleId);
+            return _likedArticles.Exists(item => item.Id == articleId);
         }
 
         public async Task<ObservableCollection<IArticleEntry>> LoadFirstPage()
@@ -160,9 +159,9 @@ namespace ArxivExpress.Features.LikedArticles
                     var result = new ObservableCollection<IArticleEntry>();
                     var start = GetPageNumber() * GetResultsPerPage();
                     var count = IsLastPage() ?
-                        _articles.Count - start : GetResultsPerPage();
+                        _likedArticles.Count - start : GetResultsPerPage();
 
-                    foreach (var article in _articles.GetRange((int)start, (int)count))
+                    foreach (var article in _likedArticles.GetRange((int)start, (int)count))
                     {
                         result.Add(article);
                     }
@@ -175,7 +174,7 @@ namespace ArxivExpress.Features.LikedArticles
 
         public Task<ObservableCollection<IArticleEntry>> LoadNextPage()
         {
-            if ((GetPageNumber() + 1) * GetResultsPerPage() < _articles.Count)
+            if ((GetPageNumber() + 1) * GetResultsPerPage() < _likedArticles.Count)
             {
                 _pageNumber++;
             }
@@ -206,7 +205,12 @@ namespace ArxivExpress.Features.LikedArticles
         public bool IsLastPage()
         {
             var start = GetPageNumber() * GetResultsPerPage();
-            return GetResultsPerPage() >= _articles.Count - start;
+            return GetResultsPerPage() >= _likedArticles.Count - start;
+        }
+
+        public bool IsEmpty()
+        {
+            return _likedArticles.Count == 0;
         }
     }
 }

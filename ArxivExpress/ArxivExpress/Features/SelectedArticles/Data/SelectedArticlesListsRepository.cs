@@ -160,5 +160,10 @@ namespace ArxivExpress.Features.SelectedArticles.Data
                 SaveSelectedArticlesLists();
             }
         }
+
+        public bool IsEmpty()
+        {
+            return _selectedArticlesLists.Count == 0;
+        }
     }
 }
