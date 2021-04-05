@@ -55,6 +55,13 @@ namespace ArxivExpress.Features.ArticleInfo
                 );
         }
 
+        private void CreateAddToArticleListButton(IArticleEntry articleEntry)
+        {
+            StackLayoutArticleInfo.Children.Add(
+                new AddToArticleListButton(articleEntry)
+                );
+        }
+
         private void AddArticleToViewedList(IArticleEntry articleEntry)
         {
             var viewedArticleRepository = ViewedArticlesRepository.GetInstance();
@@ -71,6 +78,7 @@ namespace ArxivExpress.Features.ArticleInfo
             CreatePdfUrl();
             CreateAddLikedArticleButton(articleEntry);
             CreateNewArticleListButton();
+            CreateAddToArticleListButton(articleEntry);
 
             AddArticleToViewedList(articleEntry);
         }
