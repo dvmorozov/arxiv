@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+
 namespace ArxivExpress.Features.SelectedArticles.Forms
 {
     public class NewArticleListButton : StyledButton
@@ -14,13 +16,13 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
         {
             if (sender == this)
             {
-                CreateArticleList();
+                CreateArticleListAsync();
             }
         }
 
-        private void CreateArticleList()
+        private async Task CreateArticleListAsync()
         {
-
+            await Navigation.PushAsync(new NewList());
         }
     }
 }

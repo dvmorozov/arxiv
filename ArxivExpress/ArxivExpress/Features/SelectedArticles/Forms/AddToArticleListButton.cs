@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ArxivExpress.Features.SearchArticles;
 
 namespace ArxivExpress.Features.SelectedArticles.Forms
@@ -16,13 +17,13 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
         {
             if (sender == this)
             {
-                AddArticleToList();
+                AddArticleToListAsync();
             }
         }
 
-        private void AddArticleToList()
+        private async Task AddArticleToListAsync()
         {
-
+            await Navigation.PushAsync(new AddToList());
         }
     }
 }
