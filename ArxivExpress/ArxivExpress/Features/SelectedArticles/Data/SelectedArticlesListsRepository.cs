@@ -152,7 +152,7 @@ namespace ArxivExpress.Features.SelectedArticles.Data
             return GetResultsPerPage() >= _selectedArticlesLists.Count - start;
         }
 
-        public void AddAuthor(SelectedArticlesList list)
+        public void AddList(SelectedArticlesList list)
         {
             if (!_selectedArticlesLists.Exists(item => item.Name == list.Name))
             {
