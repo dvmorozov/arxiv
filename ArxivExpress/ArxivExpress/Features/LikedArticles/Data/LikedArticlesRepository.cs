@@ -100,11 +100,8 @@ namespace ArxivExpress.Features.LikedArticles
             return new XElement(_contributorListElementName, contributorElements);
         }
 
-        protected void SaveArtcles()
+        private XElement GetArticlesRoot()
         {
-            var filePath = GetFilePath();
-
-            var xml = new XDocument();
             var articleElements = new XElement[_likedArticles.Count];
 
             for (var i = 0; i < _likedArticles.Count; i++)
@@ -122,8 +119,14 @@ namespace ArxivExpress.Features.LikedArticles
                 articleElements[i] = new XElement(ArticleElementName, objects);
             }
 
-            xml.Add(new XElement(ArticleListElementName, articleElements));
-            xml.Save(filePath);
+            return new XElement(ArticleListElementName, articleElements);
+        }
+
+        protected void SaveArtcles()
+        {
+            var xml = new XDocument();
+            xml.Add(GetArticlesRoot());
+            xml.Save(GetFilePath());
         }
 
         public static LikedArticlesRepository GetInstance()
