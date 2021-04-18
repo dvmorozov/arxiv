@@ -39,15 +39,11 @@ namespace ArxivExpress.Features.LikedArticles
                 Environment.SpecialFolder.LocalApplicationData), FileName);
         }
 
-        private List<Article> LoadArticlesFromFile(string filePath)
+        private List<Article> LoadArticlesFromRoot(XElement root)
         {
-            if (File.Exists(filePath))
-            {
-                var xml = XDocument.Load(filePath);
-
-                return (
+            return (
                     from article
-                    in xml.Root.Descendants(ArticleElementName)
+                    in root.Descendants(ArticleElementName)
                     select new Article
                     {
                         Id = article.Attribute("Id").Value,
@@ -69,6 +65,15 @@ namespace ArxivExpress.Features.LikedArticles
                         ).ToList()
                     }
                 ).ToList();
+        }
+
+        private List<Article> LoadArticlesFromFile(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                var xml = XDocument.Load(filePath);
+
+                return LoadArticlesFromRoot(xml.Root);
             }
 
             return new List<Article>();
