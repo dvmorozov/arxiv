@@ -1,0 +1,188 @@
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+using ArxivExpress.Features.LikedArticles;
+using ArxivExpress.Features.SearchArticles;
+
+namespace ArxivExpress.Features.Data
+{
+    public abstract class ArticlesRepository : IListRepository<IArticleEntry>
+    {
+        protected List<Article> _articles;
+
+        public ArticlesRepository()
+        {
+        }
+
+        protected abstract string ArticleElementName
+        {
+            get;
+        }
+
+        protected abstract string ArticleListElementName
+        {
+            get;
+        }
+
+        private string _contributorListElementName => "ContributorList";
+
+        private string _contributorElementName => "Contributor";
+
+        protected List<Article> LoadArticlesFromRoot(XElement root)
+        {
+            return (
+                    from article
+                    in root.Descendants(ArticleElementName)
+                    select new Article
+                    {
+                        Id = article.Attribute("Id").Value,
+
+                        LastUpdated = article.Attribute("LastUpdated")?.Value,
+                        Published = article.Attribute("Published")?.Value,
+                        Title = article.Attribute("Title")?.Value,
+                        Categories = article.Attribute("Categories")?.Value.Split(';').ToList(),
+                        PdfUrl = article.Attribute("PdfUrl")?.Value,
+                        Summary = article.Attribute("Summary")?.Value,
+
+                        Contributors = (
+                            from contributor
+                            in article.Descendants(_contributorListElementName)
+                            select new Contributor(
+                                contributor.Attribute("Name")?.Value,
+                                contributor.Attribute("Email")?.Value
+                            )
+                        ).ToList()
+                    }
+                ).ToList();
+        }
+
+        private XElement GetContributors(Article article)
+        {
+            var contributorElements = new XElement[0];
+
+            if (article.Contributors != null)
+            {
+                contributorElements = new XElement[article.Contributors.Count];
+
+                for (var i = 0; i < article.Contributors.Count; i++)
+                {
+                    var objects = new object[2];
+                    objects[0] = new XAttribute("Name", article.Contributors[i].Name);
+                    objects[1] = new XAttribute("Email", article.Contributors[i].Email);
+
+                    contributorElements[i] = new XElement(_contributorElementName, objects);
+                }
+            }
+
+            return new XElement(_contributorListElementName, contributorElements);
+        }
+
+        protected XElement GetArticlesRoot()
+        {
+            var articleElements = new XElement[_articles.Count];
+
+            for (var i = 0; i < _articles.Count; i++)
+            {
+                var objects = new object[8];
+                objects[0] = new XAttribute("Id", _articles[i].Id);
+                objects[1] = new XAttribute("LastUpdated", _articles[i].LastUpdated);
+                objects[2] = new XAttribute("Published", _articles[i].Published);
+                objects[3] = new XAttribute("Title", _articles[i].Title);
+                objects[4] = new XAttribute("Categories", string.Join(";", _articles[i].Categories));
+                objects[5] = new XAttribute("PdfUrl", _articles[i].PdfUrl);
+                objects[6] = new XAttribute("Summary", _articles[i].Summary);
+                objects[7] = GetContributors(_articles[i]);
+
+                articleElements[i] = new XElement(ArticleElementName, objects);
+            }
+
+            return new XElement(ArticleListElementName, articleElements);
+        }
+
+        public async Task<ObservableCollection<IArticleEntry>> LoadFirstPage()
+        {
+            var task = new Task<ObservableCollection<IArticleEntry>>(
+                () =>
+                {
+                    var result = new ObservableCollection<IArticleEntry>();
+                    var start = GetPageNumber() * GetResultsPerPage();
+                    var count = IsLastPage() ?
+                        _articles.Count - start : GetResultsPerPage();
+
+                    foreach (var article in _articles.GetRange((int)start, (int)count))
+                    {
+                        result.Add(article);
+                    }
+                    return result;
+                });
+
+            task.Start();
+            return await task;
+        }
+
+        public Task<ObservableCollection<IArticleEntry>> LoadNextPage()
+        {
+            if ((GetPageNumber() + 1) * GetResultsPerPage() < _articles.Count)
+            {
+                _pageNumber++;
+            }
+            return LoadFirstPage();
+        }
+
+        public Task<ObservableCollection<IArticleEntry>> LoadPrevPage()
+        {
+            if (_pageNumber > 0)
+            {
+                _pageNumber--;
+            }
+            return LoadFirstPage();
+        }
+
+        private uint _pageNumber = 0;
+
+        public uint GetPageNumber()
+        {
+            return _pageNumber;
+        }
+
+        public uint GetResultsPerPage()
+        {
+            return 25;
+        }
+
+        public bool IsLastPage()
+        {
+            var start = GetPageNumber() * GetResultsPerPage();
+            return GetResultsPerPage() >= _articles.Count - start;
+        }
+
+        public bool IsEmpty()
+        {
+            return _articles.Count == 0;
+        }
+
+        protected abstract void SaveArticles();
+
+        public virtual void AddArticle(Article article)
+        {
+            _articles.Add(article);
+            SaveArticles();
+        }
+
+        public void DeleteArticle(string articleId)
+        {
+            if (_articles.Exists(item => item.Id == articleId))
+            {
+                _articles.RemoveAll(item => item.Id == articleId);
+                SaveArticles();
+            }
+        }
+
+        public bool HasArticle(string articleId)
+        {
+            return _articles.Exists(item => item.Id == articleId);
+        }
+    }
+}

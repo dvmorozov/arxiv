@@ -48,4 +48,7 @@
     <Folder Include="Features\SelectedArticles\Forms\" />
     <Folder Include="Features\LikedArticles\Forms\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Features\SelectedArticles\Data\SelectedArticlesRepository.cs" />
+  </ItemGroup>
 </Project>

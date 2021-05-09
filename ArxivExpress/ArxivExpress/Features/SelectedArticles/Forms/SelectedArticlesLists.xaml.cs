@@ -24,6 +24,12 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             Items = await _selectedArticlesListsRepository.LoadFirstPage();
         }
 
+        private void OpenArticleList(SelectedArticlesList list)
+        {
+            //await Navigation.PushAsync(new SearchAttributes());
+
+        }
+
         private async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e.Item == null)
@@ -31,9 +37,7 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
 
             if (e.Item is SelectedArticlesList list)
             {
-                //await Navigation.PushAsync(new SearchAttributes());
-
-                //  Open article list.
+                OpenArticleList(list);
             }
 
             // Deselect Item
