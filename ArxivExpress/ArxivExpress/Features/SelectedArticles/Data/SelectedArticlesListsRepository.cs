@@ -10,6 +10,9 @@ using ArxivExpress.Features.SelectedArticles.Model;
 
 namespace ArxivExpress.Features.SelectedArticles.Data
 {
+    /// <summary>
+    /// Represents list of selected article lists.
+    /// </summary>
     public class SelectedArticlesListsRepository : IListRepository<SelectedArticlesList>
     {
         private static SelectedArticlesListsRepository _instance;
@@ -51,6 +54,26 @@ namespace ArxivExpress.Features.SelectedArticles.Data
         {
             return Path.Combine(Environment.GetFolderPath(
                 Environment.SpecialFolder.LocalApplicationData), GetFileName());
+        }
+
+        public XElement GetArticleListRootNode(string articleListName)
+        {
+            var filePath = GetFilePath();
+
+            if (File.Exists(filePath))
+            {
+                var xml = XDocument.Load(filePath);
+                var rootElement = (
+                    from searchQuery
+                    in xml.Root.Descendants(GetElementName())
+                    where searchQuery.Attribute("Name").Value == articleListName
+                    select searchQuery
+                ).FirstOrDefault();
+
+                return rootElement;
+            }
+
+            return new XElement("");
         }
 
         private List<SelectedArticlesList> LoadSelectedArticlesLists()

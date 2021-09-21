@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using ArxivExpress.Features.SearchArticles;
 using ArxivExpress.Features.SelectedArticles.Data;
 using ArxivExpress.Features.SelectedArticles.Model;
 using Xamarin.Forms;
@@ -24,10 +25,12 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             Items = await _selectedArticlesListsRepository.LoadFirstPage();
         }
 
-        private void OpenArticleList(SelectedArticlesList list)
+        private async void OpenArticleList(SelectedArticlesList list)
         {
-            //await Navigation.PushAsync(new SearchAttributes());
-
+            var rootNode = _selectedArticlesListsRepository.GetArticleListRootNode(list.Name);
+            var selectedArticlesListRepository = new SelectedArticlesListRepository(rootNode);
+            var articleList = new ArticleList(selectedArticlesListRepository);
+            await Navigation.PushAsync(articleList);
         }
 
         private async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)

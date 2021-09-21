@@ -30,6 +30,11 @@ namespace ArxivExpress.Features.Data
 
         private string _contributorElementName => "Contributor";
 
+        /// <summary>
+        /// Loads article list from XML element.
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns>Article list</returns>
         protected List<Article> LoadArticlesFromRoot(XElement root)
         {
             return (
@@ -79,6 +84,10 @@ namespace ArxivExpress.Features.Data
             return new XElement(_contributorListElementName, contributorElements);
         }
 
+        /// <summary>
+        /// Returns article list as XML element.
+        /// </summary>
+        /// <returns>XML element</returns>
         protected XElement GetArticlesRoot()
         {
             var articleElements = new XElement[_articles.Count];

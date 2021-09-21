@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using ArxivExpress.Features.SelectedArticles.Data;
 using ArxivExpress.Features.SelectedArticles.Model;
 using Xamarin.Forms;
