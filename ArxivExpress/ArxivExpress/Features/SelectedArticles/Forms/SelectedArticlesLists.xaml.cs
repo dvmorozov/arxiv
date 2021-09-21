@@ -10,11 +10,31 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
 {
     public partial class SelectedArticlesLists : ContentPage
     {
+        public enum ListMode
+        {
+            ViewList,
+            AddArticleToList
+        }
+
         private SelectedArticlesListsRepository _selectedArticlesListsRepository;
+        private ListMode _listMode;
+        private IArticleEntry _articleEntry;
+
+        public SelectedArticlesLists(IArticleEntry articleEntry)
+        {
+            _selectedArticlesListsRepository = SelectedArticlesListsRepository.GetInstance();
+            _articleEntry = articleEntry;
+            _listMode = ListMode.AddArticleToList;
+
+            InitializeComponent();
+            LoadSelectedArticlesLists();
+        }
+
 
         public SelectedArticlesLists()
         {
             _selectedArticlesListsRepository = SelectedArticlesListsRepository.GetInstance();
+            _listMode = ListMode.ViewList;
 
             InitializeComponent();
             LoadSelectedArticlesLists();
@@ -33,6 +53,10 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             await Navigation.PushAsync(articleList);
         }
 
+        private async void AddArticleToList(SelectedArticlesList list)
+        {
+        }
+
         private async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e.Item == null)
@@ -40,7 +64,19 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
 
             if (e.Item is SelectedArticlesList list)
             {
-                OpenArticleList(list);
+                switch (_listMode)
+                {
+                    case (ListMode.ViewList):
+                        OpenArticleList(list);
+                        break;
+
+                    case (ListMode.AddArticleToList):
+                        AddArticleToList(list);
+                        break;
+
+                    default:
+                        throw new Exception("Unsupported article list mode.");
+                }
             }
 
             // Deselect Item

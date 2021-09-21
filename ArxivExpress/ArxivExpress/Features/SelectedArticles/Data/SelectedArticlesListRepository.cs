@@ -4,6 +4,9 @@ using ArxivExpress.Features.Data;
 
 namespace ArxivExpress.Features.SelectedArticles.Data
 {
+    /// <summary>
+	/// Represents list of selected articles.
+	/// </summary>
     public class SelectedArticlesListRepository : ArticlesRepository
     {
         private readonly XElement _root;

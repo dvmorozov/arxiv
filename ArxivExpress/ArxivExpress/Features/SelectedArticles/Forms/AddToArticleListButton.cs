@@ -8,8 +8,9 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
     {
         public AddToArticleListButton(IArticleEntry articleEntry)
         {
-            Clicked += Handle_Pressed;
+            BindingContext = articleEntry;
 
+            Clicked += Handle_Pressed;
             Text = "Add to List";
         }
 
@@ -23,7 +24,10 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
 
         private async Task AddArticleToListAsync()
         {
-            await Navigation.PushAsync(new AddToList());
+            if (BindingContext is IArticleEntry articleEntry)
+            {
+                await Navigation.PushAsync(new SelectedArticlesLists(articleEntry));
+            }
         }
     }
 }
