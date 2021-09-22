@@ -9,11 +9,13 @@ namespace ArxivExpress.Features.SelectedArticles.Data
 	/// </summary>
     public class SelectedArticlesListRepository : ArticlesRepository
     {
-        private readonly XElement _root;
+        private XElement _root;
 
         public SelectedArticlesListRepository(XElement root)
         {
             _root = root;
+
+            LoadArticlesFromRoot(_root);
         }
 
         protected override string ArticleElementName => "SelectedArticle";
@@ -28,11 +30,7 @@ namespace ArxivExpress.Features.SelectedArticles.Data
         protected override void SaveArticles()
         {
             CleanRoot();
-
-            var articleListElement = GetArticlesRoot();
-            //foreach (var articleElement in articleListElement.)
-            //{
-            //}
+            _root.AddFirst(GetArticlesRoot());
         }
     }
 }

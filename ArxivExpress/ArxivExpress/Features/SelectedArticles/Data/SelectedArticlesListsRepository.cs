@@ -56,7 +56,7 @@ namespace ArxivExpress.Features.SelectedArticles.Data
                 Environment.SpecialFolder.LocalApplicationData), GetFileName());
         }
 
-        public XElement GetArticleListRootNode(string articleListName)
+        public XElement GetArticleListRoot(string articleListName)
         {
             var filePath = GetFilePath();
 
@@ -99,7 +99,7 @@ namespace ArxivExpress.Features.SelectedArticles.Data
             return new List<SelectedArticlesList>();
         }
 
-        private void SaveSelectedArticlesLists()
+        public void SaveSelectedArticlesLists()
         {
             var filePath = GetFilePath();
 

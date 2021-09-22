@@ -10,7 +10,7 @@ namespace ArxivExpress.Features.Data
 {
     public abstract class ArticlesRepository : IListRepository<IArticleEntry>
     {
-        protected List<Article> _articles;
+        protected List<IArticleEntry> _articles;
 
         public ArticlesRepository()
         {
@@ -35,7 +35,7 @@ namespace ArxivExpress.Features.Data
         /// </summary>
         /// <param name="root"></param>
         /// <returns>Article list</returns>
-        protected List<Article> LoadArticlesFromRoot(XElement root)
+        protected List<IArticleEntry> LoadArticlesFromRoot(XElement root)
         {
             return (
                     from article
@@ -59,11 +59,11 @@ namespace ArxivExpress.Features.Data
                                 contributor.Attribute("Email")?.Value
                             )
                         ).ToList()
-                    }
+                    } as IArticleEntry
                 ).ToList();
         }
 
-        private XElement GetContributors(Article article)
+        private XElement GetContributors(IArticleEntry article)
         {
             var contributorElements = new XElement[0];
 
@@ -174,7 +174,7 @@ namespace ArxivExpress.Features.Data
 
         protected abstract void SaveArticles();
 
-        public virtual void AddArticle(Article article)
+        public virtual void AddArticle(IArticleEntry article)
         {
             _articles.Add(article);
             SaveArticles();

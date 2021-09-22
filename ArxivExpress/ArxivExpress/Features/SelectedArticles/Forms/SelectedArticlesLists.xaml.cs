@@ -47,14 +47,22 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
 
         private async void OpenArticleList(SelectedArticlesList list)
         {
-            var rootNode = _selectedArticlesListsRepository.GetArticleListRootNode(list.Name);
+            var rootNode = _selectedArticlesListsRepository.GetArticleListRoot(list.Name);
             var selectedArticlesListRepository = new SelectedArticlesListRepository(rootNode);
             var articleList = new ArticleList(selectedArticlesListRepository);
+
             await Navigation.PushAsync(articleList);
         }
 
         private async void AddArticleToList(SelectedArticlesList list)
         {
+            var rootNode = _selectedArticlesListsRepository.GetArticleListRoot(list.Name);
+            var selectedArticlesListRepository = new SelectedArticlesListRepository(rootNode);
+            selectedArticlesListRepository.AddArticle(_articleEntry);
+            _selectedArticlesListsRepository.SaveSelectedArticlesLists();
+
+            //  Returns to previous page.
+            await Navigation.PopAsync();
         }
 
         private async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)

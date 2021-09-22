@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;
 using ArxivExpress.Features.Data;
+using ArxivExpress.Features.SearchArticles;
 
 namespace ArxivExpress.Features.LikedArticles
 {
@@ -29,7 +30,7 @@ namespace ArxivExpress.Features.LikedArticles
                 Environment.SpecialFolder.LocalApplicationData), FileName);
         }
 
-        private List<Article> LoadArticlesFromFile(string filePath)
+        private List<IArticleEntry> LoadArticlesFromFile(string filePath)
         {
             if (File.Exists(filePath))
             {
@@ -38,7 +39,7 @@ namespace ArxivExpress.Features.LikedArticles
                 return LoadArticlesFromRoot(xml.Root);
             }
 
-            return new List<Article>();
+            return new List<IArticleEntry>();
         }
 
         protected override void SaveArticles()

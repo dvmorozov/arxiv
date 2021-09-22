@@ -1,4 +1,5 @@
 ﻿using ArxivExpress.Features.LikedArticles;
+using ArxivExpress.Features.SearchArticles;
 using ArxivExpress.Features.ViewedAuthors.Data;
 using ArxivExpress.Features.ViewedAuthors.Model;
 
@@ -32,7 +33,7 @@ namespace ArxivExpress.Features.RecentlyViewedArticles.Data
             return _instance;
         }
 
-        private void MoveArticleToTop(Article article)
+        private void MoveArticleToTop(IArticleEntry article)
         {
             if (_articles.Exists(item => item.Id == article.Id))
             {
@@ -49,7 +50,7 @@ namespace ArxivExpress.Features.RecentlyViewedArticles.Data
             }
         }
 
-        private void AddAuthors(Article article)
+        private void AddAuthors(IArticleEntry article)
         {
             foreach (var autor in article.Contributors)
             {
@@ -58,7 +59,7 @@ namespace ArxivExpress.Features.RecentlyViewedArticles.Data
             }
         }
 
-        public override void AddArticle(Article article)
+        public override void AddArticle(IArticleEntry article)
         {
             if (!_articles.Exists(item => item.Id == article.Id))
             {
