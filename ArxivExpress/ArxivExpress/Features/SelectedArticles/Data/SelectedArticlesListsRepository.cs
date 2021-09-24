@@ -76,6 +76,27 @@ namespace ArxivExpress.Features.SelectedArticles.Data
             return new XElement("");
         }
 
+        /// <summary>
+        /// Replaces article list by new element.
+        /// </summary>
+        /// <param name="root"></param>
+        public void ReplaceArticleListElement(XElement root)
+        {
+            if (root.Attribute("Name") == null)
+                throw new Exception("Attribute \"Name\" is not assigned.");
+
+            var savedElements = (
+                from item
+                in _selectedArticlesLists
+                where item.Name != root.Attribute("Name").Value
+                select item
+            ).ToList();
+
+            _selectedArticlesLists = savedElements;
+            _selectedArticlesLists.Add(new SelectedArticlesList(root));
+            SaveSelectedArticlesLists();
+        }
+
         private List<SelectedArticlesList> LoadSelectedArticlesLists()
         {
             var filePath = GetFilePath();
@@ -87,10 +108,8 @@ namespace ArxivExpress.Features.SelectedArticles.Data
                     from searchQuery
                     in xml.Root.Descendants(GetElementName())
                     where searchQuery.Attribute("Name") != null
-                    select new SelectedArticlesList
-                    {
-                        Name = searchQuery.Attribute("Name").Value
-                    }
+                    select new SelectedArticlesList(GetElementName(),
+                        searchQuery.Attribute("Name").Value)
                 ).OrderBy(list => list.Name).ToList();
 
                 return list;
@@ -104,17 +123,12 @@ namespace ArxivExpress.Features.SelectedArticles.Data
             var filePath = GetFilePath();
 
             var xml = new XDocument();
-            var authorElements = new XElement[_selectedArticlesLists.Count];
+            var listElements = new XElement[_selectedArticlesLists.Count];
 
             for (var i = 0; i < _selectedArticlesLists.Count; i++)
-            {
-                var attributes = new object[1];
-                attributes[0] = new XAttribute("Name", _selectedArticlesLists[i].Name);
+                listElements[i] = _selectedArticlesLists[i].InnerElement;
 
-                authorElements[i] = new XElement(GetElementName(), attributes);
-            }
-
-            xml.Add(new XElement(GetRootElementName(), authorElements));
+            xml.Add(new XElement(GetRootElementName(), listElements));
             xml.Save(filePath);
         }
 
@@ -175,11 +189,11 @@ namespace ArxivExpress.Features.SelectedArticles.Data
             return GetResultsPerPage() >= _selectedArticlesLists.Count - start;
         }
 
-        public void AddList(SelectedArticlesList list)
+        public void AddList(string name)
         {
-            if (!_selectedArticlesLists.Exists(item => item.Name == list.Name))
+            if (!_selectedArticlesLists.Exists(item => item.Name == name))
             {
-                _selectedArticlesLists.Insert(0, list);
+                _selectedArticlesLists.Insert(0, new SelectedArticlesList(GetElementName(), name));
                 SaveSelectedArticlesLists();
             }
         }

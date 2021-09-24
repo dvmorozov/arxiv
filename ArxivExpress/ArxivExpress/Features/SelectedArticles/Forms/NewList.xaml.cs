@@ -33,7 +33,7 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
         private async void Handle_CreateNewListPressed(object sender, EventArgs e)
         {
             var selectedArticlesListsRepository = SelectedArticlesListsRepository.GetInstance();
-            selectedArticlesListsRepository.AddList(new SelectedArticlesList() { Name = _listName });
+            selectedArticlesListsRepository.AddList(_listName);
 
             await Navigation.PushAsync(new SelectedArticlesLists());
         }

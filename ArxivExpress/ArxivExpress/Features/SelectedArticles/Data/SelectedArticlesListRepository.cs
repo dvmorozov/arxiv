@@ -1,5 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using ArxivExpress.Features.Data;
 
 namespace ArxivExpress.Features.SelectedArticles.Data
@@ -11,26 +10,28 @@ namespace ArxivExpress.Features.SelectedArticles.Data
     {
         private XElement _root;
 
+        public XElement Root { get { return _root; } }
+
         public SelectedArticlesListRepository(XElement root)
         {
             _root = root;
-
-            LoadArticlesFromRoot(_root);
+            _articles = LoadArticlesFromRoot(_root);
         }
 
         protected override string ArticleElementName => "SelectedArticle";
 
         protected override string ArticleListElementName => "SelectedArticleList";
 
-        private void CleanRoot()
-        {
-            _root.RemoveAll();
-        }
-
         protected override void SaveArticles()
         {
-            CleanRoot();
-            _root.AddFirst(GetArticlesRoot());
+            var newRoot = GetArticlesRoot();
+
+            //  Saves root attributes.
+            _root.RemoveNodes();
+            foreach (var descendant in newRoot.Descendants())
+            {
+                _root.Add(descendant);
+            }
         }
     }
 }
