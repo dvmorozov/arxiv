@@ -176,8 +176,11 @@ namespace ArxivExpress.Features.Data
 
         public virtual void AddArticle(IArticleEntry article)
         {
-            _articles.Add(article);
-            SaveArticles();
+            if (!_articles.Exists(item => item.Id == article.Id))
+            {
+                _articles.Add(article);
+                SaveArticles();
+            }
         }
 
         public void DeleteArticle(string articleId)
