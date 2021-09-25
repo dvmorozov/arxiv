@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArxivExpress.Features.SelectedArticles.Forms.SelectedArticleList"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            x:Name="ToolbarItemHome"
+            Text=""
+            IconImageSource="AppIcon"
+            Clicked="Handle_ToolbarItemClicked"/>
+        <ToolbarItem
+            x:Name="ToolbarItemNextPage"
+            Text=""
+            Clicked="Handle_ToolbarItemClicked"/>
+    </ContentPage.ToolbarItems> 
+
+    <ListView x:Name="ArticleListView" ItemsSource="{Binding Items}"
+              ItemTapped="Handle_ItemTapped" CachingStrategy="RecycleElement"
+              HasUnevenRows="True" ios:ListView.SeparatorStyle="FullWidth">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout x:Name="ArticleStackLayout" VerticalOptions="FillAndExpand" Margin="10">
+                        <Label Text="{Binding Title}"
+                               Style="{DynamicResource ListItemTextStyle}"
+                               LineBreakMode="WordWrap"/>
+                        <Label Text="{Binding Summary}"
+                               Style="{DynamicResource ListItemDetailTextStyle}"
+                               LineBreakMode="WordWrap"/>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
+                                     BindableLayout.ItemsSource="{Binding Contributors}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Text="{Binding Name}"
+                                            Style="{DynamicResource ListItemDetailTextStyle}"
+                                            LineBreakMode="WordWrap"/>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="FillAndExpand">
+                            <Label Text="Published:"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   LineBreakMode="WordWrap"/>
+
+                            <Label Text="{Binding Published}"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   LineBreakMode="WordWrap"/>
+
+                            <Label Text="Last Updated:"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   LineBreakMode="WordWrap"/>
+
+                            <Label Text="{Binding LastUpdated}"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   LineBreakMode="WordWrap"/>
+                        </StackLayout>
+
+                        <Button Text="Remove from List"
+                                Clicked="OnRemoveArticleFromListPressed"
+                                CommandParameter="{Binding .}"
+                                BorderColor="#2196F3"
+                                BackgroundColor="#2196F3"
+                                BorderWidth="2"
+                                Margin="10"
+                                HeightRequest="50"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                WidthRequest="200"
+                                TextColor="White"
+                                />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>

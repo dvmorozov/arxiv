@@ -50,7 +50,8 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             var rootNode = _selectedArticlesListsRepository.GetArticleListRoot(list.Name);
 
             var selectedArticlesListRepository = new SelectedArticlesListRepository(rootNode);
-            var articleList = new ArticleList(selectedArticlesListRepository);
+            var articleList = new SelectedArticleList(
+                selectedArticlesListRepository, _selectedArticlesListsRepository);
 
             await Navigation.PushAsync(articleList);
         }
@@ -59,10 +60,10 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
         {
             var rootNode = _selectedArticlesListsRepository.GetArticleListRoot(list.Name);
 
-            var selectedArticlesListRepository = new SelectedArticlesListRepository(rootNode);
-            selectedArticlesListRepository.AddArticle(_articleEntry);
+            var articlesListRepository = new SelectedArticlesListRepository(rootNode);
+            articlesListRepository.AddArticle(_articleEntry);
 
-            _selectedArticlesListsRepository.ReplaceArticleListElement(selectedArticlesListRepository.Root);
+            _selectedArticlesListsRepository.ReplaceArticleListElement(articlesListRepository.Root);
             //  Returns to previous page.
             await Navigation.PopAsync();
         }

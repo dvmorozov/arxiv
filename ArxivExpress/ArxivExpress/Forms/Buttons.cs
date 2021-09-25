@@ -1,8 +1,4 @@
-﻿using System;
-using ArxivExpress.Features.LikedArticles;
-using ArxivExpress.Features.SearchArticles;
-using Xamarin.Essentials;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace ArxivExpress
 {
