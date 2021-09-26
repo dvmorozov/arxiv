@@ -90,7 +90,7 @@ namespace ArxivExpress.Features.SelectedArticles.Data
                 in _selectedArticlesLists
                 where item.Name != root.Attribute("Name").Value
                 select item
-            ).ToList();
+            ).OrderBy(list => list.Name).ToList();
 
             _selectedArticlesLists = savedElements;
             _selectedArticlesLists.Add(new SelectedArticlesList(root));
