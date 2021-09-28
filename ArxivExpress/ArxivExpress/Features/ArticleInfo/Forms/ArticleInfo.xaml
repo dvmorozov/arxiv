@@ -7,11 +7,12 @@
             <StackLayout VerticalOptions="StartAndExpand" Margin="10"
                          x:Name="StackLayoutArticleInfo">
                 <Label Text="{Binding ArticleEntry.Title}"
-                        Style="{DynamicResource ListItemTextStyle}"
-                        LineBreakMode="WordWrap"/>
+                       Style="{DynamicResource ListItemTextStyle}"
+                       FontAttributes="Bold"
+                       LineBreakMode="WordWrap"/>
                 <Label Text="{Binding ArticleEntry.Summary}"
-                        Style="{DynamicResource ListItemDetailTextStyle}"
-                        LineBreakMode="WordWrap"/>
+                       Style="{DynamicResource ListItemDetailTextStyle}"
+                       LineBreakMode="WordWrap"/>
 
                 <FlexLayout Direction="Row" AlignItems="Start"
                             JustifyContent="SpaceEvenly" Wrap="Wrap"

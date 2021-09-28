@@ -25,6 +25,7 @@
 
                         <Label Text="{Binding Title}"
                                Style="{DynamicResource ListItemTextStyle}"
+                               FontAttributes="Bold"
                                LineBreakMode="WordWrap"/>
 
                         <FlexLayout Direction="Row" AlignItems="Start"

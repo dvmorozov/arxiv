@@ -24,6 +24,7 @@
 
                         <Label Text="{Binding Title}"
                                Style="{DynamicResource ListItemTextStyle}"
+                               FontAttributes="Bold"
                                LineBreakMode="WordWrap"/>
 
                         <Label Text="{Binding Summary}" 
