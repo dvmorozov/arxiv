@@ -92,6 +92,14 @@ namespace ArxivExpress.Features.SearchArticles
             }
         }
 
+        public string PublishedWithLabel
+        {
+            get
+            {
+                return "Published: " + Published;
+            }
+        }
+
         public string LastUpdated
         {
             get
@@ -100,6 +108,14 @@ namespace ArxivExpress.Features.SearchArticles
                   _entry.LastUpdated != null ?
                   _entry.LastUpdated.Date.ToShortDateString() :
                   "unknown";
+            }
+        }
+
+        public string LastUpdatedWithLabel
+        {
+            get
+            {
+                return "Last updated: " + LastUpdated;
             }
         }
 
