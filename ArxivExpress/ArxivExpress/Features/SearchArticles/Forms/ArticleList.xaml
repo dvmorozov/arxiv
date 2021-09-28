@@ -31,8 +31,8 @@
                                Style="{DynamicResource ListItemDetailTextStyle}"
                                LineBreakMode="WordWrap"/>
 
-                        <FlexLayout Direction="Row" AlignItems="Start"
-                                    JustifyContent="SpaceEvenly" Wrap="Wrap"
+                        <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
+                                    JustifyContent="SpaceBetween" Wrap="Wrap"
                                     BindableLayout.ItemsSource="{Binding Contributors}">
 
                             <BindableLayout.ItemTemplate>
@@ -45,8 +45,8 @@
 
                         </FlexLayout>
 
-                        <FlexLayout Direction="Row" AlignItems="Start"
-                                    JustifyContent="SpaceEvenly" Wrap="Wrap">
+                        <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
+                                    JustifyContent="SpaceBetween" Wrap="Wrap">
 
                             <Label Text="{Binding PublishedWithLabel}"
                                     Style="{DynamicResource ListItemDetailTextStyle}"

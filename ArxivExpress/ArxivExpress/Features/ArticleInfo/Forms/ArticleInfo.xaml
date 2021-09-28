@@ -14,8 +14,8 @@
                        Style="{DynamicResource ListItemDetailTextStyle}"
                        LineBreakMode="WordWrap"/>
 
-                <FlexLayout Direction="Row" AlignItems="Start"
-                            JustifyContent="SpaceEvenly" Wrap="Wrap"
+                <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
+                            JustifyContent="SpaceBetween" Wrap="Wrap"
                             BindableLayout.ItemsSource="{Binding ArticleEntry.Contributors}">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
@@ -26,8 +26,8 @@
                     </BindableLayout.ItemTemplate>
                 </FlexLayout>
 
-                <FlexLayout Direction="Row" AlignItems="Start"
-                            JustifyContent="SpaceEvenly" Wrap="Wrap">
+                <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
+                            JustifyContent="SpaceBetween" Wrap="Wrap">
 
                     <Label Text="{Binding ArticleEntry.PublishedWithLabel}"
                             Style="{DynamicResource ListItemDetailTextStyle}"
@@ -38,8 +38,8 @@
                             LineBreakMode="WordWrap"/>
                 </FlexLayout>
 
-                <FlexLayout Direction="Row" AlignItems="Start"
-                            JustifyContent="SpaceEvenly" Wrap="Wrap"
+                <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
+                            JustifyContent="SpaceBetween" Wrap="Wrap"
                             BindableLayout.ItemsSource="{Binding ArticleEntry.Categories}">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
