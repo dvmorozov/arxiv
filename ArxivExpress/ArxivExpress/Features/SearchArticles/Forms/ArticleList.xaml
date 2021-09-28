@@ -32,16 +32,11 @@
                                LineBreakMode="WordWrap"/>
 
                         <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
-                                    JustifyContent="SpaceBetween" Wrap="Wrap"
-                                    BindableLayout.ItemsSource="{Binding Contributors}">
+                                    JustifyContent="SpaceBetween" Wrap="Wrap">
 
-                            <BindableLayout.ItemTemplate>
-                                <DataTemplate>
-                                    <Label Text="{Binding Name}"
-                                            Style="{DynamicResource ListItemDetailTextStyle}"
-                                            LineBreakMode="WordWrap"/>
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
+                            <Label Text="{Binding ContributorsAbbreviated}"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                LineBreakMode="WordWrap"/>
 
                         </FlexLayout>
 

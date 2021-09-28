@@ -50,6 +50,24 @@ namespace ArxivExpress.Features.SearchArticles
             }
         }
 
+        public string ContributorsAbbreviated
+        {
+            get
+            {
+                var contributors = Contributors;
+                if (contributors.Count != 0)
+                {
+                    var result = contributors[0].Name;
+                    if (contributors.Count > 1)
+                        result += " et al.";
+
+                    return result;
+                }
+
+                return "unknown";
+            }
+        }
+
         public string PdfUrl
         {
             get
