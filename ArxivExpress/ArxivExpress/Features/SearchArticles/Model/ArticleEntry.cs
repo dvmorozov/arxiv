@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using ArxivExpress.Features.LikedArticles;
 using Microsoft.SyndicationFeed;
 
 namespace ArxivExpress.Features.SearchArticles
 {
-    public class ArticleEntry : IArticleEntry
+    public class ArticleEntry : Article
     {
         private IAtomEntry _entry;
 
@@ -12,7 +13,7 @@ namespace ArxivExpress.Features.SearchArticles
             _entry = entry;
         }
 
-        public List<string> Categories
+        public override List<string> Categories
         {
             get
             {
@@ -30,7 +31,7 @@ namespace ArxivExpress.Features.SearchArticles
             }
         }
 
-        public List<Contributor> Contributors
+        public override List<Contributor> Contributors
         {
             get
             {
@@ -50,25 +51,7 @@ namespace ArxivExpress.Features.SearchArticles
             }
         }
 
-        public string ContributorsAbbreviated
-        {
-            get
-            {
-                var contributors = Contributors;
-                if (contributors.Count != 0)
-                {
-                    var result = contributors[0].Name;
-                    if (contributors.Count > 1)
-                        result += " et al.";
-
-                    return result;
-                }
-
-                return "unknown";
-            }
-        }
-
-        public string PdfUrl
+        public override string PdfUrl
         {
             get
             {
@@ -89,17 +72,17 @@ namespace ArxivExpress.Features.SearchArticles
             }
         }
 
-        public string Summary
+        public override string Summary
         {
             get { return MakePlainString(_entry.Summary); }
         }
 
-        public string Title
+        public override string Title
         {
             get { return MakePlainString(_entry.Title); }
         }
 
-        public string Published
+        public override string Published
         {
             get
             {
@@ -110,15 +93,7 @@ namespace ArxivExpress.Features.SearchArticles
             }
         }
 
-        public string PublishedWithLabel
-        {
-            get
-            {
-                return "Published: " + Published;
-            }
-        }
-
-        public string LastUpdated
+        public override string LastUpdated
         {
             get
             {
@@ -129,15 +104,7 @@ namespace ArxivExpress.Features.SearchArticles
             }
         }
 
-        public string LastUpdatedWithLabel
-        {
-            get
-            {
-                return "Last updated: " + LastUpdated;
-            }
-        }
-
-        public string Id
+        public override string Id
         {
             get
             {

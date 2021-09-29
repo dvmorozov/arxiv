@@ -4,42 +4,57 @@ namespace ArxivExpress.Features.SearchArticles
 {
     public interface IArticleEntry
     {
-        public List<string> Categories
+        public abstract List<string> Categories
         {
             get;
         }
 
-        public List<Contributor> Contributors
+        public abstract List<Contributor> Contributors
         {
             get;
         }
 
-        public string PdfUrl
+        public abstract string ContributorsAbbreviated
         {
             get;
         }
 
-        public string Summary
+        public abstract string PdfUrl
         {
             get;
         }
 
-        public string Title
+        public abstract string Summary
         {
             get;
         }
 
-        public string Published
+        public abstract string Title
         {
             get;
         }
 
-        public string LastUpdated
+        public abstract string Published
         {
             get;
         }
 
-        public string Id
+        public abstract string PublishedWithLabel
+        {
+            get;
+        }
+
+        public abstract string LastUpdated
+        {
+            get;
+        }
+
+        public abstract string LastUpdatedWithLabel
+        {
+            get;
+        }
+
+        public abstract string Id
         {
             get;
         }

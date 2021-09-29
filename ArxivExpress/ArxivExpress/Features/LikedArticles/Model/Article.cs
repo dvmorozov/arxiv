@@ -23,7 +23,7 @@ namespace ArxivExpress.Features.LikedArticles
 
         private List<string> _categories;
 
-        public List<string> Categories
+        public virtual List<string> Categories
         {
             get
             {
@@ -38,7 +38,7 @@ namespace ArxivExpress.Features.LikedArticles
 
         private List<Contributor> _contributors;
 
-        public List<Contributor> Contributors
+        public virtual List<Contributor> Contributors
         {
             get
             {
@@ -53,7 +53,7 @@ namespace ArxivExpress.Features.LikedArticles
 
         private string _pdfUrl;
 
-        public string PdfUrl
+        public virtual string PdfUrl
         {
             get
             {
@@ -68,7 +68,7 @@ namespace ArxivExpress.Features.LikedArticles
 
         private string _summary;
 
-        public string Summary
+        public virtual string Summary
         {
             get
             {
@@ -83,7 +83,7 @@ namespace ArxivExpress.Features.LikedArticles
 
         private string _title;
 
-        public string Title
+        public virtual string Title
         {
             get
             {
@@ -98,7 +98,7 @@ namespace ArxivExpress.Features.LikedArticles
 
         private string _published;
 
-        public string Published
+        public virtual string Published
         {
             get
             {
@@ -113,7 +113,7 @@ namespace ArxivExpress.Features.LikedArticles
 
         private string _lastUpdated;
 
-        public string LastUpdated
+        public virtual string LastUpdated
         {
             get
             {
@@ -128,7 +128,7 @@ namespace ArxivExpress.Features.LikedArticles
 
         private string _id;
 
-        public string Id
+        public virtual string Id
         {
             get
             {
@@ -138,6 +138,40 @@ namespace ArxivExpress.Features.LikedArticles
             set
             {
                 _id = value;
+            }
+        }
+
+        public virtual string ContributorsAbbreviated
+        {
+            get
+            {
+                var contributors = Contributors;
+                if (contributors.Count != 0)
+                {
+                    var result = contributors[0].Name;
+                    if (contributors.Count > 1)
+                        result += " et al.";
+
+                    return result;
+                }
+
+                return "unknown";
+            }
+        }
+
+        public virtual string PublishedWithLabel
+        {
+            get
+            {
+                return "Published: " + Published;
+            }
+        }
+
+        public virtual string LastUpdatedWithLabel
+        {
+            get
+            {
+                return "Last updated: " + LastUpdated;
             }
         }
     }
