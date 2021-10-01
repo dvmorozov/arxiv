@@ -54,10 +54,11 @@ namespace ArxivExpress.Features.Data
                         Contributors = (
                             from contributor
                             in article.Descendants(_contributorListElementName)
-                            select new Contributor(
-                                contributor.Attribute("Name")?.Value,
-                                contributor.Attribute("Email")?.Value
-                            )
+                                      .Descendants(_contributorElementName)
+                                    select new Contributor(
+                                        contributor.Attribute("Name")?.Value,
+                                        contributor.Attribute("Email")?.Value
+                                    )
                         ).ToList()
                     } as IArticleEntry
                 ).ToList();
