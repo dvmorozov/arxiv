@@ -83,7 +83,7 @@ namespace ArxivExpress.Features.SearchArticles
 
             if (PickerItemType.Items.Count != 0)
             {
-                var selectedIndex = PickerItemType.Items.IndexOf(_searchQuery.Prefix);
+                var selectedIndex = _fieldPrefixes.FindIndex(i => i.Prefix == _searchQuery.Prefix);
                 PickerItemType.SelectedIndex = selectedIndex != -1 ? selectedIndex : 0;
             }
 

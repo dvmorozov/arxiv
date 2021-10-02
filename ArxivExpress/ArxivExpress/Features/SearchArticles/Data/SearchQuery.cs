@@ -19,7 +19,7 @@ namespace ArxivExpress.Features.SearchArticles
 
         public uint PageNumber;
 
-        public SearchQuery(string searchTerm = "", string prefix = "ti")
+        public SearchQuery(string searchTerm = "", string prefix = "all")
         {
             FillDefaultValues(searchTerm, prefix);
         }
