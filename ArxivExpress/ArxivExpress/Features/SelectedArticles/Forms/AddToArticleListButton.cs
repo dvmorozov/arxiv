@@ -6,28 +6,28 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
 {
     public class AddToArticleListButton : StyledButton
     {
+        private IArticleEntry _articleEntry;
+
         public AddToArticleListButton(IArticleEntry articleEntry)
         {
-            BindingContext = articleEntry;
+            _articleEntry = articleEntry ??
+                throw new Exception("Article entry is not assigned.");
 
             Clicked += Handle_Pressed;
             Text = "Add to List";
         }
 
-        private void Handle_Pressed(object sender, EventArgs e)
+        private async void Handle_Pressed(object sender, EventArgs e)
         {
             if (sender == this)
             {
-                AddArticleToListAsync();
+                await AddArticleToListAsync();
             }
         }
 
         private async Task AddArticleToListAsync()
         {
-            if (BindingContext is IArticleEntry articleEntry)
-            {
-                await Navigation.PushAsync(new SelectedArticlesLists(articleEntry));
-            }
+            await Navigation.PushAsync(new SelectedArticlesLists(_articleEntry));
         }
     }
 }

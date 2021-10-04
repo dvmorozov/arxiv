@@ -1,14 +1,19 @@
 ﻿using System;
+using ArxivExpress.Features.SearchArticles;
 using ArxivExpress.Features.SelectedArticles.Data;
-using ArxivExpress.Features.SelectedArticles.Model;
 using Xamarin.Forms;
 
 namespace ArxivExpress.Features.SelectedArticles.Forms
 {
     public partial class NewList : ContentPage
     {
-        public NewList()
+        private IArticleEntry _articleEntry;
+
+        public NewList(IArticleEntry articleEntry)
         {
+            _articleEntry = articleEntry ??
+                throw new Exception("Article entry is not assigned.");
+
             InitializeComponent();
         }
 
@@ -35,7 +40,8 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             var selectedArticlesListsRepository = SelectedArticlesListsRepository.GetInstance();
             selectedArticlesListsRepository.AddList(_listName);
 
-            await Navigation.PushAsync(new SelectedArticlesLists());
+            var selectedArticlesListsHelper = new SelectedArticlesListsHelper(Navigation);
+            selectedArticlesListsHelper.AddArticleToList(_listName, _articleEntry);
         }
     }
 }

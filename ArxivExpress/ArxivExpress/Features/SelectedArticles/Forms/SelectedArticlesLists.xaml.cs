@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using ArxivExpress.Features.SearchArticles;
-using ArxivExpress.Features.SelectedArticles.Data;
 using ArxivExpress.Features.SelectedArticles.Model;
 using Xamarin.Forms;
 
@@ -16,56 +14,59 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             AddArticleToList
         }
 
-        private SelectedArticlesListsRepository _selectedArticlesListsRepository;
-        private ListMode _listMode;
         private IArticleEntry _articleEntry;
+        private ListMode _listMode;
+        private SelectedArticlesListsHelper _selectedArticlesListsHelper;
 
+        /// <summary>
+        /// Shows lists and add given article to selected list on tapping its name.
+        /// </summary>
+        /// <param name="articleEntry"></param>
         public SelectedArticlesLists(IArticleEntry articleEntry)
         {
-            _selectedArticlesListsRepository = SelectedArticlesListsRepository.GetInstance();
-            _articleEntry = articleEntry;
+            _articleEntry = articleEntry ??
+                throw new Exception("Article entry is not assigned.");
+
+            _selectedArticlesListsHelper = new SelectedArticlesListsHelper(Navigation);
             _listMode = ListMode.AddArticleToList;
 
             InitializeComponent();
             LoadSelectedArticlesLists();
         }
 
+        /// <summary>
+        /// Adds article to given list and opens the list immediately skipping
+        /// displaying all article lists.
+        /// </summary>
+        /// <param name="articleEntry"></param>
+        /// <param name="listName"></param>
+        public SelectedArticlesLists(IArticleEntry articleEntry, string listName)
+        {
+            _articleEntry = articleEntry ??
+                throw new Exception("Article entry is not assigned.");
 
+            _selectedArticlesListsHelper = new SelectedArticlesListsHelper(Navigation);
+            _listMode = ListMode.ViewList;
+
+            InitializeComponent();
+            _selectedArticlesListsHelper.AddArticleToList(listName, _articleEntry);
+        }
+
+        /// <summary>
+        /// Shows lists and open selected list on tapping its name.
+        /// </summary>
         public SelectedArticlesLists()
         {
-            _selectedArticlesListsRepository = SelectedArticlesListsRepository.GetInstance();
+            _selectedArticlesListsHelper = new SelectedArticlesListsHelper(Navigation);
             _listMode = ListMode.ViewList;
 
             InitializeComponent();
             LoadSelectedArticlesLists();
         }
 
-        public async Task LoadSelectedArticlesLists()
+        public async void LoadSelectedArticlesLists()
         {
-            Items = await _selectedArticlesListsRepository.LoadFirstPage();
-        }
-
-        private async void OpenArticleList(SelectedArticlesList list)
-        {
-            var rootNode = _selectedArticlesListsRepository.GetArticleListRoot(list.Name);
-
-            var selectedArticlesListRepository = new SelectedArticlesListRepository(rootNode);
-            var articleList = new SelectedArticleList(
-                selectedArticlesListRepository, _selectedArticlesListsRepository);
-
-            await Navigation.PushAsync(articleList);
-        }
-
-        private async void AddArticleToList(SelectedArticlesList list)
-        {
-            var rootNode = _selectedArticlesListsRepository.GetArticleListRoot(list.Name);
-
-            var articlesListRepository = new SelectedArticlesListRepository(rootNode);
-            articlesListRepository.AddArticle(_articleEntry);
-
-            _selectedArticlesListsRepository.ReplaceArticleListElement(articlesListRepository.Root);
-            //  Returns to previous page.
-            await Navigation.PopAsync();
+            Items = await _selectedArticlesListsHelper.Repository.LoadFirstPage();
         }
 
         private async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -78,11 +79,11 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
                 switch (_listMode)
                 {
                     case (ListMode.ViewList):
-                        OpenArticleList(list);
+                        await _selectedArticlesListsHelper.OpenArticleList(list.Name);
                         break;
 
                     case (ListMode.AddArticleToList):
-                        AddArticleToList(list);
+                        await _selectedArticlesListsHelper.AddArticleToList(list.Name, _articleEntry);
                         break;
 
                     default:
@@ -99,17 +100,17 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             ToolbarItem item = (ToolbarItem)sender;
             if (item == _toolbarItemNextPage)
             {
-                Items = await _selectedArticlesListsRepository.LoadNextPage();
+                Items = await _selectedArticlesListsHelper.Repository.LoadNextPage();
             }
             else if (item == _toolbarItemPrevPage)
             {
-                Items = await _selectedArticlesListsRepository.LoadPrevPage();
+                Items = await _selectedArticlesListsHelper.Repository.LoadPrevPage();
             }
         }
 
         private string GetItemsRange(uint pageIndex)
         {
-            var resultsPerPage = _selectedArticlesListsRepository.GetResultsPerPage();
+            var resultsPerPage = _selectedArticlesListsHelper.Repository.GetResultsPerPage();
             var startIndex = pageIndex * resultsPerPage + 1;
             var endIndex = (pageIndex + 1) * resultsPerPage;
 
@@ -148,15 +149,15 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
         {
             DeleteToolbarItemPages();
 
-            if (_selectedArticlesListsRepository.GetPageNumber() > 0)
+            if (_selectedArticlesListsHelper.Repository.GetPageNumber() > 0)
             {
-                _toolbarItemPrevPage = CreateToolbarItem(_selectedArticlesListsRepository.GetPageNumber() - 1);
+                _toolbarItemPrevPage = CreateToolbarItem(_selectedArticlesListsHelper.Repository.GetPageNumber() - 1);
                 ToolbarItems.Insert(0, _toolbarItemPrevPage);
             }
 
-            if (!_selectedArticlesListsRepository.IsLastPage())
+            if (!_selectedArticlesListsHelper.Repository.IsLastPage())
             {
-                _toolbarItemNextPage = CreateToolbarItem(_selectedArticlesListsRepository.GetPageNumber() + 1);
+                _toolbarItemNextPage = CreateToolbarItem(_selectedArticlesListsHelper.Repository.GetPageNumber() + 1);
                 ToolbarItems.Add(_toolbarItemNextPage);
             }
         }

@@ -1,28 +1,33 @@
 ﻿using System;
 using System.Threading.Tasks;
+using ArxivExpress.Features.SearchArticles;
 
 namespace ArxivExpress.Features.SelectedArticles.Forms
 {
     public class NewArticleListButton : StyledButton
     {
-        public NewArticleListButton()
-        {
-            Clicked += Handle_Pressed;
+        private IArticleEntry _articleEntry;
 
+        public NewArticleListButton(IArticleEntry articleEntry)
+        {
+            _articleEntry = articleEntry ??
+                throw new Exception("Article entry is not assigned.");
+
+            Clicked += Handle_Pressed;
             Text = "New List";
         }
 
-        private void Handle_Pressed(object sender, EventArgs e)
+        private async void Handle_Pressed(object sender, EventArgs e)
         {
             if (sender == this)
             {
-                CreateArticleListAsync();
+                await CreateArticleListAsync();
             }
         }
 
         private async Task CreateArticleListAsync()
         {
-            await Navigation.PushAsync(new NewList());
+            await Navigation.PushAsync(new NewList(_articleEntry));
         }
     }
 }

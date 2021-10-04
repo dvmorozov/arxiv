@@ -49,10 +49,10 @@ namespace ArxivExpress.Features.ArticleInfo
                 );
         }
 
-        private void CreateNewArticleListButton()
+        private void CreateNewArticleListButton(IArticleEntry articleEntry)
         {
             StackLayoutArticleInfo.Children.Add(
-                new NewArticleListButton()
+                new NewArticleListButton(articleEntry)
                 );
         }
 
@@ -83,7 +83,7 @@ namespace ArxivExpress.Features.ArticleInfo
 
             CreatePdfUrl();
             CreateAddLikedArticleButton(articleEntry);
-            CreateNewArticleListButton();
+            CreateNewArticleListButton(articleEntry);
             CreateAddToArticleListButton(articleEntry);
 
             AddArticleToViewedList(articleEntry);

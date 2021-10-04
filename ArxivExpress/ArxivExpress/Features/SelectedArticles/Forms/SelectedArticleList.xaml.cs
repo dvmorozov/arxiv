@@ -18,13 +18,10 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             SelectedArticlesListRepository selectedArticlesListRepository,
             SelectedArticlesListsRepository selectedArticlesListsRepository)
         {
-            if (selectedArticlesListRepository == null)
+            _selectedArticlesListRepository = selectedArticlesListRepository ??
                 throw new Exception("Article repository is not assigned.");
-            if (selectedArticlesListsRepository == null)
+            _selectedArticlesListsRepository = selectedArticlesListsRepository ??
                 throw new Exception("Article lists repository is not assigned.");
-
-            _selectedArticlesListRepository = selectedArticlesListRepository;
-            _selectedArticlesListsRepository = selectedArticlesListsRepository;
 
             InitializeComponent();
             LoadArticles();
