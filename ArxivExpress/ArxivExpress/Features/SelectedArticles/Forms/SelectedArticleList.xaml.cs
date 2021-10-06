@@ -131,6 +131,12 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             Navigation.PopAsync(true);
         }
 
+        private void OnDeleteListPressed(object sender, EventArgs e)
+        {
+            _selectedArticlesListsRepository.DeleteArticleListElement(_selectedArticlesListRepository.Root);
+            Navigation.PopAsync(true);
+        }
+
         private void RemoveArticleFromList(IArticleEntry articleEntry)
         {
             if (articleEntry == null)

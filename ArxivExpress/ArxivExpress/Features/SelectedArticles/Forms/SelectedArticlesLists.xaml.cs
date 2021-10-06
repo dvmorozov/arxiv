@@ -31,6 +31,15 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             _listMode = ListMode.AddArticleToList;
 
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// This handler reloads list of lists on subsequent
+        /// displaying after deleting some list of articles.
+        /// </summary>
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
             LoadSelectedArticlesLists();
         }
 

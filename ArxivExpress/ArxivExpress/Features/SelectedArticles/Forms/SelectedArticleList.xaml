@@ -14,57 +14,76 @@
             Clicked="Handle_ToolbarItemClicked"/>
     </ContentPage.ToolbarItems> 
 
-    <ListView x:Name="ArticleListView" ItemsSource="{Binding Items}"
-              ItemTapped="Handle_ItemTapped" CachingStrategy="RecycleElement"
-              HasUnevenRows="True" ios:ListView.SeparatorStyle="FullWidth">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <StackLayout x:Name="ArticleStackLayout"
-                                 VerticalOptions="FillAndExpand" Margin="10">
+    <StackLayout>
+        <ListView x:Name="ArticleListView" ItemsSource="{Binding Items}"
+                  ItemTapped="Handle_ItemTapped" CachingStrategy="RecycleElement"
+                  HasUnevenRows="True" ios:ListView.SeparatorStyle="FullWidth">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout x:Name="ArticleStackLayout"
+                                     VerticalOptions="FillAndExpand" Margin="10">
 
-                        <Label Text="{Binding Title}"
-                               Style="{DynamicResource ListItemTextStyle}"
-                               FontAttributes="Bold"
-                               LineBreakMode="WordWrap"/>
+                            <Label Text="{Binding Title}"
+                                   Style="{DynamicResource ListItemTextStyle}"
+                                   FontAttributes="Bold"
+                                   LineBreakMode="WordWrap"/>
 
-                        <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
-                                    JustifyContent="SpaceBetween" Wrap="Wrap">
+                            <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
+                                        JustifyContent="SpaceBetween" Wrap="Wrap">
 
-                            <Label Text="{Binding ContributorsAbbreviated}"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                LineBreakMode="WordWrap"/>
-
-                        </FlexLayout>
-
-                        <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
-                                    JustifyContent="SpaceBetween" Wrap="Wrap">
-
-                            <Label Text="{Binding PublishedWithLabel}"
+                                <Label Text="{Binding ContributorsAbbreviated}"
                                     Style="{DynamicResource ListItemDetailTextStyle}"
                                     LineBreakMode="WordWrap"/>
 
-                            <Label Text="{Binding LastUpdatedWithLabel}"
-                                    Style="{DynamicResource ListItemDetailTextStyle}"
-                                    LineBreakMode="WordWrap"/>
-                        </FlexLayout>
+                            </FlexLayout>
 
-                        <Button Text="Remove from List"
-                                Clicked="OnRemoveArticleFromListPressed"
-                                CommandParameter="{Binding .}"
-                                BorderColor="#2196F3"
-                                BackgroundColor="#2196F3"
-                                BorderWidth="2"
-                                Margin="10"
-                                HeightRequest="50"
-                                VerticalOptions="Center"
-                                HorizontalOptions="Center"
-                                WidthRequest="200"
-                                TextColor="White"
-                                />
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+                            <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
+                                        JustifyContent="SpaceBetween" Wrap="Wrap">
+
+                                <Label Text="{Binding PublishedWithLabel}"
+                                        Style="{DynamicResource ListItemDetailTextStyle}"
+                                        LineBreakMode="WordWrap"/>
+
+                                <Label Text="{Binding LastUpdatedWithLabel}"
+                                        Style="{DynamicResource ListItemDetailTextStyle}"
+                                        LineBreakMode="WordWrap"/>
+                            </FlexLayout>
+
+                            <Button Text="Remove from List"
+                                    Clicked="OnRemoveArticleFromListPressed"
+                                    CommandParameter="{Binding .}"
+                                    BorderColor="#2196F3"
+                                    BackgroundColor="#2196F3"
+                                    BorderWidth="2"
+                                    Margin="10"
+                                    HeightRequest="50"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    WidthRequest="200"
+                                    TextColor="White"
+                                    />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
+                    JustifyContent="SpaceBetween" Wrap="Wrap">
+                            <Button Text="Delete List"
+                                    Clicked="OnDeleteListPressed"
+                                    CommandParameter="{Binding .}"
+                                    BorderColor="#2196F3"
+                                    BackgroundColor="#2196F3"
+                                    BorderWidth="2"
+                                    Margin="10"
+                                    HeightRequest="50"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    WidthRequest="200"
+                                    TextColor="White"
+                                    />
+        </FlexLayout>
+    </StackLayout>
 </ContentPage>

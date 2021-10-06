@@ -17,7 +17,7 @@ namespace ArxivExpress.Features.SelectedArticles.Data
     {
         private static SelectedArticlesListsRepository _instance;
 
-        protected List<SelectedArticlesList> _selectedArticlesLists;
+        private List<SelectedArticlesList> _selectedArticlesLists;
         public List<SelectedArticlesList> Articles => _selectedArticlesLists;
 
         private SelectedArticlesListsRepository()
@@ -82,6 +82,23 @@ namespace ArxivExpress.Features.SelectedArticles.Data
         /// <param name="root"></param>
         public void ReplaceArticleListElement(XElement root)
         {
+            DeleteArticleListElementImpl(root);
+            _selectedArticlesLists.Add(new SelectedArticlesList(root));
+            SaveSelectedArticlesLists();
+        }
+
+        public void DeleteArticleListElement(XElement root)
+        {
+            DeleteArticleListElementImpl(root);
+            SaveSelectedArticlesLists();
+        }
+
+        /// <summary>
+        /// Deletes article list.
+        /// </summary>
+        /// <param name="root"></param>
+        private void DeleteArticleListElementImpl(XElement root)
+        {
             if (root.Attribute("Name") == null)
                 throw new Exception("Attribute \"Name\" is not assigned.");
 
@@ -92,9 +109,7 @@ namespace ArxivExpress.Features.SelectedArticles.Data
                 select item
             ).OrderBy(list => list.Name).ToList();
 
-            _selectedArticlesLists = savedElements;
-            _selectedArticlesLists.Add(new SelectedArticlesList(root));
-            SaveSelectedArticlesLists();
+            _selectedArticlesLists = savedElements;   
         }
 
         private List<SelectedArticlesList> LoadSelectedArticlesLists()
@@ -105,11 +120,10 @@ namespace ArxivExpress.Features.SelectedArticles.Data
             {
                 var xml = XDocument.Load(filePath);
                 var list = (
-                    from searchQuery
+                    from xElement
                     in xml.Root.Descendants(GetElementName())
-                    where searchQuery.Attribute("Name") != null
-                    select new SelectedArticlesList(GetElementName(),
-                        searchQuery.Attribute("Name").Value)
+                    where xElement.Attribute("Name") != null
+                    select new SelectedArticlesList(xElement)
                 ).OrderBy(list => list.Name).ToList();
 
                 return list;
