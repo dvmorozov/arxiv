@@ -70,7 +70,6 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             _listMode = ListMode.ViewList;
 
             InitializeComponent();
-            LoadSelectedArticlesLists();
         }
 
         public async void LoadSelectedArticlesLists()

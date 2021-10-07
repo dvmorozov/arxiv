@@ -17,12 +17,17 @@ namespace ArxivExpress.Features.SearchArticles
             _articleRepository = articleRepository;
 
             InitializeComponent();
-            LoadArticles();
         }
 
-        public async Task LoadArticles()
+        public async void LoadArticles()
         {
             Items = await _articleRepository.LoadFirstPage();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            LoadArticles();
         }
 
         private async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)

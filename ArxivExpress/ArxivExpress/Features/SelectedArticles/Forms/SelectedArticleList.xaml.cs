@@ -24,10 +24,15 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
                 throw new Exception("Article lists repository is not assigned.");
 
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
             LoadArticles();
         }
 
-        public async Task LoadArticles()
+        public async void LoadArticles()
         {
             Items = await _selectedArticlesListRepository.LoadFirstPage();
         }

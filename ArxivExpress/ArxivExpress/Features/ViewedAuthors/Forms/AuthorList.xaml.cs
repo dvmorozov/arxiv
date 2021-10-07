@@ -17,12 +17,17 @@ namespace ArxivExpress.Features.ViewedAuthors.Forms
             _authorsRepository = ViewedAuthorsRepository.GetInstance();
 
             InitializeComponent();
-            LoadAuthors();
         }
 
-        public async Task LoadAuthors()
+        public async void LoadAuthors()
         {
             Items = await _authorsRepository.LoadFirstPage();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            LoadAuthors();
         }
 
         private async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
