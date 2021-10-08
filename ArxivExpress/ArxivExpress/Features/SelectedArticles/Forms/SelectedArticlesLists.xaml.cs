@@ -92,6 +92,7 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
 
                     case (ListMode.AddArticleToList):
                         await _selectedArticlesListsHelper.AddArticleToList(list.Name, _articleEntry);
+                        _listMode = ListMode.ViewList;
                         break;
 
                     default:
