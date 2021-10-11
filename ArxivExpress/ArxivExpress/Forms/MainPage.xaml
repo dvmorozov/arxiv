@@ -12,22 +12,25 @@
             <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand">
 
                 <Button Text="Search" Pressed="Handle_SearchPressed"
-                        BorderColor="#2196F3" BackgroundColor="#2196F3"
-                        BorderWidth="2" Margin="10,40,10,10" HeightRequest="50"
+                        ImageSource="icons8_search_32"
+                        BorderColor="Black" BackgroundColor="White"
+                        BorderWidth="1" Margin="10,40,10,10" HeightRequest="50"
                         VerticalOptions="Center" HorizontalOptions="Center"
-                        WidthRequest="200" TextColor="White"/>
+                        WidthRequest="200" TextColor="Black"/>
 
                 <Button Text="Recently Viewed" Pressed="Handle_RecentlyViewedPressed"
-                        BorderColor="#2196F3" BackgroundColor="#2196F3"
-                        BorderWidth="2" Margin="10" HeightRequest="50"
+                        ImageSource="icons8_activity_history_32"
+                        BorderColor="Black" BackgroundColor="White"
+                        BorderWidth="1" Margin="10" HeightRequest="50"
                         VerticalOptions="Center" HorizontalOptions="Center"
-                        WidthRequest="200" TextColor="White"/>
+                        WidthRequest="200" TextColor="Black"/>
 
                 <Button Text="Liked Articles" Pressed="Handle_LikedArticlesPressed"
-                        BorderColor="#2196F3" BackgroundColor="#2196F3"
-                        BorderWidth="2" Margin="10" HeightRequest="50"
+                        ImageSource="icons8_heart_32"
+                        BorderColor="Black" BackgroundColor="White"
+                        BorderWidth="1" Margin="10" HeightRequest="50"
                         VerticalOptions="Center" HorizontalOptions="Center"
-                        WidthRequest="200" TextColor="White"/>
+                        WidthRequest="200" TextColor="Black"/>
 
                 <!--
                 <Button Text="Recommended Articles" Pressed="Handle_RecommendedArticlesPressed"
@@ -38,16 +41,18 @@
                 -->
 
                 <Button Text="Authors" Pressed="Handle_ViewedAuthorsPressed"
-                        BorderColor="#2196F3" BackgroundColor="#2196F3"
-                        BorderWidth="2" Margin="10" HeightRequest="50"
+                        ImageSource="icons8_contacts_32"
+                        BorderColor="Black" BackgroundColor="White"
+                        BorderWidth="1" Margin="10" HeightRequest="50"
                         VerticalOptions="Center" HorizontalOptions="Center"
-                        WidthRequest="200" TextColor="White"/>
+                        WidthRequest="200" TextColor="Black"/>
 
                 <Button Text="Lists" Pressed="Handle_ListsPressed"
-                        BorderColor="#2196F3" BackgroundColor="#2196F3"
-                        BorderWidth="2" Margin="10" HeightRequest="50"
+                        ImageSource="icons8_book_shelf_32"
+                        BorderColor="Black" BackgroundColor="White"
+                        BorderWidth="1" Margin="10" HeightRequest="50"
                         VerticalOptions="Center" HorizontalOptions="Center"
-                        WidthRequest="200" TextColor="White"/>
+                        WidthRequest="200" TextColor="Black"/>
 
             </StackLayout>
         </ScrollView>
