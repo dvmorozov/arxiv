@@ -5,7 +5,7 @@ namespace ArxivExpress.Features.LikedArticles.Forms
 {
     public class ToggleLikeButton : StyledButton
     {
-        public ToggleLikeButton(IArticleEntry articleEntry)
+        public ToggleLikeButton(IArticleEntry articleEntry) : base("icons8_heart_32")
         {
             BindingContext = articleEntry;
 

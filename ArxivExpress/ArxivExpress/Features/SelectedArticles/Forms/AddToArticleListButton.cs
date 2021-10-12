@@ -8,7 +8,7 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
     {
         private IArticleEntry _articleEntry;
 
-        public AddToArticleListButton(IArticleEntry articleEntry)
+        public AddToArticleListButton(IArticleEntry articleEntry) : base("icons8_book_shelf_32")
         {
             _articleEntry = articleEntry ??
                 throw new Exception("Article entry is not assigned.");

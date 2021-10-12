@@ -53,15 +53,16 @@
                             <Button Text="Remove from List"
                                     Clicked="OnRemoveArticleFromListPressed"
                                     CommandParameter="{Binding .}"
-                                    BorderColor="#2196F3"
-                                    BackgroundColor="#2196F3"
-                                    BorderWidth="2"
+                                    BorderColor="Black"
+                                    BackgroundColor="White"
+                                    BorderWidth="1"
                                     Margin="10"
                                     HeightRequest="50"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"
                                     WidthRequest="200"
-                                    TextColor="White"
+                                    TextColor="Black"
+                                    ImageSource="icons8_trash_can_32"
                                     />
                         </StackLayout>
                     </ViewCell>
@@ -74,15 +75,16 @@
                             <Button Text="Delete List"
                                     Clicked="OnDeleteListPressed"
                                     CommandParameter="{Binding .}"
-                                    BorderColor="#2196F3"
-                                    BackgroundColor="#2196F3"
-                                    BorderWidth="2"
+                                    BorderColor="Black"
+                                    BackgroundColor="White"
+                                    BorderWidth="1"
                                     Margin="10"
                                     HeightRequest="50"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"
                                     WidthRequest="200"
-                                    TextColor="White"
+                                    TextColor="Black"
+                                    ImageSource="icons8_trash_can_32"
                                     />
         </FlexLayout>
     </StackLayout>

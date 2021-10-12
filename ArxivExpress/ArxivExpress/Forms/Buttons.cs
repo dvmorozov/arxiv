@@ -4,17 +4,18 @@ namespace ArxivExpress
 {
     public class StyledButton : Button
     {
-        public StyledButton()
+        public StyledButton(string imageSource)
         {
-            BorderColor = Color.FromHex("#2196F3");
-            BackgroundColor = Color.FromHex("#2196F3");
-            BorderWidth = 2;
+            BorderColor = Color.Black;
+            BackgroundColor = Color.White;
+            BorderWidth = 1;
             Margin = 10;
             HeightRequest = 50;
             VerticalOptions = LayoutOptions.Center;
             HorizontalOptions = LayoutOptions.Center;
             WidthRequest = 200;
-            TextColor = Color.White;
+            TextColor = Color.Black;
+            ImageSource = imageSource;
         }
     }
 }

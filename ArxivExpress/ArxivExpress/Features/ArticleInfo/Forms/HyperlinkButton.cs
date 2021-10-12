@@ -7,7 +7,7 @@ namespace ArxivExpress.Features.ArticleInfo.Forms
     {
         public string Url { get; }
 
-        public HyperlinkButton(string text, string url)
+        public HyperlinkButton(string text, string url) : base("icons8_pdf_32")
         {
             Url = url;
             Text = text;
