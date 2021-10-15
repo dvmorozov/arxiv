@@ -70,7 +70,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
+        <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="End"
                     JustifyContent="SpaceBetween" Wrap="Wrap">
                             <Button Text="Delete List"
                                     Clicked="OnDeleteListPressed"

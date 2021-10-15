@@ -37,31 +37,42 @@ namespace ArxivExpress.Features.Data
         /// <returns>Article list</returns>
         protected List<IArticleEntry> LoadArticlesFromRoot(XElement root)
         {
-            return (
-                    from article
-                    in root.Descendants(ArticleElementName)
-                    select new Article
+            var result = new List<IArticleEntry>();
+            foreach (var articleElement in root.Descendants(ArticleElementName))
+            {
+                //  Attributes are case sensitive.
+                if (articleElement.Attribute("Id") != null)
+                {
+                    var article = new Article
                     {
-                        Id = article.Attribute("Id").Value,
+                        Id = articleElement.Attribute("Id").Value,
+                        LastUpdated = articleElement.Attribute("LastUpdated")?.Value,
+                        Published = articleElement.Attribute("Published")?.Value,
+                        Title = articleElement.Attribute("Title")?.Value,
+                        Categories = articleElement.Attribute("Categories")?.Value.Split(';').ToList(),
+                        PdfUrl = articleElement.Attribute("PdfUrl")?.Value,
+                        Summary = articleElement.Attribute("Summary")?.Value,
+                    };
 
-                        LastUpdated = article.Attribute("LastUpdated")?.Value,
-                        Published = article.Attribute("Published")?.Value,
-                        Title = article.Attribute("Title")?.Value,
-                        Categories = article.Attribute("Categories")?.Value.Split(';').ToList(),
-                        PdfUrl = article.Attribute("PdfUrl")?.Value,
-                        Summary = article.Attribute("Summary")?.Value,
+                    var contributors = new List<Contributor>();
+                    foreach (var contributorListElement in articleElement.Descendants(_contributorListElementName))
+                    {
+                        foreach (var contributorElement in contributorListElement.Descendants(_contributorElementName))
+                        {
+                            var contributor = new Contributor(
+                                contributorElement.Attribute("Name")?.Value,
+                                contributorElement.Attribute("Email")?.Value
+                                );
+                            contributors.Add(contributor);
+                        }
+                    }
 
-                        Contributors = (
-                            from contributor
-                            in article.Descendants(_contributorListElementName)
-                                      .Descendants(_contributorElementName)
-                                    select new Contributor(
-                                        contributor.Attribute("Name")?.Value,
-                                        contributor.Attribute("Email")?.Value
-                                    )
-                        ).ToList()
-                    } as IArticleEntry
-                ).ToList();
+                    article.Contributors = contributors;
+                    result.Add(article);
+                }
+            }
+
+            return result;
         }
 
         private XElement GetContributors(IArticleEntry article)
