@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+using ArxivExpress.Features.LikedArticles;
+using ArxivExpress.Features.RecentlyViewedArticles.Data;
 using ArxivExpress.Features.SearchArticles;
 using ArxivExpress.Features.SelectedArticles.Data;
+using ArxivExpress.Features.ViewedAuthors.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -149,6 +151,31 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
 
             _selectedArticlesListRepository.DeleteArticle(articleEntry.Id);
             _selectedArticlesListsRepository.ReplaceArticleListElement(_selectedArticlesListRepository.Root);
+        }
+
+        public async void Handle_SearchPressed(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new SearchAttributes());
+        }
+
+        public async void Handle_RecentlyViewedPressed(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new ArticleList(ViewedArticlesRepository.GetInstance()));
+        }
+
+        public async void Handle_LikedArticlesPressed(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new ArticleList(LikedArticlesRepository.GetInstance()));
+        }
+
+        public async void Handle_ViewedAuthorsPressed(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new AuthorList());
+        }
+
+        public async void Handle_ListsPressed(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new SelectedArticlesLists());
         }
     }
 }

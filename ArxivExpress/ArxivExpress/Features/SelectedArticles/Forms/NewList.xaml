@@ -21,8 +21,10 @@
                     ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
         </Grid>
 
-        <Button Text="Create" Pressed="Handle_CreateNewListPressed" BorderColor="#2196F3" BackgroundColor="#2196F3"
-            BorderWidth="2" Margin="10" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center"
-            WidthRequest="200" TextColor="White"/>
+        <Button Text="Create" Pressed="Handle_CreateNewListPressed"
+                BorderColor="Black" BackgroundColor="White"
+                BorderWidth="1" Margin="10" HeightRequest="50"
+                VerticalOptions="Center" HorizontalOptions="Center"
+                WidthRequest="200" TextColor="Black"/>
     </StackLayout>
 </ContentPage>

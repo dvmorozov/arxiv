@@ -3,6 +3,7 @@ using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Distribute;
+using ArxivExpress.Features.SearchArticles;
 
 namespace ArxivExpress
 {
@@ -12,7 +13,7 @@ namespace ArxivExpress
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new SearchAttributes());
         }
 
         protected override void OnStart()

@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using ArxivExpress.Features.LikedArticles;
+using ArxivExpress.Features.RecentlyViewedArticles.Data;
 using ArxivExpress.Features.SearchArticles.Data;
+using ArxivExpress.Features.SelectedArticles.Forms;
+using ArxivExpress.Features.ViewedAuthors.Forms;
 using Xamarin.Forms;
 
 namespace ArxivExpress.Features.SearchArticles
@@ -173,6 +177,25 @@ namespace ArxivExpress.Features.SearchArticles
 
             var articleList = new ArticleList(_searchArticleRepository);
             await Navigation.PushAsync(articleList);
+        }
+        public async void Handle_RecentlyViewedPressed(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new ArticleList(ViewedArticlesRepository.GetInstance()));
+        }
+
+        public async void Handle_LikedArticlesPressed(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new ArticleList(LikedArticlesRepository.GetInstance()));
+        }
+
+        public async void Handle_ViewedAuthorsPressed(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new AuthorList());
+        }
+
+        public async void Handle_ListsPressed(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new SelectedArticlesLists());
         }
     }
 }

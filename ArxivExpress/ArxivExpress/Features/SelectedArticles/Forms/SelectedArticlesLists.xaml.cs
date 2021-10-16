@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using ArxivExpress.Features.LikedArticles;
+using ArxivExpress.Features.RecentlyViewedArticles.Data;
 using ArxivExpress.Features.SearchArticles;
 using ArxivExpress.Features.SelectedArticles.Model;
+using ArxivExpress.Features.ViewedAuthors.Forms;
 using Xamarin.Forms;
 
 namespace ArxivExpress.Features.SelectedArticles.Forms
@@ -178,6 +181,31 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
                 SelectedArticlesListsView.ItemsSource = value;
                 SetToolbarPageNavigationItems();
             }
+        }
+
+        public async void Handle_SearchPressed(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new SearchAttributes());
+        }
+
+        public async void Handle_RecentlyViewedPressed(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new ArticleList(ViewedArticlesRepository.GetInstance()));
+        }
+
+        public async void Handle_LikedArticlesPressed(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new ArticleList(LikedArticlesRepository.GetInstance()));
+        }
+
+        public async void Handle_ViewedAuthorsPressed(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new AuthorList());
+        }
+
+        public async void Handle_ListsPressed(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new SelectedArticlesLists());
         }
     }
 }
