@@ -3,53 +3,61 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ArxivExpress.Features.ArticleInfo.ArticleInfo">
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout VerticalOptions="StartAndExpand" Margin="10"
-                         x:Name="StackLayoutArticleInfo">
-                <Label Text="{Binding ArticleEntry.Title}"
-                       Style="{DynamicResource ListItemTextStyle}"
-                       FontAttributes="Bold"
-                       LineBreakMode="WordWrap"/>
-                <Label Text="{Binding ArticleEntry.Summary}"
-                       Style="{DynamicResource ListItemDetailTextStyle}"
-                       LineBreakMode="WordWrap"/>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout VerticalOptions="StartAndExpand" Margin="10"
+                             x:Name="StackLayoutArticleInfo">
+                    <Label Text="{Binding ArticleEntry.Title}"
+                           Style="{DynamicResource ListItemTextStyle}"
+                           FontAttributes="Bold"
+                           LineBreakMode="WordWrap"/>
+                    <Label Text="{Binding ArticleEntry.Summary}"
+                           Style="{DynamicResource ListItemDetailTextStyle}"
+                           LineBreakMode="WordWrap"/>
 
-                <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
-                            JustifyContent="SpaceBetween" Wrap="Wrap"
-                            BindableLayout.ItemsSource="{Binding ArticleEntry.Contributors}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <Label Text="{Binding Name}"
-                                    Style="{DynamicResource ListItemDetailTextStyle}"
-                                    LineBreakMode="WordWrap"/>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </FlexLayout>
+                    <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
+                                JustifyContent="SpaceBetween" Wrap="Wrap"
+                                BindableLayout.ItemsSource="{Binding ArticleEntry.Contributors}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Label Text="{Binding Name}"
+                                        Style="{DynamicResource ListItemDetailTextStyle}"
+                                        LineBreakMode="WordWrap"/>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
 
-                <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
-                            JustifyContent="SpaceBetween" Wrap="Wrap">
+                    <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
+                                JustifyContent="SpaceBetween" Wrap="Wrap">
 
-                    <Label Text="{Binding ArticleEntry.PublishedWithLabel}"
-                            Style="{DynamicResource ListItemDetailTextStyle}"
-                            LineBreakMode="WordWrap"/>
+                        <Label Text="{Binding ArticleEntry.PublishedWithLabel}"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                LineBreakMode="WordWrap"/>
 
-                    <Label Text="{Binding ArticleEntry.LastUpdatedWithLabel}"
-                            Style="{DynamicResource ListItemDetailTextStyle}"
-                            LineBreakMode="WordWrap"/>
-                </FlexLayout>
+                        <Label Text="{Binding ArticleEntry.LastUpdatedWithLabel}"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                LineBreakMode="WordWrap"/>
+                    </FlexLayout>
 
-                <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
-                            JustifyContent="SpaceBetween" Wrap="Wrap"
-                            BindableLayout.ItemsSource="{Binding ArticleEntry.Categories}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <Label Text="{Binding .}"
-                                    Style="{DynamicResource ListItemDetailTextStyle}"
-                                    LineBreakMode="WordWrap"/>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </FlexLayout>
-             </StackLayout>
-        </ScrollView>
+                    <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
+                                JustifyContent="SpaceBetween" Wrap="Wrap"
+                                BindableLayout.ItemsSource="{Binding ArticleEntry.Categories}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Label Text="{Binding .}"
+                                        Style="{DynamicResource ListItemDetailTextStyle}"
+                                        LineBreakMode="WordWrap"/>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                 </StackLayout>
+            </ScrollView>
+
+            <FlexLayout Margin="0,10,0,0" Direction="Row" HeightRequest="70"
+                        JustifyContent="Center" Wrap="Wrap"
+                        x:Name="FlexLayoutToolbar">
+
+            </FlexLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -10,7 +10,7 @@ namespace ArxivExpress.Features.LikedArticles.Forms
             BindingContext = articleEntry;
 
             Clicked += Handle_Pressed;
-            SetText();
+            SetIcon();
         }
 
         private void Handle_Pressed(object sender, EventArgs e)
@@ -36,16 +36,16 @@ namespace ArxivExpress.Features.LikedArticles.Forms
                     likedArticlesRepository.AddArticle(new Article(articleEntry));
                 }
             }
-            SetText();
+            SetIcon();
         }
 
-        private void SetText()
+        private void SetIcon()
         {
             if (BindingContext is IArticleEntry articleEntry)
             {
                 var likedArticlesRepository = LikedArticlesRepository.GetInstance();
-                Text = likedArticlesRepository.HasArticle(articleEntry.Id)
-                    ? "Remove from Liked" : "Add to Liked";
+                ImageSource = likedArticlesRepository.HasArticle(articleEntry.Id)
+                    ? "icons8_love_32" : "icons8_heart_32";
             }
         }
     }

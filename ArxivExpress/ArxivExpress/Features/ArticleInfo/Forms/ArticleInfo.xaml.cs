@@ -36,7 +36,7 @@ namespace ArxivExpress.Features.ArticleInfo
         {
             if (ArticleEntry.PdfUrl != "unknown")
             {
-                StackLayoutArticleInfo.Children.Add(
+                FlexLayoutToolbar.Children.Add(
                     new HyperlinkButton("Open Pdf", ArticleEntry.PdfUrl)
                     );
             }
@@ -44,14 +44,14 @@ namespace ArxivExpress.Features.ArticleInfo
 
         private void CreateAddLikedArticleButton(IArticleEntry articleEntry)
         {
-            StackLayoutArticleInfo.Children.Add(
+            FlexLayoutToolbar.Children.Add(
                 new ToggleLikeButton(articleEntry)
                 );
         }
 
         private void CreateNewArticleListButton(IArticleEntry articleEntry)
         {
-            StackLayoutArticleInfo.Children.Add(
+            FlexLayoutToolbar.Children.Add(
                 new NewArticleListButton(articleEntry)
                 );
         }
@@ -62,7 +62,7 @@ namespace ArxivExpress.Features.ArticleInfo
 
             if (!selectedArticlesListsRepository.IsEmpty())
             {
-                StackLayoutArticleInfo.Children.Add(
+                FlexLayoutToolbar.Children.Add(
                     new AddToArticleListButton(articleEntry)
                     );
             }

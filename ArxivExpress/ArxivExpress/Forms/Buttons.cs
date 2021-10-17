@@ -13,7 +13,7 @@ namespace ArxivExpress
             HeightRequest = 50;
             VerticalOptions = LayoutOptions.Center;
             HorizontalOptions = LayoutOptions.Center;
-            WidthRequest = 200;
+            WidthRequest = 50;
             TextColor = Color.Black;
             ImageSource = imageSource;
         }

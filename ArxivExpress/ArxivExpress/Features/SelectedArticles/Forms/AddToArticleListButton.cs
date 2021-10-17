@@ -14,7 +14,6 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
                 throw new Exception("Article entry is not assigned.");
 
             Clicked += Handle_Pressed;
-            Text = "Add to List";
         }
 
         private async void Handle_Pressed(object sender, EventArgs e)
