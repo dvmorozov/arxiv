@@ -120,6 +120,25 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\icons8_activity_history_32.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icons8_activity_history_32.imageset\icons8_activity_history_32.png" />
+    <ImageAsset Include="Assets.xcassets\icons8_activity_history_32.imageset\icons8_activity_history_32-1.png" />
+    <ImageAsset Include="Assets.xcassets\icons8_add_list_32.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icons8_add_list_32.imageset\icons8_add_list_32.png" />
+    <ImageAsset Include="Assets.xcassets\icons8_book_shelf_32.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icons8_book_shelf_32.imageset\icons8_book_shelf_32.png" />
+    <ImageAsset Include="Assets.xcassets\icons8_contacts_32.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icons8_contacts_32.imageset\icons8_contacts_32.png" />
+    <ImageAsset Include="Assets.xcassets\icons8_heart_32.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icons8_heart_32.imageset\icons8_heart_32.png" />
+    <ImageAsset Include="Assets.xcassets\icons8_love_32.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icons8_love_32.imageset\icons8_love_32.png" />
+    <ImageAsset Include="Assets.xcassets\icons8_pdf_32.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icons8_pdf_32.imageset\icons8_pdf_32.png" />
+    <ImageAsset Include="Assets.xcassets\icons8_search_32.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icons8_search_32.imageset\icons8_search_32.png" />
+    <ImageAsset Include="Assets.xcassets\icons8_trash_can_32.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icons8_trash_can_32.imageset\icons8_trash_can_32.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -152,5 +171,16 @@
       <Project>{7D581A43-CCAB-4336-A502-1230742933D5}</Project>
       <Name>ArxivExpress</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets.xcassets\icons8_activity_history_32.imageset\" />
+    <Folder Include="Assets.xcassets\icons8_add_list_32.imageset\" />
+    <Folder Include="Assets.xcassets\icons8_book_shelf_32.imageset\" />
+    <Folder Include="Assets.xcassets\icons8_contacts_32.imageset\" />
+    <Folder Include="Assets.xcassets\icons8_heart_32.imageset\" />
+    <Folder Include="Assets.xcassets\icons8_love_32.imageset\" />
+    <Folder Include="Assets.xcassets\icons8_pdf_32.imageset\" />
+    <Folder Include="Assets.xcassets\icons8_search_32.imageset\" />
+    <Folder Include="Assets.xcassets\icons8_trash_can_32.imageset\" />
   </ItemGroup>
 </Project>
