@@ -22,6 +22,7 @@
         </Grid>
 
         <Button Text="Create" Pressed="Handle_CreateNewListPressed"
+                ImageSource="icons8_add_list_32"
                 BorderColor="Black" BackgroundColor="White"
                 BorderWidth="1" Margin="10" HeightRequest="50"
                 VerticalOptions="Center" HorizontalOptions="Center"
