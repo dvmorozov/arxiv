@@ -73,7 +73,7 @@ namespace ArxivExpress.Features.SelectedArticles.Data
                 return rootElement;
             }
 
-            return new XElement("");
+            throw new Exception("Article list \"" + articleListName + "\" not found.");
         }
 
         /// <summary>

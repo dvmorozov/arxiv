@@ -27,7 +27,7 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
 
             var selectedArticlesListRepository = new SelectedArticlesListRepository(rootNode);
             var articleList = new SelectedArticleList(
-                selectedArticlesListRepository, _selectedArticlesListsRepository);
+                selectedArticlesListRepository, _selectedArticlesListsRepository, rootNode.Attribute("Name")?.Value);
 
             await _navigation.PushAsync(articleList);
         }

@@ -18,7 +18,7 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
 
         public SelectedArticleList(
             SelectedArticlesListRepository selectedArticlesListRepository,
-            SelectedArticlesListsRepository selectedArticlesListsRepository)
+            SelectedArticlesListsRepository selectedArticlesListsRepository, string Name)
         {
             _selectedArticlesListRepository = selectedArticlesListRepository ??
                 throw new Exception("Article repository is not assigned.");
@@ -26,6 +26,7 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
                 throw new Exception("Article lists repository is not assigned.");
 
             InitializeComponent();
+            Title = Name;
         }
 
         protected override void OnAppearing()
@@ -160,12 +161,12 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
 
         public async void Handle_RecentlyViewedPressed(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new ArticleList(ViewedArticlesRepository.GetInstance()));
+            await Navigation.PushAsync(new ArticleList(ViewedArticlesRepository.GetInstance(), "History"));
         }
 
         public async void Handle_LikedArticlesPressed(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new ArticleList(LikedArticlesRepository.GetInstance()));
+            await Navigation.PushAsync(new ArticleList(LikedArticlesRepository.GetInstance(), "Liked"));
         }
 
         public async void Handle_ViewedAuthorsPressed(object sender, System.EventArgs e)
