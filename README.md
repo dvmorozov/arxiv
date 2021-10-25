@@ -1,6 +1,10 @@
 # ArxivExpress
 Arxiv.org clients
 
+## Supported devices
+
+Minimum Android version is 10 as required by Xamarin and Google Play.
+
 ## Dependencies
 
 [Microsoft.SyndicationFeed.ReaderWriter](https://www.nuget.org/packages/Microsoft.SyndicationFeed.ReaderWriter)
