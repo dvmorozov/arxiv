@@ -74,17 +74,29 @@ namespace ArxivExpress.Features.ArticleInfo
             viewedArticleRepository.AddArticle(new Article(articleEntry));
         }
 
+        private void DisplayButtons()
+        {
+            FlexLayoutToolbar.Children.Clear();
+
+            CreatePdfUrl();
+            CreateAddLikedArticleButton(ArticleEntry);
+            CreateNewArticleListButton(ArticleEntry);
+            CreateAddToArticleListButton(ArticleEntry);
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            DisplayButtons();
+        }
+
         public ArticleInfo(IArticleEntry articleEntry)
         {
             ArticleEntry = articleEntry;
             BindingContext = this;
 
             InitializeComponent();
-
-            CreatePdfUrl();
-            CreateAddLikedArticleButton(articleEntry);
-            CreateNewArticleListButton(articleEntry);
-            CreateAddToArticleListButton(articleEntry);
 
             AddArticleToViewedList(articleEntry);
         }
