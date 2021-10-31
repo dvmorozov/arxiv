@@ -1,4 +1,9 @@
-﻿using System.Collections.ObjectModel;
+// ****************************************************************************
+//    File "SearchArticlesRepository.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using ArxivExpress.Features.Data;
 

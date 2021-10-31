@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+// ****************************************************************************
+//    File "IArticleEntry.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using System.Collections.Generic;
 
 namespace ArxivExpress.Features.SearchArticles
 {

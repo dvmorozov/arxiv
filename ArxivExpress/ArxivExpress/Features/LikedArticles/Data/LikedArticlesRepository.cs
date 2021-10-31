@@ -1,4 +1,9 @@
-﻿using System;
+// ****************************************************************************
+//    File "LikedArticlesRepository.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;

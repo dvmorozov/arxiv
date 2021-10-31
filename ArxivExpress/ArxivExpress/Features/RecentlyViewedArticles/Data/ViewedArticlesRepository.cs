@@ -1,4 +1,9 @@
-﻿using ArxivExpress.Features.LikedArticles;
+// ****************************************************************************
+//    File "ViewedArticlesRepository.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using ArxivExpress.Features.LikedArticles;
 using ArxivExpress.Features.SearchArticles;
 using ArxivExpress.Features.ViewedAuthors.Data;
 using ArxivExpress.Features.ViewedAuthors.Model;

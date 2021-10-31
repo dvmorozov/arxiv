@@ -1,4 +1,9 @@
-﻿using Xamarin.Forms;
+// ****************************************************************************
+//    File "App.xaml.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using Xamarin.Forms;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;

@@ -1,4 +1,9 @@
-﻿using Xamarin.Forms;
+// ****************************************************************************
+//    File "Buttons.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using Xamarin.Forms;
 
 namespace ArxivExpress
 {

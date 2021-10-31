@@ -1,4 +1,9 @@
-﻿using System;
+// ****************************************************************************
+//    File "ToggleLikeButton.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using System;
 using ArxivExpress.Features.SearchArticles;
 
 namespace ArxivExpress.Features.LikedArticles.Forms

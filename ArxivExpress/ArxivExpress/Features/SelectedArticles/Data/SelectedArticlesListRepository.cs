@@ -1,4 +1,9 @@
-﻿using System.Xml.Linq;
+// ****************************************************************************
+//    File "SelectedArticlesListRepository.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using System.Xml.Linq;
 using ArxivExpress.Features.Data;
 
 namespace ArxivExpress.Features.SelectedArticles.Data

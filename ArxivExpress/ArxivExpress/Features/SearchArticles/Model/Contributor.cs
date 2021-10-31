@@ -1,4 +1,9 @@
-﻿namespace ArxivExpress.Features.SearchArticles
+// ****************************************************************************
+//    File "Contributor.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+namespace ArxivExpress.Features.SearchArticles
 {
     public class Contributor
     {

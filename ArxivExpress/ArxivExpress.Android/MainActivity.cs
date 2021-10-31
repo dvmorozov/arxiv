@@ -1,4 +1,9 @@
-﻿using Android.App;
+// ****************************************************************************
+//    File "MainActivity.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;

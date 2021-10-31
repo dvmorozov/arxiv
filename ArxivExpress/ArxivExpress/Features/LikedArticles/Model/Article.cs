@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+// ****************************************************************************
+//    File "Article.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using System.Collections.Generic;
 using ArxivExpress.Features.SearchArticles;
 
 namespace ArxivExpress.Features.LikedArticles

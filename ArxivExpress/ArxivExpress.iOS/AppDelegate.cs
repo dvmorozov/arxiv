@@ -1,4 +1,9 @@
-﻿using Foundation;
+// ****************************************************************************
+//    File "AppDelegate.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using Foundation;
 using Microsoft.AppCenter.Distribute;
 using PCLAppConfig;
 using UIKit;

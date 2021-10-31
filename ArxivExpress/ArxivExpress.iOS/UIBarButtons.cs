@@ -1,4 +1,9 @@
-﻿using System;
+// ****************************************************************************
+//    File "UIBarButtons.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using System;
 using UIKit;
 
 namespace ArxivExpress.iOS

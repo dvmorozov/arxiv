@@ -1,4 +1,9 @@
-﻿using System;
+// ****************************************************************************
+//    File "AuthorList.xaml.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using System;
 using System.Collections.ObjectModel;
 using ArxivExpress.Features.LikedArticles;
 using ArxivExpress.Features.RecentlyViewedArticles.Data;

@@ -1,4 +1,9 @@
-﻿using System.Reflection;
+// ****************************************************************************
+//    File "AssemblyInfo.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 

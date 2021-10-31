@@ -1,4 +1,9 @@
-﻿using System;
+// ****************************************************************************
+//    File "NewList.xaml.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using System;
 using ArxivExpress.Features.SearchArticles;
 using ArxivExpress.Features.SelectedArticles.Data;
 using Xamarin.Forms;

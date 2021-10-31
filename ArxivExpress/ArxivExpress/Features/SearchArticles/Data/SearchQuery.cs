@@ -1,4 +1,8 @@
-﻿
+// ****************************************************************************
+//    File "SearchQuery.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
 namespace ArxivExpress.Features.SearchArticles
 {
     //  TODO: Convert SearchQuery to singleton.

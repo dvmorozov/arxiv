@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+// ****************************************************************************
+//    File "ArticlesRepository.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;

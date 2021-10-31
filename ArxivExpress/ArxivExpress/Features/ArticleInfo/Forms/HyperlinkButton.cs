@@ -1,4 +1,9 @@
-﻿using System;
+// ****************************************************************************
+//    File "HyperlinkButton.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using System;
 using Xamarin.Essentials;
 
 namespace ArxivExpress.Features.ArticleInfo.Forms

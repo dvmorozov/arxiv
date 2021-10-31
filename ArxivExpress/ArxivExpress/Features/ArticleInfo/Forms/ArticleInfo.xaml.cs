@@ -1,4 +1,9 @@
-﻿using ArxivExpress.Features.ArticleInfo.Forms;
+// ****************************************************************************
+//    File "ArticleInfo.xaml.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using ArxivExpress.Features.ArticleInfo.Forms;
 using ArxivExpress.Features.LikedArticles;
 using ArxivExpress.Features.LikedArticles.Forms;
 using ArxivExpress.Features.RecentlyViewedArticles.Data;

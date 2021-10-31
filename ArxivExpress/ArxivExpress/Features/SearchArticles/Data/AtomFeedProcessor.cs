@@ -1,4 +1,9 @@
-﻿using System.Collections.ObjectModel;
+// ****************************************************************************
+//    File "AtomFeedProcessor.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using System.Collections.ObjectModel;
 using Microsoft.SyndicationFeed;
 
 namespace ArxivExpress.Features.SearchArticles

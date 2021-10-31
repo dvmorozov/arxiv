@@ -1,4 +1,9 @@
-﻿using System;
+// ****************************************************************************
+//    File "SearchQueryRepository.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using System;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;

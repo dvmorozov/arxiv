@@ -1,4 +1,9 @@
-﻿using System;
+// ****************************************************************************
+//    File "NewArticleListButton.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using System;
 using System.Threading.Tasks;
 using ArxivExpress.Features.SearchArticles;
 

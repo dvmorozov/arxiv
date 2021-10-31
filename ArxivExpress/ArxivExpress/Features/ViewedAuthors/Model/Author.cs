@@ -1,4 +1,8 @@
-﻿
+// ****************************************************************************
+//    File "Author.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
 namespace ArxivExpress.Features.ViewedAuthors.Model
 {
     public class Author

@@ -1,4 +1,9 @@
-﻿using System;
+// ****************************************************************************
+//    File "AppInitializer.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using System;
 using Xamarin.UITest;
 using Xamarin.UITest.Queries;
 

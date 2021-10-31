@@ -1,4 +1,9 @@
-﻿using System.IO;
+// ****************************************************************************
+//    File "AtomFeedRequest.cs"
+//    Copyright © Dmitry Morozov 2021
+// ****************************************************************************
+
+using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Xml;
