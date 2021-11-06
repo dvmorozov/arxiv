@@ -35,6 +35,8 @@ namespace ArxivExpress.Features.Data
 
         private string _contributorElementName => "Contributor";
 
+        public List<IArticleEntry> Articles => _articles;
+
         /// <summary>
         /// Loads article list from XML element.
         /// </summary>

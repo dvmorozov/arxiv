@@ -23,7 +23,7 @@ namespace ArxivExpress.Features.SelectedArticles.Data
         private static SelectedArticlesListsRepository _instance;
 
         private List<SelectedArticlesList> _selectedArticlesLists;
-        public List<SelectedArticlesList> Articles => _selectedArticlesLists;
+        public List<SelectedArticlesList> ArticlesLists => _selectedArticlesLists;
 
         private SelectedArticlesListsRepository()
         {

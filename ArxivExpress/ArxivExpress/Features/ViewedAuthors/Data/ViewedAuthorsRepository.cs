@@ -6,11 +6,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using ArxivExpress.Features.Data;
+using ArxivExpress.Features.LikedArticles;
+using ArxivExpress.Features.SelectedArticles.Data;
 using ArxivExpress.Features.ViewedAuthors.Model;
 
 namespace ArxivExpress.Features.ViewedAuthors.Data
@@ -38,65 +38,54 @@ namespace ArxivExpress.Features.ViewedAuthors.Data
 
         private string GetFileName()
         {
-            return "viewed_authors.xml";
+            throw new Exception("This method should not be called.");
         }
 
         private string GetElementName()
         {
-            return "ViewedAuthors";
+            throw new Exception("This method should not be called.");
         }
 
         private string GetRootElementName()
         {
-            return "ViewedAuthorsList";
+            throw new Exception("This method should not be called.");
         }
 
         private string GetFilePath()
         {
-            return Path.Combine(Environment.GetFolderPath(
-                Environment.SpecialFolder.LocalApplicationData), GetFileName());
+            throw new Exception("This method should not be called.");
         }
 
         private List<Author> LoadAuthors()
         {
-            var filePath = GetFilePath();
+            var likedArticlesRepository = LikedArticlesRepository.GetInstance();
+            var likedArticles = likedArticlesRepository.Articles;
 
-            if (File.Exists(filePath))
+            var uniqueAuthors = new SortedSet<string>();
+
+            foreach (var article in likedArticles)
             {
-                var xml = XDocument.Load(filePath);
-                var list = (
-                    from searchQuery
-                    in xml.Root.Descendants(GetElementName())
-                    where searchQuery.Attribute("Name") != null
-                    select new Author
-                    {
-                        Name = searchQuery.Attribute("Name").Value
-                    }
-                ).OrderBy(author => author.Name).ToList();
-
-                return list;
+                foreach (var contributor in article.Contributors)
+                    uniqueAuthors.Add(contributor.Name);
             }
 
-            return new List<Author>();
-        }
-
-        private void SaveAuthors()
-        {
-            var filePath = GetFilePath();
-
-            var xml = new XDocument();
-            var authorElements = new XElement[_viewedAuthors.Count];
-
-            for (var i = 0; i < _viewedAuthors.Count; i++)
+            var selectedArticlesListsRepository = SelectedArticlesListsRepository.GetInstance();
+            var selectedArticlesLists = selectedArticlesListsRepository.ArticlesLists;
+            foreach (var selectedArticlesList in selectedArticlesLists)
             {
-                var attributes = new object[1];
-                attributes[0] = new XAttribute("Name", _viewedAuthors[i].Name);
+                var rootNode = selectedArticlesListsRepository.GetArticleListRoot(selectedArticlesList.Name);
+                var selectedArticlesListRepository = new SelectedArticlesListRepository(rootNode);
 
-                authorElements[i] = new XElement(GetElementName(), attributes);
+                foreach (var article in selectedArticlesListRepository.Articles)
+                {
+                    foreach (var contributor in article.Contributors)
+                        uniqueAuthors.Add(contributor.Name);
+                }
             }
 
-            xml.Add(new XElement(GetRootElementName(), authorElements));
-            xml.Save(filePath);
+            return (from author
+                    in uniqueAuthors
+                    select new Author { Name = author }).ToList();
         }
 
         public async Task<ObservableCollection<Author>> LoadFirstPage()
@@ -154,15 +143,6 @@ namespace ArxivExpress.Features.ViewedAuthors.Data
         {
             var start = GetPageNumber() * GetResultsPerPage();
             return GetResultsPerPage() >= _viewedAuthors.Count - start;
-        }
-
-        public void AddAuthor(Author author)
-        {
-            if (!_viewedAuthors.Exists(item => item.Name == author.Name))
-            {
-                _viewedAuthors.Insert(0, author);
-                SaveAuthors();
-            }
         }
 
         public bool IsEmpty()

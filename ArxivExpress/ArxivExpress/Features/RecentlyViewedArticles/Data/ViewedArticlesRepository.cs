@@ -55,15 +55,6 @@ namespace ArxivExpress.Features.RecentlyViewedArticles.Data
             }
         }
 
-        private void AddAuthors(IArticleEntry article)
-        {
-            foreach (var autor in article.Contributors)
-            {
-                _viewedAuthorsRepository.AddAuthor(
-                    new Author() { Name = autor.Name });
-            }
-        }
-
         public override void AddArticle(IArticleEntry article)
         {
             if (!_articles.Exists(item => item.Id == article.Id))
@@ -71,8 +62,6 @@ namespace ArxivExpress.Features.RecentlyViewedArticles.Data
                 _articles.Insert(0, article);
                 LimitArticleNumber();
                 SaveArticles();
-
-                AddAuthors(article);
             }
             else
                 MoveArticleToTop(article);
