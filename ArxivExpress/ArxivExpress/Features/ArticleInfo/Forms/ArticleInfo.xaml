@@ -54,7 +54,7 @@
                  </StackLayout>
             </ScrollView>
 
-            <FlexLayout Margin="0,10,0,0" Direction="Row" HeightRequest="70"
+            <FlexLayout Margin="0,10,0,20" Direction="Row" HeightRequest="70"
                         JustifyContent="Center" Wrap="Wrap"
                         x:Name="FlexLayoutToolbar">
             <!-- Cleaned on form displaying. -->

@@ -35,7 +35,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <FlexLayout Margin="0,10,0,0" Direction="Row" HeightRequest="70"
+        <FlexLayout Margin="0,10,0,20" Direction="Row" HeightRequest="70"
             JustifyContent="Center" Wrap="Wrap">
 
             <Button Text="" Pressed="Handle_SearchPressed"
