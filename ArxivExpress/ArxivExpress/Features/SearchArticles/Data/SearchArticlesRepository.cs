@@ -3,6 +3,7 @@
 //    Copyright © Dmitry Morozov 2021
 // ****************************************************************************
 
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using ArxivExpress.Features.Data;
@@ -31,22 +32,30 @@ namespace ArxivExpress.Features.SearchArticles
 
         public async Task<ObservableCollection<IArticleEntry>> LoadFirstPage()
         {
-            var atomFeedProcessor = new AtomFeedProcessor();
-
-            await AtomFeedRequest.MakeRequest(
-                SearchQuery.GetQueryString(), atomFeedProcessor);
-
-            var result = new ObservableCollection<IArticleEntry>();
-
-            foreach (var article in atomFeedProcessor.Items)
+            try
             {
-                result.Add(article);
+                var atomFeedProcessor = new AtomFeedProcessor();
+
+                await AtomFeedRequest.MakeRequest(
+                    SearchQuery.GetQueryString(), atomFeedProcessor);
+
+                var result = new ObservableCollection<IArticleEntry>();
+
+                foreach (var article in atomFeedProcessor.Items)
+                {
+                    result.Add(article);
+                }
+
+                _isLastPage = result.Count < GetResultsPerPage();
+                _isEmpty = result.Count == 0 && GetPageNumber() == 0;
+
+                return result;
             }
-
-            _isLastPage = result.Count < GetResultsPerPage();
-            _isEmpty = result.Count == 0 && GetPageNumber() == 0;
-
-            return result;
+            catch (Exception ex)
+            {
+                //  TODO: add logging (and show error message).
+                return new ObservableCollection<IArticleEntry>();
+            }
         }
 
         public async Task<ObservableCollection<IArticleEntry>> LoadNextPage()

@@ -3,6 +3,7 @@
 //    Copyright © Dmitry Morozov 2021
 // ****************************************************************************
 
+using System;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
