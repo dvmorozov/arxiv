@@ -16,38 +16,35 @@
                            Style="{DynamicResource ListItemDetailTextStyle}"
                            LineBreakMode="WordWrap"/>
 
-                    <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
-                                JustifyContent="SpaceBetween" Wrap="Wrap"
+                    <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start" Wrap="Wrap"
                                 BindableLayout.ItemsSource="{Binding ArticleEntry.Contributors}">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
                                 <Label Text="{Binding Name}"
                                         Style="{DynamicResource ListItemDetailTextStyle}"
-                                        LineBreakMode="WordWrap"/>
+                                        LineBreakMode="WordWrap" Margin="0,0,10,0"/>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </FlexLayout>
 
-                    <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
-                                JustifyContent="SpaceBetween" Wrap="Wrap">
+                    <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start" Wrap="Wrap">
 
                         <Label Text="{Binding ArticleEntry.PublishedWithLabel}"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
-                                LineBreakMode="WordWrap"/>
+                                LineBreakMode="WordWrap" Margin="0,0,10,0"/>
 
                         <Label Text="{Binding ArticleEntry.LastUpdatedWithLabel}"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
                                 LineBreakMode="WordWrap"/>
                     </FlexLayout>
 
-                    <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start"
-                                JustifyContent="SpaceBetween" Wrap="Wrap"
+                    <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start" Wrap="Wrap"
                                 BindableLayout.ItemsSource="{Binding ArticleEntry.Categories}">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
                                 <Label Text="{Binding .}"
                                         Style="{DynamicResource ListItemDetailTextStyle}"
-                                        LineBreakMode="WordWrap"/>
+                                        LineBreakMode="WordWrap" Margin="0,0,10,0"/>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </FlexLayout>
