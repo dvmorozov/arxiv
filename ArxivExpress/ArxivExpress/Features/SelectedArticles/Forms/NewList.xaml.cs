@@ -40,7 +40,7 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             }
         }
 
-        private async void Handle_CreateNewListPressed(object sender, EventArgs e)
+        private void Handle_CreateNewListPressed(object sender, EventArgs e)
         {
             var selectedArticlesListsRepository = SelectedArticlesListsRepository.GetInstance();
             selectedArticlesListsRepository.AddList(_listName);

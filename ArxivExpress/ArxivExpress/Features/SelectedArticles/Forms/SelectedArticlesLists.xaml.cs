@@ -85,7 +85,7 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             Items = await _selectedArticlesListsHelper.Repository.LoadFirstPage();
         }
 
-        private async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
+        private void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e.Item == null)
                 return;
@@ -95,11 +95,11 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
                 switch (_listMode)
                 {
                     case (ListMode.ViewList):
-                        await _selectedArticlesListsHelper.OpenArticleList(list.Name);
+                        _selectedArticlesListsHelper.OpenArticleList(list.Name);
                         break;
 
                     case (ListMode.AddArticleToList):
-                        await _selectedArticlesListsHelper.AddArticleToList(list.Name, _articleEntry);
+                        _selectedArticlesListsHelper.AddArticleToList(list.Name, _articleEntry);
                         _listMode = ListMode.ViewList;
                         break;
 
@@ -188,29 +188,29 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             }
         }
 
-        public async void Handle_SearchPressed(object sender, System.EventArgs e)
+        public void Handle_SearchPressed(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new SearchAttributes());
+            Navigation.PushAsync(new SearchAttributes());
         }
 
-        public async void Handle_RecentlyViewedPressed(object sender, System.EventArgs e)
+        public void Handle_RecentlyViewedPressed(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new ArticleList(ViewedArticlesRepository.GetInstance(), "History"));
+            Navigation.PushAsync(new ArticleList(ViewedArticlesRepository.GetInstance(), "History"));
         }
 
-        public async void Handle_LikedArticlesPressed(object sender, System.EventArgs e)
+        public void Handle_LikedArticlesPressed(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new ArticleList(LikedArticlesRepository.GetInstance(), "Liked"));
+            Navigation.PushAsync(new ArticleList(LikedArticlesRepository.GetInstance(), "Liked"));
         }
 
-        public async void Handle_ViewedAuthorsPressed(object sender, System.EventArgs e)
+        public void Handle_ViewedAuthorsPressed(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new AuthorList());
+            Navigation.PushAsync(new AuthorList());
         }
 
-        public async void Handle_ListsPressed(object sender, System.EventArgs e)
+        public void Handle_ListsPressed(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new SelectedArticlesLists());
+            Navigation.PushAsync(new SelectedArticlesLists());
         }
     }
 }

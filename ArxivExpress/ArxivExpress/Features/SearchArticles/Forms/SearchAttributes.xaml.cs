@@ -175,32 +175,32 @@ namespace ArxivExpress.Features.SearchArticles
             }
         }
 
-        private async void Handle_SearchPressed(object sender, EventArgs e)
+        private void Handle_SearchPressed(object sender, EventArgs e)
         {
             _searchQueryRepository.SaveSearchQuery(_searchQuery);
             _searchArticleRepository.SearchQuery = _searchQuery;
 
             var articleList = new ArticleList(_searchArticleRepository, "Found");
-            await Navigation.PushAsync(articleList);
+            Navigation.PushAsync(articleList);
         }
-        public async void Handle_RecentlyViewedPressed(object sender, System.EventArgs e)
+        public void Handle_RecentlyViewedPressed(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new ArticleList(ViewedArticlesRepository.GetInstance(), "History"));
-        }
-
-        public async void Handle_LikedArticlesPressed(object sender, System.EventArgs e)
-        {
-            await Navigation.PushAsync(new ArticleList(LikedArticlesRepository.GetInstance(), "Liked"));
+            Navigation.PushAsync(new ArticleList(ViewedArticlesRepository.GetInstance(), "History"));
         }
 
-        public async void Handle_ViewedAuthorsPressed(object sender, System.EventArgs e)
+        public void Handle_LikedArticlesPressed(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new AuthorList());
+            Navigation.PushAsync(new ArticleList(LikedArticlesRepository.GetInstance(), "Liked"));
         }
 
-        public async void Handle_ListsPressed(object sender, System.EventArgs e)
+        public void Handle_ViewedAuthorsPressed(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new SelectedArticlesLists());
+            Navigation.PushAsync(new AuthorList());
+        }
+
+        public void Handle_ListsPressed(object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new SelectedArticlesLists());
         }
     }
 }

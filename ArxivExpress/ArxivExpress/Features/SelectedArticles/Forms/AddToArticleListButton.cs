@@ -21,17 +21,17 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             Clicked += Handle_Pressed;
         }
 
-        private async void Handle_Pressed(object sender, EventArgs e)
+        private void Handle_Pressed(object sender, EventArgs e)
         {
             if (sender == this)
             {
-                await AddArticleToListAsync();
+                AddArticleToListAsync();
             }
         }
 
-        private async Task AddArticleToListAsync()
+        private void AddArticleToListAsync()
         {
-            await Navigation.PushAsync(new SelectedArticlesLists(_articleEntry));
+            Navigation.PushAsync(new SelectedArticlesLists(_articleEntry));
         }
     }
 }

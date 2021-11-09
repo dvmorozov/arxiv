@@ -26,7 +26,7 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             _selectedArticlesListsRepository = SelectedArticlesListsRepository.GetInstance();
         }
 
-        public async Task OpenArticleList(string listName)
+        public void OpenArticleList(string listName)
         {
             var rootNode = _selectedArticlesListsRepository.GetArticleListRoot(listName);
 
@@ -34,10 +34,10 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             var articleList = new SelectedArticleList(
                 selectedArticlesListRepository, _selectedArticlesListsRepository, rootNode.Attribute("Name")?.Value);
 
-            await _navigation.PushAsync(articleList);
+            _navigation.PushAsync(articleList);
         }
 
-        public async Task AddArticleToList(string listName, IArticleEntry articleEntry)
+        public void AddArticleToList(string listName, IArticleEntry articleEntry)
         {
             var rootNode = _selectedArticlesListsRepository.GetArticleListRoot(listName);
 
@@ -46,7 +46,7 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
 
             _selectedArticlesListsRepository.ReplaceArticleListElement(articlesListRepository.Root);
 
-            await OpenArticleList(listName);
+            OpenArticleList(listName);
         }
     }
 }
