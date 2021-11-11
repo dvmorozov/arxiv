@@ -82,7 +82,14 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
 
         public async void LoadSelectedArticlesLists()
         {
-            Items = await _selectedArticlesListsHelper.Repository.LoadFirstPage();
+            try
+            {
+                Items = await _selectedArticlesListsHelper.Repository.LoadFirstPage();
+            }
+            catch (Exception e)
+            {
+                await DisplayAlert("Error", e.Message, "Ok");
+            }
         }
 
         private void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -114,14 +121,22 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
 
         public async void Handle_ToolbarItemClicked(object sender, EventArgs e)
         {
-            ToolbarItem item = (ToolbarItem)sender;
-            if (item == _toolbarItemNextPage)
+            try
             {
-                Items = await _selectedArticlesListsHelper.Repository.LoadNextPage();
+                ToolbarItem item = (ToolbarItem)sender;
+
+                if (item == _toolbarItemNextPage)
+                {
+                    Items = await _selectedArticlesListsHelper.Repository.LoadNextPage();
+                }
+                else if (item == _toolbarItemPrevPage)
+                {
+                    Items = await _selectedArticlesListsHelper.Repository.LoadPrevPage();
+                }
             }
-            else if (item == _toolbarItemPrevPage)
+            catch (Exception ex)
             {
-                Items = await _selectedArticlesListsHelper.Repository.LoadPrevPage();
+                await DisplayAlert("Error", ex.Message, "Ok");
             }
         }
 

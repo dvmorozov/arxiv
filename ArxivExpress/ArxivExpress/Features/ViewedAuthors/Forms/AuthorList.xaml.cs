@@ -28,7 +28,14 @@ namespace ArxivExpress.Features.ViewedAuthors.Forms
 
         public async void LoadAuthors()
         {
-            Items = await _authorsRepository.LoadFirstPage();
+            try
+            {
+                Items = await _authorsRepository.LoadFirstPage();
+            }
+            catch (Exception e)
+            {
+                await DisplayAlert("Error", e.Message, "Ok");
+            }
         }
 
         protected override void OnAppearing()
@@ -59,14 +66,22 @@ namespace ArxivExpress.Features.ViewedAuthors.Forms
 
         public async void Handle_ToolbarItemClicked(object sender, EventArgs e)
         {
-            ToolbarItem item = (ToolbarItem)sender;
-            if (item == _toolbarItemNextPage)
+            try
             {
-                Items = await _authorsRepository.LoadNextPage();
+                ToolbarItem item = (ToolbarItem)sender;
+
+                if (item == _toolbarItemNextPage)
+                {
+                    Items = await _authorsRepository.LoadNextPage();
+                }
+                else if (item == _toolbarItemPrevPage)
+                {
+                    Items = await _authorsRepository.LoadPrevPage();
+                }
             }
-            else if (item == _toolbarItemPrevPage)
+            catch (Exception ex)
             {
-                Items = await _authorsRepository.LoadPrevPage();
+                await DisplayAlert("Error", ex.Message, "Ok");
             }
         }
 

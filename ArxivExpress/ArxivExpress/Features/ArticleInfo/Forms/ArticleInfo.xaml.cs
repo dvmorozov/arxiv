@@ -3,6 +3,8 @@
 //    Copyright © Dmitry Morozov 2021
 // ****************************************************************************
 
+using System;
+using System.Threading.Tasks;
 using ArxivExpress.Features.ArticleInfo.Forms;
 using ArxivExpress.Features.LikedArticles;
 using ArxivExpress.Features.LikedArticles.Forms;
@@ -22,17 +24,34 @@ namespace ArxivExpress.Features.ArticleInfo
         private class HyperlinkLabel : Label
         {
             public string Url { get; }
+            private ContentPage _page;
 
-            public HyperlinkLabel(string text, string url)
+            private async Task Handle_Tap(string url)
             {
+                try
+                {
+                    await Launcher.OpenAsync(url);
+                }
+                catch (Exception e)
+                {
+                    await _page.DisplayAlert("Error", e.Message, "Ok");
+                }
+            }
+
+            public HyperlinkLabel(string text, string url, ContentPage page)
+            {
+                if (page == null)
+                    throw new Exception("Page is not assigned.");
+
                 Url = url;
                 Text = text;
+                _page = page;
 
                 TextDecorations = TextDecorations.Underline;
                 TextColor = Color.Blue;
                 GestureRecognizers.Add(new TapGestureRecognizer
                 {
-                    Command = new Command(async () => await Launcher.OpenAsync(Url))
+                    Command = new Command(async () => await Handle_Tap(Url))
                 });
             }
         }

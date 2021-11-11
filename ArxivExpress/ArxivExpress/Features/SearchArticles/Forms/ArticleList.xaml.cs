@@ -30,7 +30,14 @@ namespace ArxivExpress.Features.SearchArticles
 
         public async void LoadArticles()
         {
-            Items = await _articleRepository.LoadFirstPage();
+            try
+            {
+                Items = await _articleRepository.LoadFirstPage();
+            }
+            catch (Exception e)
+            {
+                await DisplayAlert("Error", e.Message, "Ok");
+            }
         }
 
         protected override void OnAppearing()
@@ -55,14 +62,22 @@ namespace ArxivExpress.Features.SearchArticles
 
         public async void Handle_ToolbarItemClicked(object sender, EventArgs e)
         {
-            ToolbarItem item = (ToolbarItem)sender;
-            if (item == _toolbarItemNextPage)
-            {
-                Items = await _articleRepository.LoadNextPage();
+            try
+            { 
+                ToolbarItem item = (ToolbarItem)sender;
+
+                if (item == _toolbarItemNextPage)
+                {
+                    Items = await _articleRepository.LoadNextPage();
+                }
+                else if (item == _toolbarItemPrevPage)
+                {
+                    Items = await _articleRepository.LoadPrevPage();
+                }
             }
-            else if (item == _toolbarItemPrevPage)
+            catch (Exception ex)
             {
-                Items = await _articleRepository.LoadPrevPage();
+                await DisplayAlert("Error", ex.Message, "Ok");
             }
         }
 

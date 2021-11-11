@@ -32,30 +32,22 @@ namespace ArxivExpress.Features.SearchArticles
 
         public async Task<ObservableCollection<IArticleEntry>> LoadFirstPage()
         {
-            try
+            var atomFeedProcessor = new AtomFeedProcessor();
+
+            await AtomFeedRequest.MakeRequest(
+                SearchQuery.GetQueryString(), atomFeedProcessor);
+
+            var result = new ObservableCollection<IArticleEntry>();
+
+            foreach (var article in atomFeedProcessor.Items)
             {
-                var atomFeedProcessor = new AtomFeedProcessor();
-
-                await AtomFeedRequest.MakeRequest(
-                    SearchQuery.GetQueryString(), atomFeedProcessor);
-
-                var result = new ObservableCollection<IArticleEntry>();
-
-                foreach (var article in atomFeedProcessor.Items)
-                {
-                    result.Add(article);
-                }
-
-                _isLastPage = result.Count < GetResultsPerPage();
-                _isEmpty = result.Count == 0 && GetPageNumber() == 0;
-
-                return result;
+                result.Add(article);
             }
-            catch (Exception ex)
-            {
-                //  TODO: add logging (and show error message).
-                return new ObservableCollection<IArticleEntry>();
-            }
+
+            _isLastPage = result.Count < GetResultsPerPage();
+            _isEmpty = result.Count == 0 && GetPageNumber() == 0;
+
+            return result;
         }
 
         public async Task<ObservableCollection<IArticleEntry>> LoadNextPage()
