@@ -42,14 +42,7 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
 
         public async void LoadArticles()
         {
-            try
-            {
-                Items = await _selectedArticlesListRepository.LoadFirstPage();
-            }
-            catch (Exception e)
-            {
-                await DisplayAlert("Error", e.Message, "Ok");
-            }
+            Items = await _selectedArticlesListRepository.LoadFirstPage();
         }
 
         private void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -83,7 +76,7 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.Message, "Ok");
+                await ArticleList.DisplayAlert(ex, this);
             }
         }
 

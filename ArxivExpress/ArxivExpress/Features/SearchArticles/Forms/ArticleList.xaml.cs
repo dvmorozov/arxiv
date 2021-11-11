@@ -4,12 +4,15 @@
 // ****************************************************************************
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using ArxivExpress.Features.Data;
 using ArxivExpress.Features.LikedArticles;
 using ArxivExpress.Features.RecentlyViewedArticles.Data;
 using ArxivExpress.Features.SelectedArticles.Forms;
 using ArxivExpress.Features.ViewedAuthors.Forms;
+using Microsoft.AppCenter.Crashes;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -28,6 +31,25 @@ namespace ArxivExpress.Features.SearchArticles
             Title = title;
         }
 
+        public static async Task DisplayAlert(Exception e, Page page)
+        {
+            if (page == null)
+                throw new Exception("Page is not assigned.");
+            if (e == null)
+                throw new Exception("Exception object is not assigned.");
+
+            var properties = new Dictionary<string, string>
+                {
+                    {"Message", e.Message},
+                    {"Source", e.Source },
+                    {"InnerException", e.InnerException?.Message}
+                };
+            var errorAttachmentLog = ErrorAttachmentLog.AttachmentWithText(e.StackTrace, e.Source);
+            Crashes.TrackError(e, properties, errorAttachmentLog);
+
+            await page.DisplayAlert("Error", e.Message, "Ok");
+        }
+
         public async void LoadArticles()
         {
             try
@@ -36,7 +58,7 @@ namespace ArxivExpress.Features.SearchArticles
             }
             catch (Exception e)
             {
-                await DisplayAlert("Error", e.Message, "Ok");
+                await DisplayAlert(e, this);
             }
         }
 
@@ -77,7 +99,7 @@ namespace ArxivExpress.Features.SearchArticles
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.Message, "Ok");
+                await DisplayAlert(ex, this);
             }
         }
 

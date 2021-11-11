@@ -88,7 +88,7 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             }
             catch (Exception e)
             {
-                await DisplayAlert("Error", e.Message, "Ok");
+                await ArticleList.DisplayAlert(e, this);
             }
         }
 
@@ -136,7 +136,7 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.Message, "Ok");
+                await ArticleList.DisplayAlert(ex, this);
             }
         }
 
