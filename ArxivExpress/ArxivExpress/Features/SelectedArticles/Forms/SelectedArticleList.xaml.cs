@@ -152,10 +152,19 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             Navigation.PopAsync(true);
         }
 
-        private void OnDeleteListPressed(object sender, EventArgs e)
+        private async void OnDeleteListPressed(object sender, EventArgs e)
         {
-            _selectedArticlesListsRepository.DeleteArticleListElement(_selectedArticlesListRepository.Root);
-            Navigation.PopAsync(true);
+            if (_selectedArticlesListRepository.Root == null ||
+                _selectedArticlesListRepository.Root.Attribute("Name") == null)
+                throw new Exception("Root node is not assigned or its name is not assigned.");
+
+            if (await DisplayAlert("Please confirm",
+                "Delete list \"" + _selectedArticlesListRepository.Root.Attribute("Name").Value + "\"?",
+                "Yes", "No"))
+            {
+                _selectedArticlesListsRepository.DeleteArticleListElement(_selectedArticlesListRepository.Root);
+                await Navigation.PopAsync(true);
+            }
         }
 
         private void RemoveArticleFromList(IArticleEntry articleEntry)
