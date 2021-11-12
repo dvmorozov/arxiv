@@ -38,16 +38,20 @@ namespace ArxivExpress.Features.SearchArticles
             if (e == null)
                 throw new Exception("Exception object is not assigned.");
 
-            var properties = new Dictionary<string, string>
+            if (await page.DisplayAlert("Some error occured",
+                "Would you like to send information about error \"" + e.Message +
+                "\" to developers? No personal information is sent.",
+                "Yes", "No"))
+            {
+                var properties = new Dictionary<string, string>
                 {
                     {"Message", e.Message},
                     {"Source", e.Source },
                     {"InnerException", e.InnerException?.Message}
                 };
-            var errorAttachmentLog = ErrorAttachmentLog.AttachmentWithText(e.StackTrace, e.Source);
-            Crashes.TrackError(e, properties, errorAttachmentLog);
-
-            await page.DisplayAlert("Error", e.Message, "Ok");
+                var errorAttachmentLog = ErrorAttachmentLog.AttachmentWithText(e.StackTrace, e.Source);
+                Crashes.TrackError(e, properties, errorAttachmentLog);
+            }
         }
 
         public async void LoadArticles()
