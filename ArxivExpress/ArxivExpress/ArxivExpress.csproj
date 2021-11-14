@@ -40,7 +40,6 @@
     <Folder Include="Features\ViewedAuthors\" />
     <Folder Include="Features\ViewedAuthors\Data\" />
     <Folder Include="Features\ViewedAuthors\Forms\" />
-    <Folder Include="Features\Data\" />
     <Folder Include="Features\ViewedAuthors\Model\" />
     <Folder Include="Features\SelectedArticles\" />
     <Folder Include="Features\SelectedArticles\Data\" />
