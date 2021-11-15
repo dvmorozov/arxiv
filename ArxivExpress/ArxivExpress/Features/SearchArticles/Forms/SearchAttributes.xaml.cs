@@ -184,6 +184,7 @@ namespace ArxivExpress.Features.SearchArticles
             var articleList = new ArticleList(_searchArticleRepository, "Found");
             Navigation.PushAsync(articleList);
         }
+
         public void Handle_RecentlyViewedPressed(object sender, System.EventArgs e)
         {
             Navigation.PushAsync(new ArticleList(ViewedArticlesRepository.GetInstance(), "History"));
