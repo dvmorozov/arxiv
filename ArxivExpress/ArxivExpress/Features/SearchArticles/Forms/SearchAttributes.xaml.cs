@@ -10,6 +10,7 @@ using ArxivExpress.Features.RecentlyViewedArticles.Data;
 using ArxivExpress.Features.SearchArticles.Data;
 using ArxivExpress.Features.SelectedArticles.Forms;
 using ArxivExpress.Features.ViewedAuthors.Forms;
+using ArxivExpress.Forms;
 using Xamarin.Forms;
 
 namespace ArxivExpress.Features.SearchArticles
@@ -201,6 +202,11 @@ namespace ArxivExpress.Features.SearchArticles
         public void Handle_ListsPressed(object sender, System.EventArgs e)
         {
             Navigation.PushAsync(new SelectedArticlesLists());
+        }
+
+        public async void Handle_ToolbarItemAboutClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new About());
         }
     }
 }

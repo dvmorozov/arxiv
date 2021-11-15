@@ -12,6 +12,7 @@ using ArxivExpress.Features.LikedArticles;
 using ArxivExpress.Features.RecentlyViewedArticles.Data;
 using ArxivExpress.Features.SelectedArticles.Forms;
 using ArxivExpress.Features.ViewedAuthors.Forms;
+using ArxivExpress.Forms;
 using Microsoft.AppCenter.Crashes;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -86,7 +87,12 @@ namespace ArxivExpress.Features.SearchArticles
             ((ListView)sender).SelectedItem = null;
         }
 
-        public async void Handle_ToolbarItemClicked(object sender, EventArgs e)
+        public async void Handle_ToolbarItemAboutClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new About());
+        }
+
+        public async void Handle_ToolbarItemNavigationClicked(object sender, EventArgs e)
         {
             try
             { 
@@ -131,7 +137,7 @@ namespace ArxivExpress.Features.SearchArticles
             }
         }
 
-        private ToolbarItem CreateToolbarItem(uint pageNumber)
+        private ToolbarItem CreateToolbarNavigationItem(uint pageNumber)
         {
             var item = new ToolbarItem
             {
@@ -139,7 +145,7 @@ namespace ArxivExpress.Features.SearchArticles
                 Order = ToolbarItemOrder.Primary,
                 Priority = 0
             };
-            item.Clicked += Handle_ToolbarItemClicked;
+            item.Clicked += Handle_ToolbarItemNavigationClicked;
 
             return item;
         }
@@ -150,13 +156,13 @@ namespace ArxivExpress.Features.SearchArticles
 
             if (_articleRepository.GetPageNumber() > 0)
             {
-                _toolbarItemPrevPage = CreateToolbarItem(_articleRepository.GetPageNumber() - 1);
+                _toolbarItemPrevPage = CreateToolbarNavigationItem(_articleRepository.GetPageNumber() - 1);
                 ToolbarItems.Insert(0, _toolbarItemPrevPage);
             }
 
             if (!_articleRepository.IsLastPage())
             {
-                _toolbarItemNextPage = CreateToolbarItem(_articleRepository.GetPageNumber() + 1);
+                _toolbarItemNextPage = CreateToolbarNavigationItem(_articleRepository.GetPageNumber() + 1);
                 ToolbarItems.Add(_toolbarItemNextPage);
             }
         }

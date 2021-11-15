@@ -7,14 +7,9 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem
-            x:Name="ToolbarItemHome"
-            Text=""
-            IconImageSource="AppIcon"
-            Clicked="Handle_ToolbarItemClicked"/>
-        <ToolbarItem
-            x:Name="ToolbarItemNextPage"
-            Text=""
-            Clicked="Handle_ToolbarItemClicked"/>
+            x:Name="ToolbarItemAboutHome"
+            IconImageSource="icon"
+            Clicked="Handle_ToolbarItemAboutClicked"/>
     </ContentPage.ToolbarItems> 
 
     <StackLayout>

@@ -1,4 +1,4 @@
-// ****************************************************************************
+﻿// ****************************************************************************
 //    File "AuthorList.xaml.cs"
 //    Copyright © Dmitry Morozov 2021
 // ****************************************************************************
@@ -11,6 +11,7 @@ using ArxivExpress.Features.SearchArticles;
 using ArxivExpress.Features.SelectedArticles.Forms;
 using ArxivExpress.Features.ViewedAuthors.Data;
 using ArxivExpress.Features.ViewedAuthors.Model;
+using ArxivExpress.Forms;
 using Xamarin.Forms;
 
 namespace ArxivExpress.Features.ViewedAuthors.Forms
@@ -44,6 +45,11 @@ namespace ArxivExpress.Features.ViewedAuthors.Forms
             LoadAuthors();
         }
 
+        public async void Handle_ToolbarItemAboutClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new About());
+        }
+
         private void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e.Item == null)
@@ -64,7 +70,7 @@ namespace ArxivExpress.Features.ViewedAuthors.Forms
             ((ListView)sender).SelectedItem = null;
         }
 
-        public async void Handle_ToolbarItemClicked(object sender, EventArgs e)
+        public async void Handle_ToolbarItemNavigationClicked(object sender, EventArgs e)
         {
             try
             {
@@ -117,7 +123,7 @@ namespace ArxivExpress.Features.ViewedAuthors.Forms
                 Order = ToolbarItemOrder.Primary,
                 Priority = 0
             };
-            item.Clicked += Handle_ToolbarItemClicked;
+            item.Clicked += Handle_ToolbarItemNavigationClicked;
 
             return item;
         }

@@ -1,4 +1,4 @@
-// ****************************************************************************
+﻿// ****************************************************************************
 //    File "SelectedArticlesLists.xaml.cs"
 //    Copyright © Dmitry Morozov 2021
 // ****************************************************************************
@@ -10,6 +10,7 @@ using ArxivExpress.Features.RecentlyViewedArticles.Data;
 using ArxivExpress.Features.SearchArticles;
 using ArxivExpress.Features.SelectedArticles.Model;
 using ArxivExpress.Features.ViewedAuthors.Forms;
+using ArxivExpress.Forms;
 using Xamarin.Forms;
 
 namespace ArxivExpress.Features.SelectedArticles.Forms
@@ -119,7 +120,12 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
             ((ListView)sender).SelectedItem = null;
         }
 
-        public async void Handle_ToolbarItemClicked(object sender, EventArgs e)
+        public async void Handle_ToolbarItemAboutClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new About());
+        }
+
+        public async void Handle_ToolbarItemNavigationClicked(object sender, EventArgs e)
         {
             try
             {
@@ -172,7 +178,7 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
                 Order = ToolbarItemOrder.Primary,
                 Priority = 0
             };
-            item.Clicked += Handle_ToolbarItemClicked;
+            item.Clicked += Handle_ToolbarItemNavigationClicked;
 
             return item;
         }
