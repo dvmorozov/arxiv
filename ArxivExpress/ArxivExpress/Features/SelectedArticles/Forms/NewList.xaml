@@ -10,11 +10,6 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="40"/>
-            </Grid.RowDefinitions>
-
             <Label Grid.Column="0" Grid.Row="0" Text="List Name" VerticalOptions="End"/>
 
             <Entry Grid.Column="0" Grid.Row="1" x:Name="EntryListName" TextChanged="Handle_TextChanged"

@@ -19,11 +19,6 @@
                 <ColumnDefinition Width="0.4*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="40"/>
-            </Grid.RowDefinitions>
-
             <Label Grid.Column="0" Grid.Row="0" Text="Search Term" VerticalOptions="End"/>
             <Label Grid.Column="1" Grid.Row="0" Text="Search Field" VerticalOptions="End"/>
 
