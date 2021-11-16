@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Mail;
+using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -39,7 +40,12 @@ namespace ArxivExpress.Forms
 
         private void Handle_SendFeedbackPressed(object sender, EventArgs e)
         {
+            var properties = new Dictionary<string, string>
+            {
+                {"Feedback", Feedback}
+            };
 
+            Analytics.TrackEvent("Feedback", properties);
         }
     }
 }
