@@ -60,10 +60,6 @@
                         <ColumnDefinition Width="0.8*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
-                    </Grid.RowDefinitions>
-
                     <Picker Grid.Column="0" Grid.Row="0"
                             x:Name="PickerResultsPerPage" Title="50"
                             SelectedIndexChanged="Hangle_OnPickerSelectedIndexChanged">
