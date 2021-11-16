@@ -10,9 +10,20 @@ namespace ArxivExpress.Forms
 {
     public partial class About : ContentPage
     {
-        public string Version => VersionTracking.CurrentVersion;
+        public string Version => AppInfo.VersionString;
 
-        public string Build => VersionTracking.CurrentBuild;
+        public string Build => AppInfo.BuildString;
+
+        public string AppName => AppInfo.Name;
+
+        public string AppTitle
+        {
+            get
+            {
+                string[] parts = AppName.Split('.');
+                return "About " + (parts.Length != 0 ? parts[0] : "");
+            }
+        }
 
         public string Feedback;
 
