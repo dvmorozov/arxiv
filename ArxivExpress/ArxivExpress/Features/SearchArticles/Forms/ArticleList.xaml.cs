@@ -76,6 +76,9 @@ namespace ArxivExpress.Features.SearchArticles
 
         private void DisplayButtons()
         {
+            if (_menuButtons == null)
+                throw new Exception("Menu buttons are not assigned.");
+
             foreach (var button in _menuButtons)
                 FlexLayoutToolbar.Children.Add(button);
         }
