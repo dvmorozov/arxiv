@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using ArxivExpress.Features.Data;
-using ArxivExpress.Features.LikedArticles;
 using ArxivExpress.Features.RecentlyViewedArticles.Data;
 using ArxivExpress.Features.SelectedArticles.Forms;
 using ArxivExpress.Features.ViewedAuthors.Forms;
@@ -70,7 +69,28 @@ namespace ArxivExpress.Features.SearchArticles
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
             LoadArticles();
+            DisplayButtons();
+        }
+
+        private void DisplayButtons()
+        {
+            FlexLayoutToolbar.Children.Add(
+                new SearchButton()
+                );
+
+            FlexLayoutToolbar.Children.Add(
+                new RecentlyViewedButton()
+            );
+
+            FlexLayoutToolbar.Children.Add(
+                new AuthorListButton()
+                );
+
+            FlexLayoutToolbar.Children.Add(
+                new SelectedArticlesListsButton()
+                );
         }
 
         private void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -174,31 +194,6 @@ namespace ArxivExpress.Features.SearchArticles
                 ArticleListView.ItemsSource = value;
                 SetToolbarPageNavigationItems();
             }
-        }
-
-        public void Handle_SearchPressed(object sender, System.EventArgs e)
-        {
-            Navigation.PushAsync(new SearchAttributes());
-        }
-
-        public void Handle_RecentlyViewedPressed(object sender, System.EventArgs e)
-        {
-            Navigation.PushAsync(new ArticleList(ViewedArticlesRepository.GetInstance(), "History"));
-        }
-
-        public void Handle_LikedArticlesPressed(object sender, System.EventArgs e)
-        {
-            Navigation.PushAsync(new ArticleList(LikedArticlesRepository.GetInstance(), "Liked"));
-        }
-
-        public void Handle_ViewedAuthorsPressed(object sender, System.EventArgs e)
-        {
-            Navigation.PushAsync(new AuthorList());
-        }
-
-        public void Handle_ListsPressed(object sender, System.EventArgs e)
-        {
-            Navigation.PushAsync(new SelectedArticlesLists());
         }
     }
 }
