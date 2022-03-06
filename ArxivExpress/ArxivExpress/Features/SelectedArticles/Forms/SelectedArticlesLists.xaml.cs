@@ -49,7 +49,23 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
             LoadSelectedArticlesLists();
+            DisplayButtons();
+        }
+
+        private void DisplayButtons()
+        {
+            var menuButtons = new StyledButton[]
+            {
+                new SearchButton(),
+                new RecentlyViewedButton(),
+                new LikedListButton(),
+                new AuthorListButton()
+            };
+
+            foreach (var button in menuButtons)
+                FlexLayoutToolbar.Children.Add(button);
         }
 
         /// <summary>
@@ -207,47 +223,6 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
                 SelectedArticlesListsView.ItemsSource = value;
                 SetToolbarPageNavigationItems();
             }
-        }
-
-        public void Handle_SearchPressed(object sender, System.EventArgs e)
-        {
-            Navigation.PushAsync(new SearchAttributes());
-        }
-
-        public void Handle_RecentlyViewedPressed(object sender, System.EventArgs e)
-        {
-            Navigation.PushAsync(
-                new ArticleList(ViewedArticlesRepository.GetInstance(), "History",
-                new StyledButton[]
-                    {
-                        new SearchButton(),
-                        new LikedListButton(),
-                        new AuthorListButton(),
-                        new SelectedArticlesListsButton()
-                    }));
-        }
-
-        public void Handle_LikedArticlesPressed(object sender, System.EventArgs e)
-        {
-            Navigation.PushAsync(
-                new ArticleList(LikedArticlesRepository.GetInstance(), "Liked",
-                new StyledButton[]
-                    {
-                        new SearchButton(),
-                        new RecentlyViewedButton(),
-                        new AuthorListButton(),
-                        new SelectedArticlesListsButton()
-                    }));
-        }
-
-        public void Handle_ViewedAuthorsPressed(object sender, System.EventArgs e)
-        {
-            Navigation.PushAsync(new AuthorList());
-        }
-
-        public void Handle_ListsPressed(object sender, System.EventArgs e)
-        {
-            Navigation.PushAsync(new SelectedArticlesLists());
         }
     }
 }

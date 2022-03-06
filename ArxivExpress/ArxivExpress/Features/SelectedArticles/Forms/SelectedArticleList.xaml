@@ -62,7 +62,7 @@
         </ListView>
 
         <FlexLayout Margin="0,10,0,20" Direction="Row" HeightRequest="70"
-            JustifyContent="Center" Wrap="Wrap">
+            JustifyContent="Center" Wrap="Wrap" x:Name="FlexLayoutToolbar">
 
             <Button Text=""
                     Clicked="OnDeleteListPressed"
@@ -72,41 +72,6 @@
                     VerticalOptions="Center" HorizontalOptions="Center"
                     WidthRequest="50" TextColor="Black"
                     ImageSource="icons8_trash_can_32"/>
-
-            <Button Text="" Pressed="Handle_SearchPressed"
-                    ImageSource="icons8_search_32"
-                    BorderColor="Black" BackgroundColor="White"
-                    BorderWidth="1" Margin="10" HeightRequest="50"
-                    VerticalOptions="Center" HorizontalOptions="Center"
-                    WidthRequest="50" TextColor="Black"/>
-
-            <Button Text="" Pressed="Handle_RecentlyViewedPressed"
-                    ImageSource="icons8_activity_history_32"
-                    BorderColor="Black" BackgroundColor="White"
-                    BorderWidth="1" Margin="10" HeightRequest="50"
-                    VerticalOptions="Center" HorizontalOptions="Center"
-                    WidthRequest="50" TextColor="Black"/>
-
-            <Button Text="" Pressed="Handle_LikedArticlesPressed"
-                    ImageSource="icons8_heart_32"
-                    BorderColor="Black" BackgroundColor="White"
-                    BorderWidth="1" Margin="10" HeightRequest="50"
-                    VerticalOptions="Center" HorizontalOptions="Center"
-                    WidthRequest="50" TextColor="Black"/>
-
-            <Button Text="" Pressed="Handle_ViewedAuthorsPressed"
-                    ImageSource="icons8_contacts_32"
-                    BorderColor="Black" BackgroundColor="White"
-                    BorderWidth="1" Margin="10" HeightRequest="50"
-                    VerticalOptions="Center" HorizontalOptions="Center"
-                    WidthRequest="50" TextColor="Black"/>
-
-            <Button Text="" Pressed="Handle_ListsPressed"
-                    ImageSource="icons8_book_shelf_32"
-                    BorderColor="Black" BackgroundColor="White"
-                    BorderWidth="1" Margin="10" HeightRequest="50"
-                    VerticalOptions="Center" HorizontalOptions="Center"
-                    WidthRequest="50" TextColor="Black"/>
         </FlexLayout>
     </StackLayout>
 </ContentPage>
