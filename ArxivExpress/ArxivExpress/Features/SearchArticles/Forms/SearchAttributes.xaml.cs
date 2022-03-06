@@ -181,18 +181,45 @@ namespace ArxivExpress.Features.SearchArticles
             _searchQueryRepository.SaveSearchQuery(_searchQuery);
             _searchArticleRepository.SearchQuery = _searchQuery;
 
-            var articleList = new ArticleList(_searchArticleRepository, "Found");
+            var articleList = new ArticleList(
+                    _searchArticleRepository, "Found",
+                    new StyledButton[]
+                    {
+                        new RecentlyViewedButton(),
+                        new LikedListButton(),
+                        new AuthorListButton(),
+                        new SelectedArticlesListsButton()
+                    }
+                );
             Navigation.PushAsync(articleList);
         }
 
         public void Handle_RecentlyViewedPressed(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new ArticleList(ViewedArticlesRepository.GetInstance(), "History"));
+            Navigation.PushAsync(
+                new ArticleList(ViewedArticlesRepository.GetInstance(), "History",
+                new StyledButton[]
+                    {
+                        new SearchButton(),
+                        new LikedListButton(),
+                        new AuthorListButton(),
+                        new SelectedArticlesListsButton()
+                    }
+                ));
         }
 
         public void Handle_LikedArticlesPressed(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new ArticleList(LikedArticlesRepository.GetInstance(), "Liked"));
+            Navigation.PushAsync(
+                new ArticleList(LikedArticlesRepository.GetInstance(), "Liked",
+                new StyledButton[]
+                    {
+                        new SearchButton(),
+                        new RecentlyViewedButton(),
+                        new AuthorListButton(),
+                        new SelectedArticlesListsButton()
+                    }
+                ));
         }
 
         public void Handle_ViewedAuthorsPressed(object sender, System.EventArgs e)

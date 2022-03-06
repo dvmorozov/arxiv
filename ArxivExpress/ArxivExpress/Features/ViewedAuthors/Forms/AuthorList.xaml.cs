@@ -62,7 +62,15 @@ namespace ArxivExpress.Features.ViewedAuthors.Forms
                 _searchArticleRepository.SearchQuery =
                     new SearchQuery(searchTerm : author.Name, prefix : "au");
 
-                var articleList = new ArticleList(_searchArticleRepository, author.Name);
+                var articleList = new ArticleList(
+                    _searchArticleRepository, author.Name,
+                    new StyledButton[]
+                    {
+                        new SearchButton(),
+                        new RecentlyViewedButton(),
+                        new LikedListButton(),
+                        new SelectedArticlesListsButton()
+                    });
                 Navigation.PushAsync(articleList);
             }
 
@@ -161,12 +169,28 @@ namespace ArxivExpress.Features.ViewedAuthors.Forms
 
         public void Handle_RecentlyViewedPressed(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new ArticleList(ViewedArticlesRepository.GetInstance(), "History"));
+            Navigation.PushAsync(
+                new ArticleList(ViewedArticlesRepository.GetInstance(), "History",
+                new StyledButton[]
+                    {
+                        new SearchButton(),
+                        new LikedListButton(),
+                        new AuthorListButton(),
+                        new SelectedArticlesListsButton()
+                    }));
         }
 
         public void Handle_LikedArticlesPressed(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new ArticleList(LikedArticlesRepository.GetInstance(), "Liked"));
+            Navigation.PushAsync(
+                new ArticleList(LikedArticlesRepository.GetInstance(), "Liked",
+                new StyledButton[]
+                    {
+                        new SearchButton(),
+                        new RecentlyViewedButton(),
+                        new AuthorListButton(),
+                        new SelectedArticlesListsButton()
+                    }));
         }
 
         public void Handle_ViewedAuthorsPressed(object sender, System.EventArgs e)

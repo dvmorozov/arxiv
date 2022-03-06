@@ -189,12 +189,30 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
 
         public void Handle_RecentlyViewedPressed(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new ArticleList(ViewedArticlesRepository.GetInstance(), "History"));
+            Navigation.PushAsync(
+                new ArticleList(ViewedArticlesRepository.GetInstance(), "History",
+                new StyledButton[]
+                    {
+                        new SearchButton(),
+                        new LikedListButton(),
+                        new AuthorListButton(),
+                        new SelectedArticlesListsButton()
+                    }
+                ));
         }
 
         public void Handle_LikedArticlesPressed(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new ArticleList(LikedArticlesRepository.GetInstance(), "Liked"));
+            Navigation.PushAsync(
+                new ArticleList(LikedArticlesRepository.GetInstance(), "Liked",
+                new StyledButton[]
+                    {
+                        new SearchButton(),
+                        new RecentlyViewedButton(),
+                        new AuthorListButton(),
+                        new SelectedArticlesListsButton()
+                    }
+                ));
         }
 
         public void Handle_ViewedAuthorsPressed(object sender, System.EventArgs e)

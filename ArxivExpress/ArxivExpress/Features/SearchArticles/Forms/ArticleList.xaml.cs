@@ -8,9 +8,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using ArxivExpress.Features.Data;
-using ArxivExpress.Features.RecentlyViewedArticles.Data;
-using ArxivExpress.Features.SelectedArticles.Forms;
-using ArxivExpress.Features.ViewedAuthors.Forms;
 using ArxivExpress.Forms;
 using Microsoft.AppCenter.Crashes;
 using Xamarin.Forms;
@@ -22,10 +19,13 @@ namespace ArxivExpress.Features.SearchArticles
     public partial class ArticleList : ContentPage
     {
         private IListRepository<IArticleEntry> _articleRepository;
+        private StyledButton[] _menuButtons;
 
-        public ArticleList(IListRepository<IArticleEntry> articleRepository, string title)
+        public ArticleList(IListRepository<IArticleEntry> articleRepository,
+            string title, StyledButton[] menuButtons)
         {
             _articleRepository = articleRepository;
+            _menuButtons = menuButtons;
 
             InitializeComponent();
             Title = title;
@@ -76,21 +76,8 @@ namespace ArxivExpress.Features.SearchArticles
 
         private void DisplayButtons()
         {
-            FlexLayoutToolbar.Children.Add(
-                new SearchButton()
-                );
-
-            FlexLayoutToolbar.Children.Add(
-                new RecentlyViewedButton()
-            );
-
-            FlexLayoutToolbar.Children.Add(
-                new AuthorListButton()
-                );
-
-            FlexLayoutToolbar.Children.Add(
-                new SelectedArticlesListsButton()
-                );
+            foreach (var button in _menuButtons)
+                FlexLayoutToolbar.Children.Add(button);
         }
 
         private void Handle_ItemTapped(object sender, ItemTappedEventArgs e)

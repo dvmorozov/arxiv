@@ -17,7 +17,17 @@ namespace ArxivExpress.Features.SelectedArticles.Forms
 
         public void Handle_Pressed(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new ArticleList(LikedArticlesRepository.GetInstance(), "Liked"));
+            Navigation.PushAsync(
+                new ArticleList(
+                    LikedArticlesRepository.GetInstance(), "Liked",
+                    new StyledButton[]
+                    {
+                        new SearchButton(),
+                        new RecentlyViewedButton(),
+                        new AuthorListButton(),
+                        new SelectedArticlesListsButton()
+                    }
+                ));
         }
     }
 }
