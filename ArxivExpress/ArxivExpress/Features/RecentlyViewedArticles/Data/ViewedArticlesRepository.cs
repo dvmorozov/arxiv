@@ -1,6 +1,7 @@
 // ****************************************************************************
 //    File "ViewedArticlesRepository.cs"
-//    Copyright © Dmitry Morozov 2021
+//    Copyright © Dmitry Morozov 2022
+//    If you want to use this file please contact me by dvmorozov@hotmail.com.
 // ****************************************************************************
 
 using ArxivExpress.Features.LikedArticles;

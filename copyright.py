@@ -32,7 +32,8 @@ for filepath in files:
         contents = dedent('''\
             // ****************************************************************************
             //    File "{0}"
-            //    Copyright © Dmitry Morozov 2021
+            //    Copyright © Dmitry Morozov 2022
+            //    If you want to use this file please contact me by dvmorozov@hotmail.com.
             // ****************************************************************************
     
             ''').format(os.path.basename(filepath)) + match.group(1)
