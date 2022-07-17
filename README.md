@@ -1,6 +1,8 @@
 # ArxivExpress
 Arxiv.org clients
 
+[Main screenshot](<./Simulator Screen Shot - iPhone 13 Pro Max - 2022-07-17 at 21.38.29.png> "Main screenshot")
+
 ## Supported devices
 
 Minimum Android version is 10 as required by Xamarin and Google Play.
