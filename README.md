@@ -1,7 +1,7 @@
 # ArxivExpress
 Arxiv.org clients
 
-[![Main screenshot](<./Screenshots/Simulator Screen Shot - iPhone 13 Pro Max - 2022-07-17 at 21.38.29.png> "Main screenshot")]
+![Main screenshot](<./Screenshots/Simulator Screen Shot - iPhone 13 Pro Max - 2022-07-17 at 21.38.29.png> "Main screenshot")
 
 
 ## Supported devices
