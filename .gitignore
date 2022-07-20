@@ -1,1 +1,12 @@
+.vs
 ArxivExpress/.vs
+ArxivExpress/ArxivExpress.Android/bin/
+ArxivExpress/ArxivExpress.Android/obj/
+ArxivExpress/ArxivExpress/bin/
+ArxivExpress/ArxivExpress/obj/
+ArxivExpress/ArxivExpress.iOS/bin/
+ArxivExpress/ArxivExpress.iOS/obj/
+ArxivExpress/ArxivExpress.UITests/bin/
+ArxivExpress/ArxivExpress.UITests/obj/
+.DS_Store
+*.user
