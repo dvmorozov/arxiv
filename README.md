@@ -18,13 +18,3 @@ Arxiv.org clients for Android and iOS.
 ## Supported devices
 
 Minimum Android version is 10 as required by Xamarin and Google Play.
-
-## Dependencies
-
-[Microsoft.SyndicationFeed.ReaderWriter](https://www.nuget.org/packages/Microsoft.SyndicationFeed.ReaderWriter)
-
-[PCLAppConfig](https://www.nuget.org/packages/PCLAppConfig)
-
-## Arxiv API
-
-[User manual](https://arxiv.org/help/api/user-manual#api_response)
