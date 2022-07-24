@@ -16,4 +16,8 @@ History of viewed articles||
 
 ## Supported devices
 
-Minimum Android version is 10 as required by Xamarin and Google Play.
+Minimum Android version is 11 as required by Xamarin and Google Play.
+
+## Download from MS App Center
+
+[Android](https://install.appcenter.ms/users/dvmorozov/apps/arxivexpress-2/distribution_groups/public)
