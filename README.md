@@ -22,6 +22,6 @@ Minimum Android version is 11 as required by Xamarin and Google Play.
 
 [Read this before installing](DISCLAIMER.md)
 
-## Download from MS App Center
+## Install from MS App Center
 
 [Android](https://install.appcenter.ms/users/dvmorozov/apps/arxivexpress-2/distribution_groups/public)
