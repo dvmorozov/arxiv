@@ -2,7 +2,7 @@
 
 Arxiv.org clients for Android and iOS.
 
-## Screenshots
+## Features
 
 Searching articles|Found articles|Article
 ---|---|---
@@ -17,6 +17,10 @@ History of viewed articles||
 ## Supported devices
 
 Minimum Android version is 11 as required by Xamarin and Google Play.
+
+## Disclaimer
+
+[Read this before installing](DISCLAIMER.md)
 
 ## Download from MS App Center
 
