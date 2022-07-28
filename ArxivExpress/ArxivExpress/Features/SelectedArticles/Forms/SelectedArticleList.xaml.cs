@@ -6,11 +6,8 @@
 
 using System;
 using System.Collections.ObjectModel;
-using ArxivExpress.Features.LikedArticles;
-using ArxivExpress.Features.RecentlyViewedArticles.Data;
 using ArxivExpress.Features.SearchArticles;
 using ArxivExpress.Features.SelectedArticles.Data;
-using ArxivExpress.Features.ViewedAuthors.Forms;
 using ArxivExpress.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
