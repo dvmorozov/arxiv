@@ -18,9 +18,9 @@ History of viewed articles||
 
 Minimum Android version is 11 as required by Xamarin and Google Play.
 
-## Disclaimer
+## Read this before installing
 
-[Read this before installing](DISCLAIMER.md)
+[Disclaimer](DISCLAIMER.md) [Privacy policy](PRIVACY_POLICY.html)
 
 ## Install from MS App Center
 
