@@ -1,0 +1,28 @@
+<html lang="en">
+    <head>
+        <script src="https://cdn.observableusercontent.com/npm/d3@7.6.1/dist/d3.min.js"></script>
+        <script src="https://cdn.observableusercontent.com/npm/marked@0.3.12/marked.min.js"></script>
+        <script src="https://cdn.observableusercontent.com/npm/htl@0.3.1/dist/htl.min.js"></script>
+        <script src="https://cdn.observableusercontent.com/npm/@observablehq/highlight.js@2.0.0/highlight.min.js"></script>
+        <script src="data.js" charset="utf-8"></script>
+        <script src="chart.js" charset="utf-8"></script>
+    </head>
+
+    <body>
+        <svg id="visualisation" width="5333" height="3000"></svg>
+
+        <script language="JavaScript">
+            chart = ForceGraph(miserables, {
+                nodeGroup: d => d.group,
+                nodeRadius: 5,
+                nodeTitle: d => `${d.id}\n${d.group}`,
+                linkStrokeWidth: l => Math.sqrt(l.value),
+                width: 5333,
+                height: 3000,
+                invalidation: null // a promise to stop the simulation when the cell is re-run
+            });
+
+            document.getElementById('visualisation').appendChild(chart);
+        </script>
+    </body>
+</html>
