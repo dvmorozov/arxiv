@@ -14,7 +14,8 @@
         <script language="JavaScript">
             chart = ForceGraph(miserables, {
                 nodeGroup: d => d.group,
-                nodeRadius: 5,
+                nodeRadius: d => Math.sqrt(d.group * 10),   //  Circle area must be proportional to
+                                                            //  number of articles for given topic.
                 nodeTitle: d => `${d.id}\n${d.group}`,
                 linkStrokeWidth: l => Math.sqrt(l.value),
                 width: 5333,

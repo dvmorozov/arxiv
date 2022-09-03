@@ -36,6 +36,7 @@ function ForceGraph({
   const G = nodeGroup == null ? null : d3.map(nodes, nodeGroup).map(intern);
   const W = typeof linkStrokeWidth !== "function" ? null : d3.map(links, linkStrokeWidth);
   const L = typeof linkStroke !== "function" ? null : d3.map(links, linkStroke);
+  const R = typeof nodeRadius !== "function" ? null : d3.map(nodes, nodeRadius);
 
   // Replace the input nodes and links with mutable objects for the simulation.
   nodes = d3.map(nodes, (_, i) => ({id: N[i]}));
@@ -82,12 +83,13 @@ function ForceGraph({
     .selectAll("circle")
     .data(nodes)
     .join("circle")
-      .attr("r", nodeRadius)
+      .attr("r", typeof nodeRadius !== "function" ? nodeRadius : 5)
       .call(drag(simulation));
 
   if (W) link.attr("stroke-width", ({index: i}) => W[i]);
   if (L) link.attr("stroke", ({index: i}) => L[i]);
   if (G) node.attr("fill", ({index: i}) => color(G[i]));
+  if (R) node.attr("r", ({index: i}) => R[i]);
   if (T) node.append("title").text(({index: i}) => T[i]);
   if (invalidation != null) invalidation.then(() => simulation.stop());
 
