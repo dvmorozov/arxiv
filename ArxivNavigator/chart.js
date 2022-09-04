@@ -36,7 +36,9 @@ function ForceGraph({
   const G = nodeGroup == null ? null : d3.map(nodes, nodeGroup).map(intern);
   const W = typeof linkStrokeWidth !== "function" ? null : d3.map(links, linkStrokeWidth);
   const L = typeof linkStroke !== "function" ? null : d3.map(links, linkStroke);
-  const R = typeof nodeRadius !== "function" ? null : d3.map(nodes, nodeRadius);
+  const R = typeof nodeRadius !== "function" ? null : d3.map(nodes, nodeRadius);    //  Function takes appropriate
+                                                                                    //  node attribute and converts
+                                                                                    //  it to number.
 
   // Replace the input nodes and links with mutable objects for the simulation.
   nodes = d3.map(nodes, (_, i) => ({id: N[i]}));
@@ -51,13 +53,30 @@ function ForceGraph({
   // Construct the forces.
   const forceNode = d3.forceManyBody();
   const forceLink = d3.forceLink(links).id(({index: i}) => N[i]);
+
   if (nodeStrength !== undefined) forceNode.strength(nodeStrength);
+  else
+  {
+    if (typeof nodeRadius !== "function")
+    {
+      if (nodeRadius !== undefined)
+        forceNode.strength(nodeRadius);
+    }
+    else
+    {
+      console.assert(R !== undefined);
+      //  Repulsion is proportional to the number of articles ("mass" of node).
+      forceNode.strength(({index: i}) => {/*console.log(R[i]);*/ return -1 * Math.pow(R[i], 2);});
+    }
+  }
+
   if (linkStrength !== undefined) forceLink.strength(linkStrength);
 
   const simulation = d3.forceSimulation(nodes)
       .force("link", forceLink)
       .force("charge", forceNode)
       .force("center",  d3.forceCenter())
+      .force('collision', d3.forceCollide().radius(({index: i}) => R[i]))   //  Circles don't overlap.
       .on("tick", ticked);
 
   const svg = d3.create("svg")
