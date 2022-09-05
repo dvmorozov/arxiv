@@ -79,10 +79,13 @@ function ForceGraph({
       .force('collision', d3.forceCollide().radius(({index: i}) => R[i]))   //  Circles don't overlap.
       .on("tick", ticked);
 
+  const viewBoxX = -width / 2;
+  const viewBoxY = -height / 2;
+
   const svg = d3.create("svg")
       .attr("width", width)
       .attr("height", height)
-      .attr("viewBox", [-width / 2, -height / 2, width, height])
+      .attr("viewBox", [viewBoxX, viewBoxY, width, height])
       .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
 
   const link = svg.append("g")
@@ -151,6 +154,14 @@ function ForceGraph({
       .on("drag", dragged)
       .on("end", dragended);
   }
+
+   const graphTitle = svg.append("text")
+      .attr("x", viewBoxX + width / 2)
+      .attr("y", viewBoxY + 20)
+      .attr("text-anchor", "middle")
+      .style("font-size", "16px")
+      .style("text-decoration", "underline")
+      .text("Arxiv.org topics by number of articles");
 
   return Object.assign(svg.node(), {scales: {color}});
 };
