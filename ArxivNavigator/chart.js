@@ -151,13 +151,15 @@ function ForceGraph(
         return d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended);
     }
 
+    const fontSize = $(window).innerWidth() / 30;
+
     const graphTitle = svg
         .append("text")
         .attr("x", viewBoxX + width / 2)
-        .attr("y", viewBoxY + 20)
+        .attr("y", viewBoxY + fontSize * 2)
         .attr("text-anchor", "middle")
-        .style("font-size", "16px")
-        .style("text-decoration", "underline")
+        .style("font-size", fontSize.toString() + "px")
+        //.style("text-decoration", "underline")
         .text("Arxiv.org topics by number of articles");
 
     return Object.assign(svg.node(), { scales: { color } });
