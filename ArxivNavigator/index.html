@@ -4,14 +4,19 @@
         <script src="https://cdn.observableusercontent.com/npm/marked@0.3.12/marked.min.js"></script>
         <script src="https://cdn.observableusercontent.com/npm/htl@0.3.1/dist/htl.min.js"></script>
         <script src="https://cdn.observableusercontent.com/npm/@observablehq/highlight.js@2.0.0/highlight.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
         <script src="data.js" charset="utf-8"></script>
         <script src="chart.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="index.css">
     </head>
 
     <body>
-        <svg id="visualisation" width="5333" height="3000"></svg>
+        <svg id="visualisation"></svg>
 
         <script language="JavaScript">
+            $('svg#visualisation').width($(window.top).width());
+            $('svg#visualisation').height($(window.top).height());
+
             chart = ForceGraph(miserables, {
                 nodeGroup: d => d.group,
                 nodeRadius: d => Math.sqrt(d.group * 10),   //  Circle area is proportional to
@@ -24,8 +29,8 @@
                 nodeTitle: d => `${d.id}\n${d.group}`,
                 //linkStroke,                               //  Function or value providing stroke value.
                 linkStrokeWidth: l => Math.sqrt(l.value),
-                width: 5333,
-                height: 3000,
+                width: $(window.top).width(),
+                height: $(window.top).height(),
                 invalidation: null // a promise to stop the simulation when the cell is re-run
             });
 
