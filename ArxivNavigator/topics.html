@@ -19,11 +19,6 @@
 
             chart = ForceGraph(miserables, {
                 nodeGroup: d => d.group,
-                nodeRadius: d => Math.sqrt(d.group * 10),   //  Circle area is proportional to
-                                                            //  number of articles for given topic.
-                                                            //  This could be a number of function
-                                                            //  that maps node data into value
-
                 //nodeStrength: -200,                       //  This could be a number.
                                                             //  Negative value means repulsion, positive - attraction.
                 nodeTitle: d => `${d.id}\n${d.group}`,
