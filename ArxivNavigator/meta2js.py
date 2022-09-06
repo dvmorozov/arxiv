@@ -96,7 +96,8 @@ def extract_graph_data():
             add_node(source)
 
             for target in category_set[0].split():
-                add_link(source, target)
+                if source != target:
+                    add_link(source, target)
 
         articles_count += 1
 
