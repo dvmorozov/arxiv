@@ -5,7 +5,7 @@ import ijson
 #   Set of tuples (source, target)
 unique_links = dict()
 unique_nodes = dict()
-
+articles_count = 0
 
 def add_node(node):
     global unique_nodes
@@ -62,7 +62,6 @@ def generate_nodes_json():
             nodes_json += ','
         value_str = str(unique_nodes[node])
         nodes_json += '{id: "' + str(node) + '", group: ' + value_str + '}'
-        print(value_str)
         node_index += 1
 
     nodes_json += ']'
@@ -73,8 +72,9 @@ def finish_parsing(write_to_file):
     links_json = generate_links_json()
     nodes_json = generate_nodes_json()
 
-    print('links_count =>', str(len(unique_links)))
-    print('nodes_count =>', str(len(unique_nodes)))
+    print('links', '=>', str(len(unique_links)))
+    print('nodes', '=>', str(len(unique_nodes)))
+    print('articles', '=>', str(articles_count))
 
     miserables = 'var miserables = {' + nodes_json + ', ' + links_json + '};'
 
@@ -84,6 +84,8 @@ def finish_parsing(write_to_file):
 
 
 def extract_graph_data():
+    global articles_count
+
     metadata = ijson.parse(open('arxiv-public-datasets.json', 'r'))
     #   Extracts categories
     category_sets = ijson.items(metadata, 'articles.item.categories')
@@ -95,6 +97,8 @@ def extract_graph_data():
 
             for target in category_set[0].split():
                 add_link(source, target)
+
+        articles_count += 1
 
     finish_parsing('data.js')
 
