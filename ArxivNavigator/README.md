@@ -4,6 +4,7 @@ Interactive visualizations of Arxiv metadata.
 
 <script language="JavaScript">
     function resizeIframe(data) {
+        console.log(data);
         document.getElementById('topicsFrame').style.height = data + 'px';
     };
 
