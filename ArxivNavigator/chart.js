@@ -43,7 +43,7 @@ function ForceGraph(
     const maxLinkValue = d3.max(links, d => Math.abs(d.value));
     const W = typeof linkStrokeWidth !== "function"
         ? (linkStrokeWidth != null ? d3.map(nodes, d => linkStrokeWidth)                    //  Const value is used.
-        : d3.map(links, d => Math.max(Math.abs(d.value) * 100.0 * 0.5 / maxLinkValue, 1)))  //  Minimum value is 1.
+        : d3.map(links, d => Math.max(Math.abs(d.value) * 100.0 * 0.5 / maxLinkValue, 1)))  //  Minimum value is limited.
         : d3.map(links, linkStrokeWidth);
 
     //  Node values are normalized.
@@ -51,8 +51,10 @@ function ForceGraph(
     //  R must be initialized.
     const R = typeof nodeRadius !== "function"
         ? (nodeRadius !== null ? d3.map(nodes, d => nodeRadius)                             //  Const value is used.
-        : d3.map(nodes, d => Math.sqrt(Math.abs(d.group) * 100 * 10 / maxNodeValue)))       //  Circle area is proportional
+        : d3.map(nodes, d => Math.max(Math.sqrt(Math.abs(d.group) * 100 * 10 / maxNodeValue), 5)))
+                                                                                            //  Circle area is proportional
                                                                                             //  to normalized value.
+                                                                                            //  Minimum value is limited.
         : d3.map(nodes, nodeRadius);                                                        //  Function should take appropriate
                                                                                             //  node attribute and converts
                                                                                             //  it to number.
