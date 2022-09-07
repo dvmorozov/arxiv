@@ -5,6 +5,7 @@ import ijson
 #   Set of tuples (source, target)
 unique_links = dict()
 unique_nodes = dict()
+link_count = 0
 articles_count = 0
 
 def add_node(node):
@@ -33,19 +34,55 @@ def add_link(source, target):
 
 
 def generate_links_json():
-    global unique_links
+    global unique_links, link_count
 
     links_json: str = 'links: ['
-    link_index = 0
+    link_count = 0
 
-    for key in unique_links:
+    #  Creates list sorted by value in ascending order.
+    sorted_list = sorted(unique_links.items(), key=lambda x: x[1])
+
+    #  Creates sorted dictionary.
+    sorted_links = dict(sorted_list)
+
+    #  Removes "weak" links (having small values) but keeps at least one existing link between any two nodes.
+    for key in list(sorted_links):
+        #  Checks lower bound on acceptable number of links.
+        if len(sorted_links) <= len(unique_nodes):
+            break
+
         source = key[0]
         target = key[1]
-        value = unique_links[key]
-        if link_index != 0:
+
+        #   Checks if related nodes have at least one more links.
+        source_found = False
+        target_found = False
+        for key2 in list(sorted_links):
+            if key2 == key:
+                continue
+
+            source2 = key2[0]
+            target2 = key2[1]
+            if source2 == source:
+                source_found = True
+            if target2 == target:
+                target_found = True
+            if source_found and target_found:
+                break
+
+        #   Deletes the link.
+        if source_found and target_found:
+            del sorted_links[key]
+
+    for key in sorted_links:
+        source = key[0]
+        target = key[1]
+        value = sorted_links[key]
+
+        if link_count != 0:
             links_json += ','
         links_json += '{source: "' + str(source) + '", target: "' + str(target) + '", value: ' + str(value) + '}'
-        link_index += 1
+        link_count += 1
 
     links_json += ']'
     return links_json
@@ -72,7 +109,7 @@ def finish_parsing(write_to_file):
     links_json = generate_links_json()
     nodes_json = generate_nodes_json()
 
-    print('links', '=>', str(len(unique_links)))
+    print('links', '=>', str(link_count))
     print('nodes', '=>', str(len(unique_nodes)))
     print('articles', '=>', str(articles_count))
 
