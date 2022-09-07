@@ -11,13 +11,13 @@ Interactive visualizations of Arxiv metadata.
     function sendLocation(){
         //  Notifies child window about parent name.
         var win = window.frames.topicsFrame;
-        win.postMessage(window.location.origin, 'https://dvmorozov.github.io/arxiv/ArxivNavigator/topics.html');
+        win.postMessage(window.location.origin, 'https://dvmorozov.github.io');
     };
 
     var messageEventHandler = function(event){
         console.log(event);
         //  Updates frame size according to child window size.
-        if(event.origin === 'https://dvmorozov.github.io/arxiv/ArxivNavigator/topics.html'){
+        if(event.origin === 'https://dvmorozov.github.io'){
             resizeIframe(event.data);
         }
     };
