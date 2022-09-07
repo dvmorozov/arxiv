@@ -15,6 +15,7 @@ Interactive visualizations of Arxiv metadata.
     };
 
     var messageEventHandler = function(event){
+        console.log(event);
         //  Updates frame size according to child window size.
         if(event.origin === 'https://dvmorozov.github.io/arxiv/ArxivNavigator/topics.html'){
             resizeIframe(event.data);

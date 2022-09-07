@@ -28,8 +28,10 @@
                 var parentEventHandler = function (event) {
                     //  Handles messages from parent window.
                     //	Destination should not be empty string.
+                    console.log(event);
                     if (isDefined(event.data) &&
                        (event.data.search("http://") != -1 || event.data.search("https://") != -1)) {
+                        console.log(event.data);
                         parentDestination = event.data;
                         updateParentHeight();
                     }
