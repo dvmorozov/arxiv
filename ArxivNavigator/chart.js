@@ -76,7 +76,7 @@ function ForceGraph(
         console.assert(R !== null);
         //  Repulsion is proportional to the number of articles ("mass" of node).
         forceNode.strength(({ index: i }) => {
-            return -1 * Math.pow(R[i], 2);
+            return -1 * R[i];
         });
     }
 
