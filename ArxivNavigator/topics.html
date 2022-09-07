@@ -12,6 +12,11 @@
         <script language="JavaScript">
             var parentDestination = null;
 
+            function isDefined(obj) {
+                if (obj !== undefined && obj !== null) return true;
+                else return false;
+            }
+
             function updateParentHeight() {
                 //  Send message with size to parent window.
                 if (isDefined(parentDestination)) {
