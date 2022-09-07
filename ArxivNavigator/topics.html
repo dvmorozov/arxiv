@@ -8,14 +8,43 @@
         <script src="data.js" charset="utf-8"></script>
         <script src="chart.js" charset="utf-8"></script>
         <link rel="stylesheet" href="main.css">
+
+        <script language="JavaScript">
+            var parentDestination = null;
+
+            function updateParentHeight() {
+                //  Send message with size to parent window.
+                if (isDefined(parentDestination)) {
+                    window.parent.postMessage(document.body.scrollHeight, parentDestination);
+                }
+            }
+
+            (function () {
+                var parentEventHandler = function (event) {
+                    //  Handles messages from parent window.
+                    //	Destination should not be empty string.
+                    if (isDefined(event.data) &&
+                       (event.data.search("http://") != -1 || event.data.search("https://") != -1)) {
+                        parentDestination = event.data;
+                        updateParentHeight();
+                    }
+                    else
+                        parentDestination = null;
+                };
+                window.addEventListener('message', parentEventHandler, false);
+            })();
+        </script>
     </head>
 
     <body>
         <svg id="visualisation"></svg>
 
         <script language="JavaScript">
-            $('svg#visualisation').width($(window.top).width());
-            $('svg#visualisation').height($(window.top).height());
+            const graphWidth = 800;
+            const graphHeight = 600;
+
+            $('svg#visualisation').width(graphWidth);
+            $('svg#visualisation').height(graphHeight);
 
             chart = ForceGraph(miserables, {
                 nodeGroup: d => d.group,
@@ -25,8 +54,8 @@
                 //linkStroke,                               //  Function or value providing stroke value.
                 //linkStrokeWidth: 2,
                 //nodeRadius: 5,
-                width: $(window.top).width(),
-                height: $(window.top).height(),
+                width: graphWidth,
+                height: graphHeight,
                 invalidation: null // a promise to stop the simulation when the cell is re-run
             });
 
