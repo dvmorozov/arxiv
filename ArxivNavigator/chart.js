@@ -23,7 +23,7 @@ function ForceGraph(
         linkStrokeOpacity = 0.6,            // link stroke opacity
         linkStrokeWidth = null,             // given d in links, returns a stroke width in pixels
         linkStrokeLinecap = "round",        // link stroke linecap
-        linkStrength,
+        linkStrength = 0.5,
         colors = d3.schemeTableau10,        // an array of color strings, for the node groups
         width = 640,                        // outer width, in pixels
         height = 400,                       // outer height, in pixels
