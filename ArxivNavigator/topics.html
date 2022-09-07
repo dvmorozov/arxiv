@@ -23,7 +23,8 @@
                                                             //  Negative value means repulsion, positive - attraction.
                 nodeTitle: d => `${d.id}\n${d.group}`,
                 //linkStroke,                               //  Function or value providing stroke value.
-                linkStrokeWidth: l => Math.sqrt(l.value),
+                //linkStrokeWidth: 2,
+                //nodeRadius: 5,
                 width: $(window.top).width(),
                 height: $(window.top).height(),
                 invalidation: null // a promise to stop the simulation when the cell is re-run

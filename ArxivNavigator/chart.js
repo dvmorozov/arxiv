@@ -21,7 +21,7 @@ function ForceGraph(
         linkTarget = ({ target }) => target,// given d in links, returns a node identifier string
         linkStroke = "#999",                // link stroke color
         linkStrokeOpacity = 0.6,            // link stroke opacity
-        linkStrokeWidth = 1.5,              // given d in links, returns a stroke width in pixels
+        linkStrokeWidth = null,             // given d in links, returns a stroke width in pixels
         linkStrokeLinecap = "round",        // link stroke linecap
         linkStrength,
         colors = d3.schemeTableau10,        // an array of color strings, for the node groups
@@ -37,17 +37,25 @@ function ForceGraph(
     if (nodeTitle === undefined) nodeTitle = (_, i) => N[i];
     const T = nodeTitle == null ? null : d3.map(nodes, nodeTitle);
     const G = nodeGroup == null ? null : d3.map(nodes, nodeGroup).map(intern);
-    const W = typeof linkStrokeWidth !== "function" ? null : d3.map(links, linkStrokeWidth);
     const L = typeof linkStroke !== "function" ? null : d3.map(links, linkStroke);
 
-    const maxValue = d3.max(nodes, d => Math.abs(d.group));
+    //  Link values are normalized.
+    const maxLinkValue = d3.max(links, d => Math.abs(d.value));
+    const W = typeof linkStrokeWidth !== "function"
+        ? (linkStrokeWidth != null ? d3.map(nodes, d => linkStrokeWidth)                    //  Const value is used.
+        : d3.map(links, d => Math.max(Math.abs(d.value) * 100.0 * 0.5 / maxLinkValue, 1)))  //  Minimum value is 1.
+        : d3.map(links, linkStrokeWidth);
+
+    //  Node values are normalized.
+    const maxNodeValue = d3.max(nodes, d => Math.abs(d.group));
+    //  R must be initialized.
     const R = typeof nodeRadius !== "function"
-        ? (nodeRadius !== null ? nodeRadius                                         //  Const value is used.
-        : d3.map(nodes, d => Math.sqrt(Math.abs(d.group) * 100 * 10 / maxValue)))   //  Circle area is proportional to
-                                                                                    //  normalized value.
-        : d3.map(nodes, nodeRadius);                                                //  Function should take appropriate
-                                                                                    //  node attribute and converts
-                                                                                    //  it to number.
+        ? (nodeRadius !== null ? d3.map(nodes, d => nodeRadius)                             //  Const value is used.
+        : d3.map(nodes, d => Math.sqrt(Math.abs(d.group) * 100 * 10 / maxNodeValue)))       //  Circle area is proportional
+                                                                                            //  to normalized value.
+        : d3.map(nodes, nodeRadius);                                                        //  Function should take appropriate
+                                                                                            //  node attribute and converts
+                                                                                            //  it to number.
 
     // Replace the input nodes and links with mutable objects for the simulation.
     nodes = d3.map(nodes, (_, i) => ({ id: N[i] }));
@@ -65,15 +73,11 @@ function ForceGraph(
 
     if (nodeStrength !== undefined) forceNode.strength(nodeStrength);
     else {
-        if (typeof nodeRadius !== "function" && nodeRadius !== null) {
-            forceNode.strength(nodeRadius);
-        } else {
-            console.assert(R !== null);
-            //  Repulsion is proportional to the number of articles ("mass" of node).
-            forceNode.strength(({ index: i }) => {
-                /*console.log(R[i]);*/ return -1 * Math.pow(R[i], 2);
-            });
-        }
+        console.assert(R !== null);
+        //  Repulsion is proportional to the number of articles ("mass" of node).
+        forceNode.strength(({ index: i }) => {
+            return -1 * Math.pow(R[i], 2);
+        });
     }
 
     if (linkStrength !== undefined) forceLink.strength(linkStrength);
@@ -113,7 +117,7 @@ function ForceGraph(
         .selectAll("circle")
         .data(nodes)
         .join("circle")
-        .attr("r", typeof nodeRadius !== "function" ? nodeRadius : 5)
+        .attr("r", 5)
         .call(drag(simulation));
 
     if (W) link.attr("stroke-width", ({ index: i }) => W[i]);
