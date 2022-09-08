@@ -4,7 +4,7 @@ Arxiv.org client for Android and iOS.
 
 <link rel="shortcut icon" href="favicon.ico">
 
-[ArxivNavigator - arxiv visualizations](/arxiv/ArxivNavigator)
+Take look at [interactive arxiv metadata visualizations](https://dvmorozov.github.io/arxiv/ArxivNavigator/).
 
 ## Features
 
