@@ -1,4 +1,4 @@
-var miserables = {
+var topics = {
     nodes: [
         { id: "hep-ph", group: 166606 },
         { id: "math.CO", group: 56266 },
