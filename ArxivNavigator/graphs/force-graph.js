@@ -165,7 +165,7 @@ function ForceGraph(
         return d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended);
     }
 
-    const fontSize = $(window).innerWidth() / 50;
+    const fontSize = $(window).innerWidth() / 30;
     console.assert(graphTitle !== null);
     svg.append("text")
         .attr("x", viewBoxX + fontSize * 2)
