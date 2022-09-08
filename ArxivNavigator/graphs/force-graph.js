@@ -28,6 +28,7 @@ function ForceGraph(
         width = 640,                        // outer width, in pixels
         height = 400,                       // outer height, in pixels
         invalidation,                       // when this promise resolves, stop the simulation
+        graphTitle                          // must be assigned
     } = {}
 ) {
     // Compute values.
@@ -84,6 +85,7 @@ function ForceGraph(
 
     if (linkStrength !== undefined) forceLink.strength(linkStrength);
 
+    console.assert(R !== null);
     const simulation = d3
         .forceSimulation(nodes)
         .force("link", forceLink)
@@ -163,16 +165,15 @@ function ForceGraph(
         return d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended);
     }
 
-    const fontSize = $(window).innerWidth() / 40;
-
-    const graphTitle = svg
-        .append("text")
-        .attr("x", viewBoxX + width / 2)
+    const fontSize = $(window).innerWidth() / 50;
+    console.assert(graphTitle !== null);
+    svg.append("text")
+        .attr("x", viewBoxX + fontSize * 2)
         .attr("y", viewBoxY + fontSize * 2)
-        .attr("text-anchor", "middle")
+        .attr("text-anchor", "left")
         .style("font-size", fontSize.toString() + "px")
         //.style("text-decoration", "underline")
-        .text("Arxiv.org topics by number of articles");
+        .text(graphTitle);
 
     return Object.assign(svg.node(), { scales: { color } });
 }
