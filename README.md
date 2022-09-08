@@ -1,4 +1,4 @@
-# ArxivExpress
+# ArxivExpress [ArxivNavigator](/ArxivNavigator)
 
 Arxiv.org client for Android and iOS.
 
