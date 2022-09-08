@@ -5,11 +5,13 @@ Interactive visualizations of Arxiv metadata.
 <script language="JavaScript">
     function resizeIframe(data) {
         console.log(data);
-        document.getElementById('topicsFrame').style.height = data + 'px';
+
+        document.getElementById('topicsFrame').style.height = data.height + 'px';
+        document.getElementById('topicsFrame').style.width = data.width + 'px';
     };
 
     function sendLocation(){
-        //  Notifies child window about parent name.
+        //  Notifies child window about parent location.
         var win = window.frames.topicsFrame;
         win.postMessage(window.location.origin, 'https://dvmorozov.github.io');
     };

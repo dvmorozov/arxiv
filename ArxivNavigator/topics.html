@@ -17,10 +17,11 @@
                 else return false;
             }
 
-            function updateParentHeight() {
+            function updateParentSize() {
                 //  Send message with size to parent window.
                 if (isDefined(parentDestination)) {
-                    window.parent.postMessage(document.body.scrollHeight, parentDestination);
+                    window.parent.postMessage({ height: document.body.scrollHeight, width: document.body.scrollWidth },
+                        parentDestination);
                 }
             }
 
@@ -33,7 +34,8 @@
                        (event.data.search("http://") != -1 || event.data.search("https://") != -1)) {
                         console.log(event.data);
                         parentDestination = event.data;
-                        updateParentHeight();
+                        console.log(parendDestination);
+                        updateParentSize();
                     }
                     else
                         parentDestination = null;
