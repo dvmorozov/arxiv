@@ -405,4 +405,7 @@ var topics = {
         { source: "hep-ph", target: "nucl-th", value: 47362 },
         { source: "cs.IT", target: "math.IT", value: 80342 },
     ],
+    link_count: "226",
+    node_count: "176",
+    articles_count: "2121039",
 };

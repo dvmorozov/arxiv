@@ -8,6 +8,7 @@ unique_nodes = dict()
 link_count = 0
 articles_count = 0
 
+
 def add_node(node):
     global unique_nodes
 
@@ -109,21 +110,25 @@ def finish_parsing(write_to_file):
     links_json = generate_links_json()
     nodes_json = generate_nodes_json()
 
+    node_count = len(unique_nodes)
     print('links', '=>', str(link_count))
-    print('nodes', '=>', str(len(unique_nodes)))
+    print('nodes', '=>', str(node_count))
     print('articles', '=>', str(articles_count))
 
-    miserables = 'var miserables = {' + nodes_json + ', ' + links_json + '};'
+    topics = 'var topics = {' + nodes_json + ', ' + links_json + ', ' \
+        'link_count: "' + str(link_count) + '", ' \
+        'node_count: "' + str(node_count) + '", ' \
+        'articles_count: "' + str(articles_count) + '"};'
 
     textfile = open(write_to_file, "w")
-    textfile.write(miserables)
+    textfile.write(topics)
     textfile.close()
 
 
 def extract_graph_data():
     global articles_count
 
-    metadata = ijson.parse(open('arxiv-public-datasets.json', 'r'))
+    metadata = ijson.parse(open('../data/arxiv-public-datasets.json', 'r'))
     #   Extracts categories
     category_sets = ijson.items(metadata, 'articles.item.categories')
 
@@ -138,7 +143,7 @@ def extract_graph_data():
 
         articles_count += 1
 
-    finish_parsing('data.js')
+    finish_parsing('../data/topics.js')
 
 
 # Press the green button in the gutter to run the script.
