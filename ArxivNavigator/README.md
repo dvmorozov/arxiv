@@ -1,6 +1,6 @@
 # ArxivNavigator
 
-Take look at [arxiv client for Android and iOS](https://dvmorozov.github.io/arxiv/).
+Look at [arxiv client for Android and iOS](https://dvmorozov.github.io/arxiv/).
 
 <link rel="shortcut icon" href="https://dvmorozov.github.io/arxiv/ArxivNavigator/favicon.ico">
 
