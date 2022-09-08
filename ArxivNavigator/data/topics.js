@@ -407,5 +407,5 @@ var topics = {
     ],
     link_count: "226",
     node_count: "176",
-    articles_count: "2121039",
+    article_count: "2121039",
 };

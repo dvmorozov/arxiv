@@ -6,7 +6,7 @@ import ijson
 unique_links = dict()
 unique_nodes = dict()
 link_count = 0
-articles_count = 0
+article_count = 0
 
 
 def add_node(node):
@@ -113,12 +113,12 @@ def finish_parsing(write_to_file):
     node_count = len(unique_nodes)
     print('links', '=>', str(link_count))
     print('nodes', '=>', str(node_count))
-    print('articles', '=>', str(articles_count))
+    print('articles', '=>', str(article_count))
 
     topics = 'var topics = {' + nodes_json + ', ' + links_json + ', ' \
         'link_count: "' + str(link_count) + '", ' \
         'node_count: "' + str(node_count) + '", ' \
-        'articles_count: "' + str(articles_count) + '"};'
+        'article_count: "' + str(article_count) + '"};'
 
     textfile = open(write_to_file, "w")
     textfile.write(topics)
@@ -126,7 +126,7 @@ def finish_parsing(write_to_file):
 
 
 def extract_graph_data():
-    global articles_count
+    global article_count
 
     metadata = ijson.parse(open('../data/arxiv-public-datasets.json', 'r'))
     #   Extracts categories
@@ -141,7 +141,7 @@ def extract_graph_data():
                 if source != target:
                     add_link(source, target)
 
-        articles_count += 1
+        article_count += 1
 
     finish_parsing('../data/topics.js')
 
