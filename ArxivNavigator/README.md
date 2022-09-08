@@ -4,8 +4,6 @@ Interactive visualizations of Arxiv metadata.
 
 <script language="JavaScript">
     function resizeIframe(data) {
-        console.log(data);
-
         document.getElementById('topicsFrame').style.height = data.height + 'px';
         document.getElementById('topicsFrame').style.width = data.width + 'px';
     };
@@ -17,7 +15,6 @@ Interactive visualizations of Arxiv metadata.
     };
 
     var messageEventHandler = function(event){
-        console.log(event);
         //  Updates frame size according to child window size.
         if(event.origin === 'https://dvmorozov.github.io'){
             resizeIframe(event.data);
