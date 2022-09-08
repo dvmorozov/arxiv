@@ -1,8 +1,10 @@
-# ArxivExpress [ArxivNavigator](/ArxivNavigator)
+# ArxivExpress 
 
 Arxiv.org client for Android and iOS.
 
 <link rel="shortcut icon" href="favicon.ico">
+
+[ArxivNavigator - arxiv visualizations](/arxiv/ArxivNavigator)
 
 ## Features
 
