@@ -2,7 +2,7 @@
 
 Interactive visualizations of Arxiv metadata. 
 
-<link rel="shortcut icon" href="./graphs/favicon.ico">
+<link rel="shortcut icon" href="favicon.ico">
 
 <script language="JavaScript">
     function resizeIframe(data) {
@@ -27,7 +27,7 @@ Interactive visualizations of Arxiv metadata.
 </script>
 
 <div>
-    <iframe src="./graphs/topics.html"
+    <iframe src="topics.html"
          title="Arxiv topics by the number of written articles."
          id="topicsFrame" scrolling="no" style="width:100%; border:none;"
          name="topicsFrame" onload="sendLocation();">
