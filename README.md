@@ -2,6 +2,8 @@
 
 Arxiv.org client for Android and iOS.
 
+<link rel="shortcut icon" href="favicon.ico">
+
 ## Features
 
 Searching articles|Found articles|Article
