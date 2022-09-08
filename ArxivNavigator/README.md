@@ -2,6 +2,8 @@
 
 Interactive visualizations of Arxiv metadata. 
 
+<link rel="shortcut icon" href="favicon.ico">
+
 <script language="JavaScript">
     function resizeIframe(data) {
         document.getElementById('topicsFrame').style.height = data.height + 'px';
