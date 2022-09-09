@@ -28,7 +28,8 @@ function ForceGraph(
         width = 640,                        // outer width, in pixels
         height = 400,                       // outer height, in pixels
         invalidation,                       // when this promise resolves, stop the simulation
-        graphTitle                          // must be assigned
+        graphTitle,                         // must be assigned
+        inFrame
     } = {}
 ) {
     // Compute values.
@@ -165,11 +166,11 @@ function ForceGraph(
         return d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended);
     }
 
-    const fontSize = $(window).innerWidth() / 30;
+    const fontSize = inFrame === true ? $(window).innerWidth() / 30 : $(window).innerWidth() / 50;
     console.assert(graphTitle !== null);
     svg.append("text")
-        .attr("x", viewBoxX + fontSize * 2)
-        .attr("y", viewBoxY + fontSize * 2)
+        .attr("x", viewBoxX + (inFrame === true ? 0 : fontSize * 2))
+        .attr("y", viewBoxY + (inFrame === true ? 0 : fontSize * 2))
         .attr("text-anchor", "left")
         .style("font-size", fontSize.toString() + "px")
         //.style("text-decoration", "underline")

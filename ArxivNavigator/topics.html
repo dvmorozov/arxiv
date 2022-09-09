@@ -12,6 +12,10 @@
 
         <script language="JavaScript">
             var parentDestination = null;
+            //  When page is opened in window graph takes full sizes.
+            const graphWidth = $(window).innerWidth();
+            const graphHeight = $(window).innerHeight();
+            var inFrame = false;
 
             function isDefined(obj) {
                 if (obj !== undefined && obj !== null) return true;
@@ -26,6 +30,34 @@
                 }
             }
 
+            function redrawGraph() {
+                var graph = document.getElementById('visualisation');
+                //  Removes graph.
+                while (graph.hasChildNodes()) {
+                    graph.removeChild(graph.firstChild);
+                }
+
+                $('svg#visualisation').width(graphWidth);
+                $('svg#visualisation').height(graphHeight);
+
+                chart = ForceGraph(topics, {
+                    nodeGroup: d => d.group,
+                    //nodeStrength: -200,                       //  This could be a number.
+                                                                //  Negative value means repulsion, positive - attraction.
+                    nodeTitle: d => `${d.id}\n${d.group}`,
+                    //linkStroke,                               //  Function or value providing stroke value.
+                    //linkStrokeWidth: 2,
+                    //nodeRadius: 5,
+                    width: graphWidth,
+                    height: graphHeight,
+                    invalidation: null,                         // a promise to stop the simulation when the cell is re-run
+                    graphTitle: "Arxiv.org topics by number of articles (" + topics.article_count + " articles processed)",
+                    inFrame: inFrame
+                });
+
+                document.getElementById('visualisation').appendChild(chart);
+            }
+
             (function () {
                 var parentEventHandler = function (event) {
                     //  Handles messages from parent window.
@@ -33,6 +65,14 @@
                     if (isDefined(event.data) &&
                        (event.data.search("http://") != -1 || event.data.search("https://") != -1)) {
                         parentDestination = event.data;
+                        //  When page is opened in frame graph size is decreased.
+                        graphWidth = 800;
+                        graphHeight = 800;
+                        inFrame = true;
+                        $('svg#visualisation').width(graphWidth);
+                        $('svg#visualisation').height(graphHeight);
+
+                        redrawGraph();
                         updateParentSize();
                     }
                     else
@@ -47,27 +87,7 @@
         <svg id="visualisation"></svg>
 
         <script language="JavaScript">
-            const graphWidth = 800;
-            const graphHeight = 800;
-
-            $('svg#visualisation').width(graphWidth);
-            $('svg#visualisation').height(graphHeight);
-
-            chart = ForceGraph(topics, {
-                nodeGroup: d => d.group,
-                //nodeStrength: -200,                       //  This could be a number.
-                                                            //  Negative value means repulsion, positive - attraction.
-                nodeTitle: d => `${d.id}\n${d.group}`,
-                //linkStroke,                               //  Function or value providing stroke value.
-                //linkStrokeWidth: 2,
-                //nodeRadius: 5,
-                width: graphWidth,
-                height: graphHeight,
-                invalidation: null,                         // a promise to stop the simulation when the cell is re-run
-                graphTitle: "Arxiv.org topics by number of articles (" + topics.article_count + " articles processed)"
-            });
-
-            document.getElementById('visualisation').appendChild(chart);
+            redrawGraph();
         </script>
     </body>
 </html>
