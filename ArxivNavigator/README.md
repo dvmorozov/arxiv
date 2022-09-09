@@ -34,7 +34,7 @@ window.addEventListener('message', messageEventHandler, false);
 </iframe>
 </div>
 
-*Move mouse over node to see topic identifier and related number of articles.*
+*Hold mouse on node to see topic identifier and related number of articles. Drag node to see relations.*
 
 <a href="https://dvmorozov.github.io/arxiv/ArxivNavigator/topics.html" target="_blank">Open graph in new window</a>
 
