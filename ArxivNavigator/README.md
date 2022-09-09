@@ -34,7 +34,9 @@ window.addEventListener('message', messageEventHandler, false);
 </iframe>
 </div>
 
-**Move mouse over node to see topic identifier and related number of articles.**
+*Move mouse over node to see topic identifier and related number of articles.*
+
+<a href="https://dvmorozov.github.io/arxiv/ArxivNavigator/topics.html" target="_blank">Open graph in new window</a>
 
 The visualization uses modified [force-directed graph](https://observablehq.com/@d3/force-directed-graph) powered by [d3.js](https://d3js.org/).
 
