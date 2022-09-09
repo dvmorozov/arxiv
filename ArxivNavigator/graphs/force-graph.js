@@ -170,7 +170,7 @@ function ForceGraph(
     console.assert(graphTitle !== null);
     svg.append("text")
         .attr("x", viewBoxX + (inFrame === true ? 0 : fontSize * 2))
-        .attr("y", viewBoxY + (inFrame === true ? 0 : fontSize * 2))
+        .attr("y", viewBoxY + (inFrame === true ? fontSize : fontSize * 2))
         .attr("text-anchor", "left")
         .style("font-size", fontSize.toString() + "px")
         //.style("text-decoration", "underline")
