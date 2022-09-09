@@ -98,8 +98,11 @@ def generate_nodes_json():
     for node in unique_nodes:
         if node_index != 0:
             nodes_json += ','
-        value_str = str(unique_nodes[node])
-        nodes_json += '{id: "' + str(node) + '", group: ' + value_str + '}'
+
+        value = str(unique_nodes[node])
+        #   The first part of topic id. is taken as group id.
+        group = node.split('.')[0]
+        nodes_json += '{id: "' + str(node) + '", value: ' + value + ', group: "' + group + '"}'
         node_index += 1
 
     nodes_json += ']'
