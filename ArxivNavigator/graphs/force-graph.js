@@ -29,7 +29,8 @@ function ForceGraph(
         height = 400,                       // outer height, in pixels
         invalidation,                       // when this promise resolves, stop the simulation
         graphTitle,                         // must be assigned
-        inFrame
+        inFrame,
+        showPopup
     } = {}
 ) {
     // Compute values.
@@ -123,6 +124,7 @@ function ForceGraph(
         .data(nodes)
         .join("circle")
         .attr("r", 5)
+        .attr("node_id", function(d) { return d.id; })
         .call(drag(simulation));
 
     if (W) link.attr("stroke-width", ({ index: i }) => W[i]);
@@ -175,6 +177,12 @@ function ForceGraph(
         .style("font-size", fontSize.toString() + "px")
         //.style("text-decoration", "underline")
         .text(graphTitle);
+
+    node.on("click", function(d) {
+        if (d.target !== null && showPopup !== null) {
+            showPopup($(d.target).attr("node_id"));
+        }
+    });
 
     return Object.assign(svg.node(), { scales: { color } });
 }

@@ -5,10 +5,12 @@
         <script src="https://cdn.observableusercontent.com/npm/htl@0.3.1/dist/htl.min.js"></script>
         <script src="https://cdn.observableusercontent.com/npm/@observablehq/highlight.js@2.0.0/highlight.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/smoothness/jquery-ui.css">
         <script src="https://dvmorozov.github.io/arxiv/ArxivNavigator/data/topics.js" charset="utf-8"></script>
         <script src="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/force-graph.js" charset="utf-8"></script>
-        <link rel="shortcut icon" href="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/favicon.ico">
         <link rel="stylesheet" href="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/main.css">
+        <link rel="shortcut icon" href="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/favicon.ico">
 
         <script language="JavaScript">
             var parentDestination = null;
@@ -30,7 +32,14 @@
                 }
             }
 
-            function redrawGraph() {
+            function showTopicPopup(topicId) {
+                $("#popup > #content").text('At the moment content is under construction.');
+                $("#popup").dialog({
+                    title: topicId
+                });
+            }
+
+            function redrawTopicGraph() {
                 var graph = document.getElementById('visualisation');
                 //  Removes graph.
                 while (graph.hasChildNodes()) {
@@ -52,7 +61,8 @@
                     height: graphHeight,
                     invalidation: null,                         // a promise to stop the simulation when the cell is re-run
                     graphTitle: "Arxiv.org topics by number of articles (" + topics.article_count + " articles processed)",
-                    inFrame: inFrame
+                    inFrame: inFrame,
+                    showPopup: showTopicPopup
                 });
 
                 document.getElementById('visualisation').appendChild(chart);
@@ -72,7 +82,7 @@
                         $('svg#visualisation').width(graphWidth);
                         $('svg#visualisation').height(graphHeight);
 
-                        redrawGraph();
+                        redrawTopicGraph();
                         updateParentSize();
                     }
                     else
@@ -86,8 +96,14 @@
     <body>
         <svg id="visualisation"></svg>
 
+        <div id="popup">
+            <h3 id="header"></h3>
+            <p id="content">
+            </p>
+        </div>
+
         <script language="JavaScript">
-            redrawGraph();
+            redrawTopicGraph();
         </script>
     </body>
 </html>
