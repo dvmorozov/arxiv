@@ -406,6 +406,6 @@ var topics = {
         { source: "cs.IT", target: "math.IT", value: 80342 },
     ],
     link_count: "226",
-    node_count: "176",
+    topic_count: "176",
     article_count: "2121039",
 };
