@@ -1,5 +1,5 @@
 ########################################################################################################################
-# File "topic.py"
+# File "topic_link.py"
 # Copyright © Dmitry Morozov 2022
 # If you want to use this file please contact me by dvmorozov@hotmail.com.
 ########################################################################################################################
@@ -8,10 +8,6 @@ from topic import *
 
 
 class TopicLink(object):
-    link_multiplicity = 0
-    source_id = ""
-    target_id = ""
-
     def __init__(self, source_id, target_id, link_multiplicity):
         self.link_multiplicity = link_multiplicity
         self.source_id = source_id
@@ -23,10 +19,10 @@ class TopicLink(object):
     def get_multiplicity(self):
         return self.link_multiplicity
 
-    def get_link_json(self):
-        return '{source: "' + self.source_id + '", target: "'\
-               + self.target_id + '", value: '\
-               + str(self.link_multiplicity) + '}'
+    def get_json(self):
+        return '{source: "' + self.source_id + '", ' \
+                'target: "' + self.target_id + '", ' \
+                'value: ' + str(self.link_multiplicity) + '}'
 
 
 #   Set of tuples (source, target)
@@ -97,7 +93,7 @@ def generate_links_json() -> str:
 
         if link_count != 0:
             links_json += ','
-        links_json += topic_link.get_link_json()
+        links_json += topic_link.get_json()
         link_count += 1
 
     links_json += ']'

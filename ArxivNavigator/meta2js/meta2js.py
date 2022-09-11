@@ -1,12 +1,14 @@
 ########################################################################################################################
-# File "topic.py"
+# File "meta2js.py"
 # Copyright © Dmitry Morozov 2022
 # This script converts downloaded arxiv metadata into graph data suitable for 3D.js.
 # If you want to use this file please contact me by dvmorozov@hotmail.com.
 ########################################################################################################################
 
 import ijson
+from article import *
 from topic_link import *
+from datetime import datetime
 
 article_count = 0
 
@@ -34,16 +36,25 @@ def extract_topics_data():
 
     metadata = ijson.parse(open('../data/arxiv-public-datasets.json', 'r'))
     #   Extracts categories
-    category_sets = ijson.items(metadata, 'articles.item.categories')
+    articles = ijson.items(metadata, 'articles.item')
 
-    for category_set in category_sets:
+    for article in articles:
         #  All categories are represented by single string.
-        for source in category_set[0].split():
-            add_unique_topic(source)
+        categories = article["categories"]
 
-            for target in category_set[0].split():
-                if source != target:
-                    add_unique_link(source, target)
+        version_dates = []
+        for version_date in article["versions_dates"]:
+            #   Time format 'Mon, 2 Apr 2007 19:18:42 GMT'
+            date = datetime.strptime(version_date, '%a, %d %b %Y %H:%M:%S %Z')
+            version_dates.append(date)
+
+        for source_id in categories[0].split():
+            topic = add_unique_topic(source_id)
+            topic.add_to_last_articles(Article(article["id"], article["title"], max(version_dates)))
+
+            for target_id in categories[0].split():
+                if source_id != target_id:
+                    add_unique_link(source_id, target_id)
 
         article_count += 1
 
