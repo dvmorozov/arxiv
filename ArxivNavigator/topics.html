@@ -4,11 +4,17 @@
         <script src="https://cdn.observableusercontent.com/npm/marked@0.3.12/marked.min.js"></script>
         <script src="https://cdn.observableusercontent.com/npm/htl@0.3.1/dist/htl.min.js"></script>
         <script src="https://cdn.observableusercontent.com/npm/@observablehq/highlight.js@2.0.0/highlight.min.js"></script>
+
         <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/smoothness/jquery-ui.css">
+
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+
         <script src="https://dvmorozov.github.io/arxiv/ArxivNavigator/data/topics.js" charset="utf-8"></script>
         <script src="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/force-graph.js" charset="utf-8"></script>
+
         <link rel="stylesheet" href="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/main.css">
         <link rel="shortcut icon" href="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/favicon.ico">
 
@@ -33,9 +39,53 @@
             }
 
             function showTopicPopup(topicId) {
-                $("#popup > #content").text('At the moment content is under construction.');
+                //  Fills list of last articles.
+                for (let i = 0; i < topics.nodes.length; i++) {
+                    if (topics.nodes[i].id === topicId) {
+                        //  Converts data to the form appropriate for DataTables.
+                        var articleList = [];
+
+                        for (let j = 0; j < topics.nodes[i].last_articles.length; j++) {
+                            const article = topics.nodes[i].last_articles[j];
+                            var articleData = [];
+                            articleData.push(article.id);
+                            articleData.push(article.title);
+                            articleData.push(article.last_version_date);
+                            articleList.push(articleData);
+
+/*
+                            cellHyperlink = row.append('<td>');
+                            const articleHyperlink = $('<a>', {
+                                    href: "http://arxiv.org/abs/" + article.id,
+                                    text: article.title,
+                                    target: "_blank"
+                                });
+*/
+
+                        }
+
+                        $('#popup > #content > #tableArticles').DataTable({
+                            data: articleList,
+                            columns: [
+                                { title: 'Id' },
+                                { title: 'Title' },
+                                { title: 'Published' },
+                            ],
+                            info: false,
+                            ordering: false,
+                            paging: false,
+                            searching: false,
+                            scrollX: true,
+                            scrollY: false,
+                        });
+                    }
+                }
+
                 $("#popup").dialog({
-                    title: topicId
+                    title: topicId,
+                    resizable: false,
+                    height: 510,
+                    width: 1200,
                 });
             }
 
@@ -99,6 +149,7 @@
         <div id="popup">
             <h3 id="header"></h3>
             <p id="content">
+                <table id="tableArticles"></table>
             </p>
         </div>
 
