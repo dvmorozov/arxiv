@@ -28,6 +28,8 @@ Look at [arxiv client for Android and iOS](https://dvmorozov.github.io/arxiv/).
 
         redrawTopicGraph(true);
     };
+
+    $("body").css('overflow', 'scroll');
 </script>
 
 <div>
