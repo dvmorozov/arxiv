@@ -21,8 +21,17 @@ Look at [arxiv client for Android and iOS](https://dvmorozov.github.io/arxiv/).
 <link rel="stylesheet" href="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/main.css">
 <link rel="shortcut icon" href="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/favicon.ico">
 
+<script>
+    window.onload = function() {
+        $("#visualisation").width(800);
+        $("#visualisation").height(800);
+
+        redrawTopicGraph();
+    };
+</script>
+
 <div>
-<svg id="visualisation" width="800" height="800"></svg>
+<svg id="visualisation"></svg>
 
 <div id="popup">
     <h3 id="header"></h3>
