@@ -67,7 +67,7 @@ function showTopicPopup(topicId) {
     dialog.dialog('option', 'position', { my: "center", at: "center", of: window });
 }
 
-function redrawTopicGraph() {
+function redrawTopicGraph(inFrame) {
     var graph = document.getElementById('visualisation');
     //  Removes graph.
     while (graph.hasChildNodes()) {
@@ -87,9 +87,9 @@ function redrawTopicGraph() {
         //nodeRadius: 5,
         width: graphWidth,
         height: graphHeight,
-        invalidation: null,                         // a promise to stop the simulation when the cell is re-run
+        invalidation: null,                         //  a promise to stop the simulation when the cell is re-run
         graphTitle: "Arxiv.org topics by number of articles (" + topics.article_count + " articles processed)",
-        inFrame: false,                             // Use value of inFrame from script, if want to use frame.
+        inFrame: inFrame,                           //  Controls text drawing.
         showPopup: showTopicPopup
     });
 
