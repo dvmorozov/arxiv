@@ -23,8 +23,8 @@ Look at [arxiv client for Android and iOS](https://dvmorozov.github.io/arxiv/).
 
 <script>
     window.onload = function() {
-        $("#visualisation").width(600);
-        $("#visualisation").height(600);
+        $("#visualisation").width(800);
+        $("#visualisation").height(800);
 
         redrawTopicGraph(true);
     };
