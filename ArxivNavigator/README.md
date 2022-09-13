@@ -2,10 +2,27 @@
 
 Look at [arxiv client for Android and iOS](https://dvmorozov.github.io/arxiv/).
 
-<link rel="shortcut icon" href="https://dvmorozov.github.io/arxiv/ArxivNavigator/favicon.ico">
+<script src="https://cdn.observableusercontent.com/npm/d3@7.6.1/dist/d3.min.js"></script>
+<script src="https://cdn.observableusercontent.com/npm/marked@0.3.12/marked.min.js"></script>
+<script src="https://cdn.observableusercontent.com/npm/htl@0.3.1/dist/htl.min.js"></script>
+<script src="https://cdn.observableusercontent.com/npm/@observablehq/highlight.js@2.0.0/highlight.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/smoothness/jquery-ui.css">
+
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+
+<script src="https://dvmorozov.github.io/arxiv/ArxivNavigator/data/topics.js" charset="utf-8"></script>
+<script src="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/force-graph.js" charset="utf-8"></script>
+<script src="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/topics.js" charset="utf-8"></script>
+
+<link rel="stylesheet" href="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/main.css">
+<link rel="shortcut icon" href="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/favicon.ico">
 
 <div>
-<svg id="visualisation"></svg>
+<svg id="visualisation" width="800" height="800"></svg>
 
 <div id="popup">
     <h3 id="header"></h3>
