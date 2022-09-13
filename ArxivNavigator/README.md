@@ -4,34 +4,14 @@ Look at [arxiv client for Android and iOS](https://dvmorozov.github.io/arxiv/).
 
 <link rel="shortcut icon" href="https://dvmorozov.github.io/arxiv/ArxivNavigator/favicon.ico">
 
-<script language="JavaScript">
-function resizeIframe(data) {
-    document.getElementById('topicsFrame').style.height = data.height + 'px';
-    document.getElementById('topicsFrame').style.width = data.width + 'px';
-};
-
-function sendLocation(){
-    //  Notifies child window about parent location.
-    var win = window.frames.topicsFrame;
-    win.postMessage(window.location.origin, 'https://dvmorozov.github.io');
-};
-
-var messageEventHandler = function(event){
-    //  Updates frame size according to child window size.
-    if(event.origin === 'https://dvmorozov.github.io'){
-        resizeIframe(event.data);
-    }
-};
-
-window.addEventListener('message', messageEventHandler, false);
-</script>
-
 <div>
-<iframe src="https://dvmorozov.github.io/arxiv/ArxivNavigator/topics.html"
-     title="Arxiv topics by the number of written articles."
-     id="topicsFrame" scrolling="no" style="width:100%; border:none;"
-     name="topicsFrame" onload="sendLocation();">
-</iframe>
+<svg id="visualisation"></svg>
+
+<div id="popup">
+    <h3 id="header"></h3>
+    <p id="content">
+    </p>
+</div>
 </div>
 
 *Hold mouse on node to see topic identifier and related number of articles. Drag node to see relations.*
