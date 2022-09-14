@@ -81,14 +81,21 @@ function redrawTopicGraph(inFrame) {
         nodeGroup: d => d.group,
         //nodeStrength: -200,                       //  This could be a number.
                                                     //  Negative value means repulsion, positive - attraction.
-        nodeTitle: d => `${d.id}\n${d.value}`,
+        nodeTitle: d => {
+            const last_article = d.last_articles.length > 0 ? d.last_articles[0].title : '';
+            const publishing_date = d.last_articles.length > 0 ? d.last_articles[0].last_version_date : '';
+
+            return `Topic: \"${d.id}\"\nNumber of articles: ${d.value}\n` +
+                   `Last article: \"${last_article}\"\nPublished: ${publishing_date}\n` +
+                   `Click the node to view list of articles.`
+        },
         //linkStroke,                               //  Function or value providing stroke value.
         //linkStrokeWidth: 2,
         //nodeRadius: 5,
         width: graphWidth,
         height: graphHeight,
         invalidation: null,                         //  a promise to stop the simulation when the cell is re-run
-        graphTitle: "Arxiv.org topics by number of articles (" + topics.article_count + " articles processed)",
+        graphTitle: "Number of articles by topic (" + topics.article_count + " articles processed)",
         inFrame: inFrame,                           //  Controls text drawing.
         showPopup: showTopicPopup
     });
