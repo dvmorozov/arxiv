@@ -33,8 +33,22 @@ function ForceGraph(
         showPopup
     } = {}
 ) {
-    // Compute values.
+    //  Compute values.
     const N = d3.map(nodes, nodeId).map(intern);
+    //  Opacity.
+    const O = d3.map(nodes,
+        function(d) {
+            if (d.last_articles.length > 0)
+            {
+                const last_version_date = new Date(d.last_articles[0].last_version_date);
+                const now = new Date();
+                //  Approximately half for 15 years.
+                const deltaYears = (now - last_version_date) / 31536000000.0;
+                opacity = Math.exp(-0.046 * deltaYears);
+                return opacity;
+            }
+            return 1.0;
+        });
     const LS = d3.map(links, linkSource).map(intern);
     const LT = d3.map(links, linkTarget).map(intern);
     if (nodeTitle === undefined) nodeTitle = (_, i) => N[i];
@@ -123,14 +137,14 @@ function ForceGraph(
         .selectAll("circle")
         .data(nodes)
         .join("circle")
-        .attr("r", 5)
+        .attr("r", function(d) { return R !== null ? R[d.index] : 5; })
+        .attr("opacity", function(d) { return O !== null ? O[d.index] : 1; })
         .attr("node_id", function(d) { return d.id; })
         .call(drag(simulation));
 
     if (W) link.attr("stroke-width", ({ index: i }) => W[i]);
     if (L) link.attr("stroke", ({ index: i }) => L[i]);
     if (G) node.attr("fill", ({ index: i }) => color(G[i]));
-    if (R) node.attr("r", ({ index: i }) => R[i]);
     if (T) node.append("title").text(({ index: i }) => T[i]);
     if (invalidation != null) invalidation.then(() => simulation.stop());
 
