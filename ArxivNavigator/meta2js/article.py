@@ -20,6 +20,7 @@ class Article(object):
         return self.title
 
     def get_json(self) -> str:
+        #   Converts time to format which could be parsed by JavaScript.
         return '{id: "' + self.id + '", ' \
                 'title: "' + self.title + '", ' \
-                'last_version_date: "' + str(self.last_version_date) + '"}'
+                'last_version_date: "' + str(self.last_version_date.strftime("%d %b %Y %H:%M:%S %Z")) + '"}'
