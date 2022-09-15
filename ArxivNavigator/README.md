@@ -44,7 +44,7 @@ Look at [arxiv client for Android and iOS](https://dvmorozov.github.io/arxiv/).
 
 *Hold mouse on node to see topic identifier and related number of articles. 
 Drag node to see relations. Click node to see list of latest articles.
-Node opacity decreases exponentially with time since time of the last published article.*
+Node opacity decreases exponentially with time since the time of last published article.*
 
 <a href="https://dvmorozov.github.io/arxiv/ArxivNavigator/topics.html" target="_blank">Open graph in new window</a>
 
