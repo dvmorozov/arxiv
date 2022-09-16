@@ -1,6 +1,6 @@
 # ArxivExpress 
 
-Arxiv.org client for Android and iOS.
+Arxiv.org client for Android and iOS created with Xamarin.
 
 <link rel="shortcut icon" href="favicon.ico">
 
