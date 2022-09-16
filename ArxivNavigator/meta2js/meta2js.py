@@ -50,7 +50,7 @@ def extract_topics_data():
 
         for source_id in categories[0].split():
             topic = add_unique_topic(source_id)
-            topic.add_to_last_articles(Article(article["id"], article["title"], max(version_dates)))
+            topic.add_article(Article(article["id"], article["title"], max(version_dates)))
 
             for target_id in categories[0].split():
                 if source_id != target_id:
