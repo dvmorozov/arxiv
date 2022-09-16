@@ -19,7 +19,7 @@ function ForceGraph(
         nodeStrength,
         linkSource = ({ source }) => source,// given d in links, returns a node identifier string
         linkTarget = ({ target }) => target,// given d in links, returns a node identifier string
-        linkStroke = "#999",                // link stroke color
+        linkStroke = "#999",                // link stroke color or function providing stroke value
         linkStrokeOpacity = 0.6,            // link stroke opacity
         linkStrokeWidth = null,             // given d in links, returns a stroke width in pixels
         linkStrokeLinecap = "round",        // link stroke linecap

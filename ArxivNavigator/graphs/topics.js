@@ -25,9 +25,9 @@ function showTopicPopup(topicId) {
             }
 
             //  Removes all content and creates new table. Otherwise, data is not cleared.
-            $('#popup > #content').children().remove();
+            $('#content').children().remove();
             //  Creates placeholder for table.
-            $('#popup > #content').append('<table>');
+            $('#content').append('<table>');
         }
     }
 
@@ -45,7 +45,7 @@ function showTopicPopup(topicId) {
         open: function(event, ui) {
             //  Data table should be created from the event handler,
             //  otherwise column width aren't set up properly.
-            var table = $('#popup > #content > table').DataTable({
+            var table = $('#content > table').DataTable({
                 data: articleList,
                 columns: [
                     { title: 'Published', "width": "20%" },
@@ -60,6 +60,9 @@ function showTopicPopup(topicId) {
                 scrollY: false,
                 autoWidth: false,
             });
+
+            //  Shows tabs.
+            $("#tabs").tabs();
         }
     });
 
@@ -89,9 +92,6 @@ function redrawTopicGraph(inFrame) {
                    `Last article: \"${last_article}\"\nPublished: ${publishing_date}\n` +
                    `Click the node to view list of articles.`
         },
-        //linkStroke,                               //  Function or value providing stroke value.
-        //linkStrokeWidth: 2,
-        //nodeRadius: 5,
         width: graphWidth,
         height: graphHeight,
         invalidation: null,                         //  a promise to stop the simulation when the cell is re-run
