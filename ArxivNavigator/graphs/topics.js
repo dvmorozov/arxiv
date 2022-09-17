@@ -5,31 +5,38 @@
 // If you want to use this file please contact me by dvmorozov@hotmail.com.
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function showTopicPopup(topicId) {
-    var articleList = [];
-    //  Fills list of last articles.
+function getTopicByid(topicId) {
     for (let i = 0; i < topics.nodes.length; i++) {
         if (topics.nodes[i].id === topicId) {
-            //  Converts data to the form appropriate for DataTables.
-            for (let j = 0; j < topics.nodes[i].last_articles.length; j++) {
-                const article = topics.nodes[i].last_articles[j];
-                const articleLink = '<a href="http://arxiv.org/abs/' + article.id +
-                                    '" target="_blank">' + article.title + '</a>';
-                var articleData = [];
-
-                articleData.push(article.last_version_date);
-                articleData.push(articleLink);
-                //articleData.push(article.id);
-
-                articleList.push(articleData);
-            }
-
-            //  Removes all content and creates new table. Otherwise, data is not cleared.
-            $('#content').children().remove();
-            //  Creates placeholder for table.
-            $('#content').append('<table>');
+            return topics.nodes[i];
         }
     }
+    return null;
+}
+
+function showTopicPopup(topicId) {
+    var articleList = [];
+    const topic = getTopicByid(topicId);
+    console.assert(topic !== null);
+    //  Fills list of last articles.
+    //  Converts data to the form appropriate for DataTables.
+    for (let j = 0; j < topic.last_articles.length; j++) {
+        const article = topic.last_articles[j];
+        const articleLink = '<a href="http://arxiv.org/abs/' + article.id +
+                            '" target="_blank">' + article.title + '</a>';
+        var articleData = [];
+
+        articleData.push(article.last_version_date);
+        articleData.push(articleLink);
+        //articleData.push(article.id);
+
+        articleList.push(articleData);
+    }
+
+    //  Removes all content and creates new table. Otherwise, data is not cleared.
+    $('#content').children().remove();
+    //  Creates placeholder for table.
+    $('#content').append('<table>');
 
     //  Closes dialog if it was open before,
     //  otherwise content is not displayed.
@@ -63,6 +70,7 @@ function showTopicPopup(topicId) {
 
             //  Shows tabs.
             $("#tabs").tabs();
+            redrawPublishingRateChart(topic);
         }
     });
 
@@ -71,16 +79,16 @@ function showTopicPopup(topicId) {
 }
 
 function redrawTopicGraph(inFrame) {
-    var graph = document.getElementById('visualisation');
+    var graph = document.getElementById('force_graph');
     //  Removes graph.
     while (graph.hasChildNodes()) {
         graph.removeChild(graph.firstChild);
     }
 
-    graphWidth = $('svg#visualisation').width();
-    graphHeight = $('svg#visualisation').height();
+    graphWidth = $('#force_graph').width();
+    graphHeight = $('#force_graph').height();
 
-    chart = ForceGraph(topics, {
+    graph = ForceGraph(topics, {
         nodeGroup: d => d.group,
         //nodeStrength: -200,                       //  This could be a number.
                                                     //  Negative value means repulsion, positive - attraction.
@@ -100,5 +108,43 @@ function redrawTopicGraph(inFrame) {
         showPopup: showTopicPopup
     });
 
-    document.getElementById('visualisation').appendChild(chart);
+    document.getElementById('force_graph').appendChild(graph);
+}
+
+function redrawPublishingRateChart(topic) {
+    var chart = document.getElementById('bar_chart');
+    //  Removes graph.
+    while (chart.hasChildNodes()) {
+        chart.removeChild(chart.firstChild);
+    }
+    //  Takes sizes from the first tab.
+    chartWidth = $('#tabs-1').width();
+    chartHeight = $('#tabs-1').height();
+
+    $("#tabs-2").width(chartWidth);
+    $("#tabs-2").height(chartHeight);
+
+    $("#bar_chart").width(chartWidth);
+    $("#bar_chart").height(chartHeight);
+
+    chart = BarChart(topic.articles_by_year, {
+        x: (d) => d.year,
+        y: (d) => d.articles_count / 1000.0,
+        xDomain: d3.groupSort(
+            topic.articles_by_year,
+            ([d]) => d.year,
+            (d) => d.year
+        ),
+        yDomain: d3.extent(
+            topic.articles_by_year,
+            (d) => d.articles_count / 1000.0
+        ),
+        yFormat: "",
+        yLabel: "↑ Number of published articles x 1000",
+        width : chartWidth,
+        height: chartHeight,
+        color: "steelblue",
+    });
+
+    document.getElementById('bar_chart').appendChild(chart);
 }

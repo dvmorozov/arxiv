@@ -23,8 +23,8 @@ Look at [arxiv client for Android and iOS](https://dvmorozov.github.io/arxiv/).
 
 <script>
     window.onload = function() {
-        $("#visualisation").width(800);
-        $("#visualisation").height(800);
+        $("#force_graph").width(800);
+        $("#force_graph").height(800);
 
         redrawTopicGraph(true);
     };
@@ -33,23 +33,20 @@ Look at [arxiv client for Android and iOS](https://dvmorozov.github.io/arxiv/).
 </script>
 
 <div>
-<svg id="visualisation"></svg>
+<svg id="force_graph"></svg>
 
 <div id="popup" style="display: none;">
     <div id="tabs">
         <ul>
-            <li><a href="#tabs-1">Last articles</a></li>
-            <li><a href="#tabs-2">Publishing rate</a></li>
+            <li><a href="#tabs-1">Last Articles</a></li>
+            <li><a href="#tabs-2">Publishing Rate</a></li>
         </ul>
         <div id="tabs-1">
             <p id="content">
             </p>
         </div>
         <div id="tabs-2">
-            <p>
-                This content is still under construction.
-                Please check a bit later it will be here.
-            </p>
+            <svg id="bar_chart"></svg>
         </div>
     </div>
 </div>

@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 
         <script src="https://dvmorozov.github.io/arxiv/ArxivNavigator/data/topics.js" charset="utf-8"></script>
+        <script src="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/bar-chart.js" charset="utf-8"></script>
         <script src="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/force-graph.js" charset="utf-8"></script>
         <script src="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/topics.js" charset="utf-8"></script>
 
@@ -22,8 +23,8 @@
         <script>
             window.onload = function() {
                 //  When page is opened in window graph takes full sizes.
-                $("#visualisation").width($(window).innerWidth());
-                $("#visualisation").height($(window).innerHeight());
+                $("#force_graph").width($(window).width());
+                $("#force_graph").height($(window).height());
 
                 redrawTopicGraph(false);
             };
@@ -31,23 +32,20 @@
     </head>
 
     <body>
-        <svg id="visualisation"></svg>
+        <svg id="force_graph"></svg>
 
         <div id="popup" style="display: none;">
             <div id="tabs">
                 <ul>
-                    <li><a href="#tabs-1">Last articles</a></li>
-                    <li><a href="#tabs-2">Publishing rate</a></li>
+                    <li><a href="#tabs-1">Last Articles</a></li>
+                    <li><a href="#tabs-2">Publishing Rate</a></li>
                 </ul>
                 <div id="tabs-1">
                     <p id="content">
                     </p>
                 </div>
                 <div id="tabs-2">
-                    <p>
-                        This content is still under construction.
-                        Please check a bit later it will be here.
-                    </p>
+                    <svg id="bar_chart"></svg>
                 </div>
             </div>
         </div>
