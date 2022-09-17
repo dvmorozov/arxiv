@@ -15,6 +15,8 @@ Look at [arxiv client for Android and iOS](https://dvmorozov.github.io/arxiv/).
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 
 <script src="https://dvmorozov.github.io/arxiv/ArxivNavigator/data/topics.js" charset="utf-8"></script>
+
+<script src="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/bar-chart.js" charset="utf-8"></script>
 <script src="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/force-graph.js" charset="utf-8"></script>
 <script src="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/topics.js" charset="utf-8"></script>
 
