@@ -15,8 +15,38 @@ function getTopicByid(topicId) {
 }
 
 function showTopicPopup(topicId) {
+    //  Closes dialog if it was open before,
+    //  otherwise content is not displayed.
+    if ($("#popup").hasClass("ui-dialog-content") &&
+        $("#popup").dialog("isOpen"))
+        $("#popup").dialog("close");
+
+    var dialog = $("#popup").dialog({
+        title: topicId,
+        resizable: false,
+        width: 1000,
+        height: 618,
+        open: function(event, ui) {
+            //  Shows tabs.
+            $("#tabs").tabs({
+               heightStyle:"fill",
+               collapsible:true,
+            });
+
+            const topic = getTopicByid(topicId);
+
+            redrawArticleList(topic);
+            redrawPublishingRateChart(topic);
+        }
+    });
+
+    //  Position must be set after opening the dialog.
+    dialog.dialog('option', 'position', { my: "center", at: "center", of: window });
+}
+
+function getArticleList(topic) {
     var articleList = [];
-    const topic = getTopicByid(topicId);
+
     console.assert(topic !== null);
     //  Fills list of last articles.
     //  Converts data to the form appropriate for DataTables.
@@ -33,57 +63,39 @@ function showTopicPopup(topicId) {
         articleList.push(articleData);
     }
 
+    return articleList;
+}
+
+function redrawArticleList(topic) {
+    const articleList = getArticleList(topic);
+
     //  Removes all content and creates new table. Otherwise, data is not cleared.
     $('#content').children().remove();
     //  Creates placeholder for table.
     $('#content').append('<table>');
 
-    //  Closes dialog if it was open before,
-    //  otherwise content is not displayed.
-    if ($("#popup").hasClass("ui-dialog-content") &&
-        $("#popup").dialog("isOpen"))
-        $("#popup").dialog("close");
-
-    var dialog = $("#popup").dialog({
-        title: topicId,
-        resizable: false,
-        //  Height is set up by content.
-        width: 1000,
-        open: function(event, ui) {
-            //  Data table should be created from the event handler,
-            //  otherwise column width aren't set up properly.
-            var table = $('#content > table').DataTable({
-                data: articleList,
-                columns: [
-                    { title: 'Published', "width": "20%" },
-                    { title: 'Title' },
-                    //{ title: 'Id' },
-                ],
-                info: false,
-                ordering: false,
-                paging: false,
-                searching: false,
-                scrollX: false,
-                scrollY: false,
-                autoWidth: false,
-            });
-
-            //  Shows tabs.
-            $("#tabs").tabs();
-            redrawPublishingRateChart(topic);
-        }
+    //  Data table should be created from the event handler,
+    //  otherwise column width aren't set up properly.
+    $('#content > table').DataTable({
+        data: articleList,
+        columns: [
+            { title: 'Published', "width": "20%" },
+            { title: 'Title' },
+            //{ title: 'Id' },
+        ],
+        info: false,
+        ordering: true,
+        paging: false,
+        searching: false,
+        scrollX: true,
+        scrollY: true,
+        autoWidth: false,
     });
-
-    //  Position must be set after opening the dialog.
-    dialog.dialog('option', 'position', { my: "center", at: "center", of: window });
 }
 
 function redrawTopicGraph(inFrame) {
-    var graph = document.getElementById('force_graph');
-    //  Removes graph.
-    while (graph.hasChildNodes()) {
-        graph.removeChild(graph.firstChild);
-    }
+    //  Removes all content from graph element.
+    $("#force_graph").children().remove();
 
     graphWidth = $('#force_graph').width();
     graphHeight = $('#force_graph').height();
@@ -112,17 +124,11 @@ function redrawTopicGraph(inFrame) {
 }
 
 function redrawPublishingRateChart(topic) {
-    var chart = document.getElementById('bar_chart');
-    //  Removes graph.
-    while (chart.hasChildNodes()) {
-        chart.removeChild(chart.firstChild);
-    }
-    //  Takes sizes from the first tab.
-    chartWidth = $('#tabs-1').width();
-    chartHeight = $('#tabs-1').height();
+    //  Removes all content from bar chart tab.
+    $("#bar_chart").children().remove();
 
-    $("#tabs-2").width(chartWidth);
-    $("#tabs-2").height(chartHeight);
+    chartWidth = $('#tabs-2').width();
+    chartHeight = $('#tabs-2').height();
 
     $("#bar_chart").width(chartWidth);
     $("#bar_chart").height(chartHeight);
