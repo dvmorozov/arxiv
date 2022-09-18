@@ -29,8 +29,20 @@ function showTopicPopup(topicId) {
         open: function(event, ui) {
             //  Shows tabs.
             $("#tabs").tabs({
-               heightStyle:"fill",
-               collapsible:true,
+                heightStyle:"fill",
+                collapsible:true,
+                activate: function( event, ui ) {
+                    if (event.type == 'tabsactivate') {
+                        const topic = getTopicByid(topicId);
+
+                        if ($(event.currentTarget).attr("href") == '#tabs-1') {
+                            redrawArticleList(topic);
+                        }
+                        else if ($(event.currentTarget).attr("href") == '#tabs-2') {
+                            redrawPublishingRateChart(topic);
+                        }
+                    }
+                }
             });
 
             const topic = getTopicByid(topicId);
