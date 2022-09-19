@@ -147,7 +147,7 @@ function redrawPublishingRateChart(topic) {
 
     chart = BarChart(topic.articles_by_year, {
         x: (d) => d.year,
-        y: (d) => d.articles_count / 1000.0,
+        y: (d) => d.articles_count,
         xDomain: d3.groupSort(
             topic.articles_by_year,
             ([d]) => d.year,
@@ -155,10 +155,10 @@ function redrawPublishingRateChart(topic) {
         ),
         yDomain: d3.extent(
             topic.articles_by_year,
-            (d) => d.articles_count / 1000.0
+            (d) => d.articles_count
         ),
-        yFormat: "",
-        yLabel: "↑ Number of published articles x 1000",
+        yFormat: d3.format(".0f"),
+        yLabel: "↑ Number of published articles",
         width : chartWidth,
         height: chartHeight,
         color: "steelblue",

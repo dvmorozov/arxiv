@@ -4,24 +4,24 @@
 function BarChart(
     data,
     {
-        x = (d, i) => i, // given d in data, returns the (ordinal) x-value
-        y = (d) => d, // given d in data, returns the (quantitative) y-value
-        title, // given d in data, returns the title text
-        marginTop = 20, // the top margin, in pixels
-        marginRight = 0, // the right margin, in pixels
-        marginBottom = 30, // the bottom margin, in pixels
-        marginLeft = 40, // the left margin, in pixels
-        width = 640, // the outer width of the chart, in pixels
-        height = 400, // the outer height of the chart, in pixels
-        xDomain, // an array of (ordinal) x-values
+        x = (d, i) => i,                            // given d in data, returns the (ordinal) x-value
+        y = (d) => d,                               // given d in data, returns the (quantitative) y-value
+        title,                                      // given d in data, returns the title text
+        marginTop = 20,                             // the top margin, in pixels
+        marginRight = 0,                            // the right margin, in pixels
+        marginBottom = 30,                          // the bottom margin, in pixels
+        marginLeft = 40,                            // the left margin, in pixels
+        width = 640,                                // the outer width of the chart, in pixels
+        height = 400,                               // the outer height of the chart, in pixels
+        xDomain,                                    // an array of (ordinal) x-values
         xRange = [marginLeft, width - marginRight], // [left, right]
-        yType = d3.scaleLinear, // y-scale type
-        yDomain, // [ymin, ymax]
-        yRange = [height - marginBottom, marginTop], // [bottom, top]
-        xPadding = 0.1, // amount of x-range to reserve to separate bars
-        yFormat, // a format specifier string for the y-axis
-        yLabel, // a label for the y-axis
-        color = "currentColor", // bar fill color
+        yType = d3.scaleLinear,                     // y-scale type
+        yDomain,                                    // [ymin, ymax]
+        yRange = [height - marginBottom, marginTop],// [bottom, top]
+        xPadding = 0.1,                             // amount of x-range to reserve to separate bars
+        yFormat,                                    // a format specifier string for the y-axis
+        yLabel,                                     // a label for the y-axis
+        color = "currentColor",                     // bar fill color
     } = {}
 ) {
     // Compute values.
@@ -52,7 +52,8 @@ function BarChart(
         title = (i) => T(O[i], i, data);
     }
 
-    const svg = d3.create("svg").attr("width", width).attr("height", height).attr("viewBox", [0, 0, width, height]).attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+    const svg = d3.create("svg").attr("width", width).attr("height", height).attr("viewBox", [0, 0, width, height])
+        .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
 
     svg.append("g")
         .attr("transform", `translate(${marginLeft},0)`)
@@ -65,7 +66,8 @@ function BarChart(
                 .attr("x2", width - marginLeft - marginRight)
                 .attr("stroke-opacity", 0.1)
         )
-        .call((g) => g.append("text").attr("x", -marginLeft).attr("y", 10).attr("fill", "currentColor").attr("text-anchor", "start").text(yLabel));
+        .call((g) => g.append("text").attr("x", -marginLeft).attr("y", 10)
+            .attr("fill", "currentColor").attr("text-anchor", "start").text(yLabel));
 
     const bar = svg
         .append("g")
@@ -82,7 +84,9 @@ function BarChart(
 
     svg.append("g")
         .attr("transform", `translate(0,${height - marginBottom})`)
-        .call(xAxis);
+        .call(xAxis)
+        .selectAll("text")
+        .attr("transform", "translate(-10,10)rotate(-45)");
 
     return svg.node();
 }
