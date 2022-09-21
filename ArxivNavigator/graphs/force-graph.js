@@ -16,14 +16,15 @@ function ForceGraph(
         nodeStrokeWidth = 1.5,              // node stroke width, in pixels
         nodeStrokeOpacity = 1,              // node stroke opacity
         nodeRadius = null,                  // node radius, in pixels (if null then is filled by default function)
-        nodeStrength,
+        nodeStrength,                       // this could be a number or function.
+                                            // negative value means repulsion, positive - attraction.
         linkSource = ({ source }) => source,// given d in links, returns a node identifier string
         linkTarget = ({ target }) => target,// given d in links, returns a node identifier string
         linkStroke = "#999",                // link stroke color or function providing stroke value
         linkStrokeOpacity = 0.6,            // link stroke opacity
         linkStrokeWidth = null,             // given d in links, returns a stroke width in pixels
         linkStrokeLinecap = "round",        // link stroke linecap
-        linkStrength = 0.5,
+        linkStrength,
         colors = d3.schemeTableau10,        // an array of color strings, for the node groups
         width = 640,                        // outer width, in pixels
         height = 400,                       // outer height, in pixels
@@ -33,9 +34,9 @@ function ForceGraph(
         showPopup
     } = {}
 ) {
-    //  Compute values.
+    //  Construct array of node identifiers from original data.
     const N = d3.map(nodes, nodeId).map(intern);
-    //  Opacity.
+    //  Construct array of opacity values.
     const O = d3.map(nodes,
         function(d) {
             if (d.last_articles.length > 0)
@@ -58,17 +59,18 @@ function ForceGraph(
 
     //  Link values are normalized.
     const maxLinkValue = d3.max(links, d => Math.abs(d.value));
+    //  W must be initialized.
     const W = typeof linkStrokeWidth !== "function"
         ? (linkStrokeWidth != null ? d3.map(nodes, d => linkStrokeWidth)                    //  Const value is used.
-        : d3.map(links, d => Math.max(Math.abs(d.value) * 100.0 * 0.5 / maxLinkValue, 1)))  //  Minimum value is limited.
-        : d3.map(links, linkStrokeWidth);
+        : d3.map(links, d => Math.max(Math.abs(d.value) * 100 / maxLinkValue, 1)))          //  Minimum value is limited.
+        : d3.map(links, linkStrokeWidth);                                                   //  Provided function is used.
 
     //  Node values are normalized.
     const maxNodeValue = d3.max(nodes, d => Math.abs(d.value));
-    //  R must be initialized.
+    //  R (array of circle radia) must be initialized.
     const R = typeof nodeRadius !== "function"
         ? (nodeRadius !== null ? d3.map(nodes, d => nodeRadius)                             //  Const value is used.
-        : d3.map(nodes, d => Math.max(Math.sqrt(Math.abs(d.value) * 100 * 10 / maxNodeValue), 5)))
+        : d3.map(nodes, d => Math.max(Math.sqrt(Math.abs(d.value) * 100 * 10 / maxNodeValue), 1)))
                                                                                             //  Circle area is proportional
                                                                                             //  to normalized value.
                                                                                             //  Minimum value is limited.
@@ -76,20 +78,22 @@ function ForceGraph(
                                                                                             //  node attribute and converts
                                                                                             //  it to number.
 
-    // Replace the input nodes and links with mutable objects for the simulation.
+    //  Replace the input nodes and links with graphical objects for the simulation.
     nodes = d3.map(nodes, (_, i) => ({ id: N[i] }));
+    //  Construct array of "source-target" pairs of graphical objects.
     links = d3.map(links, (_, i) => ({ source: LS[i], target: LT[i] }));
 
-    // Compute default domains.
+    //  Compute default domains.
     if (G && nodeGroups === undefined) nodeGroups = d3.sort(G);
 
-    // Construct the scales.
+    //  Construct the scales.
     const color = nodeGroup == null ? null : d3.scaleOrdinal(nodeGroups, colors);
 
-    // Construct the forces.
+    //  Construct the forces.
     const forceNode = d3.forceManyBody();
-    const forceLink = d3.forceLink(links).id(({ index: i }) => N[i]);
+    var forceLink = d3.forceLink(links).id(({ index: i }) => N[i]);
 
+    //  Construct force nodes. Negative values correspond to repulsion.
     if (nodeStrength !== undefined) forceNode.strength(nodeStrength);
     else {
         console.assert(R !== null);
@@ -99,7 +103,15 @@ function ForceGraph(
         });
     }
 
+    //  Construct force links. Positive values correspond to attraction.
     if (linkStrength !== undefined) forceLink.strength(linkStrength);
+    else {
+        console.assert(W !== null);
+        forceLink.strength(({ index: i }) => {
+            //  Strength (factor of the distance) is proportional to multiplicity of link.
+            return W[i] / 100;
+        });
+    }
 
     console.assert(R !== null);
     const simulation = d3
@@ -137,12 +149,13 @@ function ForceGraph(
         .selectAll("circle")
         .data(nodes)
         .join("circle")
-        .attr("r", function(d) { return R !== null ? R[d.index] : 5; })
+        .attr("r", function(d) { return R[d.index]; })
         .attr("opacity", function(d) { return O !== null ? O[d.index] : 1; })
         .attr("node_id", function(d) { return d.id; })
         .call(drag(simulation));
 
-    if (W) link.attr("stroke-width", ({ index: i }) => W[i]);
+    if (W) link.attr("stroke-width", ({ index: i }) => W[i] / 2);   //  Normalized value is divided by 2 because actual width
+                                                                    //  of link on the graph is doubled due to link shape.
     if (L) link.attr("stroke", ({ index: i }) => L[i]);
     if (G) node.attr("fill", ({ index: i }) => color(G[i]));
     if (T) node.append("title").text(({ index: i }) => T[i]);

@@ -114,8 +114,6 @@ function redrawTopicGraph(inFrame) {
 
     graph = ForceGraph(topics, {
         nodeGroup: d => d.group,
-        //nodeStrength: -200,                       //  This could be a number.
-                                                    //  Negative value means repulsion, positive - attraction.
         nodeTitle: d => {
             const last_article = d.last_articles.length > 0 ? d.last_articles[0].title : '';
             const publishing_date = d.last_articles.length > 0 ? d.last_articles[0].last_version_date : '';
