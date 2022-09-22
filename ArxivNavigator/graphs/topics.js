@@ -125,7 +125,9 @@ function redrawTopicGraph(inFrame) {
         width: graphWidth,
         height: graphHeight,
         invalidation: null,                         //  a promise to stop the simulation when the cell is re-run
-        graphTitle: "Number of articles by topic (" + topics.article_count + " articles processed)",
+        graphTitle: "Number of articles by topic\n" +
+            "Totally " + topics.article_count + " articles\n" +
+            "Last updated " + topics.updated,
         inFrame: inFrame,                           //  Controls text drawing.
         showPopup: showTopicPopup
     });

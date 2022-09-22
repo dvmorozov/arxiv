@@ -197,13 +197,16 @@ function ForceGraph(
 
     const fontSize = $(window).innerHeight() / 30;
     console.assert(graphTitle !== null);
-    svg.append("text")
-        .attr("x", viewBoxX + (inFrame === true ? 0 : fontSize * 2))
-        .attr("y", viewBoxY + (inFrame === true ? fontSize : fontSize * 2))
-        .attr("text-anchor", "left")
-        .style("font-size", fontSize.toString() + "px")
-        //.style("text-decoration", "underline")
-        .text(graphTitle);
+    titleRow = 0;
+    graphTitle.split("\n").forEach(function (titlePart) {
+        svg.append("text")
+            .attr("x", viewBoxX + (inFrame === true ? 0 : fontSize * 2))
+            .attr("y", viewBoxY + titleRow * (fontSize + fontSize / 5) + (inFrame === true ? fontSize : fontSize * 2))
+            .attr("text-anchor", "left")
+            .style("font-size", fontSize.toString() + "px")
+            .text(titlePart);
+            titleRow++;
+        });
 
     node.on("click", function(d) {
         if (d.target !== null && showPopup !== null) {
