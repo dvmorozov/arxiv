@@ -11,6 +11,7 @@ from topic_link import *
 from datetime import datetime
 
 article_count = 0
+updated = ''
 
 
 def finish_parsing(write_to_file):
@@ -21,10 +22,11 @@ def finish_parsing(write_to_file):
     print('topic count', '=>', str(get_topic_count()))
     print('articles', '=>', str(article_count))
 
-    topics = 'var topics = {' + nodes_json + ', ' + links_json + ', ' \
-        'link_count: "' + str(get_link_count()) + '", ' \
-        'topic_count: "' + str(get_topic_count()) + '", ' \
-        'article_count: "' + str(article_count) + '"};'
+    topics = 'var topics = {' + nodes_json + ', ' + links_json + ', '   \
+        'link_count: "' + str(get_link_count()) + '", '                 \
+        'topic_count: "' + str(get_topic_count()) + '", '               \
+        'article_count: "' + str(article_count) + '", '                 \
+        'updated: "' + updated + '"};'
 
     textfile = open(write_to_file, "w")
     textfile.write(topics)
@@ -58,6 +60,7 @@ def extract_topics_data():
 
         article_count += 1
 
+    updated = ijson.items(metadata, 'updated.item')
     finish_parsing('../data/topics.js')
 
 
