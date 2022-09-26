@@ -6,27 +6,28 @@
 ########################################################################################################################
 
 import ijson
-from article import *
 from topic_link import *
 from datetime import datetime
 
 article_count = 0
-updated = ''
+updated = ""
 
 
 def finish_parsing(write_to_file):
+    global updated
     links_json = generate_links_json()
     nodes_json = generate_topics_json()
 
     print('link count', '=>', str(get_link_count()))
     print('topic count', '=>', str(get_topic_count()))
     print('articles', '=>', str(article_count))
+    print('updated', '=>', str(updated))
 
-    topics = 'var topics = {' + nodes_json + ', ' + links_json + ', '   \
-        'link_count: "' + str(get_link_count()) + '", '                 \
-        'topic_count: "' + str(get_topic_count()) + '", '               \
-        'article_count: "' + str(article_count) + '", '                 \
-        'updated: "' + updated + '"};'
+    topics = 'var topics = {' + nodes_json + ', ' + links_json + ', ' \
+        'link_count: "' + str(get_link_count()) + '", ' \
+        'topic_count: "' + str(get_topic_count()) + '", ' \
+        'article_count: "' + str(article_count) + '", ' \
+        'updated: "' + str(updated) + '"};'
 
     textfile = open(write_to_file, "w")
     textfile.write(topics)
@@ -34,7 +35,7 @@ def finish_parsing(write_to_file):
 
 
 def extract_topics_data():
-    global article_count
+    global article_count, updated
 
     metadata = ijson.parse(open('../data/arxiv-public-datasets.json', 'r'))
     #   Extracts categories
@@ -60,7 +61,12 @@ def extract_topics_data():
 
         article_count += 1
 
-    updated = ijson.items(metadata, 'updated.item')
+    # New parser should be created, otherwise another type of objects is not returned.
+    metadata = ijson.parse(open('../data/arxiv-public-datasets.json', 'r'))
+    updated_items = ijson.items(metadata, 'updated')
+    for updated_item in updated_items:
+        updated = updated_item
+
     finish_parsing('../data/topics.js')
 
 
