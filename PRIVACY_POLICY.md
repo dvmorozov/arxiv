@@ -1,10 +1,9 @@
-\[data-custom-class='body'\], \[data-custom-class='body'\] \* { background: transparent !important; } \[data-custom-class='title'\], \[data-custom-class='title'\] \* { font-family: Arial !important; font-size: 26px !important; color: #000000 !important; } \[data-custom-class='subtitle'\], \[data-custom-class='subtitle'\] \* { font-family: Arial !important; color: #595959 !important; font-size: 14px !important; } \[data-custom-class='heading\_1'\], \[data-custom-class='heading\_1'\] \* { font-family: Arial !important; font-size: 19px !important; color: #000000 !important; } \[data-custom-class='heading\_2'\], \[data-custom-class='heading\_2'\] \* { font-family: Arial !important; font-size: 17px !important; color: #000000 !important; } \[data-custom-class='body\_text'\], \[data-custom-class='body\_text'\] \* { color: #595959 !important; font-size: 14px !important; font-family: Arial !important; } \[data-custom-class='link'\], \[data-custom-class='link'\] \* { color: #3030F1 !important; font-size: 14px !important; font-family: Arial !important; word-break: break-word !important; }
 
-**PRIVACY NOTICE**
+# PRIVACY NOTICE
 
   
 
-**Last updated July 30, 2022**
+Last updated July 30, 2022
 
   
 
@@ -24,7 +23,7 @@ This privacy notice for Dmitry Morozov ("**Company**," "**we**," "**us**," or "*
 
   
 
-**SUMMARY OF KEY POINTS**
+# SUMMARY OF KEY POINTS
 
   
 
@@ -70,7 +69,7 @@ Want to learn more about what Dmitry Morozov does with any information we collec
 
   
 
-**TABLE OF CONTENTS**
+# TABLE OF CONTENTS
 
   
 
@@ -377,118 +376,40 @@ We have collected the following categories of personal information in the past t
 
   
 
-**Category**
-
-**Examples**
-
-**Collected**
-
-A. Identifiers
-
-Contact details, such as real name, alias, postal address, telephone or mobile contact number, unique personal identifier, online identifier, Internet Protocol address, email address, and account name
-
-  
-
+**Category**|**Examples**|**Collected**
+---|---|---
+A. Identifiers|
+Contact details, such as real name, alias, postal address, telephone or mobile contact number, unique personal identifier, online identifier, Internet Protocol address, email address, and account name|
 NO
-
-  
-
-B. Personal information categories listed in the California Customer Records statute
-
-Name, contact information, education, employment, employment history, and financial information
-
-  
-
+B. Personal information categories listed in the California Customer Records statute|
+Name, contact information, education, employment, employment history, and financial information|
 NO
-
-  
-
-C. Protected classification characteristics under California or federal law
-
-Gender and date of birth
-
-  
-
+C. Protected classification characteristics under California or federal law|
+Gender and date of birth|
 NO
-
-  
-
-D. Commercial information
-
-Transaction information, purchase history, financial details, and payment information
-
-  
-
+D. Commercial information|
+Transaction information, purchase history, financial details, and payment information|
 NO
-
-  
-
-E. Biometric information
-
-Fingerprints and voiceprints
-
-  
-
+E. Biometric information|
+Fingerprints and voiceprints|
 NO
-
-  
-
-F. Internet or other similar network activity
-
-Browsing history, search history, online behavior, interest data, and interactions with our and other websites, applications, systems, and advertisements
-
-  
-
+F. Internet or other similar network activity|
+Browsing history, search history, online behavior, interest data, and interactions with our and other websites, applications, systems, and advertisements|
 NO
-
-  
-
-G. Geolocation data
-
-Device location
-
-  
-
+G. Geolocation data|
+Device location|
 NO
-
-  
-
-H. Audio, electronic, visual, thermal, olfactory, or similar information
-
-Images and audio, video or call recordings created in connection with our business activities
-
-  
-
+H. Audio, electronic, visual, thermal, olfactory, or similar information|
+Images and audio, video or call recordings created in connection with our business activities|
 NO
-
-  
-
-I. Professional or employment-related information
-
-Business contact details in order to provide you our services at a business level or job title, work history, and professional qualifications if you apply for a job with us
-
-  
-
+I. Professional or employment-related information|
+Business contact details in order to provide you our services at a business level or job title, work history, and professional qualifications if you apply for a job with us|
 NO
-
-  
-
-J. Education Information
-
-Student records and directory information
-
-  
-
+J. Education Information|
+Student records and directory information|
 NO
-
-  
-
-K. Inferences drawn from other personal information
-
-Inferences drawn from any of the collected personal information listed above to create a profile or summary about, for example, an individual’s preferences and characteristics
-
-  
-
+K. Inferences drawn from other personal information|
+Inferences drawn from any of the collected personal information listed above to create a profile or summary about, for example, an individual’s preferences and characteristics|
 NO
 
   
@@ -634,13 +555,5 @@ Milovice 289 24
 Czechia
 
   
-
-**13\. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?**
-
-  
-
-Based on the applicable laws of your country, you may have the right to request access to the personal information we collect from you, change that information, or delete it. To request to review, update, or delete your personal information, please submit a request form by clicking [here](https://app.termly.io/notify/e611ea35-fc81-4926-9805-b40b1bf91cc8).
-
-ul { list-style-type: square; } ul > li > ul { list-style-type: circle; } ul > li > ul > li > ul { list-style-type: square; } ol li { font-family: Arial; }
 
 This privacy policy was created using Termly's [Privacy Policy Generator](https://termly.io/products/privacy-policy-generator/).
