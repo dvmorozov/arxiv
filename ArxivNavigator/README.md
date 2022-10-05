@@ -59,7 +59,8 @@ Drag node to see relations.
 Click node to see the list of latest articles and the number of articles published per year.
 Node opacity decreases exponentially since the time of last published article.*
 
-<a href="https://dvmorozov.github.io/arxiv/ArxivNavigator/topics.html" target="_blank">Open graph in new window</a>
+<a href="https://dvmorozov.github.io/arxiv/ArxivNavigator/topics.html" target="_blank">Open graph in new window</a> 
+<a href="https://dvmorozov.github.io/arxiv/ArxivNavigator/data/topics.js" target="_blank">Open dataset</a> 
 
 ___
 
