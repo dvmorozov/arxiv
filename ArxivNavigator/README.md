@@ -71,3 +71,7 @@ The visualization uses modified [force-directed graph](https://observablehq.com/
 Data has been collected by [modified fork](https://github.com/dvmorozov/arxiv-public-datasets) of [arxiv-public-datasets metadata collector](https://github.com/mattbierbaum/arxiv-public-datasets).
  
 JSON parsing has been implemented with [ijson](https://pypi.org/project/ijson/).
+
+---
+
+I would appreciate any way of contributing: GitHub issue, email or pull request.
