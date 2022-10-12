@@ -32,7 +32,7 @@
 
                 <Editor Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"
                        x:Name="EditorFeedback" TextChanged="Handle_FeedbackChanged"
-                       Placeholder="Any feedback..." HorizontalOptions="FillAndExpand"
+                       Placeholder="Write any feedback..." HorizontalOptions="FillAndExpand"
                        VerticalOptions="FillAndExpand" Completed="Handle_FeedbackCompleted"
                        />
 

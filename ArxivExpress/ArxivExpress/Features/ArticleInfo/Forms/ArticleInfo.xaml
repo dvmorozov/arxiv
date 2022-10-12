@@ -28,7 +28,6 @@
                     </FlexLayout>
 
                     <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start" Wrap="Wrap">
-
                         <Label Text="{Binding ArticleEntry.PublishedWithLabel}"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
                                 LineBreakMode="WordWrap" Margin="0,0,10,0"/>
