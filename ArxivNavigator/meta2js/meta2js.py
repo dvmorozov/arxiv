@@ -5,6 +5,7 @@
 # If you want to use this file please contact me by dvmorozov@hotmail.com.
 ########################################################################################################################
 
+import gzip
 import ijson
 from topic_link import *
 from datetime import datetime
@@ -29,9 +30,9 @@ def finish_parsing(write_to_file):
         'article_count: "' + str(article_count) + '", ' \
         'updated: "' + str(updated) + '"};'
 
-    textfile = open(write_to_file, "w")
-    textfile.write(topics)
-    textfile.close()
+    with gzip.open(write_to_file, 'w', encoding='utf-8') as gzip_file:
+        gzip_file.write(topics)
+        gzip_file.close()
 
 
 def extract_topics_data():
