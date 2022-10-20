@@ -30,7 +30,8 @@ def finish_parsing(write_to_file):
         'article_count: "' + str(article_count) + '", ' \
         'updated: "' + str(updated) + '"};'
 
-    with gzip.open(write_to_file, 'w', encoding='utf-8') as gzip_file:
+    # File is opened in text mode.
+    with gzip.open(write_to_file, 'wt', encoding='utf-8') as gzip_file:
         gzip_file.write(topics)
         gzip_file.close()
 
@@ -68,7 +69,7 @@ def extract_topics_data():
     for updated_item in updated_items:
         updated = updated_item
 
-    finish_parsing('../data/topics.js')
+    finish_parsing('../data/topics.js.gz')
 
 
 # Press the green button in the gutter to run the script.
