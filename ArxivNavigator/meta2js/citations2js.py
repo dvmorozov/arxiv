@@ -6,9 +6,8 @@
 ########################################################################################################################
 
 import ijson
-from datetime import datetime
+from citation import *
 
-article_count = 0
 updated = ""
 
 
@@ -36,11 +35,26 @@ def extract_articles_data():
 
     for article in articles:
         article_id = article[0]
-        article_citations = article[1]
-        print(article_id)
-        print(article_citations)
+        # This is the list articles which are cited by the given article.
+        cited_articles = article[1]
+        add_citation(article_id, cited_articles)
 
-        article_count += 1
+    #  Creates list sorted by cumulative number of citations in descending order.
+    sorted_list = sorted(citations.items(), key=lambda x: x[1].get_citation_count(), reverse=True)
+
+    max_citation_count = 0
+    if len(sorted_list) > 0:
+        key = sorted_list[0][0]
+        max_citation_count = citations[key].get_citation_count()
+
+    print('max citation count', '=>', max_citation_count)
+
+    for item in list(sorted_list):
+        key = item[0]
+        if citations[key].get_citation_count() > max_citation_count / 100:
+            print(citations[key].get_article_id(), '=>', str(citations[key].get_citation_count()))
+
+    print(str(get_citations_count()))
 
     '''
     # New parser should be created, otherwise another type of objects is not returned.
@@ -51,7 +65,6 @@ def extract_articles_data():
 
     finish_parsing('../data/most-influential-articles.js')
     '''
-    print(str(article_count))
 
 
 # Press the green button in the gutter to run the script.
