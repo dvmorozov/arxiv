@@ -36,6 +36,10 @@ class Citation(object):
     def get_article_id(self):
         return self.article_id
 
+    def get_json(self) -> str:
+        return '{article_id: "' + str(self.article_id) + '", ' \
+                'citation_count: "' + str(self.citation_count) + '"}'
+
 
 def add_citation(article_id, cited_articles):
     if article_id not in citations:
@@ -48,3 +52,22 @@ def add_citation(article_id, cited_articles):
 
 def get_citations_count():
     return len(citations)
+
+
+def generate_citations_json() -> str:
+    global citations
+
+    citations_json: str = 'articles: ['
+    citations_count = 0
+
+    for key in citations:
+        if citations_count != 0:
+            citations_json += ', '
+
+        citation = citations[key]
+
+        citations_json += citation.get_json()
+        citations_count += 1
+
+    citations_json += ']'
+    return citations_json

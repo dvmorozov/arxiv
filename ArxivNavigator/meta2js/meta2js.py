@@ -10,7 +10,7 @@ import ijson
 from topic_link import *
 from datetime import datetime
 
-article_count = 0
+processed_article_count = 0
 updated = ""
 
 
@@ -21,13 +21,13 @@ def finish_parsing(write_to_file):
 
     print('link count', '=>', str(get_link_count()))
     print('topic count', '=>', str(get_topic_count()))
-    print('articles', '=>', str(article_count))
+    print('articles', '=>', str(processed_article_count))
     print('updated', '=>', str(updated))
 
     topics = 'var topics = {' + nodes_json + ', ' + links_json + ', ' \
         'link_count: "' + str(get_link_count()) + '", ' \
         'topic_count: "' + str(get_topic_count()) + '", ' \
-        'article_count: "' + str(article_count) + '", ' \
+        'article_count: "' + str(processed_article_count) + '", ' \
         'updated: "' + str(updated) + '"};'
 
     # File is opened in text mode.
@@ -37,7 +37,7 @@ def finish_parsing(write_to_file):
 
 
 def extract_topics_data():
-    global article_count, updated
+    global processed_article_count, updated
 
     metadata = ijson.parse(open('../data/arxiv-public-datasets.json', 'r'))
     #   Extracts categories
