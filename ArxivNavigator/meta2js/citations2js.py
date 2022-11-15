@@ -7,6 +7,7 @@
 
 import ijson
 from citation import *
+from anytree import Node, RenderTree
 
 
 updated = ""
@@ -53,6 +54,27 @@ def save_only_most_influential_articles():
             most_influential_articles[key] = citations[key]
 
 
+def get_reference_tree():
+    #  Creates list sorted by cumulative number of citations in descending order.
+    sorted_list = sorted(citations.items(), key=lambda x: x[1].get_citation_count(), reverse=True)
+
+    result = Node("test")
+
+    for item in list(sorted_list):
+        key = item[0]
+        result = Node(key)
+        cited_by_articles = citations[key].get_cited_by_articles()
+        print("key", "=>", result)
+        print("cited_articles", "=>", cited_by_articles)
+
+        for article in cited_by_articles:
+            Node(article, result)
+            print("article", "=>", article)
+        break
+
+    return result
+
+
 def extract_citations_data():
     global processed_article_count, updated
 
@@ -80,4 +102,9 @@ if __name__ == '__main__':
     extract_citations_data()
     print_summary_data()
     save_only_most_influential_articles()
-    write_output('../data/most-influential-articles.js')
+
+    reference_tree = get_reference_tree()
+    for pre, fill, node in RenderTree(reference_tree):
+        print("%s%s" % (pre, node.name))
+
+    #write_output('../data/most-influential-articles.js')

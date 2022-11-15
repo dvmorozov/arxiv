@@ -12,7 +12,8 @@ class Citation(object):
     def __init__(self, article_id, cited_articles):
         self.article_id = article_id
         self.citation_count = 0
-        self.cited_articles = []
+        self.cited_articles = []                # Set of article ids. which are referenced by given article.
+        self.cited_by_articles = set()          # Set of article ids. which references this article.
         self.set_citations(cited_articles)
 
     def add_citation_count(self, citation_count):
@@ -29,9 +30,16 @@ class Citation(object):
                 citations[cited_article] = Citation(cited_article, [])
 
             citations[cited_article].add_citation_count(self.citation_count + 1)
+            citations[cited_article].add_citing_article(self.article_id)
+
+    def add_citing_article(self, article_id):
+        self.cited_by_articles.add(article_id)
 
     def get_citation_count(self):
         return self.citation_count
+
+    def get_cited_by_articles(self):
+        return self.cited_by_articles
 
     def get_article_id(self):
         return self.article_id
