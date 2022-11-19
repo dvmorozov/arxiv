@@ -21,12 +21,26 @@ def filter_out_stop_words(words):
     return [word for word in words if word not in stop_list]
 
 
+def contains(string, characters):
+    for c in characters:
+        if string.rfind(c) != -1:
+            return True
+
+    return False
+
+
 def trim(words):
+    special_characters = ',:;.≤≥-+=?!()[]{}'
     for i in range(1, len(words)):
-        words[i] = words[i].strip(',:;.≤≥-+=?!()[]{}')
+        words[i] = words[i].strip(special_characters)
 
     # Removes empty words.
-    return [word for word in words if len(word) > 0]
+    words = [word for word in words if len(word) > 0]
+
+    # Removes words containing special characters in the middle.
+    words = [word for word in words if not contains(word, special_characters)]
+
+    return words
 
 
 def filter_out_rare_words(words):
