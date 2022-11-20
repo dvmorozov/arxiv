@@ -144,7 +144,7 @@ def get_corpus_dictionary():
         path_to_text = os.path.join(path_to_texts, filename)
 
         if os.path.isfile(path_to_text):
-            # get_bag_of_words_from_file(path_to_text)
+            get_bag_of_words_from_file(path_to_text)
             processed_files_count += 1
             print_estimate_time(processed_files_count, len(dir_list), started_time, 'Collecting dictionary')
 
