@@ -20,14 +20,14 @@ dictionary = corpora.Dictionary()
 # This method must be called on every item.
 def print_estimate_time(item_processed, item_count, started_time, caption):
     if item_processed <= item_count:
-        item_step = int(item_count / 100)
+        item_step = int(item_count / 10000)
         if item_processed % item_step == 0:
             processed_percents = item_processed * 100.0 / item_count
             elapsed_sec = (datetime.datetime.now() - started_time).total_seconds()
             # print('elapsed_sec', elapsed_sec, 'item_processed', item_processed, 'item_count', item_count)
             estimated_sec = datetime.timedelta(seconds=elapsed_sec * (item_count - item_processed) / item_processed)
             estimated_time = datetime.datetime(1, 1, 1) + estimated_sec
-            print(caption, '%.1f' % (processed_percents), '%, estimated time=',
+            print(caption, '%.2f' % (processed_percents), '%, estimated time=',
                   "%d:%d:%d:%d" % (estimated_time.day - 1, estimated_time.hour, estimated_time.minute, estimated_time.second),
                   '.')
     else:
@@ -83,19 +83,19 @@ def filter_out_short_words(words):
 
 def do_preprocessing(text):
     words = text.lower().split()
-    print('Original words count', '=>', len(words))
+    # print('Original words count', '=>', len(words))
 
     words = trim(words)
-    print('After trimming words', '=>', len(words))
+    # print('After trimming words', '=>', len(words))
 
     words = filter_out_stop_words(words)
-    print('After filtering out stop words', '=>', len(words))
+    # print('After filtering out stop words', '=>', len(words))
 
     words = filter_out_rare_words(words)
-    print('After filtering out rare words', '=>', len(words))
+    # print('After filtering out rare words', '=>', len(words))
 
     words = filter_out_short_words(words)
-    print('After filtering out short words', '=>', len(words))
+    # print('After filtering out short words', '=>', len(words))
     return words
 
 
@@ -144,7 +144,7 @@ def get_corpus_dictionary():
         path_to_text = os.path.join(path_to_texts, filename)
 
         if os.path.isfile(path_to_text):
-            get_bag_of_words_from_file(path_to_text)
+            # get_bag_of_words_from_file(path_to_text)
             processed_files_count += 1
             print_estimate_time(processed_files_count, len(dir_list), started_time, 'Collecting dictionary')
 
