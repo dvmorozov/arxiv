@@ -10,6 +10,9 @@ from pprint import pprint  # pretty-printer
 from collections import defaultdict
 
 
+dictionary = corpora.Dictionary()
+
+
 def read_file(file_path):
     file = open(file_path, 'r')
     return file.read()
@@ -30,7 +33,7 @@ def contains(string, characters):
 
 
 def trim(words):
-    special_characters = ',:;.≤≥-+=?!()[]{}'
+    special_characters = ',:;.≤≥-+=*/?!()[]{}π∇▽∗"\'′−'
     for i in range(1, len(words)):
         words[i] = words[i].strip(special_characters)
 
@@ -75,11 +78,28 @@ def do_preprocessing(text):
     return words
 
 
+def add_to_dictionary(words):
+    global dictionary
+
+    # Single document is added as a set of words.
+    dictionary.add_documents([words])
+    print(dictionary)
+
+
 def get_bag_of_words_from_file(file_path):
     text = read_file(file_path)
     words = do_preprocessing(text)
-    print(words)
+    add_to_dictionary(words)
+    # print(words)
+
+
+def write_dictionary_to_file(file_path):
+    global dictionary
+
+    dictionary.save_as_text(file_path)
 
 
 if __name__ == '__main__':
-    get_bag_of_words_from_file('/home/dmitry/Downloads/arxiv-data/fulltext/0705.1248v1.txt')
+    get_bag_of_words_from_file('0705.1248v1.txt')
+    get_bag_of_words_from_file('1202.1776v1.txt')
+    write_dictionary_to_file('dictionary.txt')
