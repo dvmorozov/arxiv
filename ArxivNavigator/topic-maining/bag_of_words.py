@@ -5,11 +5,14 @@
 ########################################################################################################################
 
 
+import os
+import sys
 from gensim import *
 from pprint import pprint  # pretty-printer
 from collections import defaultdict
 
 
+# The dictionary represents vector space.
 dictionary = corpora.Dictionary()
 
 
@@ -83,7 +86,6 @@ def add_to_dictionary(words):
 
     # Single document is added as a set of words.
     dictionary.add_documents([words])
-    print(dictionary)
 
 
 def get_bag_of_words_from_file(file_path):
@@ -96,10 +98,29 @@ def get_bag_of_words_from_file(file_path):
 def write_dictionary_to_file(file_path):
     global dictionary
 
+    print(dictionary)
     dictionary.save_as_text(file_path)
 
 
+def read_dictionary_from_file(file_path):
+    global dictionary
+
+    dictionary = dictionary.load_from_text(file_path)
+    print(dictionary)
+
+
 if __name__ == '__main__':
-    get_bag_of_words_from_file('0705.1248v1.txt')
-    get_bag_of_words_from_file('1202.1776v1.txt')
-    write_dictionary_to_file('dictionary.txt')
+    assert (len(sys.argv) > 1)
+
+    path_to_texts = sys.argv[1]
+    print(path_to_texts)
+
+    path_to_dictionary = '../data/dictionary.txt'
+
+    processed_files_count = 0
+
+    get_bag_of_words_from_file(os.path.join(path_to_texts, '0705.1248v1.txt'))
+    get_bag_of_words_from_file(os.path.join(path_to_texts, '1202.1776v1.txt'))
+
+    write_dictionary_to_file(path_to_dictionary)
+    # read_dictionary_from_file(path_to_dictionary)
