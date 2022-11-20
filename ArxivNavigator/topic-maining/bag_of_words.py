@@ -7,6 +7,7 @@
 
 import os
 import sys
+import datetime
 from gensim import *
 from pprint import pprint  # pretty-printer
 from collections import defaultdict
@@ -14,6 +15,23 @@ from collections import defaultdict
 
 # The dictionary represents vector space.
 dictionary = corpora.Dictionary()
+
+
+# This method must be called on every item.
+def print_estimate_time(item_processed, item_count, started_time, caption):
+    if item_processed <= item_count:
+        item_step = int(item_count / 100)
+        if item_processed % item_step == 0:
+            processed_percents = item_processed * 100.0 / item_count
+            elapsed_sec = (datetime.datetime.now() - started_time).total_seconds()
+            # print('elapsed_sec', elapsed_sec, 'item_processed', item_processed, 'item_count', item_count)
+            estimated_sec = datetime.timedelta(seconds=elapsed_sec * (item_count - item_processed) / item_processed)
+            estimated_time = datetime.datetime(1, 1, 1) + estimated_sec
+            print(caption, '%.1f' % (processed_percents), '%, estimated time=',
+                  "%d:%d:%d:%d" % (estimated_time.day - 1, estimated_time.hour, estimated_time.minute, estimated_time.second),
+                  '.')
+    else:
+        print(caption, 'finished.')
 
 
 def read_file(file_path):
@@ -109,18 +127,30 @@ def read_dictionary_from_file(file_path):
     print(dictionary)
 
 
-if __name__ == '__main__':
+def get_corpus_dictionary():
+    print('Collection corpus dictionary...')
     assert (len(sys.argv) > 1)
 
     path_to_texts = sys.argv[1]
-    print(path_to_texts)
+    print('Corpus directory', path_to_texts)
 
     path_to_dictionary = '../data/dictionary.txt'
 
     processed_files_count = 0
+    started_time = datetime.datetime.now()
 
-    get_bag_of_words_from_file(os.path.join(path_to_texts, '0705.1248v1.txt'))
-    get_bag_of_words_from_file(os.path.join(path_to_texts, '1202.1776v1.txt'))
+    dir_list = os.listdir(path_to_texts)
+    for filename in dir_list:
+        path_to_text = os.path.join(path_to_texts, filename)
+
+        if os.path.isfile(path_to_text):
+            get_bag_of_words_from_file(path_to_text)
+            processed_files_count += 1
+            print_estimate_time(processed_files_count, len(dir_list), started_time, 'Collecting dictionary')
 
     write_dictionary_to_file(path_to_dictionary)
+
+
+if __name__ == '__main__':
+    get_corpus_dictionary()
     # read_dictionary_from_file(path_to_dictionary)
