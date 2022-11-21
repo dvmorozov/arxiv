@@ -18,7 +18,7 @@ dictionary = corpora.Dictionary()
 
 
 def read_file(file_path):
-    file = open(file_path, 'r')
+    file = open(file_path, 'r', encoding='utf8')
     return file.read()
 
 
