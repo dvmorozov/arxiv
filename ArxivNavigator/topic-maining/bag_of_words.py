@@ -35,7 +35,7 @@ def print_estimate_time(item_processed, item_count, started_time, caption):
 
 
 def read_file(file_path):
-    file = open(file_path, 'r')
+    file = open(file_path, 'r', encoding='utf8')
     return file.read()
 
 
