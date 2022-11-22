@@ -37,7 +37,7 @@ def contains(string, characters):
 
 
 def trim(words):
-    special_characters = ',:;.≤≥-+=*/?!()[]{}π∇▽∗"\'′−'
+    special_characters = ',:;.≤≥-+=*/?!()[]{}⟨⟩<>πλμηχψτω̄∇▽∗"\'′−'
     for i in range(1, len(words)):
         words[i] = words[i].strip(special_characters)
 
@@ -110,14 +110,19 @@ def read_dictionary_from_file(file_path):
     print(dictionary)
 
 
-def get_corpus_dictionary():
-    print('Collection corpus dictionary...')
+def get_corpus_directory():
     assert (len(sys.argv) > 1)
 
-    path_to_texts = sys.argv[1]
+    return sys.argv[1]
+
+
+def get_corpus_dictionary():
+    print('Collection corpus dictionary...')
+
+    path_to_texts = get_corpus_directory()
     print('Corpus directory', path_to_texts)
 
-    path_to_dictionary = '../data/dictionary.txt'
+    path_to_dictionary = os.path.join(get_corpus_directory(), 'dictionary.txt')
 
     processed_files_count = 0
     dir_list = os.listdir(path_to_texts)
@@ -131,9 +136,26 @@ def get_corpus_dictionary():
             processed_files_count += 1
             estimated_time.print_estimate_time(processed_files_count)
 
+            # Remove this to proceed.
+            if processed_files_count == 10:
+                break
+
     write_dictionary_to_file(path_to_dictionary)
+
+
+def file_to_vector(file_path):
+    text = read_file(file_path)
+    words = do_preprocessing(text)
+    vector = dictionary.doc2bow(words)
+    print(vector)
+    return vector
 
 
 if __name__ == '__main__':
     get_corpus_dictionary()
     # read_dictionary_from_file(path_to_dictionary)
+
+    # Displays token ids.
+    #pprint(dictionary.token2id)
+
+    file_to_vector(os.path.join(get_corpus_directory(), "1205.3815v1.txt"))
