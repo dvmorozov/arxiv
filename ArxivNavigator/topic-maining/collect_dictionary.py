@@ -1,5 +1,5 @@
 ########################################################################################################################
-# File "bag_of_words.py"
+# File "collect_dictionary.py"
 # Copyright © Dmitry Morozov 2022
 # If you want to use this file please contact me by dvmorozov@hotmail.com.
 ########################################################################################################################
@@ -116,13 +116,17 @@ def get_corpus_directory():
     return sys.argv[1]
 
 
+def get_path_to_dictionary():
+    return os.path.join(get_corpus_directory(), 'dictionary.txt')
+
+
 def get_corpus_dictionary():
     print('Collection corpus dictionary...')
 
     path_to_texts = get_corpus_directory()
     print('Corpus directory', path_to_texts)
 
-    path_to_dictionary = os.path.join(get_corpus_directory(), 'dictionary.txt')
+    path_to_dictionary = get_path_to_dictionary()
 
     processed_files_count = 0
     dir_list = os.listdir(path_to_texts)
@@ -153,7 +157,7 @@ def file_to_vector(file_path):
 
 if __name__ == '__main__':
     get_corpus_dictionary()
-    # read_dictionary_from_file(path_to_dictionary)
+    # read_dictionary_from_file(get_path_to_dictionary())
 
     # Displays token ids.
     #pprint(dictionary.token2id)
