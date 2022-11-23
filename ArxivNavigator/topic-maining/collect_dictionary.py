@@ -117,7 +117,35 @@ def get_corpus_directory():
 
 
 def get_path_to_dictionary():
-    return os.path.join(get_corpus_directory(), 'dictionary.txt')
+    script_path = sys.argv[0]
+    dictionary_path = os.path.abspath(os.path.join(os.path.dirname(script_path), '../data', 'dictionary.txt'))
+    return dictionary_path
+
+
+def get_metadata_path(file_path):
+    file_path_parts = os.path.splitext(file_path)
+    assert(len(file_path_parts) > 0)
+    return file_path_parts[0] + '.ini'
+
+
+def is_ext_equal(file_path, ext):
+    file_path_parts = os.path.splitext(file_path)
+    return len(file_path_parts) > 0 and file_path_parts[1] == ext
+
+
+def get_text_file_list(path_to_texts):
+    dir_list = os.listdir(path_to_texts)
+    result = []
+
+    for file_name in dir_list:
+        path_to_text = os.path.join(path_to_texts, file_name)
+        if is_ext_equal(path_to_text, '.txt'):
+            path_to_meta = get_metadata_path(path_to_text)
+            if not os.path.exists(path_to_meta):
+                result.append(path_to_text)
+
+    print('Number of files to process', str(len(result)))
+    return result
 
 
 def get_corpus_dictionary():
@@ -126,25 +154,29 @@ def get_corpus_dictionary():
     path_to_texts = get_corpus_directory()
     print('Corpus directory', path_to_texts)
 
-    path_to_dictionary = get_path_to_dictionary()
-
     processed_files_count = 0
-    dir_list = os.listdir(path_to_texts)
-    estimated_time = EstimatedTime(len(dir_list), 'Collecting dictionary')
+    text_file_list = get_text_file_list(path_to_texts)
+    estimated_time = EstimatedTime(len(text_file_list), 'Collecting dictionary')
 
-    for filename in dir_list:
-        path_to_text = os.path.join(path_to_texts, filename)
+    for file_name in text_file_list:
+        path_to_text = os.path.join(path_to_texts, file_name)
+        path_to_meta = get_metadata_path(path_to_text)
 
-        if os.path.isfile(path_to_text):
-            get_bag_of_words_from_file(path_to_text)
-            processed_files_count += 1
-            estimated_time.print_estimate_time(processed_files_count)
+        if not os.path.exists(path_to_meta):
+            if os.path.isfile(path_to_text):
+                get_bag_of_words_from_file(path_to_text)
+                processed_files_count += 1
+                estimated_time.print_estimate_time(processed_files_count)
 
-            # Remove this to proceed.
-            if processed_files_count == 10:
-                break
+                # Creates empty metadata file.
+                with open(path_to_meta, 'w') as meta_file:
+                    pass
 
-    write_dictionary_to_file(path_to_dictionary)
+                # Remove this to proceed.
+                if processed_files_count % 1000 == 0:
+                    write_dictionary_to_file(get_path_to_dictionary())
+
+    write_dictionary_to_file(get_path_to_dictionary())
 
 
 def file_to_vector(file_path):
@@ -162,4 +194,4 @@ if __name__ == '__main__':
     # Displays token ids.
     #pprint(dictionary.token2id)
 
-    file_to_vector(os.path.join(get_corpus_directory(), "1205.3815v1.txt"))
+    #file_to_vector(os.path.join(get_corpus_directory(), "1205.3815v1.txt"))
