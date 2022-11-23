@@ -41,11 +41,8 @@ def trim(words):
     for i in range(1, len(words)):
         words[i] = words[i].strip(special_characters)
 
-    # Removes empty words.
-    words = [word for word in words if len(word) > 0]
-
-    # Removes words containing special characters in the middle.
-    words = [word for word in words if not contains(word, special_characters)]
+    # Removes empty words. Saves words containing only alphabetical characters.
+    words = [word for word in words if len(word) > 0 and word.isalpha()]
 
     return words
 
@@ -118,7 +115,7 @@ def get_corpus_directory():
 
 def get_path_to_dictionary():
     if len(sys.argv) > 2:
-        return os.path.join(sys.argv[1], 'dictionary.txt')
+        return os.path.join(sys.argv[2], 'dictionary.txt')
     else:
         script_path = sys.argv[0]
         return os.path.abspath(os.path.join(os.path.dirname(script_path), '../data', 'dictionary.txt'))
