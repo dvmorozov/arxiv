@@ -160,7 +160,8 @@ def get_corpus_dictionary():
     text_file_list = get_text_file_list(path_to_texts)
     estimated_time = EstimatedTime(len(text_file_list), 'Collecting dictionary')
 
-    for file_name in text_file_list:
+    while len(text_file_list) > 0:
+        file_name = text_file_list.pop()
         path_to_text = os.path.join(path_to_texts, file_name)
         path_to_meta = get_metadata_path(path_to_text)
 
