@@ -99,7 +99,7 @@ def get_bag_of_words_from_file(file_path):
 def write_dictionary_to_file(file_path):
     global dictionary
 
-    print(dictionary)
+    print('Dictionary is saved with', str(len(dictionary)), 'items.')
     dictionary.save_as_text(file_path)
 
 
@@ -117,9 +117,11 @@ def get_corpus_directory():
 
 
 def get_path_to_dictionary():
-    script_path = sys.argv[0]
-    dictionary_path = os.path.abspath(os.path.join(os.path.dirname(script_path), '../data', 'dictionary.txt'))
-    return dictionary_path
+    if len(sys.argv) > 2:
+        return sys.argv[1]
+    else:
+        script_path = sys.argv[0]
+        return os.path.abspath(os.path.join(os.path.dirname(script_path), '../data', 'dictionary.txt'))
 
 
 def get_metadata_path(file_path):
