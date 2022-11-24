@@ -186,15 +186,13 @@ def file_to_vector(file_path):
     text = read_file(file_path)
     words = do_preprocessing(text)
     vector = dictionary.doc2bow(words)
-    print(vector)
     return vector
 
 
 if __name__ == '__main__':
     get_corpus_dictionary()
-    # read_dictionary_from_file(get_path_to_dictionary())
 
     # Displays token ids.
     #pprint(dictionary.token2id)
 
-    #file_to_vector(os.path.join(get_corpus_directory(), "1205.3815v1.txt"))
+
