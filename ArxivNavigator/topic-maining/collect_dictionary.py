@@ -179,7 +179,7 @@ def get_corpus_dictionary():
     write_dictionary_to_file(get_path_to_dictionary())
 
 
-def file_to_vector(file_path):
+def file_to_bow(file_path):
     text = read_file(file_path)
     words = do_preprocessing(text)
     vector = dictionary.doc2bow(words)

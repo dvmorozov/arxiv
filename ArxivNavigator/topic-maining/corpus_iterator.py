@@ -18,6 +18,5 @@ class CorpusIterator(object):
         for file_name in dir_list:
             path_to_text = os.path.join(self.corpus_path, file_name)
             if os.path.exists(path_to_text) and is_ext_equal(path_to_text, '.txt'):
-                bow = file_to_vector(path_to_text)
-                print(bow)
+                bow = file_to_bow(path_to_text)
                 yield bow
