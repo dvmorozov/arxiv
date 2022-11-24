@@ -19,15 +19,15 @@ class EstimatedTime(object):
         if item_processed <= self.item_count:
             item_step = int(self.item_count / 10000)
             if item_processed % item_step == 0:
-                processed_percents = item_processed * 100.0 / self.item_count
+                processed_percents: float = item_processed * 100.0 / self.item_count
                 elapsed_sec = (datetime.datetime.now() - self.started_time).total_seconds()
                 # print('elapsed_sec', elapsed_sec, 'item_processed', item_processed, 'item_count', item_count)
                 estimated_sec = datetime.timedelta(
                     seconds=elapsed_sec * (self.item_count - item_processed) / item_processed)
                 estimated_time = datetime.datetime(1, 1, 1) + estimated_sec
-                print(self.caption, '%.2f' % (processed_percents), '%, estimated time=',
+                print(self.caption, '%.2f' % processed_percents, '%, estimated time=',
                       "%d:%d:%d:%d" % (
-                      estimated_time.day - 1, estimated_time.hour, estimated_time.minute, estimated_time.second),
-                      '.')
+                          estimated_time.day - 1, estimated_time.hour, estimated_time.minute, estimated_time.second),
+                      ', processed', str(item_processed), '.')
         else:
             print(self.caption, 'finished.')

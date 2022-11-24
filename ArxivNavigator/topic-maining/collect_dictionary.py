@@ -17,6 +17,10 @@ from common.estimated_time import *
 dictionary = corpora.Dictionary()
 
 
+def get_dictionary():
+    return dictionary
+
+
 def read_file(file_path):
     file = open(file_path, 'r', encoding='utf8')
     return file.read()
@@ -147,7 +151,7 @@ def get_text_file_list(path_to_texts):
     return result
 
 
-def get_corpus_dictionary():
+def collect_corpus_dictionary():
     print('Collection corpus dictionary...')
 
     path_to_texts = get_corpus_directory()
@@ -177,6 +181,8 @@ def get_corpus_dictionary():
                     write_dictionary_to_file(get_path_to_dictionary())
 
     write_dictionary_to_file(get_path_to_dictionary())
+    # Displays token ids.
+    # pprint(dictionary.token2id)
 
 
 def file_to_bow(file_path):
@@ -187,9 +193,4 @@ def file_to_bow(file_path):
 
 
 if __name__ == '__main__':
-    get_corpus_dictionary()
-
-    # Displays token ids.
-    #pprint(dictionary.token2id)
-
-
+    collect_corpus_dictionary()
