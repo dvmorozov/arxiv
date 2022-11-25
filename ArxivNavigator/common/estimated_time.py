@@ -30,4 +30,4 @@ class EstimatedTime(object):
                           estimated_time.day - 1, estimated_time.hour, estimated_time.minute, estimated_time.second),
                       ', processed', str(item_processed), '.')
         else:
-            print(self.caption, 'finished.')
+            print(self.caption, 'finished. Item number', str(item_processed), '.')

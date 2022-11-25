@@ -8,15 +8,16 @@ from corpus_iterator import *
 from gensim import models
 
 
-num_topics=200
+num_topics: int = 20
 
 
 def get_path_to_model():
+    model_file_name = 'model.mm'
     if len(sys.argv) > 2:
-        return os.path.join(sys.argv[2], 'model.txt')
+        return os.path.join(sys.argv[2], model_file_name)
     else:
         script_path = sys.argv[0]
-        return os.path.abspath(os.path.join(os.path.dirname(script_path), '../data', 'model.txt'))
+        return os.path.abspath(os.path.join(os.path.dirname(script_path), '../data', model_file_name))
 
 
 def read_model_from_file(file_path, lsi_model):
@@ -30,6 +31,8 @@ def write_model_to_file(file_path, lsi_model):
     global num_topics
 
     lsi_model.save(file_path)
+    print('======================================== Model topics ========================================')
+    print(lsi_model)
     lsi_model.print_topics(num_topics)
 
 
@@ -37,18 +40,13 @@ def create_model():
     global num_topics
 
     corpus_iterator = CorpusIterator(get_corpus_directory())
+
+    print('======================================== TF-IDF ========================================')
     tfidf = models.TfidfModel(corpus_iterator)
     tfidf_iterator = tfidf[corpus_iterator]
-    # Initializes model.
-    for tfidf in tfidf_iterator:
-        print(tfidf)
 
+    print('========================================= LSI ==========================================')
     lsi_model = models.LsiModel(tfidf_iterator, id2word=get_dictionary(), num_topics=num_topics)
-    lsi_iterator = lsi_model[tfidf_iterator]
-    # Initializes model.
-    for lsi in lsi_model:
-        print(lsi)
-
     return lsi_model
 
 

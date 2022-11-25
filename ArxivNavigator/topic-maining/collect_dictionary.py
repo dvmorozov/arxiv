@@ -118,11 +118,12 @@ def get_corpus_directory():
 
 
 def get_path_to_dictionary():
+    dictionary_file_name = 'dictionary.txt'
     if len(sys.argv) > 2:
-        return os.path.join(sys.argv[2], 'dictionary.txt')
+        return os.path.join(sys.argv[2], dictionary_file_name)
     else:
         script_path = sys.argv[0]
-        return os.path.abspath(os.path.join(os.path.dirname(script_path), '../data', 'dictionary.txt'))
+        return os.path.abspath(os.path.join(os.path.dirname(script_path), '../data', dictionary_file_name))
 
 
 def get_metadata_path(file_path):
@@ -186,6 +187,7 @@ def collect_corpus_dictionary():
 
 
 def file_to_bow(file_path):
+    # print('File', file_path, 'is processed.')
     text = read_file(file_path)
     words = do_preprocessing(text)
     vector = dictionary.doc2bow(words)
