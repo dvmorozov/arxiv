@@ -14,17 +14,21 @@ num_topics: int = 20
 def get_path_to_model():
     model_file_name = 'model.mm'
     if len(sys.argv) > 2:
-        return os.path.join(sys.argv[2], model_file_name)
+        path_to_model = os.path.join(sys.argv[2], model_file_name)
     else:
         script_path = sys.argv[0]
-        return os.path.abspath(os.path.join(os.path.dirname(script_path), '../data', model_file_name))
+        path_to_model = os.path.abspath(os.path.join(os.path.dirname(script_path), '../data', model_file_name))
+
+    print('path to model', path_to_model)
+    return path_to_model
 
 
 def read_model_from_file(file_path, lsi_model):
     global num_topics
 
     lsi_model.load(file_path)
-    lsi_model.print_topics(num_topics)
+    print('======================================== Model topics ========================================')
+    print(lsi_model.print_topics(num_topics))
 
 
 def write_model_to_file(file_path, lsi_model):
@@ -32,8 +36,7 @@ def write_model_to_file(file_path, lsi_model):
 
     lsi_model.save(file_path)
     print('======================================== Model topics ========================================')
-    print(lsi_model)
-    lsi_model.print_topics(num_topics)
+    print(lsi_model.print_topics(num_topics))
 
 
 def create_model():
@@ -52,9 +55,9 @@ def create_model():
 
 def collect_corpus_topic():
     read_dictionary_from_file(get_path_to_dictionary())
-    model = create_model()
-    write_model_to_file(get_path_to_model(), model)
+    write_model_to_file(get_path_to_model(), create_model())
 
 
 if __name__ == '__main__':
-    collect_corpus_topic()
+    #collect_corpus_topic()
+    read_model_from_file(get_path_to_model(), create_model())
