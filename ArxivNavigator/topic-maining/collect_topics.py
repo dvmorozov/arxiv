@@ -48,9 +48,27 @@ def create_model():
     tfidf = models.TfidfModel(corpus_iterator)
     tfidf_iterator = tfidf[corpus_iterator]
 
-    print('========================================= LSI ==========================================')
-    lsi_model = models.LsiModel(tfidf_iterator, id2word=get_dictionary(), num_topics=num_topics)
-    return lsi_model
+    # print('========================================= LSI ==========================================')
+    # lsi_model = models.LsiModel(tfidf_iterator, id2word=get_dictionary(), num_topics=num_topics)
+    # return lsi_model
+
+    print('========================================= LDA ==========================================')
+    lda_model = models.LdaMulticore(corpus=tfidf_iterator,
+                             id2word=get_dictionary(),
+                             random_state=100,
+                             num_topics=num_topics,
+                             passes=10,
+                             chunksize=1000,
+                             batch=False,
+                             alpha='asymmetric',
+                             decay=0.5,
+                             offset=64,
+                             eta=None,
+                             eval_every=0,
+                             iterations=100,
+                             gamma_threshold=0.001,
+                             per_word_topics=True)
+    return lda_model
 
 
 def collect_corpus_topic():
@@ -59,5 +77,5 @@ def collect_corpus_topic():
 
 
 if __name__ == '__main__':
-    #collect_corpus_topic()
-    read_model_from_file(get_path_to_model(), create_model())
+    collect_corpus_topic()
+    #read_model_from_file(get_path_to_model(), create_model())
