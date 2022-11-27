@@ -25,6 +25,10 @@ class CorpusIterator(object):
             self.estimated_time.print_estimate_time(self.processed_files_count)
 
             if os.path.exists(path_to_text) and is_ext_equal(path_to_text, '.txt'):
-                yield file_to_bow(path_to_text)
+                bow = file_to_bow(path_to_text)
             else:
-                yield []
+                print('empty bow is returned')
+                bow = []
+
+            # print('bow', bow)
+            yield bow

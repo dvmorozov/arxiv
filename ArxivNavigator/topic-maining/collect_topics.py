@@ -6,6 +6,11 @@
 
 from corpus_iterator import *
 from gensim import models
+from collections import defaultdict
+from gensim import corpora
+
+import logging
+logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 
 num_topics: int = 20

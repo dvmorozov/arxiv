@@ -41,7 +41,7 @@ def contains(string, characters):
 
 
 def trim(words):
-    special_characters = ',:;.≤≥-+=*/?!()[]{}⟨⟩<>πλμηχψτω̄∇▽∗"\'′−'
+    special_characters = ',:;.≤≥-+=*/?!()[]{}⟨⟩<>πλμηχψτω̄∇▽∗"\'′−\x01'
     for i in range(1, len(words)):
         words[i] = words[i].strip(special_characters)
 
