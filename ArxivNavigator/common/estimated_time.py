@@ -17,7 +17,7 @@ class EstimatedTime(object):
     # This method must be called on every item.
     def print_estimate_time(self, item_processed):
         if item_processed <= self.item_count:
-            item_step = int(self.item_count / 10000)
+            item_step = int(self.item_count / 100)
             if item_processed % item_step == 0:
                 processed_percents: float = item_processed * 100.0 / self.item_count
                 elapsed_sec = (datetime.datetime.now() - self.started_time).total_seconds()
