@@ -16,8 +16,7 @@ logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=lo
 num_topics: int = 20
 
 
-def get_path_to_model():
-    model_file_name = 'model.mm'
+def get_path_to_model(model_file_name):
     if len(sys.argv) > 2:
         path_to_model = os.path.join(sys.argv[2], model_file_name)
     else:
@@ -35,6 +34,53 @@ def read_model_from_file(file_path, lsi_model):
     lsi_model.load(file_path)
     print('======================================== Model topics ========================================')
     print(lsi_model.print_topics(num_topics))
+
+
+def expression_to_js(expression_parts):
+    result = '['
+
+    first_word = True
+    for part in expression_parts:
+        sub_parts = part.split('*')
+        assert (len(sub_parts) == 2)
+        left = sub_parts[0].strip()
+        right = sub_parts[1].strip('" ')
+
+        result += ', ' if not first_word else ''
+        result += '{factor: "' + left + '",'
+        result += ' word: "' + right + '"}'
+        first_word = False
+
+    result += ']'
+    return result
+
+
+def write_topics_to_js_file(file_path, model):
+    global num_topics
+    print('======================================== Model topics ========================================')
+    print('Topics are written to JavaScript file', file_path)
+
+    first_topic = True
+    topics = 'var collected_topics = {topics: ['
+    for topic in model.print_topics(num_topics):
+        print(topic)
+        topic_index = topic[0]
+        topic_expression = topic[1]
+        topic_expression_parts = topic_expression.split('+')
+
+        topic_js = ', ' if not first_topic else ''
+        topic_js += '{topic_index: "' + str(topic_index)
+        topic_js += '", words: ' + expression_to_js(topic_expression_parts)
+        topic_js += '}'
+        topics += topic_js
+        first_topic = False
+
+    topics += ']};'
+
+    print(topics)
+    text_file = open(file_path, "w")
+    text_file.write(topics)
+    text_file.close()
 
 
 def write_model_to_file(file_path, model):
@@ -84,9 +130,9 @@ def create_model():
 
 def collect_corpus_topic():
     read_dictionary_from_file(get_path_to_dictionary())
-    write_model_to_file(get_path_to_model(), create_model())
+    write_topics_to_js_file(get_path_to_model('collected_topics.js'), create_model())
 
 
 if __name__ == '__main__':
     collect_corpus_topic()
-    #read_model_from_file(get_path_to_model(), create_model())
+    #read_model_from_file(get_path_to_model('model.mm'), create_model())
