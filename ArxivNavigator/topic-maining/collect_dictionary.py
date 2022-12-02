@@ -7,14 +7,20 @@
 
 import os
 import sys
+import nltk
+
 from gensim import *
 from pprint import pprint  # pretty-printer
 from collections import defaultdict
 from common.estimated_time import *
+from nltk.stem.wordnet import WordNetLemmatizer
 
+nltk.download('wordnet')
+nltk.download('omw-1.4')
 
 # The dictionary represents vector space.
 dictionary = corpora.Dictionary()
+lemmatizer = WordNetLemmatizer()
 
 
 def get_dictionary():
@@ -28,7 +34,7 @@ def read_file(file_path):
 
 def filter_out_stop_words(words):
     # Removes common words and tokenizes.
-    stop_list = set('for a of the and to in'.split()).union(parsing.preprocessing.STOPWORDS)
+    stop_list = set('for a of the that and to in is are'.split()).union(parsing.preprocessing.STOPWORDS)
     return [word for word in words if word not in stop_list]
 
 
@@ -51,6 +57,11 @@ def trim(words):
     return words
 
 
+def lemmatize_words(words):
+    words = [lemmatizer.lemmatize(word) for word in words]
+    return words
+
+
 def filter_out_rare_words(words):
     frequency = defaultdict(int)
 
@@ -66,11 +77,16 @@ def filter_out_short_words(words):
 
 
 def do_preprocessing(text):
+    global lemmatizer
+
     words = text.lower().split()
     # print('Original words count', '=>', len(words))
 
     words = trim(words)
     # print('After trimming words', '=>', len(words))
+
+    words = lemmatize_words(words)
+    # print('Lemmatized words count', '=>', len(words))
 
     words = filter_out_stop_words(words)
     # print('After filtering out stop words', '=>', len(words))
@@ -174,8 +190,8 @@ def collect_corpus_dictionary():
                 estimated_time.print_estimate_time(processed_files_count)
 
                 # Creates empty metadata file.
-                with open(path_to_meta, 'w') as meta_file:
-                    pass
+                # with open(path_to_meta, 'w') as meta_file:
+                #    pass
 
                 # Remove this to proceed.
                 if processed_files_count % 1000 == 0:

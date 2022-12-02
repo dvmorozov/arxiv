@@ -18,6 +18,9 @@ class EstimatedTime(object):
     def print_estimate_time(self, item_processed):
         if item_processed <= self.item_count:
             item_step = int(self.item_count / 100)
+            if item_step == 0:
+                item_step = 1
+
             if item_processed % item_step == 0:
                 processed_percents: float = item_processed * 100.0 / self.item_count
                 elapsed_sec = (datetime.datetime.now() - self.started_time).total_seconds()
