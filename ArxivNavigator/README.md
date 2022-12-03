@@ -72,6 +72,8 @@ Data has been collected by [modified fork](https://github.com/dvmorozov/arxiv-pu
  
 JSON parsing has been implemented with [ijson](https://pypi.org/project/ijson/).
 
+For topic maining [Natural Language Toolkit](https://www.nltk.org/) is used powered by "Bird, Steven, Edward Loper and Ewan Klein (2009), Natural Language Processing with Python. O’Reilly Media Inc.".
+
 ---
 
 I would appreciate any way of contributing: GitHub issue, email or pull request.
