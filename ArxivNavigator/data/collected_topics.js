@@ -2,479 +2,551 @@ var collected_topics = {
 	topics: [{
 		topic_index: "0",
 		words: [{
-			factor: "0.004",
-			word: "graph"
+			factor: "0.013",
+			word: "robot"
 		}, {
-			factor: "0.004",
-			word: "lemma"
+			factor: "0.011",
+			word: "semantic"
 		}, {
-			factor: "0.004",
-			word: "theorem"
+			factor: "0.009",
+			word: "abelian"
 		}, {
-			factor: "0.004",
-			word: "algorithm"
+			factor: "0.009",
+			word: "social"
 		}, {
-			factor: "0.004",
-			word: "proof"
+			factor: "0.008",
+			word: "market"
 		}, {
-			factor: "0.004",
-			word: "random"
+			factor: "0.007",
+			word: "ample"
 		}, {
-			factor: "0.004",
-			word: "solution"
+			factor: "0.007",
+			word: "simplicial"
 		}, {
-			factor: "0.003",
-			word: "probability"
+			factor: "0.006",
+			word: "ranking"
 		}, {
-			factor: "0.003",
-			word: "matrix"
+			factor: "0.006",
+			word: "fibre"
 		}, {
-			factor: "0.003",
-			word: "stochastic"
+			factor: "0.005",
+			word: "percolation"
 		}]
 	}, {
 		topic_index: "1",
 		words: [{
-			factor: "0.015",
-			word: "security"
+			factor: "0.033",
+			word: "sheaf"
+		}, {
+			factor: "0.013",
+			word: "decoder"
+		}, {
+			factor: "0.012",
+			word: "axion"
 		}, {
 			factor: "0.009",
-			word: "server"
+			word: "participant"
+		}, {
+			factor: "0.009",
+			word: "birational"
 		}, {
 			factor: "0.007",
-			word: "brain"
-		}, {
-			factor: "0.007",
-			word: "latency"
+			word: "flag"
 		}, {
 			factor: "0.006",
-			word: "pour"
+			word: "pencil"
 		}, {
 			factor: "0.006",
-			word: "dans"
+			word: "chow"
 		}, {
-			factor: "0.005",
-			word: "attacker"
+			factor: "0.006",
+			word: "subscheme"
 		}, {
-			factor: "0.005",
-			word: "synaptic"
-		}, {
-			factor: "0.005",
-			word: "requests"
-		}, {
-			factor: "0.004",
-			word: "client"
+			factor: "0.006",
+			word: "inflaton"
 		}]
 	}, {
 		topic_index: "2",
 		words: [{
-			factor: "0.027",
-			word: "graphene"
-		}, {
-			factor: "0.008",
-			word: "centrality"
+			factor: "0.007",
+			word: "phys"
 		}, {
 			factor: "0.005",
-			word: "soliton"
+			word: "energy"
 		}, {
 			factor: "0.005",
-			word: "bunch"
+			word: "magnetic"
 		}, {
 			factor: "0.004",
-			word: "solitons"
+			word: "quantum"
 		}, {
 			factor: "0.004",
-			word: "nnlo"
+			word: "spin"
 		}, {
 			factor: "0.004",
-			word: "sterile"
+			word: "phase"
+		}, {
+			factor: "0.004",
+			word: "state"
+		}, {
+			factor: "0.004",
+			word: "temperature"
+		}, {
+			factor: "0.004",
+			word: "particle"
 		}, {
 			factor: "0.003",
-			word: "helical"
-		}, {
-			factor: "0.003",
-			word: "motor"
-		}, {
-			factor: "0.003",
-			word: "dielectric"
+			word: "electron"
 		}]
 	}, {
 		topic_index: "3",
 		words: [{
+			factor: "0.007",
+			word: "filament"
+		}, {
+			factor: "0.006",
+			word: "centrality"
+		}, {
 			factor: "0.005",
-			word: "droplets"
+			word: "rapidity"
+		}, {
+			factor: "0.005",
+			word: "parton"
+		}, {
+			factor: "0.005",
+			word: "hash"
+		}, {
+			factor: "0.005",
+			word: "plasmon"
+		}, {
+			factor: "0.005",
+			word: "tracker"
 		}, {
 			factor: "0.004",
-			word: "merger"
+			word: "inclusive"
 		}, {
-			factor: "0.003",
-			word: "granular"
+			factor: "0.004",
+			word: "nanoparticles"
 		}, {
-			factor: "0.003",
-			word: "afterglow"
-		}, {
-			factor: "0.003",
-			word: "grbs"
-		}, {
-			factor: "0.003",
-			word: "engine"
-		}, {
-			factor: "0.003",
-			word: "tsallis"
-		}, {
-			factor: "0.003",
-			word: "cantor"
-		}, {
-			factor: "0.003",
-			word: "swift"
-		}, {
-			factor: "0.002",
-			word: "mergers"
+			factor: "0.004",
+			word: "nnlo"
 		}]
 	}, {
 		topic_index: "4",
 		words: [{
-			factor: "0.006",
-			word: "phys"
-		}, {
 			factor: "0.005",
-			word: "gauge"
-		}, {
-			factor: "0.005",
-			word: "mass"
+			word: "dynamo"
 		}, {
 			factor: "0.004",
-			word: "neutrino"
+			word: "convection"
 		}, {
-			factor: "0.004",
-			word: "segmentation"
+			factor: "0.003",
+			word: "maser"
 		}, {
-			factor: "0.004",
-			word: "higgs"
+			factor: "0.003",
+			word: "damage"
 		}, {
-			factor: "0.004",
-			word: "dark"
+			factor: "0.003",
+			word: "smbh"
 		}, {
-			factor: "0.004",
-			word: "scalar"
+			factor: "0.003",
+			word: "brauer"
 		}, {
-			factor: "0.004",
-			word: "gravity"
+			factor: "0.003",
+			word: "marker"
 		}, {
-			factor: "0.004",
-			word: "matter"
+			factor: "0.003",
+			word: "shimura"
+		}, {
+			factor: "0.003",
+			word: "cyclotomic"
+		}, {
+			factor: "0.003",
+			word: "ocean"
 		}]
 	}, {
 		topic_index: "5",
 		words: [{
-			factor: "0.008",
-			word: "matroid"
+			factor: "0.022",
+			word: "policy"
 		}, {
-			factor: "0.006",
-			word: "nanowire"
+			factor: "0.020",
+			word: "recognition"
 		}, {
-			factor: "0.005",
-			word: "knot"
+			factor: "0.018",
+			word: "game"
 		}, {
-			factor: "0.005",
-			word: "polariton"
+			factor: "0.018",
+			word: "video"
 		}, {
-			factor: "0.005",
-			word: "pencil"
+			factor: "0.015",
+			word: "query"
 		}, {
-			factor: "0.004",
-			word: "matroids"
+			factor: "0.015",
+			word: "vision"
 		}, {
-			factor: "0.004",
-			word: "hyperelliptic"
+			factor: "0.010",
+			word: "transaction"
 		}, {
-			factor: "0.004",
-			word: "weierstrass"
+			factor: "0.009",
+			word: "player"
 		}, {
-			factor: "0.004",
-			word: "encryption"
+			factor: "0.009",
+			word: "controller"
 		}, {
-			factor: "0.003",
-			word: "lefschetz"
+			factor: "0.009",
+			word: "decision"
 		}]
 	}, {
 		topic_index: "6",
 		words: [{
-			factor: "0.007",
-			word: "lasso"
+			factor: "0.025",
+			word: "neutrino"
+		}, {
+			factor: "0.021",
+			word: "higgs"
+		}, {
+			factor: "0.015",
+			word: "alice"
+		}, {
+			factor: "0.012",
+			word: "lepton"
+		}, {
+			factor: "0.009",
+			word: "mass"
+		}, {
+			factor: "0.008",
+			word: "boson"
 		}, {
 			factor: "0.007",
-			word: "photometric"
+			word: "yukawa"
+		}, {
+			factor: "0.007",
+			word: "mixing"
+		}, {
+			factor: "0.006",
+			word: "majorana"
+		}, {
+			factor: "0.005",
+			word: "bunch"
+		}]
+	}, {
+		topic_index: "7",
+		words: [{
+			factor: "0.010",
+			word: "network"
+		}, {
+			factor: "0.008",
+			word: "learning"
+		}, {
+			factor: "0.006",
+			word: "algorithm"
+		}, {
+			factor: "0.006",
+			word: "training"
+		}, {
+			factor: "0.005",
+			word: "neural"
+		}, {
+			factor: "0.005",
+			word: "image"
+		}, {
+			factor: "0.004",
+			word: "performance"
+		}, {
+			factor: "0.004",
+			word: "node"
+		}, {
+			factor: "0.004",
+			word: "layer"
+		}, {
+			factor: "0.004",
+			word: "data"
+		}]
+	}, {
+		topic_index: "8",
+		words: [{
+			factor: "0.029",
+			word: "posterior"
+		}, {
+			factor: "0.015",
+			word: "bayesian"
+		}, {
+			factor: "0.009",
+			word: "inference"
+		}, {
+			factor: "0.009",
+			word: "bayes"
+		}, {
+			factor: "0.008",
+			word: "mcmc"
+		}, {
+			factor: "0.008",
+			word: "tile"
+		}, {
+			factor: "0.006",
+			word: "sampler"
+		}, {
+			factor: "0.005",
+			word: "likelihood"
+		}, {
+			factor: "0.005",
+			word: "climate"
+		}, {
+			factor: "0.004",
+			word: "twistor"
+		}]
+	}, {
+		topic_index: "9",
+		words: [{
+			factor: "0.010",
+			word: "star"
+		}, {
+			factor: "0.009",
+			word: "galaxy"
+		}, {
+			factor: "0.005",
+			word: "mass"
+		}, {
+			factor: "0.005",
+			word: "mnras"
+		}, {
+			factor: "0.005",
+			word: "emission"
+		}, {
+			factor: "0.005",
+			word: "stellar"
+		}, {
+			factor: "0.004",
+			word: "redshift"
+		}, {
+			factor: "0.004",
+			word: "planet"
+		}, {
+			factor: "0.004",
+			word: "velocity"
+		}, {
+			factor: "0.004",
+			word: "halo"
+		}]
+	}, {
+		topic_index: "10",
+		words: [{
+			factor: "0.013",
+			word: "functor"
+		}, {
+			factor: "0.013",
+			word: "superconducting"
+		}, {
+			factor: "0.009",
+			word: "hall"
+		}, {
+			factor: "0.008",
+			word: "interface"
+		}, {
+			factor: "0.007",
+			word: "resistivity"
+		}, {
+			factor: "0.006",
+			word: "superconductor"
+		}, {
+			factor: "0.006",
+			word: "voltage"
+		}, {
+			factor: "0.006",
+			word: "functors"
+		}, {
+			factor: "0.005",
+			word: "alloy"
+		}, {
+			factor: "0.005",
+			word: "nematic"
+		}]
+	}, {
+		topic_index: "11",
+		words: [{
+			factor: "0.022",
+			word: "sentence"
+		}, {
+			factor: "0.020",
+			word: "vehicle"
+		}, {
+			factor: "0.007",
+			word: "conv"
+		}, {
+			factor: "0.006",
+			word: "penalty"
+		}, {
+			factor: "0.006",
+			word: "train"
 		}, {
 			factor: "0.006",
 			word: "validation"
 		}, {
 			factor: "0.006",
-			word: "covariates"
-		}, {
-			factor: "0.006",
-			word: "photometry"
-		}, {
-			factor: "0.006",
-			word: "dwarf"
+			word: "l�vy"
 		}, {
 			factor: "0.005",
-			word: "gene"
+			word: "rydberg"
 		}, {
 			factor: "0.005",
-			word: "transit"
+			word: "vorticity"
 		}, {
 			factor: "0.005",
-			word: "dwarfs"
-		}, {
-			factor: "0.004",
-			word: "tropical"
-		}]
-	}, {
-		topic_index: "7",
-		words: [{
-			factor: "0.023",
-			word: "classifier"
-		}, {
-			factor: "0.014",
-			word: "controller"
-		}, {
-			factor: "0.012",
-			word: "classifiers"
-		}, {
-			factor: "0.010",
-			word: "students"
-		}, {
-			factor: "0.009",
-			word: "scores"
-		}, {
-			factor: "0.008",
-			word: "scheduling"
-		}, {
-			factor: "0.007",
-			word: "disease"
-		}, {
-			factor: "0.006",
-			word: "plasmonic"
-		}, {
-			factor: "0.005",
-			word: "score"
-		}, {
-			factor: "0.004",
-			word: "congruence"
-		}]
-	}, {
-		topic_index: "8",
-		words: [{
-			factor: "0.008",
-			word: "learning"
-		}, {
-			factor: "0.006",
-			word: "training"
-		}, {
-			factor: "0.006",
-			word: "network"
-		}, {
-			factor: "0.005",
-			word: "neural"
-		}, {
-			factor: "0.004",
-			word: "networks"
-		}, {
-			factor: "0.004",
-			word: "data"
-		}, {
-			factor: "0.003",
-			word: "image"
-		}, {
-			factor: "0.003",
-			word: "performance"
-		}, {
-			factor: "0.003",
-			word: "dataset"
-		}, {
-			factor: "0.003",
-			word: "deep"
-		}]
-	}, {
-		topic_index: "9",
-		words: [{
-			factor: "0.025",
-			word: "policy"
-		}, {
-			factor: "0.015",
-			word: "functor"
-		}, {
-			factor: "0.011",
-			word: "modular"
-		}, {
-			factor: "0.008",
-			word: "categories"
-		}, {
-			factor: "0.008",
-			word: "policies"
-		}, {
-			factor: "0.006",
-			word: "functors"
-		}, {
-			factor: "0.006",
-			word: "fibre"
-		}, {
-			factor: "0.006",
-			word: "frobenius"
-		}, {
-			factor: "0.006",
-			word: "items"
-		}, {
-			factor: "0.006",
-			word: "hecke"
-		}]
-	}, {
-		topic_index: "10",
-		words: [{
-			factor: "0.019",
-			word: "sheaf"
-		}, {
-			factor: "0.014",
-			word: "ample"
-		}, {
-			factor: "0.014",
-			word: "sheaves"
-		}, {
-			factor: "0.008",
-			word: "birational"
-		}, {
-			factor: "0.007",
-			word: "surjective"
-		}, {
-			factor: "0.006",
-			word: "locus"
-		}, {
-			factor: "0.006",
-			word: "linguistics"
-		}, {
-			factor: "0.005",
-			word: "complexes"
-		}, {
-			factor: "0.005",
-			word: "poset"
-		}, {
-			factor: "0.005",
-			word: "subscheme"
-		}]
-	}, {
-		topic_index: "11",
-		words: [{
-			factor: "0.011",
-			word: "holographic"
-		}, {
-			factor: "0.010",
-			word: "inflation"
-		}, {
-			factor: "0.008",
-			word: "inflationary"
-		}, {
-			factor: "0.006",
-			word: "universe"
-		}, {
-			factor: "0.006",
-			word: "communities"
-		}, {
-			factor: "0.005",
-			word: "cosmological"
-		}, {
-			factor: "0.005",
-			word: "clique"
-		}, {
-			factor: "0.004",
-			word: "sitter"
-		}, {
-			factor: "0.004",
-			word: "hubble"
-		}, {
-			factor: "0.003",
-			word: "horizon"
+			word: "modality"
 		}]
 	}, {
 		topic_index: "12",
 		words: [{
+			factor: "0.024",
+			word: "cavity"
+		}, {
 			factor: "0.013",
-			word: "pulse"
-		}, {
-			factor: "0.010",
-			word: "pump"
-		}, {
-			factor: "0.010",
-			word: "traffic"
+			word: "resonator"
 		}, {
 			factor: "0.009",
-			word: "film"
-		}, {
-			factor: "0.009",
-			word: "films"
+			word: "photonic"
 		}, {
 			factor: "0.007",
-			word: "pulses"
+			word: "qubit"
 		}, {
 			factor: "0.006",
-			word: "vehicle"
+			word: "detuning"
 		}, {
-			factor: "0.005",
-			word: "carrier"
+			factor: "0.006",
+			word: "rabi"
 		}, {
-			factor: "0.005",
-			word: "mater"
+			factor: "0.006",
+			word: "squeezing"
 		}, {
-			factor: "0.005",
-			word: "thickness"
+			factor: "0.006",
+			word: "dephasing"
+		}, {
+			factor: "0.004",
+			word: "microwave"
+		}, {
+			factor: "0.004",
+			word: "blowup"
 		}]
 	}, {
 		topic_index: "13",
 		words: [{
 			factor: "0.010",
-			word: "sentences"
+			word: "lasso"
 		}, {
-			factor: "0.009",
-			word: "bootstrap"
+			factor: "0.010",
+			word: "disease"
 		}, {
-			factor: "0.007",
-			word: "estimators"
+			factor: "0.008",
+			word: "covariates"
+		}, {
+			factor: "0.008",
+			word: "tissue"
 		}, {
 			factor: "0.005",
-			word: "predicate"
+			word: "medical"
+		}, {
+			factor: "0.005",
+			word: "predictor"
 		}, {
 			factor: "0.004",
-			word: "nonparametric"
-		}, {
-			factor: "0.004",
-			word: "seesaw"
+			word: "causal"
 		}, {
 			factor: "0.003",
-			word: "predicates"
+			word: "resummation"
 		}, {
 			factor: "0.003",
-			word: "spline"
+			word: "trust"
 		}, {
 			factor: "0.003",
-			word: "quantifier"
-		}, {
-			factor: "0.003",
-			word: "diam"
+			word: "boosting"
 		}]
 	}, {
 		topic_index: "14",
 		words: [{
 			factor: "0.008",
+			word: "wavelet"
+		}, {
+			factor: "0.007",
+			word: "outlier"
+		}, {
+			factor: "0.007",
+			word: "dxdt"
+		}, {
+			factor: "0.006",
+			word: "stimulus"
+		}, {
+			factor: "0.006",
+			word: "abbott"
+		}, {
+			factor: "0.004",
+			word: "cortex"
+		}, {
+			factor: "0.004",
+			word: "firing"
+		}, {
+			factor: "0.004",
+			word: "neuroscience"
+		}, {
+			factor: "0.003",
+			word: "coded"
+		}, {
+			factor: "0.003",
+			word: "kick"
+		}]
+	}, {
+		topic_index: "15",
+		words: [{
+			factor: "0.019",
+			word: "graphene"
+		}, {
+			factor: "0.009",
+			word: "entity"
+		}, {
+			factor: "0.006",
+			word: "muon"
+		}, {
+			factor: "0.006",
+			word: "conductance"
+		}, {
+			factor: "0.006",
+			word: "monolayer"
+		}, {
+			factor: "0.006",
+			word: "speaker"
+		}, {
+			factor: "0.006",
+			word: "event"
+		}, {
+			factor: "0.005",
+			word: "linguistics"
+		}, {
+			factor: "0.005",
+			word: "uncertainty"
+		}, {
+			factor: "0.004",
+			word: "carbon"
+		}]
+	}, {
+		topic_index: "16",
+		words: [{
+			factor: "0.009",
 			word: "theorem"
 		}, {
-			factor: "0.007",
+			factor: "0.009",
 			word: "lemma"
 		}, {
-			factor: "0.007",
+			factor: "0.008",
 			word: "proof"
 		}, {
 			factor: "0.006",
 			word: "proposition"
+		}, {
+			factor: "0.005",
+			word: "graph"
+		}, {
+			factor: "0.005",
+			word: "vertex"
 		}, {
 			factor: "0.004",
 			word: "algebra"
@@ -486,178 +558,106 @@ var collected_topics = {
 			word: "bundle"
 		}, {
 			factor: "0.004",
-			word: "math"
-		}, {
-			factor: "0.003",
-			word: "smooth"
-		}, {
-			factor: "0.003",
-			word: "spaces"
-		}]
-	}, {
-		topic_index: "15",
-		words: [{
-			factor: "0.020",
-			word: "posterior"
-		}, {
-			factor: "0.010",
-			word: "mcmc"
-		}, {
-			factor: "0.009",
-			word: "floquet"
-		}, {
-			factor: "0.009",
-			word: "groupoid"
-		}, {
-			factor: "0.008",
-			word: "bayes"
-		}, {
-			factor: "0.007",
-			word: "priors"
-		}, {
-			factor: "0.005",
-			word: "groupoids"
-		}, {
-			factor: "0.005",
-			word: "sampler"
-		}, {
-			factor: "0.004",
-			word: "microlensing"
-		}, {
-			factor: "0.003",
-			word: "subdivision"
-		}]
-	}, {
-		topic_index: "16",
-		words: [{
-			factor: "0.018",
-			word: "user"
-		}, {
-			factor: "0.016",
-			word: "users"
-		}, {
-			factor: "0.015",
-			word: "datasets"
-		}, {
-			factor: "0.012",
-			word: "generative"
-		}, {
-			factor: "0.012",
-			word: "channel"
-		}, {
-			factor: "0.008",
-			word: "wireless"
-		}, {
-			factor: "0.007",
-			word: "decoding"
-		}, {
-			factor: "0.007",
-			word: "market"
-		}, {
-			factor: "0.007",
-			word: "pose"
-		}, {
-			factor: "0.007",
-			word: "social"
+			word: "polynomial"
 		}]
 	}, {
 		topic_index: "17",
 		words: [{
-			factor: "0.005",
-			word: "magnetic"
+			factor: "0.009",
+			word: "gauge"
+		}, {
+			factor: "0.008",
+			word: "gravity"
+		}, {
+			factor: "0.007",
+			word: "hole"
+		}, {
+			factor: "0.006",
+			word: "scalar"
+		}, {
+			factor: "0.006",
+			word: "metric"
+		}, {
+			factor: "0.006",
+			word: "spacetime"
 		}, {
 			factor: "0.005",
-			word: "phys"
+			word: "tensor"
 		}, {
 			factor: "0.005",
-			word: "quantum"
+			word: "black"
 		}, {
-			factor: "0.004",
-			word: "spin"
-		}, {
-			factor: "0.004",
-			word: "phase"
-		}, {
-			factor: "0.004",
-			word: "temperature"
-		}, {
-			factor: "0.004",
-			word: "energy"
-		}, {
-			factor: "0.003",
-			word: "states"
-		}, {
-			factor: "0.003",
-			word: "state"
-		}, {
-			factor: "0.003",
+			factor: "0.005",
 			word: "field"
+		}, {
+			factor: "0.005",
+			word: "action"
 		}]
 	}, {
 		topic_index: "18",
 		words: [{
+			factor: "0.008",
+			word: "pour"
+		}, {
 			factor: "0.007",
-			word: "dxdt"
-		}, {
-			factor: "0.006",
-			word: "monoid"
-		}, {
-			factor: "0.005",
-			word: "surrogate"
+			word: "dans"
 		}, {
 			factor: "0.004",
-			word: "minimizers"
-		}, {
-			factor: "0.004",
-			word: "monoids"
-		}, {
-			factor: "0.004",
-			word: "minimizer"
-		}, {
-			factor: "0.004",
-			word: "smbh"
+			word: "soit"
 		}, {
 			factor: "0.003",
-			word: "pilot"
+			word: "alors"
 		}, {
-			factor: "0.002",
-			word: "prefix"
+			factor: "0.003",
+			word: "nous"
 		}, {
-			factor: "0.002",
-			word: "agns"
+			factor: "0.003",
+			word: "bead"
+		}, {
+			factor: "0.003",
+			word: "sont"
+		}, {
+			factor: "0.003",
+			word: "koszul"
+		}, {
+			factor: "0.003",
+			word: "donc"
+		}, {
+			factor: "0.003",
+			word: "tout"
 		}]
 	}, {
 		topic_index: "19",
 		words: [{
-			factor: "0.014",
-			word: "speech"
-		}, {
-			factor: "0.008",
-			word: "robots"
+			factor: "0.010",
+			word: "skyrmion"
 		}, {
 			factor: "0.007",
-			word: "homotopy"
+			word: "kondo"
 		}, {
 			factor: "0.007",
-			word: "robotics"
+			word: "skyrmions"
 		}, {
-			factor: "0.007",
-			word: "participants"
+			factor: "0.003",
+			word: "homeomorphism"
 		}, {
-			factor: "0.006",
-			word: "nodal"
+			factor: "0.003",
+			word: "dmft"
 		}, {
-			factor: "0.006",
-			word: "flare"
+			factor: "0.003",
+			word: "insulating"
 		}, {
-			factor: "0.006",
-			word: "cancer"
+			factor: "0.003",
+			word: "seismic"
 		}, {
-			factor: "0.005",
-			word: "bilayer"
+			factor: "0.002",
+			word: "occupancy"
 		}, {
-			factor: "0.005",
-			word: "music"
+			factor: "0.002",
+			word: "leptogenesis"
+		}, {
+			factor: "0.002",
+			word: "homoclinic"
 		}]
 	}]
 };
