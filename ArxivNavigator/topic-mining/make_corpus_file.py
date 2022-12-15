@@ -38,13 +38,17 @@ def make_corpus_file():
         path_to_text = os.path.join(path_to_corpus, file_name)
 
         if os.path.isfile(path_to_text):
-            line = make_line_from_file(path_to_text) + '\n'
+            line = make_line_from_file(path_to_text)
+            if len(text_file_list) > 0:
+                line += '\n'
+
             corpus_file.write(line)
 
             processed_files_count += 1
             estimated_time.print_estimate_time(processed_files_count)
 
     corpus_file.close()
+    print('Number of processed files', processed_files_count)
 
 
 if __name__ == '__main__':
