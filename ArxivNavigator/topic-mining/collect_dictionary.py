@@ -29,7 +29,9 @@ def get_dictionary():
 
 def read_file(file_path):
     file = open(file_path, 'r', encoding='utf8')
-    return file.read()
+    file_content = file.read()
+    file.close()
+    return file_content
 
 
 def filter_out_stop_words(words):
