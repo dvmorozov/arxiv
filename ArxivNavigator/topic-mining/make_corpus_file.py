@@ -27,7 +27,7 @@ def make_corpus_file():
     path_to_corpus_file = get_corpus_file()
     print('Path to corpus file', path_to_corpus_file)
 
-    corpus_file = open(path_to_corpus_file, "w")
+    corpus_file = open(path_to_corpus_file, "w", encoding='utf8')
 
     processed_files_count = 0
     text_file_list = get_text_file_list(path_to_corpus)
