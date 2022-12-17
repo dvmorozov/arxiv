@@ -47,8 +47,8 @@ def expression_to_js(expression_parts):
         right = sub_parts[1].strip('" ')
 
         result += ', ' if not first_word else ''
-        result += '{factor: "' + left + '",'
-        result += ' word: "' + right + '"}'
+        result += '{value: "' + left + '",'
+        result += ' name: "' + right + '"}'
         first_word = False
 
     result += ']'
@@ -61,7 +61,7 @@ def write_topics_to_js_file(file_path, model):
     print('Topics are written to JavaScript file', file_path)
 
     first_topic = True
-    topics = 'var collected_topics = {topics: ['
+    topics = 'var flare = {name: "main topics", children: ['
     for topic in model.print_topics(num_topics):
         print(topic)
         topic_index = topic[0]
@@ -69,8 +69,8 @@ def write_topics_to_js_file(file_path, model):
         topic_expression_parts = topic_expression.split('+')
 
         topic_js = ', ' if not first_topic else ''
-        topic_js += '{topic_index: "' + str(topic_index)
-        topic_js += '", words: ' + expression_to_js(topic_expression_parts)
+        topic_js += '{name: "' + str(topic_index)
+        topic_js += '", children: ' + expression_to_js(topic_expression_parts)
         topic_js += '}'
         topics += topic_js
         first_topic = False
