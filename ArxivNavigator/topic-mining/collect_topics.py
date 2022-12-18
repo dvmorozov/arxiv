@@ -13,7 +13,7 @@ import logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 
-num_topics: int = 20
+num_topics: int = 10
 
 
 def get_path_to_model(model_file_name):

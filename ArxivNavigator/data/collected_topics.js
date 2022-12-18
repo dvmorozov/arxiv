@@ -4,468 +4,6 @@ var flare = {
         name: "0",
         children: [{
             value: "0.000",
-            name: "smallestnodes"
-        }, {
-            value: "0.000",
-            name: "subsetlen"
-        }, {
-            value: "0.000",
-            name: "scaledtarget"
-        }, {
-            value: "0.000",
-            name: "setchildren"
-        }, {
-            value: "0.000",
-            name: "setindices"
-        }, {
-            value: "0.000",
-            name: "setlimit"
-        }, {
-            value: "0.000",
-            name: "kthmin"
-        }, {
-            value: "0.000",
-            name: "stringrepresentation"
-        }, {
-            value: "0.000",
-            name: "tostringverbose"
-        }, {
-            value: "0.000",
-            name: "targetfound"
-        }]
-    }, {
-        name: "1",
-        children: [{
-            value: "0.000",
-            name: "smallestnodes"
-        }, {
-            value: "0.000",
-            name: "subsetlen"
-        }, {
-            value: "0.000",
-            name: "scaledtarget"
-        }, {
-            value: "0.000",
-            name: "setchildren"
-        }, {
-            value: "0.000",
-            name: "setindices"
-        }, {
-            value: "0.000",
-            name: "setlimit"
-        }, {
-            value: "0.000",
-            name: "kthmin"
-        }, {
-            value: "0.000",
-            name: "stringrepresentation"
-        }, {
-            value: "0.000",
-            name: "tostringverbose"
-        }, {
-            value: "0.000",
-            name: "targetfound"
-        }]
-    }, {
-        name: "2",
-        children: [{
-            value: "0.000",
-            name: "smallestnodes"
-        }, {
-            value: "0.000",
-            name: "subsetlen"
-        }, {
-            value: "0.000",
-            name: "scaledtarget"
-        }, {
-            value: "0.000",
-            name: "setchildren"
-        }, {
-            value: "0.000",
-            name: "setindices"
-        }, {
-            value: "0.000",
-            name: "setlimit"
-        }, {
-            value: "0.000",
-            name: "kthmin"
-        }, {
-            value: "0.000",
-            name: "stringrepresentation"
-        }, {
-            value: "0.000",
-            name: "tostringverbose"
-        }, {
-            value: "0.000",
-            name: "targetfound"
-        }]
-    }, {
-        name: "3",
-        children: [{
-            value: "0.000",
-            name: "smallestnodes"
-        }, {
-            value: "0.000",
-            name: "subsetlen"
-        }, {
-            value: "0.000",
-            name: "scaledtarget"
-        }, {
-            value: "0.000",
-            name: "setchildren"
-        }, {
-            value: "0.000",
-            name: "setindices"
-        }, {
-            value: "0.000",
-            name: "setlimit"
-        }, {
-            value: "0.000",
-            name: "kthmin"
-        }, {
-            value: "0.000",
-            name: "stringrepresentation"
-        }, {
-            value: "0.000",
-            name: "tostringverbose"
-        }, {
-            value: "0.000",
-            name: "targetfound"
-        }]
-    }, {
-        name: "4",
-        children: [{
-            value: "0.000",
-            name: "worldline"
-        }, {
-            value: "0.000",
-            name: "loop"
-        }, {
-            value: "0.000",
-            name: "gauge"
-        }, {
-            value: "0.000",
-            name: "wilson"
-        }, {
-            value: "0.000",
-            name: "string"
-        }, {
-            value: "0.000",
-            name: "gluon"
-        }, {
-            value: "0.000",
-            name: "amplitude"
-        }, {
-            value: "0.000",
-            name: "integral"
-        }, {
-            value: "0.000",
-            name: "scattering"
-        }, {
-            value: "0.000",
-            name: "momentum"
-        }]
-    }, {
-        name: "5",
-        children: [{
-            value: "0.000",
-            name: "smallestnodes"
-        }, {
-            value: "0.000",
-            name: "subsetlen"
-        }, {
-            value: "0.000",
-            name: "scaledtarget"
-        }, {
-            value: "0.000",
-            name: "setchildren"
-        }, {
-            value: "0.000",
-            name: "setindices"
-        }, {
-            value: "0.000",
-            name: "setlimit"
-        }, {
-            value: "0.000",
-            name: "kthmin"
-        }, {
-            value: "0.000",
-            name: "stringrepresentation"
-        }, {
-            value: "0.000",
-            name: "tostringverbose"
-        }, {
-            value: "0.000",
-            name: "targetfound"
-        }]
-    }, {
-        name: "6",
-        children: [{
-            value: "0.000",
-            name: "cosmological"
-        }, {
-            value: "0.000",
-            name: "constraint"
-        }, {
-            value: "0.000",
-            name: "redshift"
-        }, {
-            value: "0.000",
-            name: "datasets"
-        }, {
-            value: "0.000",
-            name: "dark"
-        }, {
-            value: "0.000",
-            name: "shape"
-        }, {
-            value: "0.000",
-            name: "correlation"
-        }, {
-            value: "0.000",
-            name: "parameter"
-        }, {
-            value: "0.000",
-            name: "data"
-        }, {
-            value: "0.000",
-            name: "galaxy"
-        }]
-    }, {
-        name: "7",
-        children: [{
-            value: "0.000",
-            name: "smallestnodes"
-        }, {
-            value: "0.000",
-            name: "subsetlen"
-        }, {
-            value: "0.000",
-            name: "scaledtarget"
-        }, {
-            value: "0.000",
-            name: "setchildren"
-        }, {
-            value: "0.000",
-            name: "setindices"
-        }, {
-            value: "0.000",
-            name: "setlimit"
-        }, {
-            value: "0.000",
-            name: "kthmin"
-        }, {
-            value: "0.000",
-            name: "stringrepresentation"
-        }, {
-            value: "0.000",
-            name: "tostringverbose"
-        }, {
-            value: "0.000",
-            name: "targetfound"
-        }]
-    }, {
-        name: "8",
-        children: [{
-            value: "0.000",
-            name: "film"
-        }, {
-            value: "0.000",
-            name: "ultrathin"
-        }, {
-            value: "0.000",
-            name: "plasmonic"
-        }, {
-            value: "0.000",
-            name: "thickness"
-        }, {
-            value: "0.000",
-            name: "optical"
-        }, {
-            value: "0.000",
-            name: "strain"
-        }, {
-            value: "0.000",
-            name: "dielectric"
-        }, {
-            value: "0.000",
-            name: "layer"
-        }, {
-            value: "0.000",
-            name: "titanium"
-        }, {
-            value: "0.000",
-            name: "wavelength"
-        }]
-    }, {
-        name: "9",
-        children: [{
-            value: "0.000",
-            name: "cosmological"
-        }, {
-            value: "0.000",
-            name: "shape"
-        }, {
-            value: "0.000",
-            name: "constraint"
-        }, {
-            value: "0.000",
-            name: "dark"
-        }, {
-            value: "0.000",
-            name: "datasets"
-        }, {
-            value: "0.000",
-            name: "data"
-        }, {
-            value: "0.000",
-            name: "correlation"
-        }, {
-            value: "0.000",
-            name: "gaztañaga"
-        }, {
-            value: "0.000",
-            name: "redshift"
-        }, {
-            value: "0.000",
-            name: "lrgs"
-        }]
-    }, {
-        name: "10",
-        children: [{
-            value: "0.000",
-            name: "smallestnodes"
-        }, {
-            value: "0.000",
-            name: "subsetlen"
-        }, {
-            value: "0.000",
-            name: "scaledtarget"
-        }, {
-            value: "0.000",
-            name: "setchildren"
-        }, {
-            value: "0.000",
-            name: "setindices"
-        }, {
-            value: "0.000",
-            name: "setlimit"
-        }, {
-            value: "0.000",
-            name: "kthmin"
-        }, {
-            value: "0.000",
-            name: "stringrepresentation"
-        }, {
-            value: "0.000",
-            name: "tostringverbose"
-        }, {
-            value: "0.000",
-            name: "targetfound"
-        }]
-    }, {
-        name: "11",
-        children: [{
-            value: "0.000",
-            name: "smallestnodes"
-        }, {
-            value: "0.000",
-            name: "subsetlen"
-        }, {
-            value: "0.000",
-            name: "scaledtarget"
-        }, {
-            value: "0.000",
-            name: "setchildren"
-        }, {
-            value: "0.000",
-            name: "setindices"
-        }, {
-            value: "0.000",
-            name: "setlimit"
-        }, {
-            value: "0.000",
-            name: "kthmin"
-        }, {
-            value: "0.000",
-            name: "stringrepresentation"
-        }, {
-            value: "0.000",
-            name: "tostringverbose"
-        }, {
-            value: "0.000",
-            name: "targetfound"
-        }]
-    }, {
-        name: "12",
-        children: [{
-            value: "0.000",
-            name: "smallestnodes"
-        }, {
-            value: "0.000",
-            name: "subsetlen"
-        }, {
-            value: "0.000",
-            name: "scaledtarget"
-        }, {
-            value: "0.000",
-            name: "setchildren"
-        }, {
-            value: "0.000",
-            name: "setindices"
-        }, {
-            value: "0.000",
-            name: "setlimit"
-        }, {
-            value: "0.000",
-            name: "kthmin"
-        }, {
-            value: "0.000",
-            name: "stringrepresentation"
-        }, {
-            value: "0.000",
-            name: "tostringverbose"
-        }, {
-            value: "0.000",
-            name: "targetfound"
-        }]
-    }, {
-        name: "13",
-        children: [{
-            value: "0.000",
-            name: "smallestnodes"
-        }, {
-            value: "0.000",
-            name: "subsetlen"
-        }, {
-            value: "0.000",
-            name: "scaledtarget"
-        }, {
-            value: "0.000",
-            name: "setchildren"
-        }, {
-            value: "0.000",
-            name: "setindices"
-        }, {
-            value: "0.000",
-            name: "setlimit"
-        }, {
-            value: "0.000",
-            name: "kthmin"
-        }, {
-            value: "0.000",
-            name: "stringrepresentation"
-        }, {
-            value: "0.000",
-            name: "tostringverbose"
-        }, {
-            value: "0.000",
-            name: "targetfound"
-        }]
-    }, {
-        name: "14",
-        children: [{
-            value: "0.000",
             name: "electron"
         }, {
             value: "0.000",
@@ -478,10 +16,10 @@ var flare = {
             name: "decay"
         }, {
             value: "0.000",
-            name: "dynamic"
+            name: "compound"
         }, {
             value: "0.000",
-            name: "compound"
+            name: "dynamic"
         }, {
             value: "0.000",
             name: "orbitals"
@@ -496,169 +34,301 @@ var flare = {
             name: "excited"
         }]
     }, {
-        name: "15",
+        name: "1",
         children: [{
             value: "0.000",
-            name: "smallestnodes"
+            name: "algebra"
         }, {
             value: "0.000",
-            name: "subsetlen"
+            name: "cendn"
         }, {
             value: "0.000",
-            name: "scaledtarget"
+            name: "junction"
         }, {
             value: "0.000",
-            name: "setchildren"
+            name: "conformal"
         }, {
             value: "0.000",
-            name: "setindices"
+            name: "packet"
         }, {
             value: "0.000",
-            name: "setlimit"
+            name: "majorana"
         }, {
             value: "0.000",
-            name: "kthmin"
+            name: "qahi"
         }, {
             value: "0.000",
-            name: "stringrepresentation"
+            name: "fermion"
         }, {
             value: "0.000",
-            name: "tostringverbose"
+            name: "chiral"
         }, {
             value: "0.000",
-            name: "targetfound"
+            name: "wave"
         }]
     }, {
-        name: "16",
+        name: "2",
         children: [{
             value: "0.000",
-            name: "smallestnodes"
+            name: "entourage"
         }, {
             value: "0.000",
-            name: "subsetlen"
+            name: "graph"
         }, {
             value: "0.000",
-            name: "scaledtarget"
+            name: "uniform"
         }, {
             value: "0.000",
-            name: "setchildren"
+            name: "algebra"
         }, {
             value: "0.000",
-            name: "setindices"
+            name: "chain"
         }, {
             value: "0.000",
-            name: "setlimit"
+            name: "sequence"
         }, {
             value: "0.000",
-            name: "kthmin"
+            name: "uniformly"
         }, {
             value: "0.000",
-            name: "stringrepresentation"
+            name: "gauge"
         }, {
             value: "0.000",
-            name: "tostringverbose"
+            name: "exact"
         }, {
             value: "0.000",
-            name: "targetfound"
+            name: "path"
         }]
     }, {
-        name: "17",
+        name: "3",
         children: [{
             value: "0.000",
-            name: "smallestnodes"
+            name: "graph"
         }, {
             value: "0.000",
-            name: "subsetlen"
+            name: "entourage"
         }, {
             value: "0.000",
-            name: "scaledtarget"
+            name: "algebra"
         }, {
             value: "0.000",
-            name: "setchildren"
+            name: "uniform"
         }, {
             value: "0.000",
-            name: "setindices"
+            name: "uniformly"
         }, {
             value: "0.000",
-            name: "setlimit"
+            name: "exact"
         }, {
             value: "0.000",
-            name: "kthmin"
+            name: "sequence"
         }, {
             value: "0.000",
-            name: "stringrepresentation"
+            name: "deformation"
         }, {
             value: "0.000",
-            name: "tostringverbose"
+            name: "cubic"
         }, {
             value: "0.000",
-            name: "targetfound"
+            name: "theorem"
         }]
     }, {
-        name: "18",
+        name: "4",
         children: [{
             value: "0.000",
-            name: "smallestnodes"
+            name: "graph"
         }, {
             value: "0.000",
-            name: "subsetlen"
+            name: "entourage"
         }, {
             value: "0.000",
-            name: "scaledtarget"
+            name: "sequence"
         }, {
             value: "0.000",
-            name: "setchildren"
+            name: "worldline"
         }, {
             value: "0.000",
-            name: "setindices"
+            name: "algebra"
         }, {
             value: "0.000",
-            name: "setlimit"
+            name: "uniform"
         }, {
             value: "0.000",
-            name: "kthmin"
+            name: "conjecture"
         }, {
             value: "0.000",
-            name: "stringrepresentation"
+            name: "uniformly"
         }, {
             value: "0.000",
-            name: "tostringverbose"
+            name: "cendn"
         }, {
             value: "0.000",
-            name: "targetfound"
+            name: "chain"
         }]
     }, {
-        name: "19",
+        name: "5",
         children: [{
             value: "0.000",
-            name: "smallestnodes"
+            name: "graph"
         }, {
             value: "0.000",
-            name: "subsetlen"
+            name: "exact"
         }, {
             value: "0.000",
-            name: "scaledtarget"
+            name: "sequence"
         }, {
             value: "0.000",
-            name: "setchildren"
+            name: "cubic"
         }, {
             value: "0.000",
-            name: "setindices"
+            name: "theorem"
         }, {
             value: "0.000",
-            name: "setlimit"
+            name: "directed"
         }, {
             value: "0.000",
-            name: "kthmin"
+            name: "conjecture"
         }, {
             value: "0.000",
-            name: "stringrepresentation"
+            name: "profinite"
         }, {
             value: "0.000",
-            name: "tostringverbose"
+            name: "lemma"
         }, {
             value: "0.000",
-            name: "targetfound"
+            name: "canonical"
+        }]
+    }, {
+        name: "6",
+        children: [{
+            value: "0.000",
+            name: "algebra"
+        }, {
+            value: "0.000",
+            name: "graph"
+        }, {
+            value: "0.000",
+            name: "exact"
+        }, {
+            value: "0.000",
+            name: "breaking"
+        }, {
+            value: "0.000",
+            name: "uniform"
+        }, {
+            value: "0.000",
+            name: "conformal"
+        }, {
+            value: "0.000",
+            name: "sequence"
+        }, {
+            value: "0.000",
+            name: "electron"
+        }, {
+            value: "0.000",
+            name: "deformation"
+        }, {
+            value: "0.000",
+            name: "chain"
+        }]
+    }, {
+        name: "7",
+        children: [{
+            value: "0.000",
+            name: "deformation"
+        }, {
+            value: "0.000",
+            name: "metastable"
+        }, {
+            value: "0.000",
+            name: "breaking"
+        }, {
+            value: "0.000",
+            name: "superpotential"
+        }, {
+            value: "0.000",
+            name: "flavor"
+        }, {
+            value: "0.000",
+            name: "gauge"
+        }, {
+            value: "0.000",
+            name: "landau"
+        }, {
+            value: "0.000",
+            name: "vacuum"
+        }, {
+            value: "0.000",
+            name: "mass"
+        }, {
+            value: "0.000",
+            name: "susy"
+        }]
+    }, {
+        name: "8",
+        children: [{
+            value: "0.000",
+            name: "entourage"
+        }, {
+            value: "0.000",
+            name: "loop"
+        }, {
+            value: "0.000",
+            name: "film"
+        }, {
+            value: "0.000",
+            name: "worldline"
+        }, {
+            value: "0.000",
+            name: "uniform"
+        }, {
+            value: "0.000",
+            name: "uniformly"
+        }, {
+            value: "0.000",
+            name: "ultrathin"
+        }, {
+            value: "0.000",
+            name: "chain"
+        }, {
+            value: "0.000",
+            name: "plasmonic"
+        }, {
+            value: "0.000",
+            name: "wilson"
+        }]
+    }, {
+        name: "9",
+        children: [{
+            value: "0.000",
+            name: "cosmological"
+        }, {
+            value: "0.000",
+            name: "constraint"
+        }, {
+            value: "0.000",
+            name: "redshift"
+        }, {
+            value: "0.000",
+            name: "dark"
+        }, {
+            value: "0.000",
+            name: "shape"
+        }, {
+            value: "0.000",
+            name: "datasets"
+        }, {
+            value: "0.000",
+            name: "correlation"
+        }, {
+            value: "0.000",
+            name: "data"
+        }, {
+            value: "0.000",
+            name: "galaxy"
+        }, {
+            value: "0.000",
+            name: "parameter"
         }]
     }]
 };
