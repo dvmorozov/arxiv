@@ -3,332 +3,332 @@ var flare = {
     children: [{
         name: "0",
         children: [{
-            value: "0.000",
-            name: "electron"
+            value: "0.008",
+            name: "theorem"
         }, {
-            value: "0.000",
-            name: "pump"
+            value: "0.007",
+            name: "lemma"
         }, {
-            value: "0.000",
-            name: "hole"
+            value: "0.006",
+            name: "proof"
         }, {
-            value: "0.000",
-            name: "decay"
+            value: "0.005",
+            name: "proposition"
         }, {
-            value: "0.000",
-            name: "compound"
+            value: "0.004",
+            name: "algebra"
         }, {
-            value: "0.000",
-            name: "dynamic"
+            value: "0.004",
+            name: "graph"
         }, {
-            value: "0.000",
-            name: "orbitals"
+            value: "0.004",
+            name: "vertex"
         }, {
-            value: "0.000",
-            name: "relaxation"
+            value: "0.004",
+            name: "bundle"
         }, {
-            value: "0.000",
-            name: "intensity"
+            value: "0.004",
+            name: "group"
         }, {
-            value: "0.000",
-            name: "excited"
+            value: "0.003",
+            name: "polynomial"
         }]
     }, {
         name: "1",
         children: [{
-            value: "0.000",
-            name: "algebra"
+            value: "0.007",
+            name: "network"
         }, {
-            value: "0.000",
-            name: "cendn"
+            value: "0.006",
+            name: "learning"
         }, {
-            value: "0.000",
-            name: "junction"
+            value: "0.004",
+            name: "algorithm"
         }, {
-            value: "0.000",
-            name: "conformal"
+            value: "0.004",
+            name: "training"
         }, {
-            value: "0.000",
-            name: "packet"
+            value: "0.004",
+            name: "neural"
         }, {
-            value: "0.000",
-            name: "majorana"
+            value: "0.003",
+            name: "image"
         }, {
-            value: "0.000",
-            name: "qahi"
+            value: "0.003",
+            name: "node"
         }, {
-            value: "0.000",
-            name: "fermion"
+            value: "0.003",
+            name: "performance"
         }, {
-            value: "0.000",
-            name: "chiral"
+            value: "0.003",
+            name: "data"
         }, {
-            value: "0.000",
-            name: "wave"
+            value: "0.002",
+            name: "layer"
         }]
     }, {
         name: "2",
         children: [{
-            value: "0.000",
-            name: "entourage"
+            value: "0.004",
+            name: "tile"
         }, {
-            value: "0.000",
-            name: "graph"
+            value: "0.004",
+            name: "tiling"
         }, {
-            value: "0.000",
-            name: "uniform"
+            value: "0.003",
+            name: "entanglement"
         }, {
-            value: "0.000",
-            name: "algebra"
+            value: "0.002",
+            name: "distillation"
         }, {
-            value: "0.000",
-            name: "chain"
+            value: "0.002",
+            name: "ancilla"
         }, {
-            value: "0.000",
-            name: "sequence"
+            value: "0.002",
+            name: "entangled"
         }, {
-            value: "0.000",
-            name: "uniformly"
+            value: "0.002",
+            name: "lidar"
         }, {
-            value: "0.000",
-            name: "gauge"
+            value: "0.002",
+            name: "charlie"
         }, {
-            value: "0.000",
-            name: "exact"
+            value: "0.002",
+            name: "concurrence"
         }, {
-            value: "0.000",
-            name: "path"
+            value: "0.002",
+            name: "chsh"
         }]
     }, {
         name: "3",
         children: [{
-            value: "0.000",
-            name: "graph"
+            value: "0.013",
+            name: "score"
         }, {
-            value: "0.000",
-            name: "entourage"
+            value: "0.006",
+            name: "security"
         }, {
-            value: "0.000",
-            name: "algebra"
+            value: "0.006",
+            name: "service"
         }, {
-            value: "0.000",
-            name: "uniform"
+            value: "0.006",
+            name: "reinforcement"
         }, {
-            value: "0.000",
-            name: "uniformly"
+            value: "0.005",
+            name: "patient"
         }, {
-            value: "0.000",
-            name: "exact"
+            value: "0.005",
+            name: "server"
         }, {
-            value: "0.000",
-            name: "sequence"
+            value: "0.005",
+            name: "student"
         }, {
-            value: "0.000",
-            name: "deformation"
+            value: "0.004",
+            name: "medical"
         }, {
-            value: "0.000",
-            name: "cubic"
+            value: "0.004",
+            name: "retrieval"
         }, {
-            value: "0.000",
-            name: "theorem"
+            value: "0.004",
+            name: "supervised"
         }]
     }, {
         name: "4",
         children: [{
-            value: "0.000",
-            name: "graph"
+            value: "0.012",
+            name: "neuron"
         }, {
-            value: "0.000",
-            name: "entourage"
+            value: "0.004",
+            name: "tropical"
         }, {
-            value: "0.000",
-            name: "sequence"
+            value: "0.003",
+            name: "synaptic"
         }, {
-            value: "0.000",
-            name: "worldline"
+            value: "0.003",
+            name: "spike"
         }, {
-            value: "0.000",
-            name: "algebra"
+            value: "0.003",
+            name: "epidemic"
         }, {
-            value: "0.000",
-            name: "uniform"
+            value: "0.002",
+            name: "spiking"
         }, {
-            value: "0.000",
-            name: "conjecture"
+            value: "0.002",
+            name: "firing"
         }, {
-            value: "0.000",
-            name: "uniformly"
+            value: "0.002",
+            name: "auction"
         }, {
-            value: "0.000",
-            name: "cendn"
+            value: "0.002",
+            name: "circulant"
         }, {
-            value: "0.000",
-            name: "chain"
+            value: "0.002",
+            name: "neuronal"
         }]
     }, {
         name: "5",
         children: [{
-            value: "0.000",
-            name: "graph"
+            value: "0.008",
+            name: "star"
         }, {
-            value: "0.000",
-            name: "exact"
+            value: "0.008",
+            name: "galaxy"
         }, {
-            value: "0.000",
-            name: "sequence"
+            value: "0.004",
+            name: "mnras"
         }, {
-            value: "0.000",
-            name: "cubic"
+            value: "0.004",
+            name: "mass"
         }, {
-            value: "0.000",
-            name: "theorem"
+            value: "0.004",
+            name: "stellar"
         }, {
-            value: "0.000",
-            name: "directed"
+            value: "0.004",
+            name: "emission"
         }, {
-            value: "0.000",
-            name: "conjecture"
+            value: "0.003",
+            name: "redshift"
         }, {
-            value: "0.000",
-            name: "profinite"
+            value: "0.003",
+            name: "planet"
         }, {
-            value: "0.000",
-            name: "lemma"
+            value: "0.003",
+            name: "velocity"
         }, {
-            value: "0.000",
-            name: "canonical"
+            value: "0.003",
+            name: "halo"
         }]
     }, {
         name: "6",
         children: [{
-            value: "0.000",
-            name: "algebra"
+            value: "0.005",
+            name: "phys"
         }, {
-            value: "0.000",
-            name: "graph"
+            value: "0.004",
+            name: "quantum"
         }, {
-            value: "0.000",
-            name: "exact"
+            value: "0.003",
+            name: "energy"
         }, {
-            value: "0.000",
-            name: "breaking"
+            value: "0.003",
+            name: "spin"
         }, {
-            value: "0.000",
-            name: "uniform"
+            value: "0.003",
+            name: "magnetic"
         }, {
-            value: "0.000",
-            name: "conformal"
+            value: "0.003",
+            name: "phase"
         }, {
-            value: "0.000",
-            name: "sequence"
+            value: "0.003",
+            name: "particle"
         }, {
-            value: "0.000",
-            name: "electron"
+            value: "0.003",
+            name: "state"
         }, {
-            value: "0.000",
-            name: "deformation"
+            value: "0.003",
+            name: "field"
         }, {
-            value: "0.000",
-            name: "chain"
+            value: "0.003",
+            name: "temperature"
         }]
     }, {
         name: "7",
         children: [{
-            value: "0.000",
-            name: "deformation"
+            value: "0.004",
+            name: "pour"
         }, {
-            value: "0.000",
-            name: "metastable"
+            value: "0.004",
+            name: "dans"
         }, {
-            value: "0.000",
-            name: "breaking"
+            value: "0.003",
+            name: "repair"
         }, {
-            value: "0.000",
-            name: "superpotential"
+            value: "0.002",
+            name: "soit"
         }, {
-            value: "0.000",
-            name: "flavor"
+            value: "0.002",
+            name: "alors"
         }, {
-            value: "0.000",
-            name: "gauge"
+            value: "0.002",
+            name: "nous"
         }, {
-            value: "0.000",
-            name: "landau"
+            value: "0.002",
+            name: "sont"
         }, {
-            value: "0.000",
-            name: "vacuum"
+            value: "0.001",
+            name: "tout"
         }, {
-            value: "0.000",
-            name: "mass"
+            value: "0.001",
+            name: "comet"
         }, {
-            value: "0.000",
-            name: "susy"
+            value: "0.001",
+            name: "th�or�me"
         }]
     }, {
         name: "8",
         children: [{
-            value: "0.000",
-            name: "entourage"
+            value: "0.009",
+            name: "market"
         }, {
-            value: "0.000",
-            name: "loop"
+            value: "0.006",
+            name: "price"
         }, {
-            value: "0.000",
-            name: "film"
+            value: "0.004",
+            name: "stock"
         }, {
-            value: "0.000",
-            name: "worldline"
+            value: "0.004",
+            name: "volatility"
         }, {
-            value: "0.000",
-            name: "uniform"
+            value: "0.004",
+            name: "asset"
         }, {
-            value: "0.000",
-            name: "uniformly"
+            value: "0.004",
+            name: "portfolio"
         }, {
-            value: "0.000",
-            name: "ultrathin"
+            value: "0.004",
+            name: "dxdt"
         }, {
-            value: "0.000",
-            name: "chain"
+            value: "0.003",
+            name: "pricing"
         }, {
-            value: "0.000",
-            name: "plasmonic"
+            value: "0.003",
+            name: "trading"
         }, {
-            value: "0.000",
-            name: "wilson"
+            value: "0.003",
+            name: "finance"
         }]
     }, {
         name: "9",
         children: [{
-            value: "0.000",
-            name: "cosmological"
+            value: "0.007",
+            name: "quiver"
         }, {
-            value: "0.000",
-            name: "constraint"
+            value: "0.005",
+            name: "supergravity"
         }, {
-            value: "0.000",
-            name: "redshift"
+            value: "0.003",
+            name: "superconformal"
         }, {
-            value: "0.000",
-            name: "dark"
+            value: "0.003",
+            name: "citation"
         }, {
-            value: "0.000",
-            name: "shape"
+            value: "0.003",
+            name: "supersymmetry"
         }, {
-            value: "0.000",
-            name: "datasets"
+            value: "0.002",
+            name: "supersymmetric"
         }, {
-            value: "0.000",
-            name: "correlation"
+            value: "0.002",
+            name: "superalgebra"
         }, {
-            value: "0.000",
-            name: "data"
+            value: "0.002",
+            name: "hyperk�hler"
         }, {
-            value: "0.000",
-            name: "galaxy"
+            value: "0.002",
+            name: "twistor"
         }, {
-            value: "0.000",
-            name: "parameter"
+            value: "0.002",
+            name: "operad"
         }]
     }]
 };
