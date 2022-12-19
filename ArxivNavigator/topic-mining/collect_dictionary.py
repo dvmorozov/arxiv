@@ -192,7 +192,7 @@ def collect_corpus_dictionary():
                 estimated_time.print_estimate_time(processed_files_count)
 
                 # Creates empty metadata file.
-                # with open(path_to_meta, 'w') as meta_file:
+                # with open(path_to_meta, 'w', encoding='utf8') as meta_file:
                 #    pass
 
                 # Remove this to proceed.

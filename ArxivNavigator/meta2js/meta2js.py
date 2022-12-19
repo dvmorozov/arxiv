@@ -39,7 +39,7 @@ def finish_parsing(write_to_file):
 def extract_topics_data():
     global processed_article_count, updated
 
-    metadata = ijson.parse(open('../data/arxiv-public-datasets.json', 'r'))
+    metadata = ijson.parse(open('../data/arxiv-public-datasets.json', 'r', encoding='utf8'))
     #   Extracts categories
     articles = ijson.items(metadata, 'articles.item')
 
@@ -64,7 +64,7 @@ def extract_topics_data():
         article_count += 1
 
     # New parser should be created, otherwise another type of objects is not returned.
-    metadata = ijson.parse(open('../data/arxiv-public-datasets.json', 'r'))
+    metadata = ijson.parse(open('../data/arxiv-public-datasets.json', 'r', encoding='utf8'))
     updated_items = ijson.items(metadata, 'updated')
     for updated_item in updated_items:
         updated = updated_item

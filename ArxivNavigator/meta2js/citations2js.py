@@ -36,7 +36,7 @@ def write_output(file_name):
         'processed_article_count: "' + str(processed_article_count) + '", ' \
         'updated: "' + str(updated) + '"};'
 
-    text_file = open(file_name, "w")
+    text_file = open(file_name, "w", encoding='utf8')
     text_file.write(topics)
     text_file.close()
 
@@ -78,7 +78,7 @@ def get_reference_tree():
 def extract_citations_data():
     global processed_article_count, updated
 
-    metadata = ijson.parse(open('../data/internal-citations.json', 'r'))
+    metadata = ijson.parse(open('../data/internal-citations.json', 'r', encoding='utf8'))
     #   Extracts categories
     articles = ijson.kvitems(metadata, '')
 
@@ -91,7 +91,7 @@ def extract_citations_data():
 
     # Extracts data generation date.
     # New parser should be created, otherwise another type of objects is not returned.
-    metadata = ijson.parse(open('../data/internal-citations.json', 'r'))
+    metadata = ijson.parse(open('../data/internal-citations.json', 'r', encoding='utf8'))
     updated_items = ijson.items(metadata, 'updated')
     for updated_item in updated_items:
         updated = updated_item

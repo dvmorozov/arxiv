@@ -78,7 +78,7 @@ def write_topics_to_js_file(file_path, model):
     topics += ']};'
 
     print(topics)
-    text_file = open(file_path, "w")
+    text_file = open(file_path, "w", encoding='utf8')
     text_file.write(topics)
     text_file.close()
 
