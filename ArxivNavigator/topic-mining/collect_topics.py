@@ -106,7 +106,7 @@ def create_model():
     # return lsi_model
 
     print('========================================= LDA ==========================================')
-    lda_model = models.LdaModel(tfidf_iterator, id2word=get_dictionary(), num_topics=num_topics)
+    lda_model = models.LdaMulticore(tfidf_iterator, id2word=get_dictionary(), num_topics=num_topics)
     '''
     Multicore algorithm is crashed on the test dataset.
     lda_model = models.LdaMulticore(corpus=tfidf_iterator,
