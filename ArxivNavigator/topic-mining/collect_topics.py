@@ -130,7 +130,7 @@ def create_model():
 
 def collect_corpus_topic():
     read_dictionary_from_file(get_path_to_dictionary())
-    write_topics_to_js_file(get_path_to_model('collected_topics.js'), create_model())
+    write_topics_to_js_file(get_path_to_model('collected_topics_10.js'), create_model())
 
 
 if __name__ == '__main__':
