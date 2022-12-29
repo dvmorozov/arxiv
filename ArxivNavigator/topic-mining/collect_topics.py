@@ -97,16 +97,16 @@ def create_model():
 
     corpus_iterator = CorpusIterator(get_corpus_directory())
 
-    print('======================================== TF-IDF ========================================')
-    tfidf = models.TfidfModel(corpus_iterator)
-    tfidf_iterator = tfidf[corpus_iterator]
+    # print('======================================== TF-IDF ========================================')
+    # tfidf = models.TfidfModel(corpus_iterator)
+    # tfidf_iterator = tfidf[corpus_iterator]
 
     # print('========================================= LSI ==========================================')
     # lsi_model = models.LsiModel(tfidf_iterator, id2word=get_dictionary(), num_topics=num_topics)
     # return lsi_model
 
     print('========================================= LDA ==========================================')
-    lda_model = models.LdaMulticore(tfidf_iterator, id2word=get_dictionary(), num_topics=num_topics)
+    lda_model = models.LdaMulticore(corpus_iterator, id2word=get_dictionary(), num_topics=num_topics)
     '''
     Multicore algorithm is crashed on the test dataset.
     lda_model = models.LdaMulticore(corpus=tfidf_iterator,
