@@ -21,14 +21,16 @@ nltk.download('omw-1.4')
 # The dictionary represents vector space.
 dictionary = corpora.Dictionary()
 lemmatizer = WordNetLemmatizer()
-
+corpus_encoding='utf8'
 
 def get_dictionary():
     return dictionary
 
 
 def read_file(file_path):
-    file = open(file_path, 'r', encoding='utf8')
+    global corpus_encoding
+
+    file = open(file_path, 'r' , encoding=corpus_encoding)
     file_content = file.read()
     file.close()
     return file_content
@@ -118,7 +120,7 @@ def get_bag_of_words_from_file(file_path):
 def write_dictionary_to_file(file_path):
     global dictionary
 
-    print('Dictionary is saved with', str(len(dictionary)), 'items into "', file_path, '".')
+    print('Dictionary having', str(len(dictionary)), 'items is saved into', file_path, '.')
     dictionary.save_as_text(file_path)
 
 
@@ -132,16 +134,32 @@ def read_dictionary_from_file(file_path):
 def get_corpus_directory():
     assert (len(sys.argv) > 1)
 
-    return sys.argv[1]
+    result = sys.argv[1]
+
+    print('Corpus directory is', result, '.')
+    return result
 
 
 def get_path_to_dictionary():
     dictionary_file_name = 'dictionary.txt'
     if len(sys.argv) > 2:
-        return os.path.join(sys.argv[2], dictionary_file_name)
+        result = os.path.join(sys.argv[2], dictionary_file_name)
     else:
         script_path = sys.argv[0]
-        return os.path.abspath(os.path.join(os.path.dirname(script_path), '../data', dictionary_file_name))
+        result = os.path.abspath(os.path.join(os.path.dirname(script_path), '../data', dictionary_file_name))
+
+    print('Path to dictionary is', result, '.')
+    return result
+
+
+def get_corpus_encoding():
+    if len(sys.argv) > 3:
+        result = sys.argv[3]
+    else:
+        result = 'utf8'
+
+    print('Corpus encoding is', result, '.')
+    return result
 
 
 def get_metadata_path(file_path):
@@ -171,10 +189,12 @@ def get_text_file_list(path_to_texts):
 
 
 def collect_corpus_dictionary():
+    global corpus_encoding
+
     print('Collection corpus dictionary...')
 
+    corpus_encoding = get_corpus_encoding()
     path_to_texts = get_corpus_directory()
-    print('Corpus directory', path_to_texts)
 
     processed_files_count = 0
     text_file_list = get_text_file_list(path_to_texts)
