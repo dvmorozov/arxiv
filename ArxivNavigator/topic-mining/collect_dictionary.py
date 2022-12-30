@@ -21,16 +21,14 @@ nltk.download('omw-1.4')
 # The dictionary represents vector space.
 dictionary = corpora.Dictionary()
 lemmatizer = WordNetLemmatizer()
-corpus_encoding='utf8'
+
 
 def get_dictionary():
     return dictionary
 
 
 def read_file(file_path):
-    global corpus_encoding
-
-    file = open(file_path, 'r' , encoding=corpus_encoding)
+    file = open(file_path, 'r' , encoding=get_corpus_encoding())
     file_content = file.read()
     file.close()
     return file_content
@@ -189,8 +187,6 @@ def get_text_file_list(path_to_texts):
 
 
 def collect_corpus_dictionary():
-    global corpus_encoding
-
     print('Collection corpus dictionary...')
 
     corpus_encoding = get_corpus_encoding()
