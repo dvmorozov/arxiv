@@ -5,6 +5,62 @@
 // If you want to use this file please contact me by dvmorozov@hotmail.com.
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+var topics = null;
+
+function loadTopicData() {
+/*
+    this.http.get("data/topics.js.gz", new RequestOptions({ responseType: ResponseContentType.Blob })).map((res) => {
+            var blob = res.blob();
+            var arrayBuffer;
+            var fileReader = new FileReader();
+            fileReader.onload = function() {
+                arrayBuffer = this.result;
+                try {
+                  let result = pako.ungzip(new Uint8Array(arrayBuffer), {"to": "string"});
+                  let obj = JSON.parse(result);
+                  console.log(obj);
+                } catch (err) {
+                  console.log("Error " + err);
+                }
+            };
+            fileReader.readAsArrayBuffer(blob);
+            return "abc";
+          });
+          */
+    /*
+    $.ajax({
+        url: 'data/topics.js.gz',
+        timeout: 999999,
+        //dataType: 'binary',
+        processData: false, // this one does not seem to do anything ?
+
+        success: function (result) {
+            console.log(result);
+            console.log(result.length);
+            var arr = new Uint8Array(result);
+            console.log(arr);
+            var jsText = pako.inflate(arr);
+            console.log(jsText);
+        },
+        error: function (result, errStatus, errorMessage) {
+            console.log(errStatus + ' -- ' + errorMessage);
+        }});
+        */
+
+    $.get('data/topics.js.gz', '', function(gzippedTopicData) {
+        //console.log(gzippedTopicData);
+        //var fileReader = new FileReader();
+        //fileReader.readAsArrayBuffer(gzippedTopicData);
+        var array = new Uint8Array(gzippedTopicData);
+        console.log(array);
+        let result = pako.ungzip(array, {"from": "string"});
+        console.log(result);
+        //var jsText = pako.inflate(gzippedTopicData.blob());
+        //console.log(jsText);
+    });
+
+}
+
 function getTopicByid(topicId) {
     for (let i = 0; i < topics.nodes.length; i++) {
         if (topics.nodes[i].id === topicId) {

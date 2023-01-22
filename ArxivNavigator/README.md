@@ -14,7 +14,7 @@ Look at [arxiv client for Android and iOS](https://dvmorozov.github.io/arxiv/).
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 
-<script src="https://dvmorozov.github.io/arxiv/ArxivNavigator/data/topics.js" charset="utf-8"></script>
+<script src="https://dvmorozov.github.io/arxiv/ArxivNavigator/data/topics.js.gz" charset="utf-8"></script>
 
 <script src="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/bar-chart.js" charset="utf-8"></script>
 <script src="https://dvmorozov.github.io/arxiv/ArxivNavigator/graphs/force-graph.js" charset="utf-8"></script>
@@ -60,7 +60,7 @@ Click node to see the list of latest articles and the number of articles publish
 Node opacity decreases exponentially since the time of last published article.*
 
 <a href="https://dvmorozov.github.io/arxiv/ArxivNavigator/topics.html" target="_blank">Open graph in new window</a> 
-<a href="https://dvmorozov.github.io/arxiv/ArxivNavigator/data/topics.js" target="_blank">Open dataset</a> 
+<a href="https://dvmorozov.github.io/arxiv/ArxivNavigator/data/topics.js.gz" target="_blank">Open dataset</a> 
 
 ___
 
