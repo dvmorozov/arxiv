@@ -2,14 +2,16 @@
 # File "collect_topics.py"
 # Copyright © Dmitry Morozov 2022
 # If you want to use this file please contact me by dvmorozov@hotmail.com.
+# Script parameters:
+# Script parameters:
+#   N1 - path to corpus directory,
+#   N2 - path to dictionary,
+#   N3 - corpus encoding,
+#   N4 - path to dictionary.
 ########################################################################################################################
 
 from corpus_iterator import *
-from gensim import models
-from collections import defaultdict
-from gensim import corpora
 
-import logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 
@@ -17,8 +19,8 @@ num_topics: int = 10
 
 
 def get_path_to_model(model_file_name):
-    if len(sys.argv) > 2:
-        path_to_model = os.path.join(sys.argv[2], model_file_name)
+    if len(sys.argv) > 4:
+        path_to_model = os.path.join(sys.argv[4], model_file_name)
     else:
         script_path = sys.argv[0]
         path_to_model = os.path.abspath(os.path.join(os.path.dirname(script_path), '../data', model_file_name))
@@ -135,4 +137,4 @@ def collect_corpus_topic():
 
 if __name__ == '__main__':
     collect_corpus_topic()
-    #read_model_from_file(get_path_to_model('model.mm'), create_model())
+    # read_model_from_file(get_path_to_model('model.mm'), create_model())
