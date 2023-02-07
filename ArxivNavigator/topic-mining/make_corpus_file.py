@@ -2,6 +2,10 @@
 # File "make_corpus_file.py"
 # Copyright © Dmitry Morozov 2022
 # If you want to use this file please contact me by dvmorozov@hotmail.com.
+# Script parameters:
+#   N1 - path to corpus directory,
+#   N2 - path to corpus file,
+#   N3 - corpus encoding.
 ########################################################################################################################
 
 from collect_dictionary import *
@@ -27,7 +31,7 @@ def make_corpus_file():
     path_to_corpus_file = get_corpus_file()
     print('Path to corpus file', path_to_corpus_file)
 
-    corpus_file = open(path_to_corpus_file, "w", encoding='utf8')
+    corpus_file = open(path_to_corpus_file, "w", encoding=get_corpus_encoding())
 
     processed_files_count = 0
     text_file_list = get_text_file_list(path_to_corpus)
