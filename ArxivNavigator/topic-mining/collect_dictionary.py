@@ -2,18 +2,22 @@
 # File "collect_dictionary.py"
 # Copyright © Dmitry Morozov 2022
 # If you want to use this file please contact me by dvmorozov@hotmail.com.
+# Script parameters:
+#   N1 - path to corpus directory,
+#   N2 - path to dictionary,
+#   N3 - corpus encoding.
 ########################################################################################################################
 
 
 import os
 import sys
-import nltk
-
-from gensim import *
-from pprint import pprint  # pretty-printer
 from collections import defaultdict
-from common.estimated_time import *
+
+import nltk
+from gensim import *
 from nltk.stem.wordnet import WordNetLemmatizer
+
+from common.estimated_time import *
 
 nltk.download('wordnet')
 nltk.download('omw-1.4')
@@ -28,7 +32,7 @@ def get_dictionary():
 
 
 def read_file(file_path):
-    file = open(file_path, 'r' , encoding=get_corpus_encoding())
+    file = open(file_path, 'r', encoding=get_corpus_encoding())
     file_content = file.read()
     file.close()
     return file_content
@@ -49,11 +53,12 @@ def contains(string, characters):
 
 
 def trim(words):
+    # TODO: Move special characters into corpus-specific module.
     special_characters = ',:;.≤≥-+=*/?!()[]{}⟨⟩<>πλμηχψτω̄∇▽∗"\'′−\x01'
     for i in range(1, len(words)):
         words[i] = words[i].strip(special_characters)
 
-    # Removes empty words. Saves words containing only alphabetical characters.
+    # Removes empty words. Saves only words containing alphabetical characters.
     words = [word for word in words if len(word) > 0 and word.isalpha()]
 
     return words
@@ -156,7 +161,6 @@ def get_corpus_encoding():
     else:
         result = 'utf8'
 
-    print('Corpus encoding is', result, '.')
     return result
 
 
@@ -189,7 +193,6 @@ def get_text_file_list(path_to_texts):
 def collect_corpus_dictionary():
     print('Collection corpus dictionary...')
 
-    corpus_encoding = get_corpus_encoding()
     path_to_texts = get_corpus_directory()
 
     processed_files_count = 0
@@ -207,17 +210,11 @@ def collect_corpus_dictionary():
                 processed_files_count += 1
                 estimated_time.print_estimate_time(processed_files_count)
 
-                # Creates empty metadata file.
-                # with open(path_to_meta, 'w', encoding='utf8') as meta_file:
-                #    pass
-
                 # Remove this to proceed.
                 if processed_files_count % 1000 == 0:
                     write_dictionary_to_file(get_path_to_dictionary())
 
     write_dictionary_to_file(get_path_to_dictionary())
-    # Displays token ids.
-    # pprint(dictionary.token2id)
 
 
 def file_to_bow(file_path):
