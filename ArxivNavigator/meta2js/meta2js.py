@@ -2,6 +2,7 @@
 # File "meta2js.py"
 # Copyright © Dmitry Morozov 2022
 # This script converts downloaded arxiv metadata into graph data suitable for 3D.js.
+# Script extracts topic data (article categories) for representation as force graph.
 # If you want to use this file please contact me by dvmorozov@hotmail.com.
 ########################################################################################################################
 
@@ -39,7 +40,8 @@ def finish_parsing(write_to_file):
 def extract_topics_data():
     global processed_article_count, updated
 
-    metadata = ijson.parse(open('../data/arxiv-public-datasets.json', 'r', encoding='utf8'))
+    #   File has JSON-format. Original name is saved for convenience.
+    metadata = ijson.parse(open('../data/arxiv-public-datasets', 'r', encoding='utf8'))
     #   Extracts categories
     articles = ijson.items(metadata, 'articles.item')
 
@@ -61,10 +63,11 @@ def extract_topics_data():
                 if source_id != target_id:
                     add_unique_link(source_id, target_id)
 
-        article_count += 1
+        processed_article_count += 1
 
+    # Reads the time when data has been collected.
     # New parser should be created, otherwise another type of objects is not returned.
-    metadata = ijson.parse(open('../data/arxiv-public-datasets.json', 'r', encoding='utf8'))
+    metadata = ijson.parse(open('../data/arxiv-public-datasets', 'r', encoding='utf8'))
     updated_items = ijson.items(metadata, 'updated')
     for updated_item in updated_items:
         updated = updated_item
