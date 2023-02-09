@@ -40,6 +40,7 @@ def finish_parsing(write_to_file):
 def extract_topics_data():
     global processed_article_count, updated
 
+    processed_article_count = 0
     #   File has JSON-format. Original name is saved for convenience.
     metadata = ijson.parse(open('../data/arxiv-public-datasets', 'r', encoding='utf8'))
     #   Extracts categories
@@ -64,6 +65,8 @@ def extract_topics_data():
                     add_unique_link(source_id, target_id)
 
         processed_article_count += 1
+        if processed_article_count % 10000 == 0:
+            print ('Processed: ', str(processed_article_count))
 
     # Reads the time when data has been collected.
     # New parser should be created, otherwise another type of objects is not returned.
