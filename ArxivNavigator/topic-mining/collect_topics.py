@@ -3,7 +3,6 @@
 # Copyright © Dmitry Morozov 2022
 # If you want to use this file please contact me by dvmorozov@hotmail.com.
 # Script parameters:
-# Script parameters:
 #   N1 - path to corpus directory,
 #   N2 - path to dictionary,
 #   N3 - corpus encoding,

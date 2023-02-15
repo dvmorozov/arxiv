@@ -1,10 +1,13 @@
 ########################################################################################################################
 # File "topic.py"
 # Copyright © Dmitry Morozov 2022
+# Class represents single category of articles extracted from metadata.
 # If you want to use this file please contact me by dvmorozov@hotmail.com.
 ########################################################################################################################
-import datetime
+
+
 from article import *
+from common.time import *
 
 
 class Topic(object):
@@ -17,9 +20,7 @@ class Topic(object):
         self.max_last_articles_count = 10
         self.articles_by_year = dict()
         #   Fills the dictionary with years.
-        current_date = datetime.datetime.now().date()
-        current_year = int(current_date.strftime("%Y"))
-        for year in range(1985, current_year + 1):
+        for year in get_years_range():
             self.articles_by_year[year] = 0
 
     def inc_articles_count(self):

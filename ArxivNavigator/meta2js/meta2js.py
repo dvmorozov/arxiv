@@ -56,9 +56,11 @@ def extract_topics_data():
             date = datetime.strptime(version_date, '%a, %d %b %Y %H:%M:%S %Z')
             version_dates.append(date)
 
+        last_version_date = max(version_dates)
+
         for source_id in categories[0].split():
             topic = add_unique_topic(source_id)
-            topic.add_article(Article(article["id"], article["title"], max(version_dates)))
+            topic.add_article(Article(article["id"], article["title"], last_version_date))
 
             for target_id in categories[0].split():
                 if source_id != target_id:
@@ -66,7 +68,7 @@ def extract_topics_data():
 
         processed_article_count += 1
         if processed_article_count % 10000 == 0:
-            print ('Processed: ', str(processed_article_count))
+            print('Processed: ', str(processed_article_count))
 
     # Reads the time when data has been collected.
     # New parser should be created, otherwise another type of objects is not returned.
