@@ -9,7 +9,8 @@
 import gzip
 import ijson
 from topic_link import *
-from datetime import datetime
+from month import *
+
 
 processed_article_count = 0
 updated = ""
@@ -40,6 +41,9 @@ def finish_parsing(write_to_file):
 def extract_topics_data():
     global processed_article_count, updated
 
+    # Creates months range to store
+    create_months()
+
     processed_article_count = 0
     #   File has JSON-format. Original name is saved for convenience.
     metadata = ijson.parse(open('../data/arxiv-public-datasets', 'r', encoding='utf8'))
@@ -53,14 +57,18 @@ def extract_topics_data():
         version_dates = []
         for version_date in article["versions_dates"]:
             #   Time format 'Mon, 2 Apr 2007 19:18:42 GMT'
-            date = datetime.strptime(version_date, '%a, %d %b %Y %H:%M:%S %Z')
+            date = datetime.datetime.strptime(version_date, '%a, %d %b %Y %H:%M:%S %Z')
             version_dates.append(date)
 
         last_version_date = max(version_dates)
+        article_id = article["id"]
+        # Add article to the set of month.
+        month = get_month(last_version_date.year, last_version_date.month)
+        month.add_article_id(article_id)
 
         for source_id in categories[0].split():
             topic = add_unique_topic(source_id)
-            topic.add_article(Article(article["id"], article["title"], last_version_date))
+            topic.add_article(Article(article_id, article["title"], last_version_date))
 
             for target_id in categories[0].split():
                 if source_id != target_id:
@@ -77,6 +85,7 @@ def extract_topics_data():
     for updated_item in updated_items:
         updated = updated_item
 
+    print('Months', months)
     finish_parsing('../data/topics.js.gz')
 
 

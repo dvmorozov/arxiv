@@ -37,6 +37,7 @@ def create_months():
 def get_month(year, month_number):
     global month_names
 
+    assert(len(month_names) > 0)
     assert(0 < month_number <= len(month_names))
 
     month = month_names[month_number - 1]
