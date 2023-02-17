@@ -16,7 +16,7 @@ processed_article_count = 0
 updated = ""
 
 
-def finish_parsing(write_to_file):
+def write_topics_to_js(file_path):
     global updated
     links_json = generate_links_json()
     nodes_json = generate_topics_json()
@@ -33,8 +33,32 @@ def finish_parsing(write_to_file):
         'updated: "' + str(updated) + '"};'
 
     # File is opened in text mode.
-    with gzip.open(write_to_file, 'wt', encoding='utf-8') as gzip_file:
+    with gzip.open(file_path, 'wt', encoding='utf-8') as gzip_file:
         gzip_file.write(topics)
+        gzip_file.close()
+
+
+def write_months_to_js(file_path):
+    months_js = 'var months = ['
+
+    for month_name in months.keys():
+        month = months[month_name]
+        month_js = '{' + '"year": "' + str(month.get_year()) + '", "month": "' + month + '", "article_ids": ['
+
+        article_ids = month.get_article_ids()
+
+        for article_id in article_ids:
+            month_js += '"' + article_id + '",  '
+
+        month_js += ']}, '
+
+        months_js += month_js
+
+    months_js += '];'
+
+    # File is opened in text mode.
+    with gzip.open(file_path, 'wt', encoding='utf-8') as gzip_file:
+        gzip_file.write(months_js)
         gzip_file.close()
 
 
@@ -85,8 +109,8 @@ def extract_topics_data():
     for updated_item in updated_items:
         updated = updated_item
 
-    print('Months', months)
-    finish_parsing('../data/topics.js.gz')
+    write_topics_to_js('../data/topics.js.gz')
+    write_months_to_js('../data/months.js.gz')
 
 
 # Press the green button in the gutter to run the script.

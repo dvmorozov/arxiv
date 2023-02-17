@@ -23,6 +23,15 @@ class Month(object):
         if article_id not in self.article_ids:
             self.article_ids.append(article_id)
 
+    def get_article_ids(self):
+        return self.article_ids
+
+    def get_year(self):
+        return self.year
+
+    def get_month(self):
+        return self.month
+
 
 def create_months():
     global months, month_names
