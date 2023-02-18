@@ -43,7 +43,7 @@ def write_months_to_js(file_path):
 
     for month_name in months.keys():
         month = months[month_name]
-        month_js = '{' + '"year": "' + str(month.get_year()) + '", "month": "' + month + '", "article_ids": ['
+        month_js = '{' + '"year": "' + str(month.get_year()) + '", "month": "' + month.get_month() + '", "article_ids": ['
 
         article_ids = month.get_article_ids()
 
