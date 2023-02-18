@@ -40,19 +40,29 @@ def write_topics_to_js(file_path):
 
 def write_months_to_js(file_path):
     months_js = 'var months = ['
+    first_month = True
 
     for month_name in months.keys():
         month = months[month_name]
-        month_js = '{' + '"year": "' + str(month.get_year()) + '", "month": "' + month.get_month() + '", "article_ids": ['
+
+        if not first_month:
+            months_js += ', '
+
+        month_js = '{"year": "' + str(month.get_year()) + '", "month": "' + month.get_month() + '", "article_ids": ['
 
         article_ids = month.get_article_ids()
+        first_article_id = True
 
         for article_id in article_ids:
-            month_js += '"' + article_id + '",  '
+            if not first_article_id:
+                month_js += ', '
+            month_js += '"' + article_id + '"'
+            first_article_id = False
 
-        month_js += ']}, '
+        month_js += ']}'
 
         months_js += month_js
+        first_month = False
 
     months_js += '];'
 
