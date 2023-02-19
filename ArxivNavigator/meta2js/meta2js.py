@@ -8,6 +8,7 @@
 
 import gzip
 import ijson
+from datetime import datetime
 from topic_link import *
 from month import *
 
@@ -38,40 +39,6 @@ def write_topics_to_js(file_path):
         gzip_file.close()
 
 
-def write_months_to_js(file_path):
-    months_js = 'var months = ['
-    first_month = True
-
-    for month_name in months.keys():
-        month = months[month_name]
-
-        if not first_month:
-            months_js += ', '
-
-        month_js = '{"year": "' + str(month.get_year()) + '", "month": "' + month.get_month() + '", "article_ids": ['
-
-        article_ids = month.get_article_ids()
-        first_article_id = True
-
-        for article_id in article_ids:
-            if not first_article_id:
-                month_js += ', '
-            month_js += '"' + article_id + '"'
-            first_article_id = False
-
-        month_js += ']}'
-
-        months_js += month_js
-        first_month = False
-
-    months_js += '];'
-
-    # File is opened in text mode.
-    with gzip.open(file_path, 'wt', encoding='utf-8') as gzip_file:
-        gzip_file.write(months_js)
-        gzip_file.close()
-
-
 def extract_topics_data():
     global processed_article_count, updated
 
@@ -91,8 +58,8 @@ def extract_topics_data():
         version_dates = []
         for version_date in article["versions_dates"]:
             #   Time format 'Mon, 2 Apr 2007 19:18:42 GMT'
-            date = datetime.datetime.strptime(version_date, '%a, %d %b %Y %H:%M:%S %Z')
-            version_dates.append(date)
+            dt = datetime.datetime.strptime(version_date, '%a, %d %b %Y %H:%M:%S %Z')
+            version_dates.append(dt)
 
         last_version_date = max(version_dates)
         article_id = article["id"]
@@ -120,7 +87,7 @@ def extract_topics_data():
         updated = updated_item
 
     write_topics_to_js('../data/topics.js.gz')
-    write_months_to_js('../data/months.js.gz')
+    write_months_to_json('../data/months.json')
 
 
 # Press the green button in the gutter to run the script.

@@ -6,8 +6,8 @@
 ########################################################################################################################
 
 
+from common.common import *
 from common.time import *
-
 
 months = dict()
 month_names = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
@@ -52,3 +52,34 @@ def get_month(year, month_number):
     month = month_names[month_number - 1]
     month_name = month + '_' + str(year)
     return months[month_name]
+
+
+def write_months_to_json(file_path):
+    months_json = '{"months": ['
+    first_month = True
+
+    for month_name in months.keys():
+        month = months[month_name]
+
+        if not first_month:
+            months_json += ', '
+
+        month_json = '{"year": "' + str(month.get_year()) + '", "month": "' + month.get_month() + '", "article_ids": ['
+
+        article_ids = month.get_article_ids()
+        first_article_id = True
+
+        for article_id in article_ids:
+            if not first_article_id:
+                month_json += ', '
+            month_json += '"' + article_id + '"'
+            first_article_id = False
+
+        month_json += ']}'
+
+        months_json += month_json
+        first_month = False
+
+    months_json += '];'
+
+    write_text_to_file(file_path, months_json, 'utf-8')
