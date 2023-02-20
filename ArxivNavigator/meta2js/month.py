@@ -6,6 +6,7 @@
 ########################################################################################################################
 
 
+import ijson
 from common.common import *
 from common.time import *
 
@@ -32,15 +33,37 @@ class Month(object):
     def get_month(self):
         return self.month
 
+    def get_article_count(self):
+        return len(self.article_ids)
+
+
+def get_month_name(year, month):
+    return month + '_' + year
+
+
+def add_month_to_dict(year, month):
+    global months
+
+    month_name = get_month_name(year, month)
+    month = Month(year, month)
+    months[month_name] = month
+
+    return month
+
+
+def clear_months():
+    global months
+
+    months.clear()
+
 
 def create_months():
     global months, month_names
 
-    months.clear()
+    clear_months()
     for year in get_years_range():
         for month in month_names:
-            month_name = month + '_' + str(year)
-            months[month_name] = Month(year, month)
+            add_month_to_dict(str(year), month)
 
 
 def get_month(year, month_number):
@@ -52,6 +75,33 @@ def get_month(year, month_number):
     month = month_names[month_number - 1]
     month_name = month + '_' + str(year)
     return months[month_name]
+
+
+def get_article_count():
+    global months
+
+    result = 0
+
+    for month_name in months.keys():
+        month = months[month_name]
+        result += month.get_article_count()
+
+    return result
+
+
+def read_months_from_json(file_path):
+    global months
+
+    clear_months()
+
+    months_json = ijson.parse(open(file_path, 'r', encoding='utf8'))
+    months_objects = ijson.items(months_json, 'months.item')
+
+    for month_object in months_objects:
+        month = add_month_to_dict(month_object["year"], month_object["month"])
+
+        for article_id in month_object["article_ids"]:
+            month.add_article_id(article_id)
 
 
 def write_months_to_json(file_path):
@@ -80,6 +130,6 @@ def write_months_to_json(file_path):
         months_json += month_json
         first_month = False
 
-    months_json += '];'
+    months_json += ']}'
 
     write_text_to_file(file_path, months_json, 'utf-8')
