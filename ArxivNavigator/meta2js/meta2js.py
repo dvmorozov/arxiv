@@ -88,11 +88,6 @@ def extract_topics_data():
     write_topics_to_js('../data/topics.js.gz')
     write_months_to_json('../data/months.json')
 
-    print('Article count before reading', get_article_count())
-    clear_months()
-    read_months_from_json('../data/months.json')
-    print('Article count after reading', get_article_count())
-
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

@@ -178,6 +178,7 @@ def is_ext_equal(file_path, ext):
 def get_text_file_list(path_to_texts):
     dir_list = os.listdir(path_to_texts)
     result = []
+    total_text_file_count = 0
 
     for file_name in dir_list:
         path_to_text = os.path.join(path_to_texts, file_name)
@@ -186,7 +187,9 @@ def get_text_file_list(path_to_texts):
             if not os.path.exists(path_to_meta):
                 result.append(path_to_text)
 
-    print('Number of files to process', str(len(result)))
+            total_text_file_count += 1
+
+    print('Number of files to process', str(len(result)), 'from total', str(total_text_file_count))
     return result
 
 

@@ -6,7 +6,7 @@
 #   N1 - path to corpus directory,
 #   N2 - path to dictionary,
 #   N3 - corpus encoding,
-#   N4 - path to dictionary.
+#   N4 - path to model.
 ########################################################################################################################
 
 from corpus_iterator import *
