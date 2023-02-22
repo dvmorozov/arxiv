@@ -10,6 +10,7 @@ import ijson
 from common.common import *
 from common.time import *
 
+
 months = dict()
 month_names = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
 
@@ -20,9 +21,9 @@ class Month(object):
         self.month = month
         self.article_ids = []
 
-    def add_article_id(self, article_id):
+    def add_article_id(self, article_id, version):
         if article_id not in self.article_ids:
-            self.article_ids.append(article_id)
+            self.article_ids.append((article_id, version))
 
     def get_article_ids(self):
         return self.article_ids
@@ -101,7 +102,7 @@ def read_months_from_json(file_path):
         month = add_month_to_dict(month_object["year"], month_object["month"])
 
         for article_id in month_object["article_ids"]:
-            month.add_article_id(article_id)
+            month.add_article_id(article_id["article_id"], article_id["version"])
 
 
 def write_months_to_json(file_path):
@@ -122,7 +123,7 @@ def write_months_to_json(file_path):
         for article_id in article_ids:
             if not first_article_id:
                 month_json += ', '
-            month_json += '"' + article_id + '"'
+            month_json += '{"article_id": "' + article_id[0] + '", "version": "' + article_id[1] + '"}'
             first_article_id = False
 
         month_json += ']}'

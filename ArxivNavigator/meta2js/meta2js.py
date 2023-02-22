@@ -61,10 +61,18 @@ def extract_topics_data():
             version_dates.append(dt)
 
         last_version_date = max(version_dates)
+
+        assert(len(version_dates) == len(article["versions"]))
+
+        last_version = ''
+        for version in article["versions"]:
+            if version > last_version:
+                last_version = version
+
         article_id = article["id"]
         # Add article to the set of month.
         month = get_month(last_version_date.year, last_version_date.month)
-        month.add_article_id(article_id)
+        month.add_article_id(article_id, last_version)
 
         for source_id in categories[0].split():
             topic = add_unique_topic(source_id)
