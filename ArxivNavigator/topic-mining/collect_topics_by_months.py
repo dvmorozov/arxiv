@@ -4,8 +4,8 @@
 # If you want to use this file please contact me by dvmorozov@hotmail.com.
 # Script parameters:
 #   N1 - path to corpus directory,
-#   N2 - corpus encoding,
-#   N3 - temporary directory.
+#   N2 - temporary directory,
+#   N3 - corpus encoding.
 ########################################################################################################################
 
 
@@ -16,14 +16,14 @@ from collect_dictionary import *
 
 
 def get_temporary_directory():
-    assert (len(sys.argv) > 3)
+    assert (len(sys.argv) > 2)
 
-    result = sys.argv[3]
+    result = sys.argv[2]
     print('Temporary directory is', result)
     return result
 
 
-def clean_temporary_directory(directory_path):
+def remove_text_files_from_directory(directory_path):
     print('Directory', directory_path, 'is cleaned.')
 
     if not os.path.exists(directory_path):
@@ -36,25 +36,31 @@ def clean_temporary_directory(directory_path):
 
 
 def get_file_name_from_article_id(article_id):
-    return article_id + '.txt'
+    return article_id[0] + article_id[1] + '.txt'
 
 
-def copy_articles_into_temporary_directory(directory_path, article_ids):
+def copy_articles_into_directory(directory_path, article_ids):
     corpus_directory = get_corpus_directory()
-    print('Articles are copied from', corpus_directory, 'to', directory_path, '.')
+    copied_files_count = 0
 
     for article_id in article_ids:
         file_name = get_file_name_from_article_id(article_id)
         src_path = os.path.join(corpus_directory, file_name)
         dst_path = os.path.join(directory_path, file_name)
         if os.path.exists(src_path):
+            print('File is copied from', corpus_directory, 'to', directory_path, '.')
             shutil.copyfile(src_path, dst_path)
+            copied_files_count += 1
         else:
             print('File', src_path, 'does not exits.')
+
+    return copied_files_count
 
 
 def mine_topics_month_by_month():
     temporary_directory = get_temporary_directory()
+    corpus_directory = os.path.join(temporary_directory, 'corpus')
+    path_to_dictionary = os.path.join(temporary_directory, 'dictionary.txt')
 
     clear_months()
     read_months_from_json('../data/months.json')
@@ -66,10 +72,13 @@ def mine_topics_month_by_month():
             continue
 
         # Copy articles into temporary directory to mine by external script.
-        clean_temporary_directory(temporary_directory)
-        copy_articles_into_temporary_directory(temporary_directory, article_ids)
+        remove_text_files_from_directory(corpus_directory)
+        copied_files_count = copy_articles_into_directory(corpus_directory, article_ids)
+        if copied_files_count == 0:
+            continue
 
         # Collect dictionary.
+        collect_corpus_dictionary(corpus_directory, path_to_dictionary, get_corpus_encoding())
 
         # Collect topics.
 
@@ -78,7 +87,7 @@ def mine_topics_month_by_month():
         # Write output structure to file.
 
         # TODO: remove this.
-        # break
+        break
 
 
 if __name__ == '__main__':

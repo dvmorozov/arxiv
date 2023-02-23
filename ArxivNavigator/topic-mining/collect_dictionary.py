@@ -31,8 +31,8 @@ def get_dictionary():
     return dictionary
 
 
-def read_file(file_path):
-    file = open(file_path, 'r', encoding=get_corpus_encoding())
+def read_file(file_path, encoding):
+    file = open(file_path, 'r', encoding=encoding)
     file_content = file.read()
     file.close()
     return file_content
@@ -113,8 +113,8 @@ def add_to_dictionary(words):
     dictionary.add_documents([words])
 
 
-def get_bag_of_words_from_file(file_path):
-    text = read_file(file_path)
+def get_bag_of_words_from_file(file_path, encoding):
+    text = read_file(file_path, encoding)
     words = do_preprocessing(text)
     add_to_dictionary(words)
     # print(words)
@@ -193,23 +193,21 @@ def get_text_file_list(path_to_texts):
     return result
 
 
-def collect_corpus_dictionary():
-    print('Collection corpus dictionary...')
-
-    path_to_texts = get_corpus_directory()
+def collect_corpus_dictionary(corpus_directory, path_to_dictionary, encoding):
+    print('Collecting corpus dictionary...')
 
     processed_files_count = 0
-    text_file_list = get_text_file_list(path_to_texts)
+    text_file_list = get_text_file_list(corpus_directory)
     estimated_time = EstimatedTime(len(text_file_list), 'Collecting dictionary')
 
     while len(text_file_list) > 0:
         file_name = text_file_list.pop()
-        path_to_text = os.path.join(path_to_texts, file_name)
+        path_to_text = os.path.join(corpus_directory, file_name)
         path_to_meta = get_metadata_path(path_to_text)
 
         if not os.path.exists(path_to_meta):
             if os.path.isfile(path_to_text):
-                get_bag_of_words_from_file(path_to_text)
+                get_bag_of_words_from_file(path_to_text, encoding)
                 processed_files_count += 1
                 estimated_time.print_estimate_time(processed_files_count)
 
@@ -217,16 +215,16 @@ def collect_corpus_dictionary():
                 if processed_files_count % 1000 == 0:
                     write_dictionary_to_file(get_path_to_dictionary())
 
-    write_dictionary_to_file(get_path_to_dictionary())
+    write_dictionary_to_file(path_to_dictionary)
 
 
-def file_to_bow(file_path):
+def file_to_bow(file_path, encoding):
     # print('File', file_path, 'is processed.')
-    text = read_file(file_path)
+    text = read_file(file_path, encoding)
     words = do_preprocessing(text)
     vector = dictionary.doc2bow(words)
     return vector
 
 
 if __name__ == '__main__':
-    collect_corpus_dictionary()
+    collect_corpus_dictionary(get_corpus_directory(), get_path_to_dictionary(), get_corpus_encoding())
