@@ -24,7 +24,7 @@ def get_path_to_model(model_file_name):
         script_path = sys.argv[0]
         path_to_model = os.path.abspath(os.path.join(os.path.dirname(script_path), '../data', model_file_name))
 
-    # print('path to model', path_to_model)
+    print('Path to model is', path_to_model, '.')
     return path_to_model
 
 
@@ -93,10 +93,10 @@ def write_model_to_file(file_path, model):
     model.save(file_path)
 
 
-def create_model():
+def create_model(corpus_directory, corpus_encoding):
     global num_topics
 
-    corpus_iterator = CorpusIterator(get_corpus_directory())
+    corpus_iterator = CorpusIterator(corpus_directory, corpus_encoding)
 
     # print('======================================== TF-IDF ========================================')
     # tfidf = models.TfidfModel(corpus_iterator)
@@ -129,11 +129,11 @@ def create_model():
     return lda_model
 
 
-def collect_corpus_topic():
-    read_dictionary_from_file(get_path_to_dictionary())
-    write_topics_to_js_file(get_path_to_model('collected_topics_10.js'), create_model())
+def collect_corpus_topic(corpus_directory, path_to_dictionary, corpus_encoding, path_to_model):
+    read_dictionary_from_file(path_to_dictionary)
+    write_topics_to_js_file(path_to_model, create_model(corpus_directory, corpus_encoding))
 
 
 if __name__ == '__main__':
-    collect_corpus_topic()
-    # read_model_from_file(get_path_to_model('model.mm'), create_model())
+    collect_corpus_topic(get_corpus_directory(), get_path_to_dictionary(),
+                         get_corpus_encoding(), get_path_to_model('collected_topics_10.js'))

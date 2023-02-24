@@ -130,6 +130,7 @@ def write_dictionary_to_file(file_path):
 def read_dictionary_from_file(file_path):
     global dictionary
 
+    # The dictionary is supposed to be encoded by UTF-8.
     dictionary = dictionary.load_from_text(file_path)
     print(dictionary)
 
@@ -161,6 +162,7 @@ def get_corpus_encoding():
     else:
         result = 'utf8'
 
+    print('Corpus encoding is', result, '.')
     return result
 
 

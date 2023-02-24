@@ -12,7 +12,7 @@
 import os.path
 import shutil
 from meta2js.month import *
-from collect_dictionary import *
+from collect_topics import *
 
 
 def get_temporary_directory():
@@ -60,7 +60,9 @@ def copy_articles_into_directory(directory_path, article_ids):
 def mine_topics_month_by_month():
     temporary_directory = get_temporary_directory()
     corpus_directory = os.path.join(temporary_directory, 'corpus')
+    corpus_encoding = get_corpus_encoding()
     path_to_dictionary = os.path.join(temporary_directory, 'dictionary.txt')
+    path_to_model = os.path.join(temporary_directory, 'collected_topics_10.js')
 
     clear_months()
     read_months_from_json('../data/months.json')
@@ -77,10 +79,9 @@ def mine_topics_month_by_month():
         if copied_files_count == 0:
             continue
 
-        # Collect dictionary.
-        collect_corpus_dictionary(corpus_directory, path_to_dictionary, get_corpus_encoding())
+        collect_corpus_dictionary(corpus_directory, path_to_dictionary, corpus_encoding)
 
-        # Collect topics.
+        collect_corpus_topic(corpus_directory, path_to_dictionary, corpus_encoding, path_to_model)
 
         # Read topics and write to the output structure.
 
