@@ -14,9 +14,6 @@ from corpus_iterator import *
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 
-num_topics: int = 10
-
-
 def get_path_to_model(model_file_name):
     if len(sys.argv) > 4:
         path_to_model = os.path.join(sys.argv[4], model_file_name)
@@ -28,9 +25,7 @@ def get_path_to_model(model_file_name):
     return path_to_model
 
 
-def read_model_from_file(file_path, lsi_model):
-    global num_topics
-
+def read_model_from_file(file_path, lsi_model, num_topics):
     print('Model is read from file', file_path)
     lsi_model.load(file_path)
     print('======================================== Model topics ========================================')
@@ -56,8 +51,7 @@ def expression_to_js(expression_parts):
     return result
 
 
-def write_topics_to_js_file(file_path, model):
-    global num_topics
+def write_topics_to_js_file(file_path, model, num_topics):
     print('======================================== Model topics ========================================')
     print('Topics are written to JavaScript file', file_path)
 
@@ -84,8 +78,7 @@ def write_topics_to_js_file(file_path, model):
     text_file.close()
 
 
-def write_model_to_file(file_path, model):
-    global num_topics
+def write_model_to_file(file_path, model, num_topics):
     print('======================================== Model topics ========================================')
     print(model.print_topics(num_topics))
 
@@ -93,9 +86,7 @@ def write_model_to_file(file_path, model):
     model.save(file_path)
 
 
-def create_model(corpus_directory, corpus_encoding):
-    global num_topics
-
+def create_model(corpus_directory, corpus_encoding, num_topics):
     corpus_iterator = CorpusIterator(corpus_directory, corpus_encoding)
 
     # print('======================================== TF-IDF ========================================')
@@ -129,11 +120,11 @@ def create_model(corpus_directory, corpus_encoding):
     return lda_model
 
 
-def collect_corpus_topic(corpus_directory, path_to_dictionary, corpus_encoding, path_to_model):
+def collect_corpus_topic(corpus_directory, path_to_dictionary, corpus_encoding, path_to_model, num_topics):
     read_dictionary_from_file(path_to_dictionary)
-    write_topics_to_js_file(path_to_model, create_model(corpus_directory, corpus_encoding))
+    write_topics_to_js_file(path_to_model, create_model(corpus_directory, corpus_encoding, num_topics), num_topics)
 
 
 if __name__ == '__main__':
     collect_corpus_topic(get_corpus_directory(), get_path_to_dictionary(),
-                         get_corpus_encoding(), get_path_to_model('collected_topics_10.js'))
+                         get_corpus_encoding(), get_path_to_model('collected_topics_10.js'), 10)
