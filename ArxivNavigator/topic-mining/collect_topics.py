@@ -32,22 +32,51 @@ def read_model_from_file(file_path, lsi_model, num_topics):
     print(lsi_model.print_topics(num_topics))
 
 
-def expression_to_js(expression_parts):
+def topic_items_to_js(topic_items):
     result = '['
 
     first_word = True
-    for part in expression_parts:
-        sub_parts = part.split('*')
-        assert (len(sub_parts) == 2)
-        left = sub_parts[0].strip()
-        right = sub_parts[1].strip('" ')
+    for item in topic_items:
+        assert(len(item) == 2)
 
         result += ', ' if not first_word else ''
-        result += '{value: "' + left + '",'
-        result += ' name: "' + right + '"}'
+        result += '{value: "' + item[1] + '",'
+        result += ' name: "' + item[0] + '"}'
         first_word = False
 
     result += ']'
+    return result
+
+
+def expression_to_array(topic_expression):
+    result = []
+
+    expression_parts = topic_expression.split('+')
+
+    for part in expression_parts:
+        sub_parts = part.split('*')
+        assert (len(sub_parts) == 2)
+
+        value = sub_parts[0].strip()
+        name = sub_parts[1].strip('" ')
+        result.append((name, value))
+
+    return result
+
+
+def get_topics_from_model(model, num_topics):
+    print('======================================== Model topics ========================================')
+
+    result = []
+    for topic in model.print_topics(num_topics):
+        print(topic)
+
+        topic_name = str(topic[0])
+        topic_expression = topic[1]
+
+        topic_items = expression_to_array(topic_expression)
+        result.append((topic_name, topic_items))
+
     return result
 
 
@@ -55,26 +84,28 @@ def write_topics_to_js_file(file_path, model, num_topics):
     print('======================================== Model topics ========================================')
     print('Topics are written to JavaScript file', file_path)
 
+    topics = get_topics_from_model(model, num_topics)
+
     first_topic = True
-    topics = 'var flare = {name: "main topics", children: ['
-    for topic in model.print_topics(num_topics):
-        print(topic)
-        topic_index = topic[0]
-        topic_expression = topic[1]
-        topic_expression_parts = topic_expression.split('+')
+    topics_js = 'var flare = {name: "main topics", children: ['
+    for topic in topics:
+        assert(len(topic) == 2)
+
+        topic_name = topic[0]
+        topic_items = topic[1]
 
         topic_js = ', ' if not first_topic else ''
-        topic_js += '{name: "' + str(topic_index)
-        topic_js += '", children: ' + expression_to_js(topic_expression_parts)
+        topic_js += '{name: "' + topic_name
+        topic_js += '", children: ' + topic_items_to_js(topic_items)
         topic_js += '}'
-        topics += topic_js
+        topics_js += topic_js
         first_topic = False
 
-    topics += ']};'
+    topics_js += ']};'
 
-    print(topics)
+    print(topics_js)
     text_file = open(file_path, "w", encoding='utf8')
-    text_file.write(topics)
+    text_file.write(topics_js)
     text_file.close()
 
 
