@@ -62,7 +62,6 @@ def mine_topics_month_by_month():
     corpus_directory = os.path.join(temporary_directory, 'corpus')
     corpus_encoding = get_corpus_encoding()
     path_to_dictionary = os.path.join(temporary_directory, 'dictionary.txt')
-    path_to_model = os.path.join(temporary_directory, 'collected_topics_1.js')
 
     clear_months()
     read_months_from_json('../data/months.json')
@@ -81,14 +80,13 @@ def mine_topics_month_by_month():
 
         collect_corpus_dictionary(corpus_directory, path_to_dictionary, corpus_encoding)
 
-        collect_corpus_topic(corpus_directory, path_to_dictionary, corpus_encoding, path_to_model, 1)
+        month.set_topics(collect_corpus_topic(corpus_directory, path_to_dictionary, corpus_encoding, 1))
 
-        # Read topics and write to the output structure.
-
-        # Write output structure to file.
-
+        print(month.get_topics())
         # TODO: remove this.
         break
+
+    # Write output structure to file.
 
 
 if __name__ == '__main__':

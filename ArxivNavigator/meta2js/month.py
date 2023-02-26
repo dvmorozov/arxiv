@@ -20,6 +20,7 @@ class Month(object):
         self.year = year
         self.month = month
         self.article_ids = []
+        self.topics = None
 
     def add_article_id(self, article_id, version):
         if article_id not in self.article_ids:
@@ -36,6 +37,12 @@ class Month(object):
 
     def get_article_count(self):
         return len(self.article_ids)
+
+    def set_topics(self, topics):
+        self.topics = topics
+
+    def get_topics(self):
+        return self.topics
 
 
 def get_month_name(year, month):
