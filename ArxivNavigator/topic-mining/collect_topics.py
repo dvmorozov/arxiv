@@ -80,11 +80,9 @@ def get_topics_from_model(model, num_topics):
     return result
 
 
-def write_topics_to_js_file(file_path, model, num_topics):
+def write_topics_to_js_file(file_path, topics):
     print('======================================== Model topics ========================================')
     print('Topics are written to JavaScript file', file_path)
-
-    topics = get_topics_from_model(model, num_topics)
 
     first_topic = True
     topics_js = 'var flare = {name: "main topics", children: ['
@@ -151,11 +149,14 @@ def create_model(corpus_directory, corpus_encoding, num_topics):
     return lda_model
 
 
-def collect_corpus_topic(corpus_directory, path_to_dictionary, corpus_encoding, path_to_model, num_topics):
+def collect_corpus_topic(corpus_directory, path_to_dictionary, corpus_encoding, num_topics):
     read_dictionary_from_file(path_to_dictionary)
-    write_topics_to_js_file(path_to_model, create_model(corpus_directory, corpus_encoding, num_topics), num_topics)
+    model = create_model(corpus_directory, corpus_encoding, num_topics)
+    return get_topics_from_model(model, num_topics)
 
 
 if __name__ == '__main__':
-    collect_corpus_topic(get_corpus_directory(), get_path_to_dictionary(),
-                         get_corpus_encoding(), get_path_to_model('collected_topics_10.js'), 10)
+    write_topics_to_js_file(get_path_to_model('collected_topics_10.js'),
+                            collect_corpus_topic(get_corpus_directory(),
+                                                 get_path_to_dictionary(),
+                                                 get_corpus_encoding(), 10))
