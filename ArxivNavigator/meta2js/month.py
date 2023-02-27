@@ -130,6 +130,7 @@ def write_months_to_json(file_path):
         for article_id in article_ids:
             if not first_article_id:
                 month_json += ', '
+
             month_json += '{"article_id": "' + article_id[0] + '", "version": "' + article_id[1] + '"}'
             first_article_id = False
 
@@ -141,3 +142,55 @@ def write_months_to_json(file_path):
     months_json += ']}'
 
     write_text_to_file(file_path, months_json, 'utf-8')
+
+
+def get_topic_items_json(topic_items):
+    result = '['
+    first_topic_item = True
+
+    for topic_item in topic_items:
+        assert(len(topic_item) == 2)
+
+        if not first_topic_item:
+            result += ', '
+
+        result += '{"name": "' + topic_item[0] + '", "value": "' + topic_item[1] + '"}'
+        first_topic_item = False
+
+    return result + ']'
+
+
+def write_month_topics_to_js(file_path):
+    months_js = 'var topics_by_month = ['
+    first_month = True
+
+    for month_name in months.keys():
+        month = months[month_name]
+
+        if not first_month:
+            months_js += ', '
+
+        month_js = '{"year": "' + str(month.get_year()) + '", "month": "' + month.get_month() + '", "topics": ['
+
+        topics = month.get_topics()
+
+        if topics is not None:
+            first_topic = True
+
+            for topic in topics:
+                assert(len(topic) == 2)
+
+                if not first_topic:
+                    month_js += ', '
+
+                month_js += '{"name": "' + topic[0] + '", "items": "' + get_topic_items_json(topic[1]) + '"}'
+                first_topic = False
+
+        month_js += ']}'
+
+        months_js += month_js
+        first_month = False
+
+    months_js += ']}'
+
+    write_text_to_file(file_path, months_js, 'utf-8')
