@@ -52,7 +52,7 @@ def copy_articles_into_directory(directory_path, article_ids):
         src_path = os.path.join(corpus_directory, file_name)
         dst_path = os.path.join(directory_path, file_name)
         if os.path.exists(src_path):
-            print('File is copied from', corpus_directory, 'to', directory_path, '.')
+            print('File', src_path, 'is copied to', directory_path, '.')
             shutil.copyfile(src_path, dst_path)
             copied_files_count += 1
         else:
