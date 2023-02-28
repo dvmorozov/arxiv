@@ -36,12 +36,16 @@ def remove_text_files_from_directory(directory_path):
 
 
 def get_file_name_from_article_id(article_id):
-    return article_id[0] + article_id[1] + '.txt'
+    name = article_id[0].split('/')
+    name = name[1] if len(name) > 1 else name[0]
+    version = article_id[1]
+    return name + version + '.txt'
 
 
 def copy_articles_into_directory(directory_path, article_ids):
     corpus_directory = get_corpus_directory()
     copied_files_count = 0
+    not_existing_files_count = 0
 
     for article_id in article_ids:
         file_name = get_file_name_from_article_id(article_id)
@@ -53,8 +57,9 @@ def copy_articles_into_directory(directory_path, article_ids):
             copied_files_count += 1
         else:
             print('File', src_path, 'does not exits.')
+            not_existing_files_count += 1
 
-    return copied_files_count
+    return copied_files_count, not_existing_files_count
 
 
 def mine_topics_month_by_month():
@@ -75,16 +80,15 @@ def mine_topics_month_by_month():
 
         # Copy articles into temporary directory to mine by external script.
         remove_text_files_from_directory(corpus_directory)
-        copied_files_count = copy_articles_into_directory(corpus_directory, article_ids)
+        copied_files_count, not_existing_files_count = copy_articles_into_directory(corpus_directory, article_ids)
         if copied_files_count == 0:
             continue
+
+        print('Number of not existing files', str(not_existing_files_count), 'for month', month_name, '.')
 
         collect_corpus_dictionary(corpus_directory, path_to_dictionary, corpus_encoding)
 
         month.set_topics(collect_corpus_topic(corpus_directory, path_to_dictionary, corpus_encoding, 1))
-
-        # TODO: remove this.
-        break
 
     write_month_topics_to_js(path_to_topic_by_months_js)
 
