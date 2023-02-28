@@ -183,7 +183,7 @@ def write_month_topics_to_js(file_path):
                 if not first_topic:
                     month_js += ', '
 
-                month_js += '{"name": "' + topic[0] + '", "items": "' + get_topic_items_json(topic[1]) + '"}'
+                month_js += '{"name": "' + topic[0] + '", "items": ' + get_topic_items_json(topic[1]) + '}'
                 first_topic = False
 
         month_js += ']}'
@@ -191,6 +191,6 @@ def write_month_topics_to_js(file_path):
         months_js += month_js
         first_month = False
 
-    months_js += ']}'
+    months_js += '];'
 
     write_text_to_file(file_path, months_js, 'utf-8')
