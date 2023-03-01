@@ -31,7 +31,7 @@ def remove_text_files_from_directory(directory_path):
 
     files_to_delete = get_text_file_list(directory_path)
     for file_path in files_to_delete:
-        print('File', file_path, 'is removed.')
+        # print('File', file_path, 'is removed.')
         os.remove(file_path)
 
 
@@ -42,7 +42,13 @@ def get_file_name_from_article_id(article_id):
     return name + version + '.txt'
 
 
-def copy_articles_into_directory(directory_path, article_ids):
+def write_log_to_file(file_path, text):
+    textfile = open(file_path, "a", encoding="utf-8")
+    textfile.write(text)
+    textfile.close()
+
+
+def copy_articles_into_directory(directory_path, article_ids, path_to_copy_log):
     corpus_directory = get_corpus_directory()
     copied_files_count = 0
     not_existing_files_count = 0
@@ -52,11 +58,13 @@ def copy_articles_into_directory(directory_path, article_ids):
         src_path = os.path.join(corpus_directory, file_name)
         dst_path = os.path.join(directory_path, file_name)
         if os.path.exists(src_path):
-            print('File', src_path, 'is copied to', directory_path, '.')
+            text = 'File {0} is copied to {1}.'.format(src_path, directory_path)
+            write_log_to_file(path_to_copy_log, text)
             shutil.copyfile(src_path, dst_path)
             copied_files_count += 1
         else:
-            print('File', src_path, 'does not exits.')
+            text = 'File {0} does not exits. Article id. is {1}.'.format(src_path, article_id)
+            write_log_to_file(path_to_copy_log, text)
             not_existing_files_count += 1
 
     return copied_files_count, not_existing_files_count
@@ -67,6 +75,7 @@ def mine_topics_month_by_month():
     corpus_directory = os.path.join(temporary_directory, 'corpus')
     corpus_encoding = get_corpus_encoding()
     path_to_dictionary = os.path.join(temporary_directory, 'dictionary.txt')
+    path_to_copy_log = os.path.join(temporary_directory, 'copy.log.txt')
     path_to_topic_by_months_js = "../data/topic_by_months.js"
 
     clear_months()
@@ -80,7 +89,7 @@ def mine_topics_month_by_month():
 
         # Copy articles into temporary directory to mine by external script.
         remove_text_files_from_directory(corpus_directory)
-        copied_files_count, not_existing_files_count = copy_articles_into_directory(corpus_directory, article_ids)
+        copied_files_count, not_existing_files_count = copy_articles_into_directory(corpus_directory, article_ids, path_to_copy_log)
         if copied_files_count == 0:
             continue
 
