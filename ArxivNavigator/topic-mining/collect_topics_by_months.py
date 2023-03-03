@@ -16,6 +16,9 @@ from collect_topics import *
 from common.log import *
 
 
+copy_log = Log("")
+
+
 def get_temporary_directory():
     assert (len(sys.argv) > 2)
 
@@ -43,7 +46,10 @@ def get_file_name_from_article_id(article_id):
     return name + version + '.txt'
 
 
-def copy_articles_into_directory(directory_path, article_ids, copy_log):
+def copy_articles_into_directory(directory_path, article_ids):
+    global copy_log
+    assert(copy_log is not None)
+
     corpus_directory = get_corpus_directory()
     copied_files_count = 0
     not_existing_files_count = 0
@@ -66,6 +72,8 @@ def copy_articles_into_directory(directory_path, article_ids, copy_log):
 
 
 def mine_topics_month_by_month():
+    global copy_log
+
     temporary_directory = get_temporary_directory()
     corpus_directory = os.path.join(temporary_directory, 'corpus')
     corpus_encoding = get_corpus_encoding()
@@ -86,8 +94,7 @@ def mine_topics_month_by_month():
 
         # Copy articles into temporary directory to mine by external script.
         remove_text_files_from_directory(corpus_directory)
-        copied_files_count, not_existing_files_count = copy_articles_into_directory(corpus_directory, article_ids,
-                                                                                    copy_log)
+        copied_files_count, not_existing_files_count = copy_articles_into_directory(corpus_directory, article_ids)
         if copied_files_count == 0:
             continue
 
