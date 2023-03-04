@@ -9,7 +9,10 @@
 #   N4 - path to model.
 ########################################################################################################################
 
+
 from corpus_iterator import *
+from common.log import *
+
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
@@ -21,15 +24,16 @@ def get_path_to_model(model_file_name):
         script_path = sys.argv[0]
         path_to_model = os.path.abspath(os.path.join(os.path.dirname(script_path), '../data', model_file_name))
 
-    print('Path to model is', path_to_model, '.')
+    write_log_to_file(get_work_log(), 'Path to model is {0}.'.format(path_to_model))
     return path_to_model
 
 
 def read_model_from_file(file_path, lsi_model, num_topics):
-    print('Model is read from file', file_path)
+    write_log_to_file(get_work_log(), 'Model is read from file {0}.'.format(file_path))
     lsi_model.load(file_path)
-    print('======================================== Model topics ========================================')
-    print(lsi_model.print_topics(num_topics))
+    write_log_to_file(get_work_log(),
+                      '======================================== Model topics ========================================')
+    write_log_to_file(get_work_log(), lsi_model.print_topics(num_topics))
 
 
 def topic_items_to_js(topic_items):
@@ -65,11 +69,12 @@ def expression_to_array(topic_expression):
 
 
 def get_topics_from_model(model, num_topics):
-    print('======================================== Model topics ========================================')
+    write_log_to_file(get_work_log(),
+                      '======================================== Model topics ========================================')
 
     result = []
     for topic in model.print_topics(num_topics):
-        print(topic)
+        write_log_to_file(get_work_log(), 'Topic: {0}.'.format(topic))
 
         topic_name = str(topic[0])
         topic_expression = topic[1]
@@ -81,8 +86,9 @@ def get_topics_from_model(model, num_topics):
 
 
 def write_topics_to_js_file(file_path, topics):
-    print('======================================== Model topics ========================================')
-    print('Topics are written to JavaScript file', file_path)
+    write_log_to_file(get_work_log(),
+                      '======================================== Model topics ========================================')
+    write_log_to_file(get_work_log(), 'Topics are written to JavaScript file {0}.'.format(file_path))
 
     first_topic = True
     topics_js = 'var flare = {name: "main topics", children: ['
@@ -101,17 +107,18 @@ def write_topics_to_js_file(file_path, topics):
 
     topics_js += ']};'
 
-    print(topics_js)
+    write_log_to_file(get_work_log(), 'Topics: {0}.'.format(topics_js))
     text_file = open(file_path, "w", encoding='utf8')
     text_file.write(topics_js)
     text_file.close()
 
 
 def write_model_to_file(file_path, model, num_topics):
-    print('======================================== Model topics ========================================')
-    print(model.print_topics(num_topics))
-
-    print('Model is written to file', file_path)
+    write_log_to_file(get_work_log(),
+                      '======================================== Model topics '
+                      '===========================================')
+    write_log_to_file(get_work_log(), model.print_topics(num_topics))
+    write_log_to_file(get_work_log(), 'Model is written to file {0}.'.format(file_path))
     model.save(file_path)
 
 
@@ -126,7 +133,9 @@ def create_model(corpus_directory, corpus_encoding, num_topics):
     # lsi_model = models.LsiModel(tfidf_iterator, id2word=get_dictionary(), num_topics=num_topics)
     # return lsi_model
 
-    print('========================================= LDA ==========================================')
+    write_log_to_file(get_work_log(),
+                      '======================================== LDA '
+                      '===================================================')
     lda_model = models.LdaMulticore(corpus_iterator, id2word=get_dictionary(), num_topics=num_topics)
     '''
     Multicore algorithm is crashed on the test dataset.

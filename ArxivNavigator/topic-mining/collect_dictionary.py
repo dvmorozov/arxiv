@@ -18,6 +18,8 @@ from gensim import *
 from nltk.stem.wordnet import WordNetLemmatizer
 
 from common.estimated_time import *
+from common.log import *
+
 
 nltk.download('wordnet')
 nltk.download('omw-1.4')
@@ -123,7 +125,8 @@ def get_bag_of_words_from_file(file_path, encoding):
 def write_dictionary_to_file(file_path):
     global dictionary
 
-    print('Dictionary having', str(len(dictionary)), 'items is saved into', file_path, '.')
+    write_log_to_file(get_work_log(), 'Dictionary having {0} items is saved into {1}.'.format(len(dictionary),
+                                                                                              file_path))
     dictionary.save_as_text(file_path)
 
 
@@ -132,7 +135,7 @@ def read_dictionary_from_file(file_path):
 
     # The dictionary is supposed to be encoded by UTF-8.
     dictionary = dictionary.load_from_text(file_path)
-    print(dictionary)
+    write_log_to_file(get_work_log(), 'Dictionary: {0}.'.format(dictionary))
 
 
 def get_corpus_directory():
@@ -140,7 +143,7 @@ def get_corpus_directory():
 
     result = sys.argv[1]
 
-    print('Corpus directory is', result, '.')
+    write_log_to_file(get_work_log(), 'Corpus directory is {0}.'.format(result))
     return result
 
 
@@ -152,7 +155,7 @@ def get_path_to_dictionary():
         script_path = sys.argv[0]
         result = os.path.abspath(os.path.join(os.path.dirname(script_path), '../data', dictionary_file_name))
 
-    print('Path to dictionary is', result, '.')
+    write_log_to_file(get_work_log(), 'Path to dictionary is {0}.'.format(result))
     return result
 
 
@@ -162,7 +165,7 @@ def get_corpus_encoding():
     else:
         result = 'utf8'
 
-    print('Corpus encoding is', result, '.')
+    print('Corpus encoding is {0}.'.format(result))
     return result
 
 
@@ -191,12 +194,13 @@ def get_text_file_list(path_to_texts):
 
             total_text_file_count += 1
 
-    print('Number of files to process', str(len(result)), 'from total', str(total_text_file_count))
+    write_log_to_file(get_work_log(), 'Number of files to process {0} from total {1}.'.format(len(result),
+                                                                                              total_text_file_count))
     return result
 
 
 def collect_corpus_dictionary(corpus_directory, path_to_dictionary, encoding):
-    print('Collecting corpus dictionary...')
+    write_log_to_file(get_work_log(), 'Collecting corpus dictionary...')
 
     processed_files_count = 0
     text_file_list = get_text_file_list(corpus_directory)
@@ -221,7 +225,6 @@ def collect_corpus_dictionary(corpus_directory, path_to_dictionary, encoding):
 
 
 def file_to_bow(file_path, encoding):
-    # print('File', file_path, 'is processed.')
     text = read_file(file_path, encoding)
     words = do_preprocessing(text)
     vector = dictionary.doc2bow(words)

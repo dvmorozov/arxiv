@@ -6,6 +6,7 @@
 
 
 import datetime
+from common.log import *
 
 
 class EstimatedTime(object):
@@ -24,13 +25,16 @@ class EstimatedTime(object):
             if item_processed % item_step == 0:
                 processed_percents: float = item_processed * 100.0 / self.item_count
                 elapsed_sec = (datetime.datetime.now() - self.started_time).total_seconds()
-                # print('elapsed_sec', elapsed_sec, 'item_processed', item_processed, 'item_count', item_count)
                 estimated_sec = datetime.timedelta(
                     seconds=elapsed_sec * (self.item_count - item_processed) / item_processed)
                 estimated_time = datetime.datetime(1, 1, 1) + estimated_sec
-                print(self.caption, '%.2f' % processed_percents, '%, estimated time=',
-                      "%d:%d:%d:%d" % (
-                          estimated_time.day - 1, estimated_time.hour, estimated_time.minute, estimated_time.second),
-                      ', processed', str(item_processed), '.')
+                text = self.caption + ' {:.2f} %, estimated time={}:{}:{}:{}, processed {}.'.\
+                    format(processed_percents,
+                           estimated_time.day-1,
+                           estimated_time.hour,
+                           estimated_time.minute,
+                           estimated_time.second,
+                           item_processed)
+                write_log_to_file(get_work_log(), text)
         else:
-            print(self.caption, 'finished. Item number', str(item_processed), '.')
+            write_log_to_file(get_work_log(), self.caption + ' finished. Item number {0}.'.format(item_processed))

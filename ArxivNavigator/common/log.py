@@ -21,3 +21,21 @@ class Log(object):
         textfile.write(text)
         textfile.write('\n')
         textfile.close()
+
+
+def write_log_to_file(log, text):
+    assert (log is not None)
+    log.write_log_to_file(text)
+
+
+work_log = Log("")
+
+
+def init_work_log(path_to_work_log):
+    global work_log
+
+    work_log = Log(path_to_work_log)
+
+
+def get_work_log():
+    return work_log
