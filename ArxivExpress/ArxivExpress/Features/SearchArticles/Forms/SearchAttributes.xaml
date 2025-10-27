@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArxivExpress.Features.SearchArticles.SearchAttributes"
+             Title="Search">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            x:Name="ToolbarItemAboutHome"
+            IconImageSource="icon"
+            Clicked="Handle_ToolbarItemAboutClicked"/>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+
+        <Grid Margin="16,16,16,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.6*"/>
+                <ColumnDefinition Width="0.4*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Grid.Row="0" Text="Search Term" VerticalOptions="End"/>
+            <Label Grid.Column="1" Grid.Row="0" Text="Search Field" VerticalOptions="End"/>
+
+            <Entry Grid.Column="0" Grid.Row="1" x:Name="EntrySearchTerm" TextChanged="Handle_TextChanged"
+                    Placeholder="Search term..." HorizontalOptions="FillAndExpand"
+                    ClearButtonVisibility="WhileEditing" Completed="Handle_EntryCompleted"/>
+
+            <Picker Grid.Column="1" Grid.Row="1" x:Name="PickerItemType"
+                    Title="Title" SelectedIndexChanged="Hangle_OnPickerSelectedIndexChanged"
+                    ItemsSource="{Binding FieldPrefixes}" ItemDisplayBinding="{Binding Explanation}"/>
+        </Grid>
+
+        <ScrollView VerticalOptions="FillAndExpand">
+            <StackLayout>
+ 
+                <StackLayout Orientation="Vertical" HorizontalOptions="Start" Margin="8">
+                    <Label Text="Sort By" Margin="8,0,0,0"/>
+
+                    <RadioButton x:Name="RadioSortByRelevance" Content="Relevance"
+                                    Margin="8,0,0,0" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+                    <RadioButton x:Name="RadioSortByLastUpdatedDate" Content="Last Updated Date"
+                                    Margin="8,0,0,0" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+                    <RadioButton x:Name="RadioSortBySubmittedDate" Content="Submitted Date"
+                                    Margin="8,0,0,0" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="Start" Margin="8">
+                    <Label Text="Sort Order" Margin="8,0,0,0"/>
+
+                    <RadioButton Margin="8,0,0,0" x:Name="RadioSortOrderAscending"
+                                    Content="Ascending" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+                    <RadioButton Margin="8,0,0,0" x:Name="RadioSortOrderDescending"
+                                    Content="Descending" CheckedChanged="Handle_OnRadioButtonCheckedChanged"/>
+                </StackLayout>
+
+                <Grid Margin="16,8,16,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="0.8*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Picker Grid.Column="0" Grid.Row="0"
+                            x:Name="PickerResultsPerPage" Title="50"
+                            SelectedIndexChanged="Hangle_OnPickerSelectedIndexChanged">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>25</x:String>
+                                <x:String>50</x:String>
+                                <x:String>100</x:String>
+                                <x:String>200</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+
+                    <Label Grid.Column="1" Grid.Row="0"
+                            Text="results per page" VerticalOptions="Center" HorizontalOptions="Start"/>
+                </Grid>
+
+                <Button Text="Search" Pressed="Handle_SearchPressed"
+                        ImageSource="icons8_search_32"
+                        BorderColor="Black" BackgroundColor="White"
+                        BorderWidth="1" Margin="10" HeightRequest="50"
+                        VerticalOptions="Center" HorizontalOptions="Center"
+                        WidthRequest="200" TextColor="Black"/>
+            </StackLayout>
+        </ScrollView>
+
+        <FlexLayout Margin="0,10,0,20" Direction="Row" HeightRequest="70"
+                    JustifyContent="Center" Wrap="Wrap">
+
+            <Button Text="" Pressed="Handle_RecentlyViewedPressed"
+                    ImageSource="icons8_activity_history_32"
+                    BorderColor="Black" BackgroundColor="White"
+                    BorderWidth="1" Margin="10" HeightRequest="50"
+                    VerticalOptions="Center" HorizontalOptions="Center"
+                    WidthRequest="50" TextColor="Black"/>
+
+            <Button Text="" Pressed="Handle_LikedArticlesPressed"
+                    ImageSource="icons8_heart_32"
+                    BorderColor="Black" BackgroundColor="White"
+                    BorderWidth="1" Margin="10" HeightRequest="50"
+                    VerticalOptions="Center" HorizontalOptions="Center"
+                    WidthRequest="50" TextColor="Black"/>
+
+            <Button Text="" Pressed="Handle_ViewedAuthorsPressed"
+                    ImageSource="icons8_contacts_32"
+                    BorderColor="Black" BackgroundColor="White"
+                    BorderWidth="1" Margin="10" HeightRequest="50"
+                    VerticalOptions="Center" HorizontalOptions="Center"
+                    WidthRequest="50" TextColor="Black"/>
+
+            <Button Text="" Pressed="Handle_ListsPressed"
+                    ImageSource="icons8_book_shelf_32"
+                    BorderColor="Black" BackgroundColor="White"
+                    BorderWidth="1" Margin="10" HeightRequest="50"
+                    VerticalOptions="Center" HorizontalOptions="Center"
+                    WidthRequest="50" TextColor="Black"/>
+    </FlexLayout>
+</StackLayout>
+</ContentPage>

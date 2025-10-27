@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ArxivExpress.Forms.About"
+    Title="{Binding AppTitle}">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Grid Margin="16,16,16,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.6*"/>
+                    <ColumnDefinition Width="0.4*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition Height="200" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0" Text="Version" VerticalOptions="Start"/>
+                <Label Grid.Column="1" Grid.Row="0" Text="{Binding Version}"/>
+
+                <Label Grid.Column="0" Grid.Row="1" Text="Build"/>
+                <Label Grid.Column="1" Grid.Row="1" Text="{Binding Build}" VerticalOptions="Start"/>
+
+                <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,10,0,0"
+                       Text="Please send us your feedback about the application:"
+                       VerticalOptions="Start" FontAttributes="Bold"/>
+
+                <Editor Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"
+                       x:Name="EditorFeedback" TextChanged="Handle_FeedbackChanged"
+                       Placeholder="Write any feedback..." HorizontalOptions="FillAndExpand"
+                       VerticalOptions="FillAndExpand" Completed="Handle_FeedbackCompleted"
+                       />
+
+
+            </Grid>
+
+            <Button Text="Send" Pressed="Handle_SendFeedbackPressed"
+                
+                BorderColor="Black" BackgroundColor="White"
+                BorderWidth="1" Margin="10" HeightRequest="50"
+                VerticalOptions="Center" HorizontalOptions="Center"
+                WidthRequest="200" TextColor="Black"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
