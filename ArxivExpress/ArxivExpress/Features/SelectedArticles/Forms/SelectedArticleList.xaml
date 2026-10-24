@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArxivExpress.Features.SelectedArticles.Forms.SelectedArticleList"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             Title="Articles">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            x:Name="ToolbarItemAboutHome"
+            IconImageSource="icon"
+            Clicked="Handle_ToolbarItemAboutClicked"/>
+    </ContentPage.ToolbarItems> 
+
+    <StackLayout>
+        <ListView x:Name="ArticleListView" ItemsSource="{Binding Items}"
+                  ItemTapped="Handle_ItemTapped" CachingStrategy="RecycleElement"
+                  HasUnevenRows="True" ios:ListView.SeparatorStyle="FullWidth">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout x:Name="ArticleStackLayout"
+                                     VerticalOptions="FillAndExpand" Margin="10">
+
+                            <Label Text="{Binding Title}"
+                                   Style="{DynamicResource ListItemTextStyle}"
+                                   FontAttributes="Bold"
+                                   LineBreakMode="WordWrap"/>
+
+                            <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start" Wrap="Wrap">
+                                <Label Text="{Binding ContributorsAbbreviated}"
+                                       Style="{DynamicResource ListItemDetailTextStyle}"
+                                       LineBreakMode="WordWrap" Margin="0,0,10,0"/>
+                            </FlexLayout>
+
+                            <FlexLayout Margin="0,10,0,0" Direction="Row" AlignItems="Start" Wrap="Wrap">
+                                <Label Text="{Binding PublishedWithLabel}"
+                                       Style="{DynamicResource ListItemDetailTextStyle}"
+                                       LineBreakMode="WordWrap" Margin="0,0,10,0"/>
+
+                                <Label Text="{Binding LastUpdatedWithLabel}"
+                                       Style="{DynamicResource ListItemDetailTextStyle}"
+                                       LineBreakMode="WordWrap"/>
+                            </FlexLayout>
+
+                            <Button Text="Remove from List"
+                                    Clicked="OnRemoveArticleFromListPressed"
+                                    CommandParameter="{Binding .}"
+                                    BorderColor="Black"
+                                    BackgroundColor="White"
+                                    BorderWidth="1"
+                                    Margin="10"
+                                    HeightRequest="50"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    WidthRequest="200"
+                                    TextColor="Black"
+                                    ImageSource="icons8_trash_can_32"
+                                    />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <FlexLayout Margin="0,10,0,20" Direction="Row" HeightRequest="70"
+            JustifyContent="Center" Wrap="Wrap" x:Name="FlexLayoutToolbar">
+
+            <Button Text=""
+                    Clicked="OnDeleteListPressed"
+                    CommandParameter="{Binding .}"
+                    BorderColor="Black" BackgroundColor="White"
+                    BorderWidth="1" Margin="10" HeightRequest="50"
+                    VerticalOptions="Center" HorizontalOptions="Center"
+                    WidthRequest="50" TextColor="Black"
+                    ImageSource="icons8_trash_can_32"/>
+        </FlexLayout>
+    </StackLayout>
+</ContentPage>

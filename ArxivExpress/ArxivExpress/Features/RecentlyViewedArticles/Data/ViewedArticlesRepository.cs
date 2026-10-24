@@ -1,0 +1,71 @@
+// ****************************************************************************
+//    File "ViewedArticlesRepository.cs"
+//    Copyright © Dmitry Morozov 2022
+//    If you want to use this file please contact me by dvmorozov@hotmail.com.
+// ****************************************************************************
+
+using ArxivExpress.Features.LikedArticles;
+using ArxivExpress.Features.SearchArticles;
+using ArxivExpress.Features.ViewedAuthors.Data;
+using ArxivExpress.Features.ViewedAuthors.Model;
+
+namespace ArxivExpress.Features.RecentlyViewedArticles.Data
+{
+    public class ViewedArticlesRepository : LikedArticlesRepository
+    {
+        private static ViewedArticlesRepository _instance;
+        private uint _maxArticleNumber = 1000;
+
+        private ViewedAuthorsRepository _viewedAuthorsRepository;
+
+        protected ViewedArticlesRepository() : base()
+        {
+            _viewedAuthorsRepository = ViewedAuthorsRepository.GetInstance();
+        }
+
+        protected override string FileName => "viewed_articles.xml";
+
+        protected override string ArticleListElementName => "ViewedArticleList";
+
+        protected override string ArticleElementName => "ViewedArticle";
+
+        public static new ViewedArticlesRepository GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new ViewedArticlesRepository();
+            }
+
+            return _instance;
+        }
+
+        private void MoveArticleToTop(IArticleEntry article)
+        {
+            if (_articles.Exists(item => item.Id == article.Id))
+            {
+                _articles.RemoveAll(item => item.Id == article.Id);
+                _articles.Insert(0, article);
+            }
+        }
+
+        private void LimitArticleNumber()
+        {
+            while (_articles.Count > _maxArticleNumber)
+            {
+                _articles.RemoveAt(_articles.Count - 1);
+            }
+        }
+
+        public override void AddArticle(IArticleEntry article)
+        {
+            if (!_articles.Exists(item => item.Id == article.Id))
+            {
+                _articles.Insert(0, article);
+                LimitArticleNumber();
+                SaveArticles();
+            }
+            else
+                MoveArticleToTop(article);
+        }
+    }
+}

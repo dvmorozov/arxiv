@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ArxivExpress.Features.SelectedArticles.Forms.SelectedArticlesLists" 
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    Title="Library">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            x:Name="ToolbarItemAboutHome"
+            IconImageSource="icon"
+            Clicked="Handle_ToolbarItemAboutClicked"/>
+    </ContentPage.ToolbarItems> 
+
+    <StackLayout>
+        <ListView x:Name="SelectedArticlesListsView" ItemsSource="{Binding Items}"
+                  ItemTapped="Handle_ItemTapped" CachingStrategy="RecycleElement"
+                  HasUnevenRows="True" ios:ListView.SeparatorStyle="FullWidth"
+                  VerticalOptions="FillAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Margin="10">
+                            <Label Text="{Binding Name}"
+                                   Style="{DynamicResource ListItemTextStyle}"
+                                   LineBreakMode="WordWrap"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <FlexLayout Margin="0,10,0,20" Direction="Row" HeightRequest="70"
+            JustifyContent="Center" Wrap="Wrap" x:Name="FlexLayoutToolbar">
+        </FlexLayout>
+    </StackLayout>
+</ContentPage>

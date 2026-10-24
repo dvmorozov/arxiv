@@ -1,0 +1,67 @@
+# Publishes the ArxivExpress page to GitHub Pages (dvmorozov.github.io/arxiv/): this
+# repository's README, rendered by Jekyll. Once the deploy succeeds, every
+# earlier workflow run is deleted, so the Actions tab holds only the latest one.
+name: Publish the ArxivExpress page
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # README.md rendered with the theme in _config.yml, as GitHub Pages always served it.
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  cleanup:
+    # Only after a successful deploy: a failed run stays visible next to the last good one.
+    needs: deploy
+    permissions:
+      actions: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete every earlier workflow run
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          CURRENT: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          # Listed in full before deleting anything: deleting while paginating shifts the
+          # pages and skips runs.
+          ids=$(gh api --paginate "repos/$REPO/actions/runs?per_page=100" --jq '.workflow_runs[].id')
+          for id in $ids; do
+            [ "$id" = "$CURRENT" ] && continue
+            echo "Deleting run $id"
+            gh api -X DELETE "repos/$REPO/actions/runs/$id" || echo "  could not delete $id (still running?)"
+          done
